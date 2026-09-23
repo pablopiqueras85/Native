@@ -19,7 +19,11 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Nicho en estudio:** salud y deporte. Mejor candidato: estudios boutique de fitness independientes,
   con el foco en convertir y retener clientes (la recepción con IA ya está saturada). Ver
   `exploracion/nicho-salud-deporte.md`.
-- **Siguiente paso:** experimento del cliente misterioso en 20 estudios boutique y 20 clínicas de fisioterapia.
+- **Idea en curso:** `exploracion/ideas/0001-agente-comercial-estudios-boutique.md`.
+- **Sistema en diseño:** el embudo de diagnóstico (`sistemas/embudo-diagnostico.md`), el primer equipo
+  de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
+- **Siguiente paso:** que el fundador revise el cuestionario y decida los precios de `empresa/oferta.md`;
+  después, construir la V0 del embudo y hacer el cliente misterioso.
 
 Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
@@ -27,6 +31,8 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
 - `fundador/perfil.md` — quién es el fundador. **Léelo antes de proponer o evaluar cualquier idea.**
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
+- `empresa/oferta.md` — servicios y precios. El agente de precios solo usa lo que hay aquí.
+- `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.
@@ -43,6 +49,8 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
   fundador, una decisión, una idea), propón guardarlo en el archivo que corresponda.
 - **Decisiones con registro.** Elegir, descartar o pivotar una idea, o cambiar los criterios, es una
   decisión: crea un archivo en `decisiones/`.
+- **Nunca guardes datos personales** de prospectos o clientes (nombres, teléfonos, emails, respuestas)
+  en este repositorio. Viven en la herramienta de fichas (Google Sheets, Airtable…), no en Git.
 - **Fechas absolutas** (AAAA-MM-DD), nunca "ayer" o "la semana que viene".
 - **Numeración:** ideas y decisiones usan 4 dígitos correlativos (`0001`, `0002`…). Mira el último
   número existente antes de crear uno nuevo.

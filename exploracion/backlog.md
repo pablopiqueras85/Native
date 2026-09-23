@@ -7,4 +7,4 @@ Ordena por puntuación descendente; las descartadas van al final.
 
 | # | Idea | Estado | Puntuación | Siguiente paso |
 |---|---|---|---|---|
-| — | *Aún no hay ideas. Empieza con `/generar-ideas` o `/idea-nueva`.* | | | |
+| [0001](ideas/0001-agente-comercial-estudios-boutique.md) | Agente comercial para estudios boutique | nueva | — | Cliente misterioso y embudo de diagnóstico |
