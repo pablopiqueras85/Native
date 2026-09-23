@@ -48,17 +48,17 @@ No cedemos tus datos a terceros. Usamos estos proveedores, que los tratan por nu
 |---|---|
 | Tally (Bélgica, datos en la UE) | Recoger las respuestas del cuestionario |
 | Google (Google Sheets) | Guardar las fichas de los centros |
-| [Calendly / Cal.com] | Agendar reuniones |
-| [Alojamiento de la web: Netlify / Cloudflare Pages] | Servir la web |
-| Herramientas de inteligencia artificial ([proveedor]) | Ayudar a redactar el diagnóstico. Solo reciben tus respuestas **sin tu nombre, el del centro ni tus datos de contacto** |
+| Google (Google Calendar) | Agendar reuniones |
+| Netlify (EE. UU.) | Servir la web |
+| Anthropic (EE. UU.), inteligencia artificial | Ayudar a redactar el diagnóstico. Solo reciben tus respuestas **sin tu nombre, el del centro ni tus datos de contacto** |
 
 Algunos de estos proveedores pueden estar fuera del Espacio Económico Europeo. En ese caso, la transferencia
 se hace con las garantías que exige el RGPD (por ejemplo, cláusulas contractuales tipo).
 
 ### Cuánto tiempo los guardamos
 
-[Propuesta: hasta 12 meses después de enviarte el diagnóstico si no llegamos a trabajar juntos. Después se
-borran.] Si retiras tu consentimiento, los borramos antes.
+Hasta 12 meses después de enviarte el diagnóstico si no llegamos a trabajar juntos. Después se borran. Si
+retiras tu consentimiento, los borramos antes.
 
 ### Tus derechos
 
