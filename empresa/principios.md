@@ -4,6 +4,16 @@ Una empresa AI Native no es una empresa normal que usa IA. Es una empresa diseñ
 día asumiendo que buena parte del trabajo lo hacen agentes de IA y que las personas aportan criterio,
 relaciones y responsabilidad. Estos principios guían cómo elegimos la idea y cómo construiremos la empresa.
 
+## La prueba del doble
+
+> **Si mañana tenemos el doble de clientes, ¿necesitamos el doble de horas?**
+
+Si la respuesta es sí, no es un negocio AI Native: es un servicio tradicional que usa IA para ir más
+rápido. Toda idea tiene que pasar esta prueba.
+
+Un negocio AI Native tampoco es lo mismo que "vender IA". Montar agentes a medida para otras empresas
+es consultoría (las horas son el producto) salvo que se convierta en un servicio repetible.
+
 ## 1. Los procesos se diseñan primero para agentes
 
 Antes de contratar a alguien o hacer algo a mano de forma repetida, la pregunta es: *¿qué parte

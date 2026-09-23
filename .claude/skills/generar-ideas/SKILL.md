@@ -22,8 +22,9 @@ Objetivo: proponer ideas de negocio AI Native que encajen con el fundador, y gua
    - **Capacidades recientes de la IA:** cosas que hace poco no eran posibles. Si puedes buscar en
      la web, compruébalo y cita fuentes.
 
-3. **Filtra en voz alta:** descarta las que choquen con las líneas rojas del perfil o que claramente
-   fallen un criterio eliminatorio. Di cuáles descartas y por qué, en una línea cada una.
+3. **Filtra en voz alta:** descarta las que choquen con las líneas rojas del perfil, que no pasen la
+   prueba del doble de `empresa/principios.md` o que claramente fallen un criterio eliminatorio.
+   Di cuáles descartas y por qué, en una línea cada una.
 
 4. **Presenta las 3–5 mejores** al usuario, cada una con su frase ("Para [cliente] que [problema]…"),
    por qué encaja con el fundador y cuál es su mayor riesgo. Pregunta cuáles quiere guardar.
