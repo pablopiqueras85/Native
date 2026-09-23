@@ -20,8 +20,9 @@ El script [`tally/formulario.py`](tally/formulario.py) traslada esta guía a la 
 
 ```
 python3 sistemas/tally/formulario.py comprobar                       # ¿funciona la clave? (200)
+python3 sistemas/tally/formulario.py crear --con-logica              # crea el formulario como borrador
 python3 sistemas/tally/formulario.py privacidad politica-completa.md # publica la política, da su enlace
-python3 sistemas/tally/formulario.py crear --privacidad-url ENLACE --con-logica   # crea el borrador
+python3 sistemas/tally/formulario.py enlace ID ENLACE-POLITICA       # pone ese enlace en la pregunta 22
 python3 sistemas/tally/formulario.py publicar ID                     # tras revisarlo en el editor
 ```
 
@@ -29,11 +30,24 @@ python3 sistemas/tally/formulario.py publicar ID                     # tras revi
 - Diferencias con los pasos a mano: cada página lleva su nombre como encabezado ("Tu centro", "Captación"…),
   y en la pregunta 22 el enlace a la política va en un texto justo encima de la casilla, porque las opciones
   de una casilla no admiten enlaces.
-- **Sin probar contra la API todavía** (2026-09-23: la clave guardada en el entorno da 401 y la red del entorno
-  no deja leer la documentación de la API). Lo menos seguro es el formato de la lógica condicional
-  (`--con-logica`): si Tally lo rechaza, crea el formulario sin esa opción y añade la lógica a mano (paso 3).
+- `publicar` se niega mientras la pregunta 22 tenga el enlace provisional. La API no permite volver un
+  formulario publicado a borrador: para retirarlo, se cierra (ajuste `isClosed`).
+- La lógica condicional (`--con-logica`) se guarda, pero la API no dice si Tally la interpreta bien: hay que
+  comprobarla en la vista previa del editor (paso 8). Si no funciona, se borra ese bloque y se añade a mano (paso 3).
 - La política se crea desde una **copia completada** del [borrador](../legal/politica-privacidad.md), fuera
   del repositorio o sin datos que no deban estar en él. El script se niega a publicarla si quedan corchetes.
+
+### Estado (2026-09-23)
+
+- **Formulario creado:** `RGpogp`. Editor: https://tally.so/forms/RGpogp/edit · Enlace público:
+  https://tally.so/r/RGpogp (ya puesto en `landing/index.html`).
+- **Está publicado pero cerrado** (no admite respuestas): se publicó por error durante una prueba y la API no
+  deja volver a borrador. Tiene 0 respuestas. `publicar` lo reabre cuando tenga el enlace de la política.
+- Hecho por API: pasos 1 a 4, idioma en español (paso 6) y avisos por email activados (paso 5.2, sin
+  destinatario escrito: comprobar en *Notifications* que llegan al email de la cuenta).
+- **Pendiente:** política de privacidad (faltan los datos del fundador) → `enlace` → `publicar` → pegar el
+  enlace de la política en `landing/index.html`. El fundador: revisar la lógica de la pregunta 12 en la vista
+  previa, conectar Google Sheets (paso 5.1) y hacer las pruebas del paso 8.
 
 ## Antes de empezar
 

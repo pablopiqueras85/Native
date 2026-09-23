@@ -9,10 +9,15 @@ Uso:
         Comprueba que la clave de Tally funciona (debe responder 200).
     python3 sistemas/tally/formulario.py ver [--privacidad-url URL] [--con-logica]
         Imprime el JSON que se enviaría, sin tocar Tally.
-    python3 sistemas/tally/formulario.py crear --privacidad-url URL [--con-logica]
-        Crea el formulario como BORRADOR y comprueba que Tally lo ha guardado entero.
+    python3 sistemas/tally/formulario.py crear [--privacidad-url URL] [--con-logica]
+        Crea el formulario como BORRADOR y comprueba que Tally lo ha guardado entero. Sin
+        --privacidad-url, la pregunta 22 lleva un enlace provisional y el formulario no se puede publicar.
+    python3 sistemas/tally/formulario.py enlace ID URL
+        Cambia el enlace a la política de la pregunta 22 en un formulario ya creado.
     python3 sistemas/tally/formulario.py publicar ID
-        Publica un formulario ya creado y muestra su enlace público.
+        Publica el formulario (o lo reabre si estaba cerrado) y muestra su enlace público. Se niega si
+        la pregunta 22 sigue con el enlace provisional. Ojo: la API no permite volver a borrador; para
+        retirarlo hay que cerrarlo (ajuste isClosed).
     python3 sistemas/tally/formulario.py privacidad RUTA.md
         Crea la política de privacidad como una página de Tally sin preguntas, a partir del texto
         completado (sin corchetes pendientes).
@@ -21,11 +26,13 @@ La clave:
     En el entorno de Claude no hace falta nada: el proxy añade la cabecera Authorization a cada
     petición a api.tally.so. En otro ordenador, exporta TALLY_API_KEY con la clave antes de ejecutarlo.
 
-Qué está por validar contra la API (no se ha podido probar todavía):
-    - La lógica condicional (--con-logica): el formato del bloque CONDITIONAL_LOGIC es una suposición.
-      Sin esa opción, el formulario se crea sin lógica y se añade a mano (paso 3 de la guía).
-    - Los bloques PAGE_BREAK y THANK_YOU_PAGE y el ajuste de idioma.
-    Si Tally rechaza algo, responde con un error de validación que dice qué campo falla.
+Lo aprendido de la API (probado el 2026-09-23):
+    - Tally valida bloque a bloque y dice qué campo falla. Acepta "html" y lo guarda como safeHTMLSchema.
+    - Los encabezados usan su propio tipo como groupType (HEADING_2 → HEADING_2).
+    - La página de agradecimiento es un PAGE_BREAK con "isThankYouPage": true (THANK_YOU_PAGE solo
+      existe como groupType y no se acepta como tipo de bloque).
+    - El bloque CONDITIONAL_LOGIC (--con-logica) se guarda tal cual, pero la API no dice si Tally lo
+      interpreta bien: hay que comprobarlo en la vista previa del editor. Si falla, se añade a mano.
 """
 
 import argparse
@@ -137,6 +144,8 @@ GRACIAS = [
     "Si mientras tanto quieres añadir algo, responde al email en el que te llegue.",
 ]
 
+ENLACE_PENDIENTE = "https://enlace-pendiente.invalid/politica-de-privacidad"
+
 TIPOS_ENTRADA = {
     "corto": "INPUT_TEXT",
     "largo": "TEXTAREA",
@@ -239,8 +248,8 @@ def cuerpo_formulario(privacidad_url, con_logica):
     preguntas = {}
     for i, (seccion, lista) in enumerate(PAGINAS):
         if i > 0:
-            bloques.append(salto_de_pagina(i - 1, len(PAGINAS) - 1))
-        bloques.append(bloque("HEADING_2", "TEXT", {"html": html.escape(seccion, quote=False)}))
+            bloques.append(salto_de_pagina(i - 1, len(PAGINAS)))
+        bloques.append(bloque("HEADING_2", "HEADING_2", {"html": html.escape(seccion, quote=False)}))
         for numero, titulo, tipo, textos, obligatoria in lista:
             preguntas[numero] = pregunta(titulo, tipo, textos, obligatoria)
             bloques += preguntas[numero]
@@ -248,14 +257,16 @@ def cuerpo_formulario(privacidad_url, con_logica):
                 bloques.append(None)  # hueco para la lógica, que necesita las preguntas de después
 
     # Pregunta 22: el enlace va en un texto justo encima, porque las opciones no admiten enlaces.
-    enlace = html.escape(privacidad_url or "ENLACE-PENDIENTE", quote=True)
+    enlace = html.escape(privacidad_url or ENLACE_PENDIENTE, quote=True)
     bloques += [
         bloque("TITLE", "QUESTION", {"html": "Consentimiento"}),
         texto(f'Antes de enviar, lee la <a href="{enlace}" target="_blank">política de privacidad</a>.'),
     ]
     bloques += opciones("CHECKBOX", "CHECKBOXES", [CONSENTIMIENTO], True)
 
-    bloques.append(bloque("THANK_YOU_PAGE", "THANK_YOU_PAGE", {}))
+    bloques.append(bloque("PAGE_BREAK", "PAGE_BREAK", {
+        "index": len(PAGINAS) - 1, "isFirst": False, "isLast": True, "isThankYouPage": True,
+    }))
     bloques += [texto(parrafo) for parrafo in GRACIAS]
 
     if con_logica:
@@ -302,7 +313,7 @@ def ver(args):
 
 def crear(args):
     if not args.privacidad_url:
-        sys.exit("Falta --privacidad-url: la pregunta 22 necesita el enlace a la política de privacidad.")
+        print("Aviso: sin --privacidad-url, la pregunta 22 lleva un enlace provisional y no se podrá publicar.")
     cuerpo = cuerpo_formulario(args.privacidad_url, args.con_logica)
     _estado, form = peticion("POST", "/forms", cuerpo)
     form_id = form["id"]
@@ -324,8 +335,28 @@ def crear(args):
 
 
 def publicar(args):
-    peticion("PATCH", f"/forms/{args.id}", {"status": "PUBLISHED"})
+    _estado, form = peticion("GET", f"/forms/{args.id}")
+    if ENLACE_PENDIENTE in json.dumps(form):
+        sys.exit("No se publica: falta el enlace a la política de privacidad en la pregunta 22.")
+    peticion("PATCH", f"/forms/{args.id}", {"status": "PUBLISHED", "settings": {"isClosed": False}})
     print(f"Publicado: https://tally.so/r/{args.id}")
+
+
+def enlace(args):
+    """Cambia el enlace a la política de privacidad de la pregunta 22 en un formulario ya creado."""
+    _estado, form = peticion("GET", f"/forms/{args.id}")
+    cambiados = 0
+    for b in form["blocks"]:
+        for trozo in b["payload"].get("safeHTMLSchema", []) if b["type"] == "TEXT" else []:
+            if len(trozo) > 1 and trozo[0] == "política de privacidad":
+                for atributo in trozo[1]:
+                    if atributo[0] == "href":
+                        atributo[1] = args.url
+                        cambiados += 1
+    if cambiados != 1:
+        sys.exit(f"Se esperaba un enlace a la política y hay {cambiados}: no se cambia nada.")
+    peticion("PATCH", f"/forms/{args.id}", {"blocks": form["blocks"]})
+    print(f"Enlace de la pregunta 22 cambiado a {args.url}")
 
 
 def html_en_linea(linea):
@@ -352,7 +383,7 @@ def bloques_desde_markdown(md):
         l = linea.strip()
         if l.startswith("### "):
             cerrar_parrafo()
-            bloques.append(bloque("HEADING_2", "TEXT", {"html": html_en_linea(l[4:])}))
+            bloques.append(bloque("HEADING_2", "HEADING_2", {"html": html_en_linea(l[4:])}))
         elif l.startswith("|"):
             cerrar_parrafo()
             celdas = [c.strip() for c in l.strip("|").split("|")]
@@ -397,6 +428,10 @@ def main():
     s = sub.add_parser("publicar")
     s.add_argument("id")
     s.set_defaults(fn=publicar)
+    s = sub.add_parser("enlace")
+    s.add_argument("id")
+    s.add_argument("url")
+    s.set_defaults(fn=enlace)
     s = sub.add_parser("privacidad")
     s.add_argument("ruta")
     s.set_defaults(fn=privacidad)
