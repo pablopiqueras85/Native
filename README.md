@@ -26,6 +26,7 @@ Perfil del fundador  →  Generar ideas  →  Evaluar y filtrar  →  Validar co
 | [`fundador/`](fundador/) | Quién funda la empresa: experiencia, accesos, recursos y límites. El punto de partida de todo. |
 | [`empresa/`](empresa/) | Principios de cómo opera una empresa AI Native, y la oferta de servicios con sus precios. |
 | [`exploracion/`](exploracion/) | El embudo de ideas: criterios de evaluación, backlog e ideas individuales. |
+| [`landing/`](landing/) | La landing con la calculadora de horas de trabajo manual, primera pieza del embudo. |
 | [`sistemas/`](sistemas/) | Equipos de agentes que usa la propia empresa. El primero: el embudo de diagnóstico. |
 | [`decisiones/`](decisiones/) | Registro de decisiones importantes, con su contexto y el porqué. |
 | [`.claude/skills/`](.claude/skills/) | Procesos que Claude sabe ejecutar: `/generar-ideas`, `/idea-nueva`, `/evaluar-idea`. |

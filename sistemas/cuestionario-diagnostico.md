@@ -76,6 +76,19 @@ Si en la pregunta 12 marca "nada", el formulario salta directamente al bloque 5.
 | 21 | ¿Quieres comentar el diagnóstico en una llamada de 20 minutos? | Opción: sí / prefiero solo el informe |
 | 22 | Acepto la política de privacidad y que se traten mis datos para elaborar y enviarme el diagnóstico | Casilla obligatoria, con enlace a la política |
 
+## Datos que llegan desde la landing
+
+Si el prospecto entra desde la [landing](../landing/README.md), el cuestionario recibe estos campos ocultos:
+
+| Campo | Cuándo llega | Qué es |
+|---|---|---|
+| `origen` | Siempre | `calculadora` |
+| `nota` | Si escribió algo | Lo que le gustaría comentar o automatizar, con sus palabras |
+| `calc_horas_manuales`, `calc_facturacion_mensual`, `calc_horas_totales`, `calc_precio_sesion`, `calc_coste_mensual` | Solo si marcó la casilla de compartir sus cifras | Los datos y el resultado de la calculadora |
+
+La `nota` es la mejor fuente de *insight*: el analista la cita tal cual en el informe y la usa para
+elegir qué solución proponer primero.
+
 ## Versión para fisioterapia
 
 Mismas preguntas cambiando: socios → pacientes; cuota mensual → precio medio por sesión o bono;
@@ -87,10 +100,11 @@ el fisioterapeuta haya pautado; nunca generar contenido clínico.
 
 Siempre con la fórmula a la vista en el informe y usando el punto medio de cada rango:
 
-- **Interesados que se pierden al mes** ≈ consultas semanales (P5) × 4 × (1 − conversión (P9)).
+- **Interesados que se pierden al mes** ≈ consultas semanales (P5) × 4,33 × (1 − conversión (P9)).
 - **Ingresos perdidos por captación al mes** ≈ interesados perdidos × cuota media (P3).
 - **Ingresos perdidos por bajas al mes** ≈ bajas mensuales (P10) × cuota media (P3).
-- **Horas de trabajo manual al mes** ≈ horas semanales de envío de contenido (P15) × 4. Se presentan como
-  horas liberadas, sin convertirlas en euros: no sabemos cuánto vale la hora de cada estudio.
+- **Horas de trabajo manual al mes** ≈ horas semanales de envío de contenido (P15) × 4,33.
+- **Coste del trabajo manual al mes:** solo si compartió sus cifras en la calculadora (`calc_coste_mensual`).
+  Si no, se presentan como horas liberadas, sin convertirlas en euros: no sabemos cuánto vale su hora.
 
 Son estimaciones para abrir la conversación, no promesas: el informe debe decirlo así.

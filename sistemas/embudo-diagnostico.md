@@ -19,10 +19,11 @@ Cumple dos funciones a la vez:
 ## Flujo
 
 ```
-Cliente misterioso ─► Primer contacto ─► Cuestionario ─► Ficha del prospecto
-(medir respuesta)     (en persona o por     (5 minutos)
-                       teléfono: pedir
-                       permiso para enviarlo)
+Cliente misterioso ─► Primer contacto ─► Landing ─────────► Cuestionario ─► Ficha del prospecto
+(medir respuesta)     (en persona o por     (calculadora       (5 minutos)
+                       teléfono: pedir       privada y
+                       permiso para enviar   mensaje libre)
+                       el enlace)
                                                               │
     ┌─────────────────────────────────────────────────────────┘
     ▼
@@ -37,7 +38,7 @@ Investigador ─► Analista ─► Propuesta ─► Precio ─► REVISIÓN DEL
 | Agente | Recibe | Entrega |
 |---|---|---|
 | **1. Investigador** | Nombre y web del centro | Ficha pública: tipo de centro, servicios y precios publicados, horarios, reseñas, redes y resultado del cliente misterioso |
-| **2. Analista** | Respuestas del cuestionario y ficha pública | Dolores detectados, ordenados por dinero en juego y horas de trabajo manual, con las cuentas a la vista y hechas con los datos del propio cliente |
+| **2. Analista** | Respuestas del cuestionario, datos de la landing (si los compartió) y ficha pública | Dolores detectados, ordenados por dinero en juego y horas de trabajo manual, con las cuentas a la vista y hechas con los datos del propio cliente |
 | **3. Propuesta** | Dolores y [`empresa/oferta.md`](../empresa/oferta.md) | Servicios del catálogo que resuelven cada dolor y un piloto de 30 días con su forma de medirlo |
 | **4. Precio** | Propuesta y tabla de precios de `empresa/oferta.md` | Presupuesto personalizado. Solo usa precios de la tabla |
 | **5. Seguimiento** | Informe enviado | Mensajes de seguimiento hasta que agende o diga que no. Avisa al fundador de cada respuesta |
@@ -63,7 +64,8 @@ si basta como incentivo o hace falta algo más).
 
 | Pieza | Herramienta |
 |---|---|
-| Cuestionario | Tally o Google Forms (ver [`cuestionario-diagnostico.md`](cuestionario-diagnostico.md)) |
+| Landing con calculadora | [`landing/`](../landing/README.md): hecha. Falta pegar los enlaces y publicarla |
+| Cuestionario | Tally, con campos ocultos para recibir los datos de la landing (ver [`cuestionario-diagnostico.md`](cuestionario-diagnostico.md)) |
 | Fichas de prospectos | Google Sheets o Airtable. **Nunca en este repositorio:** son datos personales |
 | Agentes 1–4 | Prompts ejecutados a mano con Claude sobre cada ficha |
 | Agenda | Calendly o Cal.com, con Google Meet, Teams o llamada |

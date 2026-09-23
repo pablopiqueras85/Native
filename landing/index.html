@@ -1,0 +1,644 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Horas fuera de sala</title>
+<meta name="description" content="Calcula cuánta facturación representa el tiempo que tu estudio dedica a mensajes, citas y rutinas por WhatsApp.">
+<style>
+@font-face {
+  font-family: "Barlow Condensed";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fuentes/BarlowCondensed-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Figtree";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("fuentes/Figtree-variable.woff2") format("woff2");
+}
+
+:root {
+  color-scheme: light;
+  --ground: #f2f5f2;
+  --surface: #ffffff;
+  --ink: #0f241f;
+  --muted: #55665f;
+  --line: #d3dcd7;
+  --accent: #2446c8;
+  --accent-ink: #ffffff;
+  --accent-soft: #e2e8fb;
+  --warn: #9a5a00;
+  --board: #0f241f;
+  --board-ink: #eef3f0;
+  --board-muted: #9fb3ab;
+  --board-line: #2a4039;
+  --board-loss: #ff8a66;
+  --display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed", sans-serif;
+  --body: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --ground: #0c1513;
+    --surface: #131f1b;
+    --ink: #e3ebe7;
+    --muted: #93a69e;
+    --line: #26352f;
+    --accent: #8fa6ff;
+    --accent-ink: #0c1513;
+    --accent-soft: #1b2544;
+    --warn: #f0b451;
+    --board: #1a2b26;
+    --board-ink: #eef3f0;
+    --board-muted: #9fb3ab;
+    --board-line: #30463f;
+    --board-loss: #ff916f;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --ground: #0c1513;
+  --surface: #131f1b;
+  --ink: #e3ebe7;
+  --muted: #93a69e;
+  --line: #26352f;
+  --accent: #8fa6ff;
+  --accent-ink: #0c1513;
+  --accent-soft: #1b2544;
+  --warn: #f0b451;
+  --board: #1a2b26;
+  --board-ink: #eef3f0;
+  --board-muted: #9fb3ab;
+  --board-line: #30463f;
+  --board-loss: #ff916f;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding-inline: 20px;
+  padding-block: 40px 56px;
+  display: grid;
+  gap: 40px;
+}
+h1, h2 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+
+/* Cabecera */
+.hero { display: grid; gap: 16px; max-width: 46rem; }
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  line-height: 0.95;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+}
+h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: 1.125rem; color: var(--muted); max-width: 40rem; }
+
+/* Distribución */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: 28px;
+  align-items: start;
+}
+.results { display: grid; gap: 20px; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 20px); }
+@media (max-width: 860px) {
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .results { position: static; }
+}
+
+.inputs { display: grid; gap: 20px; }
+.block {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+}
+.block-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; }
+h2 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.05;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.note {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+.intro { color: var(--muted); font-size: 0.95rem; }
+
+/* Tareas */
+.tasks { list-style: none; margin: 0; padding: 0; display: grid; }
+.task {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  padding-block: 14px;
+  border-top: 1px solid var(--line);
+}
+.task:first-child { border-top: 0; padding-top: 0; }
+.task-text { display: grid; gap: 2px; flex: 1 1 14rem; }
+.task-text label { font-weight: 600; }
+.hint { font-size: 0.875rem; color: var(--muted); }
+
+.stepper { display: flex; align-items: center; gap: 6px; }
+.stepper button {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--ground);
+  color: var(--ink);
+  font: 600 1.25rem/1 var(--body);
+  cursor: pointer;
+}
+.stepper button:hover { border-color: var(--accent); color: var(--accent); }
+.unit { font-size: 0.875rem; color: var(--muted); min-width: 3.2rem; }
+
+input[type="number"] {
+  font: 600 1.05rem/1 var(--body);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  height: 36px;
+  padding-inline: 8px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.stepper input { width: 4.2rem; text-align: center; }
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-top: 14px;
+  border-top: 2px solid var(--ink);
+  font-weight: 600;
+}
+.total-row strong {
+  font-family: var(--display);
+  font-size: 1.7rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Facturación */
+.fields { display: grid; gap: 14px; }
+.field { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; }
+.field label { font-weight: 600; flex: 1 1 14rem; }
+.input-unit { display: flex; align-items: center; gap: 8px; }
+.input-unit input { width: 7.5rem; text-align: right; }
+
+/* Marcador */
+.board {
+  background: var(--board);
+  color: var(--board-ink);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: grid;
+  gap: 18px;
+}
+.kicker { font-size: 0.95rem; color: var(--board-muted); }
+.big {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(3.4rem, 9vw, 4.6rem);
+  line-height: 0.9;
+  color: var(--board-loss);
+  font-variant-numeric: tabular-nums;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+}
+.big .per { font-size: 1.4rem; color: var(--board-ink); text-transform: uppercase; letter-spacing: 0.02em; }
+.formula { font-size: 0.85rem; color: var(--board-muted); font-variant-numeric: tabular-nums; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0; padding-top: 16px; border-top: 1px solid var(--board-line); }
+.stats div { display: grid; gap: 2px; }
+.stats dt { font-size: 0.8rem; color: var(--board-muted); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 600; }
+.stats dd { margin: 0; font-family: var(--display); font-size: 1.9rem; line-height: 1; font-variant-numeric: tabular-nums; }
+.sessions { display: grid; gap: 10px; padding-top: 16px; border-top: 1px solid var(--board-line); }
+.sessions-title strong { font-family: var(--display); font-size: 1.5rem; font-variant-numeric: tabular-nums; }
+.slots { display: flex; flex-wrap: wrap; gap: 4px; }
+.slot { width: 14px; height: 14px; border-radius: 3px; background: var(--board-loss); }
+.slots-more { font-size: 0.8rem; color: var(--board-muted); align-self: center; margin-left: 4px; }
+.sessions .formula strong { color: var(--board-ink); }
+.warn { font-size: 0.9rem; color: var(--board-loss); font-weight: 600; }
+
+/* Privacidad y mensaje */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 20px;
+  display: grid;
+  gap: 12px;
+}
+.panel h2 { font-size: 1.35rem; }
+.panel p { color: var(--muted); font-size: 0.95rem; }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 600; cursor: pointer; }
+.check input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--accent); flex: none; }
+.sending {
+  font-size: 0.875rem;
+  background: var(--ground);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.panel .sending { color: var(--ink); }
+.sending b { font-weight: 600; }
+
+textarea {
+  width: 100%;
+  min-height: 7rem;
+  resize: vertical;
+  font: 400 1rem/1.5 var(--body);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+textarea::placeholder { color: var(--muted); opacity: 0.8; }
+.counter { font-size: 0.8rem; text-align: right; font-variant-numeric: tabular-nums; }
+
+.cta {
+  display: block;
+  text-align: center;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.45rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+}
+.cta:hover { filter: brightness(1.08); }
+.cta-note { font-size: 0.875rem; color: var(--warn); font-weight: 600; text-align: center; }
+
+.foot { display: grid; gap: 8px; max-width: 46rem; font-size: 0.875rem; color: var(--muted); padding-top: 24px; border-top: 1px solid var(--line); }
+.foot a { color: var(--accent); }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.board :focus-visible { outline-color: var(--board-loss); }
+@media (prefers-reduced-motion: no-preference) {
+  .cta, .stepper button { transition: filter 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header class="hero">
+    <p class="eyebrow">Para estudios de pilates, entrenamiento personal y funcional</p>
+    <h1>Cada hora con el móvil es una hora <em>fuera de sala</em></h1>
+    <p class="lede">Suma el tiempo que se te va en mensajes, citas y rutinas por WhatsApp, y mira cuánta facturación representa. El cálculo se hace en tu navegador: tus cifras no salen de aquí salvo que tú lo decidas.</p>
+  </header>
+
+  <div class="layout">
+    <section class="inputs" aria-label="Datos de tu estudio">
+      <div class="block">
+        <div class="block-head">
+          <h2>Tu semana</h2>
+          <p class="note">Valores de ejemplo: pon los tuyos</p>
+        </div>
+        <p class="intro">Horas a la semana que se van en cada tarea, sumando las tuyas y las de tu equipo.</p>
+        <ul class="tasks">
+          <li class="task">
+            <div class="task-text">
+              <label for="t-mensajes">Contestar mensajes y consultas nuevas</label>
+              <span class="hint">WhatsApp, Instagram, llamadas</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-target="t-mensajes" data-step="-0.5" aria-label="Media hora menos contestando mensajes">−</button>
+              <input id="t-mensajes" class="tarea" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="3">
+              <button type="button" data-target="t-mensajes" data-step="0.5" aria-label="Media hora más contestando mensajes">+</button>
+              <span class="unit">h/sem</span>
+            </div>
+          </li>
+          <li class="task">
+            <div class="task-text">
+              <label for="t-citas">Confirmar, cambiar y recordar citas</label>
+              <span class="hint">Reservas, cancelaciones, avisos del día antes</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-target="t-citas" data-step="-0.5" aria-label="Media hora menos gestionando citas">−</button>
+              <input id="t-citas" class="tarea" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="2">
+              <button type="button" data-target="t-citas" data-step="0.5" aria-label="Media hora más gestionando citas">+</button>
+              <span class="unit">h/sem</span>
+            </div>
+          </li>
+          <li class="task">
+            <div class="task-text">
+              <label for="t-contenido">Preparar y enviar entrenamientos o pautas</label>
+              <span class="hint">Rutinas, ejercicios para casa, seguimiento del progreso</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-target="t-contenido" data-step="-0.5" aria-label="Media hora menos enviando entrenamientos">−</button>
+              <input id="t-contenido" class="tarea" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="4">
+              <button type="button" data-target="t-contenido" data-step="0.5" aria-label="Media hora más enviando entrenamientos">+</button>
+              <span class="unit">h/sem</span>
+            </div>
+          </li>
+          <li class="task">
+            <div class="task-text">
+              <label for="t-seguimiento">Seguir a interesados y antiguos socios</label>
+              <span class="hint">Los que dijeron "me lo pienso" y los que se dieron de baja</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-target="t-seguimiento" data-step="-0.5" aria-label="Media hora menos haciendo seguimiento">−</button>
+              <input id="t-seguimiento" class="tarea" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="1">
+              <button type="button" data-target="t-seguimiento" data-step="0.5" aria-label="Media hora más haciendo seguimiento">+</button>
+              <span class="unit">h/sem</span>
+            </div>
+          </li>
+          <li class="task">
+            <div class="task-text">
+              <label for="t-admin">Cobros, bonos y otras tareas repetitivas</label>
+              <span class="hint">Recibos, renovaciones, dudas sobre tarifas</span>
+            </div>
+            <div class="stepper">
+              <button type="button" data-target="t-admin" data-step="-0.5" aria-label="Media hora menos en cobros y bonos">−</button>
+              <input id="t-admin" class="tarea" type="number" inputmode="decimal" min="0" max="80" step="0.5" value="1.5">
+              <button type="button" data-target="t-admin" data-step="0.5" aria-label="Media hora más en cobros y bonos">+</button>
+              <span class="unit">h/sem</span>
+            </div>
+          </li>
+        </ul>
+        <p class="total-row"><span>Total de tareas manuales</span><strong id="total-manual">11,5 h/sem</strong></p>
+      </div>
+
+      <div class="block">
+        <h2>Tu facturación</h2>
+        <div class="fields">
+          <div class="field">
+            <label for="f-facturacion">Facturación mensual del estudio</label>
+            <div class="input-unit">
+              <input id="f-facturacion" type="number" inputmode="decimal" min="0" step="100" value="6000">
+              <span class="unit">€/mes</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-horas">Horas que trabajáis en total a la semana</label>
+            <div class="input-unit">
+              <input id="f-horas" type="number" inputmode="decimal" min="0" max="200" step="1" value="45">
+              <span class="unit">h/sem</span>
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-sesion">Precio de una sesión de una hora</label>
+            <div class="input-unit">
+              <input id="f-sesion" type="number" inputmode="decimal" min="0" step="1" value="45">
+              <span class="unit">€</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <aside class="results" aria-label="Resultado y siguiente paso">
+      <div class="board" aria-live="polite">
+        <p class="kicker">El tiempo que dedicas a tareas manuales equivale a</p>
+        <p class="big"><span id="r-mes">1533 €</span><span class="per">al mes de tu facturación</span></p>
+        <p class="formula" id="r-formula"></p>
+        <dl class="stats">
+          <div><dt>Al año</dt><dd id="r-anio">18.400 €</dd></div>
+          <div><dt>De tu semana laboral</dt><dd id="r-pct">26 %</dd></div>
+        </dl>
+        <div class="sessions">
+          <p class="sessions-title"><strong id="r-sesiones">50</strong> horas al mes que podrían ser sesiones</p>
+          <div class="slots" id="r-bloques" role="img" aria-label="50 sesiones de una hora al mes"></div>
+          <p class="formula">A <span id="r-precio-sesion">45 €</span> la sesión, son <strong id="r-perdido">2242 €/mes</strong> que dejas de ganar, siempre que tengas clientes para llenarlas.</p>
+        </div>
+        <p class="warn" id="r-aviso" hidden></p>
+      </div>
+
+      <div class="panel">
+        <h2>Tus cifras son tuyas</h2>
+        <p>Este cálculo se hace solo en tu navegador. Tu facturación y tus horas no se envían a ningún sitio y yo no las veo.</p>
+        <label class="check" for="compartir">
+          <input type="checkbox" id="compartir">
+          <span>Quiero que estas cifras se incluyan en mi diagnóstico personalizado</span>
+        </label>
+        <p class="sending" id="envio-resumen"></p>
+      </div>
+
+      <div class="panel">
+        <h2 id="h-nota">¿Qué te gustaría comentar o automatizar?</h2>
+        <p id="d-nota">Esto sí me llega: lo leeré antes de preparar tu diagnóstico.</p>
+        <textarea id="nota" maxlength="500" aria-labelledby="h-nota" aria-describedby="d-nota" placeholder="Por ejemplo: me paso el domingo mandando por WhatsApp la rutina de la semana a cada cliente…"></textarea>
+        <p class="counter"><span id="nota-cuenta">0</span>/500</p>
+      </div>
+
+      <a class="cta" id="pedir" href="#" target="_blank" rel="noopener">Pedir mi diagnóstico gratuito</a>
+      <p class="cta-note" id="cta-aviso" hidden>Vista previa: el enlace al cuestionario aún no está configurado.</p>
+    </aside>
+  </div>
+
+  <footer class="foot">
+    <p><strong>Cómo se calcula.</strong> Un mes son 4,33 semanas. Tu hora media es tu facturación mensual dividida entre las horas trabajadas al mes. Son estimaciones para orientarte, no una auditoría.</p>
+    <p>Esta página no usa cookies ni analítica. <a id="privacidad" href="#" target="_blank" rel="noopener" hidden>Política de privacidad</a></p>
+  </footer>
+</main>
+
+<script>
+(function () {
+  // Rellenar al crear el cuestionario en Tally y la política de privacidad.
+  var CONFIG = {
+    cuestionarioUrl: "",
+    privacidadUrl: ""
+  };
+
+  var SEMANAS_MES = 52 / 12;
+  var MAX_BLOQUES = 120;
+  var TAREAS = ["t-mensajes", "t-citas", "t-contenido", "t-seguimiento", "t-admin"];
+
+  var eur = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+  var eurDecimal = new Intl.NumberFormat("es-ES", { style: "currency", currency: "EUR", minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  var num = new Intl.NumberFormat("es-ES", { maximumFractionDigits: 1 });
+  var pct = new Intl.NumberFormat("es-ES", { style: "percent", maximumFractionDigits: 0 });
+
+  function $(id) { return document.getElementById(id); }
+
+  function leer(id) {
+    var v = $(id).valueAsNumber;
+    return Number.isFinite(v) && v > 0 ? v : 0;
+  }
+
+  function calcular() {
+    var manualSem = TAREAS.reduce(function (suma, id) { return suma + leer(id); }, 0);
+    var facturacion = leer("f-facturacion");
+    var horasSem = leer("f-horas");
+    var precioSesion = leer("f-sesion");
+    var manualMes = manualSem * SEMANAS_MES;
+    var horasMes = horasSem * SEMANAS_MES;
+    var valorHora = horasMes > 0 ? facturacion / horasMes : 0;
+    return {
+      manualSem: manualSem,
+      facturacion: facturacion,
+      horasSem: horasSem,
+      horasMes: horasMes,
+      precioSesion: precioSesion,
+      manualMes: manualMes,
+      valorHora: valorHora,
+      equivalenteMes: manualMes * valorHora,
+      perdidoMes: manualMes * precioSesion,
+      fraccion: horasSem > 0 ? manualSem / horasSem : 0
+    };
+  }
+
+  function pintarBloques(n) {
+    var cont = $("r-bloques");
+    var frag = document.createDocumentFragment();
+    for (var i = 0; i < Math.min(n, MAX_BLOQUES); i++) {
+      var b = document.createElement("span");
+      b.className = "slot";
+      frag.appendChild(b);
+    }
+    if (n > MAX_BLOQUES) {
+      var mas = document.createElement("span");
+      mas.className = "slots-more";
+      mas.textContent = "+" + (n - MAX_BLOQUES);
+      frag.appendChild(mas);
+    }
+    cont.replaceChildren(frag);
+    cont.setAttribute("aria-label", n + " sesiones de una hora al mes");
+  }
+
+  function pintarEnvio(r) {
+    var compartir = $("compartir").checked;
+    var nota = $("nota").value.trim();
+    var resumen = $("envio-resumen");
+
+    if (compartir) {
+      resumen.innerHTML = "<b>Se enviará con tu cuestionario:</b> " +
+        (nota ? "tu mensaje y " : "") + "estas cifras: " +
+        num.format(r.manualSem) + " h/sem de tareas manuales · " +
+        eur.format(r.facturacion) + "/mes · " +
+        num.format(r.horasSem) + " h/sem de trabajo · " +
+        eur.format(r.precioSesion) + " por sesión.";
+    } else {
+      resumen.innerHTML = "<b>Se enviará con tu cuestionario:</b> " +
+        (nota ? "solo tu mensaje. Tus cifras se quedan en este navegador." : "nada de esta página. Tus cifras se quedan en este navegador.");
+    }
+
+    var cta = $("pedir");
+    if (!CONFIG.cuestionarioUrl) {
+      cta.href = "#";
+      return;
+    }
+    var url = new URL(CONFIG.cuestionarioUrl);
+    url.searchParams.set("origen", "calculadora");
+    if (nota) url.searchParams.set("nota", nota);
+    if (compartir) {
+      url.searchParams.set("calc_horas_manuales", String(r.manualSem));
+      url.searchParams.set("calc_facturacion_mensual", String(r.facturacion));
+      url.searchParams.set("calc_horas_totales", String(r.horasSem));
+      url.searchParams.set("calc_precio_sesion", String(r.precioSesion));
+      url.searchParams.set("calc_coste_mensual", String(Math.round(r.equivalenteMes)));
+    }
+    cta.href = url.toString();
+  }
+
+  function pintar() {
+    var r = calcular();
+    var sesiones = Math.round(r.manualMes);
+
+    $("total-manual").textContent = num.format(r.manualSem) + " h/sem";
+    $("r-mes").textContent = eur.format(r.equivalenteMes);
+    $("r-anio").textContent = eur.format(r.equivalenteMes * 12);
+    $("r-pct").textContent = pct.format(Math.min(r.fraccion, 1));
+    $("r-formula").textContent =
+      num.format(r.manualMes) + " h/mes × " + eurDecimal.format(r.valorHora) + "/h. Tu hora media: " +
+      eur.format(r.facturacion) + " ÷ " + num.format(r.horasMes) + " h trabajadas al mes.";
+    $("r-sesiones").textContent = sesiones;
+    $("r-precio-sesion").textContent = eur.format(r.precioSesion);
+    $("r-perdido").textContent = eur.format(r.perdidoMes) + "/mes";
+    pintarBloques(sesiones);
+
+    var aviso = $("r-aviso");
+    if (r.horasSem === 0) {
+      aviso.textContent = "Indica cuántas horas trabajáis a la semana para calcular el valor de tu hora.";
+      aviso.hidden = false;
+    } else if (r.manualSem > r.horasSem) {
+      aviso.textContent = "Las tareas manuales superan tus horas totales de trabajo. Revisa los datos.";
+      aviso.hidden = false;
+    } else {
+      aviso.hidden = true;
+    }
+
+    pintarEnvio(r);
+  }
+
+  document.querySelectorAll(".stepper button").forEach(function (boton) {
+    boton.addEventListener("click", function () {
+      var input = $(boton.dataset.target);
+      var actual = Number.isFinite(input.valueAsNumber) ? input.valueAsNumber : 0;
+      var nuevo = Math.round((actual + parseFloat(boton.dataset.step)) * 2) / 2;
+      input.value = String(Math.min(80, Math.max(0, nuevo)));
+      pintar();
+    });
+  });
+
+  document.addEventListener("input", function (e) {
+    if (e.target.id === "nota") $("nota-cuenta").textContent = e.target.value.length;
+    pintar();
+  });
+  $("compartir").addEventListener("change", pintar);
+
+  $("pedir").addEventListener("click", function (e) {
+    if (!CONFIG.cuestionarioUrl) {
+      e.preventDefault();
+      $("cta-aviso").hidden = false;
+    }
+  });
+
+  if (CONFIG.privacidadUrl) {
+    $("privacidad").href = CONFIG.privacidadUrl;
+    $("privacidad").hidden = false;
+  }
+
+  pintar();
+})();
+</script>
+</body>
+</html>

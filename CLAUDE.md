@@ -22,8 +22,10 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Idea en curso:** `exploracion/ideas/0001-agente-comercial-estudios-boutique.md`.
 - **Sistema en diseño:** el embudo de diagnóstico (`sistemas/embudo-diagnostico.md`), el primer equipo
   de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
-- **Siguiente paso:** que el fundador revise el cuestionario y decida los precios de `empresa/oferta.md`;
-  después, construir la V0 del embudo y hacer el cliente misterioso.
+- **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
+  https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
+- **Siguiente paso:** decidir los precios de `empresa/oferta.md`, crear el cuestionario en Tally con sus
+  campos ocultos, conectar la landing y hacer el cliente misterioso.
 
 Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
@@ -32,6 +34,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `fundador/perfil.md` — quién es el fundador. **Léelo antes de proponer o evaluar cualquier idea.**
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
 - `empresa/oferta.md` — servicios y precios. El agente de precios solo usa lo que hay aquí.
+- `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
