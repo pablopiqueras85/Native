@@ -37,7 +37,8 @@
 - **Líneas rojas:**
   - No quiere una startup que levante rondas de inversión.
   - No quiere trabajar en el sector industrial.
-- *Por completar: temas y sectores que le atraen.*
+- **Le atraen:** salud y deporte (ver `exploracion/nicho-salud-deporte.md`).
+- *Por completar: otros temas que le atraigan.*
 
 ## Recursos y límites
 
