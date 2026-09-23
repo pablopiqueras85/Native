@@ -16,6 +16,25 @@ formulario completo por API siguiendo esta guía (la API de Tally es gratuita,
 [fuente](https://tally.so/help/api)). El fundador solo tiene que conectar Google Sheets (paso 5), porque
 exige entrar con su cuenta de Google.
 
+El script [`tally/formulario.py`](tally/formulario.py) traslada esta guía a la API:
+
+```
+python3 sistemas/tally/formulario.py comprobar                       # ¿funciona la clave? (200)
+python3 sistemas/tally/formulario.py privacidad politica-completa.md # publica la política, da su enlace
+python3 sistemas/tally/formulario.py crear --privacidad-url ENLACE --con-logica   # crea el borrador
+python3 sistemas/tally/formulario.py publicar ID                     # tras revisarlo en el editor
+```
+
+- Crea el formulario como **borrador** y lo vuelve a leer para comprobar que Tally guardó todos los bloques.
+- Diferencias con los pasos a mano: cada página lleva su nombre como encabezado ("Tu centro", "Captación"…),
+  y en la pregunta 22 el enlace a la política va en un texto justo encima de la casilla, porque las opciones
+  de una casilla no admiten enlaces.
+- **Sin probar contra la API todavía** (2026-09-23: la clave guardada en el entorno da 401 y la red del entorno
+  no deja leer la documentación de la API). Lo menos seguro es el formato de la lógica condicional
+  (`--con-logica`): si Tally lo rechaza, crea el formulario sin esa opción y añade la lógica a mano (paso 3).
+- La política se crea desde una **copia completada** del [borrador](../legal/politica-privacidad.md), fuera
+  del repositorio o sin datos que no deban estar en él. El script se niega a publicarla si quedan corchetes.
+
 ## Antes de empezar
 
 - [ ] Cuenta en [tally.so](https://tally.so).

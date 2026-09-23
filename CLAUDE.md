@@ -24,12 +24,16 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
-- **Siguiente paso:** Claude crea el formulario en Tally por API, siguiendo exactamente
-  `sistemas/montaje-tally.md`. La clave de Tally está guardada como credencial del entorno: se añade sola
-  como cabecera `Authorization: Bearer …` a las peticiones a `api.tally.so`, así que **no** aparece como
-  variable de entorno. Compruébalo con `curl -sS -o /dev/null -w "%{http_code}" https://api.tally.so/users/me`
-  (200 = funciona; 401 = revisar que la cabecera se llame `Authorization`). Nunca pidas la clave en el chat. Crear también la política de
-  privacidad como página de Tally con los datos que dé el fundador, y pegar ambos enlaces en el `CONFIG` de
+- **Siguiente paso:** Claude crea el formulario en Tally por API con el script `sistemas/tally/formulario.py`
+  (uso en `sistemas/montaje-tally.md`, "Opción automática"). La clave de Tally está guardada como credencial
+  del entorno: se añade sola como cabecera `Authorization: Bearer …` a las peticiones a `api.tally.so`, así que
+  **no** aparece como variable de entorno. Compruébalo con `python3 sistemas/tally/formulario.py comprobar`
+  (200 = funciona). **Bloqueado a 2026-09-23:** Tally responde 401 a la clave guardada (el proxy dice
+  `upstream auth failed`), así que el fundador tiene que generar una clave nueva en Tally y guardarla de nuevo
+  en el entorno. Nunca pidas la clave en el chat. El script está sin probar contra la API: al primer uso,
+  créalo como borrador y revisa lo que diga. Crear también la política de privacidad como página de Tally con
+  los datos que dé el fundador (responsable, NIF, dirección, email, plazo de conservación, herramienta de
+  agenda, alojamiento de la web y proveedor de IA), y pegar ambos enlaces en el `CONFIG` de
   `landing/index.html`. El fundador conecta Google Sheets desde Tally. Después: precios y cliente misterioso.
 
 Actualiza esta sección cuando cambie la fase o el siguiente paso.
