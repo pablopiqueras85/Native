@@ -10,8 +10,9 @@
 
 ## Opción automática
 
-Si el entorno tiene acceso a `api.tally.so` y la clave de la API de Tally en la variable `TALLY_API_KEY`,
-Claude puede crear el formulario completo por API siguiendo esta guía (la API de Tally es gratuita,
+Si el entorno tiene acceso a `api.tally.so` y la clave de la API de Tally guardada como credencial del
+entorno (cabecera `Authorization`, prefijo `Bearer`, sitio permitido `api.tally.so`), Claude puede crear el
+formulario completo por API siguiendo esta guía (la API de Tally es gratuita,
 [fuente](https://tally.so/help/api)). El fundador solo tiene que conectar Google Sheets (paso 5), porque
 exige entrar con su cuenta de Google.
 

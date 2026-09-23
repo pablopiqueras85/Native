@@ -25,8 +25,10 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
 - **Siguiente paso:** Claude crea el formulario en Tally por API, siguiendo exactamente
-  `sistemas/montaje-tally.md`. Requisitos: `api.tally.so` permitido en la red del entorno y la clave en la
-  variable de entorno `TALLY_API_KEY` (nunca en el chat ni en el repositorio). Crear también la política de
+  `sistemas/montaje-tally.md`. La clave de Tally está guardada como credencial del entorno: se añade sola
+  como cabecera `Authorization: Bearer …` a las peticiones a `api.tally.so`, así que **no** aparece como
+  variable de entorno. Compruébalo con `curl -sS -o /dev/null -w "%{http_code}" https://api.tally.so/users/me`
+  (200 = funciona; 401 = revisar que la cabecera se llame `Authorization`). Nunca pidas la clave en el chat. Crear también la política de
   privacidad como página de Tally con los datos que dé el fundador, y pegar ambos enlaces en el `CONFIG` de
   `landing/index.html`. El fundador conecta Google Sheets desde Tally. Después: precios y cliente misterioso.
 
