@@ -6,45 +6,69 @@
 >
 > Atajo: pídele a Claude *"entrevístame para completar mi perfil"* y lo rellenaréis juntos.
 
-- **Última actualización:** —
+- **Última actualización:** 2026-09-23
 
 ## Trayectoria
 
-*¿A qué te has dedicado? Sectores, empresas, puestos, proyectos propios. ¿Qué parte disfrutaste más?*
+- Trabaja actualmente como **comercial en el sector industrial**.
+- **No quiere que su negocio sea en el sector industrial** (ver [decisión 0002](../decisiones/0002-descartar-sector-industrial.md)).
+- *Por completar: años de experiencia y trayectoria anterior (otros sectores o puestos).*
 
 ## Lo que sé hacer mejor que la mayoría
 
-*Conocimiento específico de un sector, un oficio, un proceso. Lo que otros te piden como favor.*
+- **Venta B2B:** sabe prospectar, ofertar y hacer seguimiento a clientes empresa. Es una habilidad
+  transferible a cualquier sector y poco común entre quienes construyen con IA (saben construir, pero no vender).
+- *Por completar: qué parte del proceso comercial se te da mejor (prospectar, ofertar, negociar, cerrar, postventa).*
 
 ## A quién tengo acceso
 
-*Redes, comunidades, antiguos clientes o compañeros, sectores donde te cogen el teléfono.
-Una idea con clientes a los que puedes llegar mañana vale más que una idea brillante sin acceso.*
+- Sus contactos del trabajo son del sector industrial, que queda descartado como nicho.
+- *Por completar: sectores, comunidades, aficiones o redes fuera del trabajo actual donde tenga contactos.*
+- ⚠️ **Precaución:** revisar si el contrato actual tiene cláusulas de exclusividad o no competencia que
+  limiten tener una actividad propia.
 
 ## Problemas que he vivido de cerca
 
-*Tareas repetitivas, caras o frustrantes que has visto (o sufrido) en tu trabajo o tu vida.
-Cuanto más concretas, mejor: quién, qué hace, cuánto tiempo le cuesta, cuánto paga hoy.*
+- Todavía no identifica dolores concretos con seguridad. Se descubrirán con conversaciones con clientes
+  del nicho que elijamos.
 
 ## Qué me motiva y qué no quiero hacer
 
-*Temas que te apasionan. Y líneas rojas: sectores, modelos de negocio o tipos de trabajo que descartas.*
+- **Líneas rojas:**
+  - No quiere una startup que levante rondas de inversión.
+  - No quiere trabajar en el sector industrial.
+- *Por completar: temas y sectores que le atraen.*
 
 ## Recursos y límites
 
 | | |
 |---|---|
-| Horas por semana disponibles | |
-| Presupuesto inicial | |
-| Meses que puedo aguantar sin ingresos del proyecto | |
-| Tolerancia al riesgo (baja / media / alta) | |
-| ¿Solo o con socios? | |
+| Horas por semana disponibles | *por confirmar* (compatible con un trabajo a tiempo completo) |
+| Presupuesto inicial | *por confirmar* |
+| Meses que puedo aguantar sin ingresos del proyecto | No aplica: mantiene su sueldo actual |
+| Tolerancia al riesgo (baja / media / alta) | *por confirmar* |
+| ¿Solo o con socios? | Solo (*solopreneur*) |
 
 ## Habilidades técnicas y con IA
 
-*Herramientas que dominas, lenguajes o no-code que usas, qué has hecho ya con IA.*
+- Perfil **algo técnico**: se maneja con herramientas y algo de código, no es desarrollador.
+- Va a empezar un curso de **AI Builder en The Hero Camp**. Su oferta de cursos de IA trabaja con
+  herramientas como Lovable, v0 y Cursor ([fuente](https://theherocamp.com/curso-ai-product-maker/));
+  el temario exacto del curso de AI Builder está *por confirmar*.
 
 ## Ambición
 
-*¿Qué buscas? Un negocio rentable que te dé libertad, una startup que escale y levante inversión,
-algo intermedio… ¿Cómo sería el éxito dentro de 12 meses?*
+Un negocio en solitario con un doble objetivo:
+
+1. **Ingresos extra mensuales** que, si el negocio crece, puedan convertirse en su fuente principal.
+2. **Mejorar su empleabilidad:** que el negocio le sirva de escaparate ante empresas que le ofrezcan
+   mejores condiciones que las actuales.
+
+## Implicaciones para elegir idea
+
+Al puntuar el criterio **Encaje con el fundador**, tener en cuenta:
+
+- **Compatible con un trabajo a tiempo completo:** entregas asíncronas y pocas reuniones en horario laboral.
+- **Sirve como portfolio:** cada cliente debe dejar un caso de éxito que se pueda enseñar.
+- **Aprovecha lo que aprenda en el curso**, para que la formación y el negocio se refuercen.
+- **Aprovecha su experiencia en venta B2B**, su mayor ventaja hoy, en un sector que no sea el industrial.

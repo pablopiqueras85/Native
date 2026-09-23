@@ -13,7 +13,9 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Fase:** exploración de ideas. No hay idea elegida.
 - **Perfil del fundador:** algo técnico (se maneja con herramientas y algo de código, no es desarrollador).
   Explica las cosas técnicas con claridad y sin jerga innecesaria.
-- **Siguiente paso:** completar `fundador/perfil.md` y generar la primera tanda de ideas.
+- **Descartado:** el sector industrial (ver `decisiones/0002-descartar-sector-industrial.md`).
+- **Siguiente paso:** descubrir qué sectores atraen al fundador y dónde tiene contactos fuera del
+  trabajo, completar `fundador/perfil.md` y generar una nueva tanda de ideas.
 
 Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
