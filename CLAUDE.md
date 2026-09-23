@@ -24,14 +24,13 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
-- **Formulario en Tally creado** por API con `sistemas/tally/formulario.py`: `RGpogp`
-  (https://tally.so/r/RGpogp), ya enlazado en la landing. Está **cerrado** hasta tener la política de privacidad.
-  Estado detallado en `sistemas/montaje-tally.md`, "Estado".
-- **Siguiente paso:** publicar la política de privacidad como página de Tally (`formulario.py privacidad`) con los
-  datos que dé el fundador (responsable, NIF, dirección, email, plazo de conservación, herramienta de agenda,
-  alojamiento de la web y proveedor de IA); luego `formulario.py enlace RGpogp URL`, `formulario.py publicar RGpogp`
-  y pegar el enlace de la política en el `CONFIG` de `landing/index.html`. La lógica de la pregunta 12, los avisos
-  por email y Google Sheets ya están revisados. Después: pruebas del paso 8 de la guía, precios y cliente misterioso.
+- **Hecho:** el formulario en Tally (https://tally.so/r/RGpogp) y la política de privacidad
+  (https://tally.so/r/J97z1K), publicados y enlazados en la landing. Creados por API con
+  `sistemas/tally/formulario.py`; estado en `sistemas/montaje-tally.md`, "Estado". La política va sin NIF ni
+  dirección: añadirlos antes de cobrar.
+- **Siguiente paso:** primera prueba con un estudio de entrenamiento personal de un conocido del fundador. Sirve
+  para probar el cuestionario y el informe, **no** como validación. Después: publicar la landing en Netlify y
+  hacer las pruebas del paso 8 de la guía, precios y cliente misterioso.
 - **Clave de Tally:** guardada como credencial del entorno; se añade sola como cabecera `Authorization: Bearer …`
   a las peticiones a `api.tally.so` (no es una variable de entorno). Compruébala con
   `python3 sistemas/tally/formulario.py comprobar` (200 = funciona). Nunca pidas la clave en el chat. La red del

@@ -39,16 +39,15 @@ python3 sistemas/tally/formulario.py publicar ID                     # tras revi
 
 ### Estado (2026-09-23)
 
-- **Formulario creado:** `RGpogp`. Editor: https://tally.so/forms/RGpogp/edit · Enlace público:
-  https://tally.so/r/RGpogp (ya puesto en `landing/index.html`).
-- **Está publicado pero cerrado** (no admite respuestas): se publicó por error durante una prueba y la API no
-  deja volver a borrador. Tiene 0 respuestas. `publicar` lo reabre cuando tenga el enlace de la política.
-- Hecho por API: pasos 1 a 4, idioma en español (paso 6) y avisos por email activados (paso 5.2, sin
-  destinatario escrito; llegan al email de la cuenta).
-- **Pendiente:** política de privacidad (faltan los datos del fundador) → `enlace` → `publicar` → pegar el
-  enlace de la política en `landing/index.html`. Después, las pruebas del paso 8.
-- Revisado por el fundador (2026-09-23): la lógica de la pregunta 12 funciona en la vista previa, los avisos
-  por email llegan y Google Sheets está conectado (hoja `Fichas de prospectos`).
+- **Formulario publicado y abierto:** `RGpogp`. Editor: https://tally.so/forms/RGpogp/edit · Enlace público:
+  https://tally.so/r/RGpogp (puesto en `landing/index.html`).
+- **Política de privacidad publicada:** `J97z1K`, https://tally.so/r/J97z1K (enlazada en la pregunta 22 y en la
+  landing). Responsable: el fundador como persona física, solo con nombre y email; sin NIF ni dirección mientras
+  no haya actividad económica (añadirlos antes de cobrar, ver `legal/politica-privacidad.md`).
+- Hecho por API: pasos 1 a 4, idioma en español (paso 6) y avisos por email (paso 5.2).
+- Revisado por el fundador: la lógica de la pregunta 12 funciona en la vista previa, los avisos por email llegan
+  y Google Sheets está conectado (hoja `Fichas de prospectos`).
+- **Pendiente:** las pruebas del paso 8 (cuando se publique la landing).
 
 ## Antes de empezar
 

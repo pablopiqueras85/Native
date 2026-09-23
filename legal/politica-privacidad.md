@@ -3,6 +3,11 @@
 > **Borrador para completar y revisar.** No es asesoramiento legal: antes de publicarlo, conviene que lo
 > revise un profesional. Rellena todo lo que va entre corchetes. Sigue la información que exige el
 > artículo 13 del RGPD ([texto](https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=CELEX:32016R0679)).
+>
+> **Publicada** el 2026-09-23 en https://tally.so/r/J97z1K con el nombre y el email del fundador. Los datos del
+> responsable no se guardan en este repositorio. Se publicó **sin NIF ni dirección**: el RGPD pide identidad y
+> contacto, y la LSSI, que pide domicilio y NIF, se aplica a quien ya ejerce una actividad económica
+> (*hipótesis*, confirmar con un gestor). Añadirlos antes de empezar a cobrar.
 
 ---
 
