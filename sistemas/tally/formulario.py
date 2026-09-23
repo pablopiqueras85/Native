@@ -18,9 +18,9 @@ Uso:
         Publica el formulario (o lo reabre si estaba cerrado) y muestra su enlace público. Se niega si
         la pregunta 22 sigue con el enlace provisional. Ojo: la API no permite volver a borrador; para
         retirarlo hay que cerrarlo (ajuste isClosed).
-    python3 sistemas/tally/formulario.py privacidad RUTA.md
-        Crea la política de privacidad como una página de Tally sin preguntas, a partir del texto
-        completado (sin corchetes pendientes).
+    python3 sistemas/tally/formulario.py privacidad RUTA.md [--actualizar ID]
+        Crea la política de privacidad como una página de Tally sin preguntas (o, con --actualizar,
+        sustituye el texto de una ya publicada), a partir del texto completado (sin corchetes pendientes).
 
 La clave:
     En el entorno de Claude no hace falta nada: el proxy añade la cabecera Authorization a cada
@@ -410,7 +410,12 @@ def privacidad(args):
     pendientes = re.findall(r"\[[^\]]+\](?!\()", md)
     if pendientes:
         sys.exit(f"Quedan huecos por rellenar: {', '.join(sorted(set(pendientes)))}")
-    cuerpo = {"status": "PUBLISHED", "blocks": bloques_desde_markdown(md), "settings": {"language": "es"}}
+    bloques = bloques_desde_markdown(md)
+    if args.actualizar:
+        peticion("PATCH", f"/forms/{args.actualizar}", {"blocks": bloques})
+        print(f"Política actualizada: https://tally.so/r/{args.actualizar}")
+        return
+    cuerpo = {"status": "PUBLISHED", "blocks": bloques, "settings": {"language": "es"}}
     _estado, form = peticion("POST", "/forms", cuerpo)
     print(f"Política publicada: https://tally.so/r/{form['id']}")
 
@@ -434,6 +439,7 @@ def main():
     s.set_defaults(fn=enlace)
     s = sub.add_parser("privacidad")
     s.add_argument("ruta")
+    s.add_argument("--actualizar", metavar="ID", help="sustituye el texto de una política ya publicada")
     s.set_defaults(fn=privacidad)
     args = p.parse_args()
     args.fn(args)

@@ -1,7 +1,7 @@
 # Embudo de diagnóstico
 
 - **Fecha:** 2026-09-23
-- **Estado:** diseño. V0 por construir.
+- **Estado:** V0.5 en marcha: formulario publicado y borradores de informe automáticos.
 - **Idea asociada:** [0001 — Agente comercial para estudios boutique](../exploracion/ideas/0001-agente-comercial-estudios-boutique.md)
 
 ## Qué es
@@ -67,11 +67,19 @@ si basta como incentivo o hace falta algo más).
 | Landing con calculadora | [`landing/`](../landing/README.md): hecha. Falta pegar los enlaces y publicarla |
 | Cuestionario | Tally, con campos ocultos para recibir los datos de la landing. Guía paso a paso: [`montaje-tally.md`](montaje-tally.md) |
 | Fichas de prospectos | Google Sheets o Airtable. **Nunca en este repositorio:** son datos personales |
-| Agentes 1–4 | Prompts ejecutados a mano con Claude sobre cada ficha |
-| Agenda | Calendly o Cal.com, con Google Meet, Teams o llamada |
+| Agentes 1–4 | Rutina de Claude Code con la skill `diagnostico` (ver V0.5) |
+| Agenda | Páginas de citas de Google Calendar, con Google Meet, Teams o llamada |
 | Envío y seguimiento | Email o WhatsApp a mano |
 
 **Pasar a V1 cuando haya:** al menos 10 cuestionarios completos y 3 reuniones.
+
+### V0.5: borradores automáticos (desde el 2026-09-23)
+
+Ver [decisión 0003](../decisiones/0003-automatizar-diagnostico-con-rutina.md). Una rutina de Claude Code
+ejecuta cada hora la skill [`diagnostico`](../.claude/skills/diagnostico/SKILL.md): lee las respuestas nuevas
+de Tally con [`diagnostico/fichas.py`](diagnostico/fichas.py) (sin datos de contacto), aplica los agentes de
+[`diagnostico/agentes.md`](diagnostico/agentes.md) y deja el borrador y las notas internas en la carpeta
+`Diagnósticos` de Google Drive. El fundador revisa y envía a mano.
 
 ### V1: automatizada
 

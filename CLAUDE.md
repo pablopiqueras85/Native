@@ -28,9 +28,13 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   (https://tally.so/r/J97z1K), publicados y enlazados en la landing. Creados por API con
   `sistemas/tally/formulario.py`; estado en `sistemas/montaje-tally.md`, "Estado". La política va sin NIF ni
   dirección: añadirlos antes de cobrar.
+- **Hecho:** borradores automáticos del diagnóstico (decisión 0003). Una rutina de Claude Code ejecuta cada hora
+  la skill `diagnostico`: respuestas nuevas de Tally → agentes → borrador y notas internas en la carpeta
+  `Diagnósticos` de Google Drive. El fundador revisa y envía a mano.
 - **Siguiente paso:** primera prueba con un estudio de entrenamiento personal de un conocido del fundador. Sirve
-  para probar el cuestionario y el informe, **no** como validación. Después: publicar la landing en Netlify y
-  hacer las pruebas del paso 8 de la guía, precios y cliente misterioso.
+  para probar el cuestionario y el informe, **no** como validación. Urgente: decidir precios (`empresa/oferta.md`)
+  y crear el enlace de agenda de Google Calendar, que los informes dejan como huecos. Después: publicar la landing
+  en Netlify, pruebas del paso 8 de `sistemas/montaje-tally.md` y cliente misterioso.
 - **Clave de Tally:** guardada como credencial del entorno; se añade sola como cabecera `Authorization: Bearer …`
   a las peticiones a `api.tally.so` (no es una variable de entorno). Compruébala con
   `python3 sistemas/tally/formulario.py comprobar` (200 = funciona). Nunca pidas la clave en el chat. La red del
@@ -46,6 +50,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
+  Los agentes del diagnóstico están en `sistemas/diagnostico/` y se lanzan con la skill `diagnostico`.
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.
