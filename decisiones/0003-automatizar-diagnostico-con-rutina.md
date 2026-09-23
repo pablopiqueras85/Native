@@ -37,3 +37,8 @@ decirlo.
 - Sin precios en `empresa/oferta.md`, los informes llevan `[PRECIO POR DECIDIR]`: decidir precios es ahora
   más urgente.
 - El envío automático por email o WhatsApp sigue en la V1.
+- **Dónde vive:** la rutina `trig_011zoodojcuLcEJzL5UAqgwR` ("Diagnósticos de Tally → borradores en Drive")
+  despierta cada hora la sesión de Claude Code en la que se creó, porque es la que tiene el repositorio, la clave de
+  Tally y Google Drive; una rutina creada desde una sesión no puede dar esos accesos a sesiones nuevas. Si esa
+  sesión se archiva, hay que recrear la rutina desde la página de rutinas de claude.ai, añadiendo el repositorio y
+  el conector de Google Drive, para que cada ejecución empiece en una sesión nueva.
