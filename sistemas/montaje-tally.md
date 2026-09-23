@@ -46,8 +46,9 @@ python3 sistemas/tally/formulario.py publicar ID                     # tras revi
 - Hecho por API: pasos 1 a 4, idioma en español (paso 6) y avisos por email activados (paso 5.2, sin
   destinatario escrito: comprobar en *Notifications* que llegan al email de la cuenta).
 - **Pendiente:** política de privacidad (faltan los datos del fundador) → `enlace` → `publicar` → pegar el
-  enlace de la política en `landing/index.html`. El fundador: revisar la lógica de la pregunta 12 en la vista
-  previa, conectar Google Sheets (paso 5.1) y hacer las pruebas del paso 8.
+  enlace de la política en `landing/index.html`. Después, las pruebas del paso 8.
+- Revisado por el fundador (2026-09-23): la lógica de la pregunta 12 funciona en la vista previa, los avisos
+  por email llegan y Google Sheets está conectado (hoja `Fichas de prospectos`).
 
 ## Antes de empezar
 
