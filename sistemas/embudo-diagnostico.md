@@ -37,7 +37,7 @@ Investigador ─► Analista ─► Propuesta ─► Precio ─► REVISIÓN DEL
 | Agente | Recibe | Entrega |
 |---|---|---|
 | **1. Investigador** | Nombre y web del centro | Ficha pública: tipo de centro, servicios y precios publicados, horarios, reseñas, redes y resultado del cliente misterioso |
-| **2. Analista** | Respuestas del cuestionario y ficha pública | Dolores detectados, ordenados por dinero en juego, con las cuentas a la vista y hechas con los datos del propio cliente |
+| **2. Analista** | Respuestas del cuestionario y ficha pública | Dolores detectados, ordenados por dinero en juego y horas de trabajo manual, con las cuentas a la vista y hechas con los datos del propio cliente |
 | **3. Propuesta** | Dolores y [`empresa/oferta.md`](../empresa/oferta.md) | Servicios del catálogo que resuelven cada dolor y un piloto de 30 días con su forma de medirlo |
 | **4. Precio** | Propuesta y tabla de precios de `empresa/oferta.md` | Presupuesto personalizado. Solo usa precios de la tabla |
 | **5. Seguimiento** | Informe enviado | Mensajes de seguimiento hasta que agende o diga que no. Avisa al fundador de cada respuesta |
@@ -45,8 +45,8 @@ Investigador ─► Analista ─► Propuesta ─► Precio ─► REVISIÓN DEL
 
 ## El informe que recibe el cliente
 
-1. **Tres hallazgos clave** sobre cómo capta y retiene clientes.
-2. **Lo que está en juego:** estimación en €/mes con sus propios datos y la fórmula a la vista.
+1. **Tres hallazgos clave** sobre cómo capta, atiende y retiene clientes.
+2. **Lo que está en juego:** estimación en €/mes y en horas de trabajo manual, con sus propios datos y la fórmula a la vista.
 3. **Comparativa** con los demás centros encuestados (a partir de 10 respuestas).
 4. **Soluciones propuestas,** por prioridad.
 5. **Piloto de 30 días:** qué se hace y cómo se mide el resultado.

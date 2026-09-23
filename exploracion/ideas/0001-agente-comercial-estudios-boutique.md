@@ -40,6 +40,11 @@ precio reducido para los 3 primeros. Precios por decidir (ver [`empresa/oferta.m
 2. **Los dueños pagarían por resultados** algo más que lo que cuesta un chatbot.
 3. **Se puede llegar a ellos:** al menos el 30 % de los contactados completa el cuestionario de diagnóstico.
 4. Los agentes pueden conectarse a sus canales (WhatsApp Business y su programa de reservas) sin un proyecto a medida en cada estudio.
+5. **Muchos estudios envían contenido a mano** (entrenamientos, pautas, seguimientos) por WhatsApp o email
+   aunque existan apps para ello ([Mywellness](https://www.mywellness.com/es-ES/staff-app/),
+   [Wellit](https://wellit-tl.com/la-mejor-app-para-entrenadores-personales-la-herramienta-que-hara-crecer-tu-negocio/),
+   [Harbiz](https://www.harbiz.io/en/blog/the-5-best-apps-for-personal-trainers)), y pagarían por quitarse ese trabajo.
+   Aportada por el fundador el 2026-09-23.
 
 ## Evaluación
 

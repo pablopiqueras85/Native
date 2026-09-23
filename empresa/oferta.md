@@ -11,7 +11,12 @@
 | **1. Conversión de interesados** | Responden cada consulta en minutos, proponen clase de prueba y hacen seguimiento hasta el alta o un "no" claro | Altas conseguidas de interesados que antes se perdían |
 | **2. Primeros 90 días** | Bienvenida, recordatorios y avisos al estudio cuando un socio nuevo muestra señales de abandono | Bajas de socios nuevos respecto a antes del servicio |
 | **3. Recuperación de antiguos socios** | Campañas personalizadas a quienes se dieron de baja | Socios recuperados |
+| *4. Envío de contenido personalizado* (**candidato, por validar**) | Preparan y envían entrenamientos, pautas, ejercicios para casa y seguimientos a partir de lo que diseña el profesional, que lo aprueba antes de enviarlo | Horas liberadas al estudio y respuesta de los socios |
 | **Informe mensual** (incluido siempre) | Resumen de resultados e ingresos atribuidos | — |
+
+El servicio 4 entra en la oferta solo si el cuestionario muestra que muchos estudios dedican horas a
+enviar contenido a mano (preguntas 12–15). Puede reforzar el servicio 2: un socio que recibe su plan cada
+semana tiene más motivos para quedarse (*hipótesis*).
 
 El fundador diseña los mensajes con cada estudio, revisa las conversaciones cada semana y atiende los
 casos que los agentes escalan.
@@ -32,6 +37,7 @@ casos que los agentes escalan.
 | 1. Conversión de interesados | *por decidir* | *por decidir* por alta | *por decidir* |
 | 2. Primeros 90 días | *por decidir* | — | *por decidir* |
 | 3. Recuperación de antiguos socios | *por decidir* | *por decidir* por socio recuperado | *por decidir* |
+| 4. Envío de contenido personalizado | *por decidir si se valida* | — | — |
 
 ## Reglas para el agente de precios
 
