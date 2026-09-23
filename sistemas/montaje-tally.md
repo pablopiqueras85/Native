@@ -8,6 +8,13 @@
   [lógica condicional](https://tally.so/help/conditional-form-logic),
   [Google Sheets](https://tally.so/help/google-sheets-integration), [RGPD](https://tally.so/help/gdpr)).
 
+## Opción automática
+
+Si el entorno tiene acceso a `api.tally.so` y la clave de la API de Tally en la variable `TALLY_API_KEY`,
+Claude puede crear el formulario completo por API siguiendo esta guía (la API de Tally es gratuita,
+[fuente](https://tally.so/help/api)). El fundador solo tiene que conectar Google Sheets (paso 5), porque
+exige entrar con su cuenta de Google.
+
 ## Antes de empezar
 
 - [ ] Cuenta en [tally.so](https://tally.so).

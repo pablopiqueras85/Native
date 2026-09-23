@@ -24,8 +24,11 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
-- **Siguiente paso:** el fundador completa la política de privacidad y monta el formulario en Tally
-  siguiendo `sistemas/montaje-tally.md`; después, conectar la landing, decidir precios y hacer el cliente misterioso.
+- **Siguiente paso:** Claude crea el formulario en Tally por API, siguiendo exactamente
+  `sistemas/montaje-tally.md`. Requisitos: `api.tally.so` permitido en la red del entorno y la clave en la
+  variable de entorno `TALLY_API_KEY` (nunca en el chat ni en el repositorio). Crear también la política de
+  privacidad como página de Tally con los datos que dé el fundador, y pegar ambos enlaces en el `CONFIG` de
+  `landing/index.html`. El fundador conecta Google Sheets desde Tally. Después: precios y cliente misterioso.
 
 Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
