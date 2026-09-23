@@ -65,7 +65,7 @@ si basta como incentivo o hace falta algo más).
 | Pieza | Herramienta |
 |---|---|
 | Landing con calculadora | [`landing/`](../landing/README.md): hecha. Falta pegar los enlaces y publicarla |
-| Cuestionario | Tally, con campos ocultos para recibir los datos de la landing (ver [`cuestionario-diagnostico.md`](cuestionario-diagnostico.md)) |
+| Cuestionario | Tally, con campos ocultos para recibir los datos de la landing. Guía paso a paso: [`montaje-tally.md`](montaje-tally.md) |
 | Fichas de prospectos | Google Sheets o Airtable. **Nunca en este repositorio:** son datos personales |
 | Agentes 1–4 | Prompts ejecutados a mano con Claude sobre cada ficha |
 | Agenda | Calendly o Cal.com, con Google Meet, Teams o llamada |
@@ -94,8 +94,10 @@ Las respuestas al cuestionario no son el objetivo. Lo que valida la idea son **r
 - **Pedir permiso antes de enviar:** la LSSI prohíbe comunicaciones comerciales por email o WhatsApp
   no solicitadas ([AEPD](https://www.aepd.es/documento/2018-0164.pdf)). Primero se habla en persona o por
   teléfono y se pregunta si se puede enviar el cuestionario.
-- **RGPD:** aviso de privacidad y consentimiento en el cuestionario. Los datos de prospectos viven en la
-  herramienta de fichas, nunca en Git.
+- **RGPD:** política de privacidad ([borrador](../legal/politica-privacidad.md)) y consentimiento en el
+  cuestionario. Los datos de prospectos viven en la herramienta de fichas, nunca en Git.
+- **Datos anónimos para la IA:** al pasar una ficha a Claude, quitar nombre, centro y datos de contacto;
+  usar solo el número de fila de la ficha para identificarla.
 - **Avisar de que es una IA** cuando el seguimiento lo haga un agente
   ([Reglamento Europeo de IA, art. 50](https://artificialintelligenceact.eu/article/50/)).
 - **Revisión humana de cada informe:** un informe con errores quema al prospecto para siempre.

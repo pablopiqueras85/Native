@@ -24,8 +24,8 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
-- **Siguiente paso:** decidir los precios de `empresa/oferta.md`, crear el cuestionario en Tally con sus
-  campos ocultos, conectar la landing y hacer el cliente misterioso.
+- **Siguiente paso:** el fundador completa la política de privacidad y monta el formulario en Tally
+  siguiendo `sistemas/montaje-tally.md`; después, conectar la landing, decidir precios y hacer el cliente misterioso.
 
 Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
@@ -35,6 +35,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
 - `empresa/oferta.md` — servicios y precios. El agente de precios solo usa lo que hay aquí.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
+- `legal/` — textos legales (borrador de política de privacidad).
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
