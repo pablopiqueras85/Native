@@ -44,7 +44,7 @@ python3 sistemas/tally/formulario.py publicar ID                     # tras revi
 - **Está publicado pero cerrado** (no admite respuestas): se publicó por error durante una prueba y la API no
   deja volver a borrador. Tiene 0 respuestas. `publicar` lo reabre cuando tenga el enlace de la política.
 - Hecho por API: pasos 1 a 4, idioma en español (paso 6) y avisos por email activados (paso 5.2, sin
-  destinatario escrito: comprobar en *Notifications* que llegan al email de la cuenta).
+  destinatario escrito; llegan al email de la cuenta).
 - **Pendiente:** política de privacidad (faltan los datos del fundador) → `enlace` → `publicar` → pegar el
   enlace de la política en `landing/index.html`. Después, las pruebas del paso 8.
 - Revisado por el fundador (2026-09-23): la lógica de la pregunta 12 funciona en la vista previa, los avisos

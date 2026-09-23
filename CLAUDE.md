@@ -31,7 +31,7 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   datos que dé el fundador (responsable, NIF, dirección, email, plazo de conservación, herramienta de agenda,
   alojamiento de la web y proveedor de IA); luego `formulario.py enlace RGpogp URL`, `formulario.py publicar RGpogp`
   y pegar el enlace de la política en el `CONFIG` de `landing/index.html`. La lógica de la pregunta 12, los avisos
-  por email y Google Sheets ya están revisados. Después: pruebas del paso 8 de la guía,: precios y cliente misterioso.
+  por email y Google Sheets ya están revisados. Después: pruebas del paso 8 de la guía, precios y cliente misterioso.
 - **Clave de Tally:** guardada como credencial del entorno; se añade sola como cabecera `Authorization: Bearer …`
   a las peticiones a `api.tally.so` (no es una variable de entorno). Compruébala con
   `python3 sistemas/tally/formulario.py comprobar` (200 = funciona). Nunca pidas la clave en el chat. La red del
