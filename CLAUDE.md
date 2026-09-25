@@ -51,7 +51,8 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
-  Los agentes del diagnóstico están en `sistemas/diagnostico/` y se lanzan con la skill `diagnostico`.
+  Los agentes del diagnóstico son agentes independientes en `.claude/agents/` (índice y plantilla en
+  `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina.
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.

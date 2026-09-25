@@ -35,13 +35,23 @@ Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de 
    "Mi unidad") un archivo cuyo título contenga el `id` de la ficha: `parentId = '…' and title contains '{id}'`. Si existe, esa ficha ya está hecha.
    Si no queda ninguna ficha nueva, termina sin avisar a nadie.
 
-4. **Por cada ficha nueva**, ejecuta los agentes en orden, siguiendo `sistemas/diagnostico/agentes.md`:
-   Investigador → Analista → Propuesta → Precio. Lee antes `empresa/oferta.md`.
+4. **Por cada ficha nueva, lanza los agentes en orden** con la herramienta Agent, uno detrás de otro (cada uno
+   necesita lo que entrega el anterior). Pásale a cada uno **solo** lo que indica la tabla de
+   `sistemas/diagnostico/agentes.md`:
+   1. `investigador`: nombre del centro y ciudad.
+   2. `analista`: la ficha anónima (el JSON de `fichas.py`, sin el `id`) y la ficha pública del Investigador.
+   3. `propuesta`: los dolores del Analista.
+   4. `precio`: la propuesta.
+
+   Si un tipo de agente no está disponible en la sesión (los de `.claude/agents/` se cargan al empezar la
+   sesión), lanza uno general con el contenido de su archivo `.claude/agents/{nombre}.md` como instrucciones.
+   Tú, como coordinador, no rehaces su trabajo: si una salida está incompleta o incoherente, relanza ese agente
+   una vez explicándole qué falta; si sigue mal, dilo en las notas internas.
 
 5. **Guarda en la carpeta `Diagnósticos` de Drive dos documentos** (Markdown convertido a documento de
    Google: `contentMimeType: text/markdown`):
-   - `Diagnóstico {id} · {centro} · BORRADOR`: el informe para el centro, con la plantilla de
-     `sistemas/diagnostico/agentes.md`.
+   - `Diagnóstico {id} · {centro} · BORRADOR`: el informe para el centro, que montas tú con la plantilla de
+     `sistemas/diagnostico/agentes.md` a partir de lo que entregan los agentes.
    - `Diagnóstico {id} · {centro} · notas internas`: lo que el fundador necesita para revisarlo (fuentes
      del Investigador, supuestos de las cuentas, huecos de precio, dudas y la lista de comprobación).
 

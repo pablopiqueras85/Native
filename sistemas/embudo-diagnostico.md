@@ -77,8 +77,8 @@ si basta como incentivo o hace falta algo más).
 
 Ver [decisión 0003](../decisiones/0003-automatizar-diagnostico-con-rutina.md). Una rutina de Claude Code
 ejecuta cada hora la skill [`diagnostico`](../.claude/skills/diagnostico/SKILL.md): lee las respuestas nuevas
-de Tally con [`diagnostico/fichas.py`](diagnostico/fichas.py) (sin datos de contacto), aplica los agentes de
-[`diagnostico/agentes.md`](diagnostico/agentes.md) y deja el borrador y las notas internas en la carpeta
+de Tally con [`diagnostico/fichas.py`](diagnostico/fichas.py) (sin datos de contacto), lanza los cuatro agentes (cada uno independiente, en
+`.claude/agents/`, con el índice en [`diagnostico/agentes.md`](diagnostico/agentes.md)) y deja el borrador y las notas internas en la carpeta
 `Diagnósticos` de Google Drive. El fundador revisa y envía a mano.
 
 ### V1: automatizada
