@@ -49,7 +49,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
 - `fundador/perfil.md` — quién es el fundador. **Léelo antes de proponer o evaluar cualquier idea.**
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
-- `empresa/oferta.md` — servicios y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
+- `empresa/oferta.md` — catálogo de agentes (qué tarea quita cada uno) y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).

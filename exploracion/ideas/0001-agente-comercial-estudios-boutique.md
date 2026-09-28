@@ -7,16 +7,28 @@
 
 ## En una frase
 
-*Para estudios boutique de fitness independientes que pierden interesados entre la primera consulta y el
-alta, y socios en los primeros meses, un servicio que convierte, acompaña y recupera clientes por WhatsApp
-con agentes de IA, y cobra en función de los socios conseguidos o recuperados.*
+*Para estudios boutique de fitness independientes cuyo dueño pierde horas en tareas manuales con sus clientes
+y, por no llegar a todo, pierde interesados y socios, un catálogo de agentes de IA que hacen esas tareas por él
+(responder, perseguir indecisos, acompañar a socios nuevos, enviar rutinas, recuperar antiguos socios) y cobra
+por agente y por los socios conseguidos o recuperados.*
+
+**Posicionamiento (2026-09-28):** "Tú entrenas; el resto lo hacemos nosotros". Se vende **quitar tareas
+manuales** (las horas abren la conversación) y **recuperar clientes** (los euros cierran la venta). No es un
+programa como Harbiz o Trainingym: es la tarea hecha, en el WhatsApp del estudio. El estudio elige los
+agentes que necesita de un catálogo (ver [`empresa/oferta.md`](../../empresa/oferta.md)) y el diagnóstico
+le recomienda por dónde empezar.
 
 ## El problema
 
 *Hipótesis:* el dueño o el equipo están dando clase y no pueden contestar a tiempo ni hacer seguimiento a
 quien no se decide; tampoco acompañan a los socios nuevos ni intentan recuperar a los que se van. Hoy lo
 resuelven a mano, cuando pueden. La recepción automática (contestar y reservar) ya la venden varias
-empresas; el hueco estaría en la parte comercial.
+empresas; el hueco estaría en la parte comercial y en las tareas que el dueño hace a mano.
+
+**Competencia de herramientas:** Harbiz, Trainingym, Glofox y parecidos prometen también automatizar y
+eliminar tareas ([Harbiz](https://www.harbiz.io/en/blog/ia-entrenador-personal),
+[Trainingym vs Harbiz](https://trainingym.com/es/trainingym-vs-harbiz)), pero son programas que el dueño tiene
+que aprender y usar. La diferencia solo existe si los estudios, aun teniéndolos, no hacen esas tareas.
 
 ## La solución AI Native
 
@@ -36,6 +48,9 @@ precio reducido para los 3 primeros. Precios por decidir (ver [`empresa/oferta.m
 
 ## Hipótesis clave
 
+0. **La más arriesgada (2026-09-28): los estudios que usan un programa de gestión (Harbiz, Trainingym…)
+   tampoco hacen seguimiento ni envían a tiempo.** Si con el programa ya lo resuelven, la idea se debilita. Se
+   mide cruzando las preguntas 16 y 8 del cuestionario.
 1. **La mayoría de estudios no hace seguimiento** a quien dice "me lo pienso" ni intenta recuperar antiguos socios.
 2. **Los dueños pagarían por resultados** algo más que lo que cuesta un chatbot.
 3. **Se puede llegar a ellos:** al menos el 30 % de los contactados completa el cuestionario de diagnóstico.
@@ -49,6 +64,9 @@ precio reducido para los 3 primeros. Precios por decidir (ver [`empresa/oferta.m
 ## Evaluación
 
 *Pendiente de `/evaluar-idea`.*
+
+6. **Los dueños prefieren elegir agentes sueltos** a un paquete cerrado, sin que tantas opciones frenen la
+   decisión (*hipótesis*; el diagnóstico recomienda como máximo 3 para empezar).
 
 ## Siguiente experimento
 

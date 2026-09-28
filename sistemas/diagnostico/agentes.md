@@ -48,7 +48,7 @@ Son estimaciones a partir de tus respuestas, que eran rangos. En una llamada las
 Cuando tengamos respuestas de al menos 10 centros como el tuyo, te enviaremos la comparativa.
 
 ## Qué haríamos
-1. **{Servicio}:** {qué hace, en una frase, y qué dolor resuelve}.
+1. **{Agente}:** {qué tarea te quita, en una frase, y qué dolor resuelve}.
 2. …
 
 ## Una prueba de 30 días
