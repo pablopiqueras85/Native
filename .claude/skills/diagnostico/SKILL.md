@@ -1,12 +1,12 @@
 ---
 name: diagnostico
-description: Ejecuta los agentes del embudo de diagnóstico sobre las respuestas nuevas del cuestionario de Tally y deja en Google Drive un borrador del informe para que el fundador lo revise. Úsala cuando la lance la rutina programada o cuando el usuario pida "haz los diagnósticos", "procesa las respuestas" o el diagnóstico de una respuesta concreta.
+description: Ejecuta los agentes del embudo de diagnóstico sobre las respuestas nuevas del cuestionario de Tally, deja el informe en Google Drive y, si el envío automático está activo y el informe pasa la revisión, lo envía por email a quien respondió. Úsala cuando la lance la rutina programada o cuando el usuario pida "haz los diagnósticos", "procesa las respuestas" o el diagnóstico de una respuesta concreta.
 ---
 
 # Diagnóstico de las respuestas nuevas
 
-Objetivo: por cada respuesta nueva del cuestionario, un **borrador** de informe en Google Drive que el
-fundador revisa y envía a mano. Nunca se envía nada al centro desde aquí.
+Objetivo: por cada respuesta nueva del cuestionario, un informe en Google Drive y, si el envío automático está
+activo, el mismo informe enviado por email a quien respondió (decisión 0004).
 
 Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de cada agente:
 `sistemas/diagnostico/agentes.md`.
@@ -18,7 +18,8 @@ Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de 
   recuperar esos datos. El nombre del centro y la ciudad sí se usan: los necesita el Investigador.
 - **Nada al repositorio.** Las fichas y los informes contienen datos de prospectos: van a Google Drive,
   nunca a Git. No hagas commits en esta tarea.
-- **Nada al centro.** Ni emails ni WhatsApp. El fundador revisa y envía.
+- **Al centro, solo el email del informe y solo con `enviar.py`.** Ese script lee el email de Tally y lo pasa a
+  Brevo sin mostrarlo. Nunca lo leas tú ni lo pases a un agente. Nada de WhatsApp.
 - **No inventes cifras ni precios.** Las cuentas salen de las respuestas, con la fórmula a la vista. Los
   informes no llevan precio mientras el agente `precio` esté en pausa.
 
@@ -57,12 +58,26 @@ Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de 
    - `Diagnóstico {id} · {centro} · notas internas`: lo que el fundador necesita para revisarlo (fuentes
      del Investigador, supuestos de las cuentas, dudas y la lista de comprobación).
 
-6. **Avisa al fundador** con una notificación (si está disponible) o en tu respuesta final: cuántos
-   informes hay listos y sus enlaces de Drive. Recuérdale que los datos de contacto están en Tally o en
-   Google Sheets, buscando por el `id`.
+6. **Envía el informe por email** (decisión 0004), solo si `python3 sistemas/diagnostico/enviar.py comprobar`
+   funciona. Si falla (sin clave de Brevo o sin red), no envíes: el informe se queda como borrador y lo dices en
+   el aviso al fundador.
+   - Antes, repasa tú la lista de comprobación de las notas internas. No envíes si hay huecos entre corchetes,
+     alguna cifra de precio, datos de la ficha pública que no sean seguro de ese centro, o si parece una
+     respuesta de prueba o absurda: en esos casos se queda como borrador para el fundador.
+   - Guarda el informe (el mismo Markdown del documento BORRADOR) en el scratchpad de la sesión, nunca en el
+     repositorio, y ejecuta `python3 sistemas/diagnostico/enviar.py enviar --id {id} --informe {ruta}`.
+   - Si se envía, renombra el documento a `Diagnóstico {id} · {centro} · ENVIADO {AAAA-MM-DD}` y borra el
+     archivo del scratchpad.
+
+7. **Avisa al fundador** con una notificación (si está disponible) o en tu respuesta final: cuántos
+   informes hay, de qué centros, si se enviaron o por qué no, y sus enlaces de Drive. Los datos de contacto
+   están en Tally o en Google Sheets, buscando por el `id`.
 
 ## Si algo falla
 
 - Tally o Drive no responden: no reintentes en bucle. Avisa de qué falló; la siguiente ejecución lo
   volverá a intentar, porque la ficha seguirá sin informe en Drive.
-- Una ficha con respuestas absurdas o de prueba: haz el informe igualmente y dilo en las notas internas.
+- Una ficha con respuestas absurdas o de prueba: haz el informe igualmente, dilo en las notas internas y no
+  lo envíes.
+- Brevo falla al enviar: no reintentes. El documento se queda como BORRADOR y avisas al fundador; como ya
+  existe en Drive, la siguiente ejecución no lo repite, así que el fundador lo envía a mano.

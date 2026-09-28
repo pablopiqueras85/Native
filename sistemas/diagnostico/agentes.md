@@ -24,7 +24,8 @@ la sección "Precio" de la plantilla.
 ## Plantilla del informe (para el centro)
 
 Tuteo, frases cortas, sin jerga técnica ni palabras como "agente" o "automatización" si hay una más clara.
-Una o dos páginas. Firmado por el fundador.
+Una o dos páginas. Firmado por el fundador. Es también el cuerpo del email (decisión 0004): `enviar.py` lo
+convierte a HTML y añade al final el enlace a la calculadora de la landing.
 
 ```markdown
 # Diagnóstico comercial de {centro}

@@ -1,7 +1,7 @@
 # 0003 — Automatizar los borradores del diagnóstico con una rutina de Claude Code
 
 - **Fecha:** 2026-09-23
-- **Estado:** aceptada
+- **Estado:** aceptada; el envío lo cambia la decisión 0004
 
 ## Contexto
 
@@ -36,7 +36,7 @@ decirlo.
   el email y el WhatsApp antes de que los vean los agentes. Nada se guarda en Git.
 - Sin precios en `empresa/oferta.md`, los informes llevaban `[PRECIO POR DECIDIR]`. Desde 2026-09-28, por decisión
   del fundador, el agente de Precio está en pausa y el informe sale sin precio: el coste se habla en la llamada.
-- El envío automático por email o WhatsApp sigue en la V1.
+- El envío automático por email o WhatsApp sigue en la V1. **Cambiado el 2026-09-28:** ver la decisión 0004 (email automático con Brevo; WhatsApp sigue en manual).
 - **Dónde vive:** la rutina `trig_011zoodojcuLcEJzL5UAqgwR` ("Diagnósticos de Tally → borradores en Drive")
   despierta cada hora la sesión de Claude Code en la que se creó, porque es la que tiene el repositorio, la clave de
   Tally y Google Drive; una rutina creada desde una sesión no puede dar esos accesos a sesiones nuevas. Si esa

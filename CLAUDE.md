@@ -30,7 +30,8 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   dirección: añadirlos antes de cobrar.
 - **Hecho:** borradores automáticos del diagnóstico (decisión 0003). Una rutina de Claude Code ejecuta cada hora
   la skill `diagnostico`: respuestas nuevas de Tally → agentes → borrador y notas internas en la carpeta
-  `Diagnósticos` de Google Drive. El fundador revisa y envía a mano. Cómo está montada la rutina y cómo
+  `Diagnósticos` de Google Drive. Desde 2026-09-28 (decisión 0004) el informe se envía solo por email con Brevo si pasa la lista de comprobación;
+  **pendiente de activar**: el fundador tiene que crear la cuenta de Brevo y añadir la clave y el remitente al entorno. Cómo está montada la rutina y cómo
   recrearla: decisión 0003, "Consecuencias".
 - **Siguiente paso:** primera prueba con un estudio de entrenamiento personal de un conocido del fundador. Sirve
   para probar el cuestionario y el informe, **no** como validación. Es una demo: el fundador aún no
