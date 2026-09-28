@@ -48,6 +48,7 @@ Son estimaciones a partir de tus respuestas, que eran rangos. En una llamada las
 Cuando tengamos respuestas de al menos 10 centros como el tuyo, te enviaremos la comparativa.
 
 ## Qué haríamos
+{Paquete recomendado y por qué, en una frase.}
 1. **{Agente}:** {qué tarea te quita, en una frase, y qué dolor resuelve}.
 2. …
 

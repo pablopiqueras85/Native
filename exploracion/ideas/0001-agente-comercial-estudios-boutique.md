@@ -65,8 +65,8 @@ precio reducido para los 3 primeros. Precios por decidir (ver [`empresa/oferta.m
 
 *Pendiente de `/evaluar-idea`.*
 
-6. **Los dueños prefieren elegir agentes sueltos** a un paquete cerrado, sin que tantas opciones frenen la
-   decisión (*hipótesis*; el diagnóstico recomienda como máximo 3 para empezar).
+6. **Tres paquetes que elige el diagnóstico venden mejor que una carta de agentes sueltos** (*hipótesis*,
+   2026-09-28). Se comprobará con los primeros clientes; la carta se abre cuando haya 5–10.
 
 ## Siguiente experimento
 
