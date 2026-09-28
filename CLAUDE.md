@@ -21,7 +21,7 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   `exploracion/nicho-salud-deporte.md`.
 - **Idea en curso:** `exploracion/ideas/0001-agente-comercial-estudios-boutique.md`.
 - **Sistema en diseño:** el embudo de diagnóstico (`sistemas/embudo-diagnostico.md`), el primer equipo
-  de agentes para uso propio: cuestionario → informe con soluciones y precio → reunión.
+  de agentes para uso propio: cuestionario → informe con soluciones (de momento sin precio) → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
 - **Hecho:** el formulario en Tally (https://tally.so/r/RGpogp) y la política de privacidad
@@ -33,8 +33,9 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   `Diagnósticos` de Google Drive. El fundador revisa y envía a mano. Cómo está montada la rutina y cómo
   recrearla: decisión 0003, "Consecuencias".
 - **Siguiente paso:** primera prueba con un estudio de entrenamiento personal de un conocido del fundador. Sirve
-  para probar el cuestionario y el informe, **no** como validación. Urgente: decidir precios (`empresa/oferta.md`)
-  y crear el enlace de agenda de Google Calendar, que los informes dejan como huecos. Después: publicar la landing
+  para probar el cuestionario y el informe, **no** como validación. Urgente: crear el enlace de agenda de Google
+  Calendar, que los informes dejan como hueco. Los informes salen sin precio (agente de Precio en pausa desde
+  2026-09-28); los precios de `empresa/oferta.md` siguen por decidir, pero ya no bloquean. Después: publicar la landing
   en Netlify, pruebas del paso 8 de `sistemas/montaje-tally.md` y cliente misterioso.
 - **Clave de Tally:** guardada como credencial del entorno; se añade sola como cabecera `Authorization: Bearer …`
   a las peticiones a `api.tally.so` (no es una variable de entorno). Compruébala con
@@ -47,7 +48,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
 - `fundador/perfil.md` — quién es el fundador. **Léelo antes de proponer o evaluar cualquier idea.**
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
-- `empresa/oferta.md` — servicios y precios. El agente de precios solo usa lo que hay aquí.
+- `empresa/oferta.md` — servicios y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).

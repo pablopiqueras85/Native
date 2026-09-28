@@ -13,9 +13,13 @@ necesita y monta el informe final con la plantilla de abajo. Ninguno recibe dato
 | 1. Investigador | [`investigador.md`](../../.claude/agents/investigador.md) | Búsqueda web | Nombre del centro y ciudad | Ficha pública con fuentes |
 | 2. Analista | [`analista.md`](../../.claude/agents/analista.md) | Solo lectura | Ficha anónima y ficha pública | Dolores con sus cuentas |
 | 3. Propuesta | [`propuesta.md`](../../.claude/agents/propuesta.md) | Solo lectura | Dolores y `empresa/oferta.md` | Soluciones y piloto de 30 días |
-| 4. Precio | [`precio.md`](../../.claude/agents/precio.md) | Solo lectura | Propuesta y `empresa/oferta.md` | Presupuesto |
+| 4. Precio (**en pausa**) | [`precio.md`](../../.claude/agents/precio.md) | Solo lectura | Propuesta y `empresa/oferta.md` | Presupuesto |
 
 Para cambiar cómo trabaja un agente, edita su archivo en `.claude/agents/`.
+
+**Precio en pausa (2026-09-28):** por decisión del fundador, el informe sale sin precio y el coste se habla en la
+llamada. El agente sigue en su archivo; para reactivarlo, vuelve a añadirlo en el paso 4 de la skill y recupera
+la sección "Precio" de la plantilla.
 
 ## Plantilla del informe (para el centro)
 
@@ -49,23 +53,21 @@ Cuando tengamos respuestas de al menos 10 centros como el tuyo, te enviaremos la
 ## Una prueba de 30 días
 {Qué se hace, con qué cifra se empieza y cómo se mide.}
 
-## Precio
-{Del agente de precios.}
-
 ## ¿Lo comentamos?
 {Si en la pregunta 21 dijo "Sí": propón la llamada de 20 minutos con el enlace de agenda [ENLACE DE AGENDA].
-Si dijo "Prefiero solo el informe": ofrécela sin insistir.}
+Si dijo "Prefiero solo el informe": ofrécela sin insistir. En los dos casos, di que en la llamada vemos también
+cuánto costaría.}
 
 Pablo Piqueras
 ```
 
 ## Notas internas (para el fundador)
 
-1. **Avisos:** precios por decidir, datos dudosos, contradicciones, si parece una respuesta de prueba.
+1. **Avisos:** datos dudosos, contradicciones, si parece una respuesta de prueba.
 2. **Ficha pública del Investigador**, con enlaces.
 3. **Supuestos** de cada cuenta.
 4. **Antes de enviar, comprueba:**
    - [ ] Cada cifra cuadra con sus respuestas.
    - [ ] Ningún dato de la ficha pública es de otro centro.
-   - [ ] No quedan `[PRECIO POR DECIDIR]` ni `[ENLACE DE AGENDA]`.
+   - [ ] No queda `[ENLACE DE AGENDA]` ni ninguna cifra de precio.
    - [ ] El tono es el tuyo: lo firmas tú.

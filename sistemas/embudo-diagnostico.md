@@ -40,7 +40,7 @@ Investigador ─► Analista ─► Propuesta ─► Precio ─► REVISIÓN DEL
 | **1. Investigador** | Nombre y web del centro | Ficha pública: tipo de centro, servicios y precios publicados, horarios, reseñas, redes y resultado del cliente misterioso |
 | **2. Analista** | Respuestas del cuestionario, datos de la landing (si los compartió) y ficha pública | Dolores detectados, ordenados por dinero en juego y horas de trabajo manual, con las cuentas a la vista y hechas con los datos del propio cliente |
 | **3. Propuesta** | Dolores y [`empresa/oferta.md`](../empresa/oferta.md) | Servicios del catálogo que resuelven cada dolor y un piloto de 30 días con su forma de medirlo |
-| **4. Precio** | Propuesta y tabla de precios de `empresa/oferta.md` | Presupuesto personalizado. Solo usa precios de la tabla |
+| **4. Precio** (en pausa desde 2026-09-28) | Propuesta y tabla de precios de `empresa/oferta.md` | Presupuesto personalizado. Solo usa precios de la tabla |
 | **5. Seguimiento** | Informe enviado | Mensajes de seguimiento hasta que agende o diga que no. Avisa al fundador de cada respuesta |
 | **Fundador** | Informe completo | Lo revisa y aprueba antes de enviarlo. Siempre, al menos en V0 y V1 |
 
@@ -51,7 +51,7 @@ Investigador ─► Analista ─► Propuesta ─► Precio ─► REVISIÓN DEL
 3. **Comparativa** con los demás centros encuestados (a partir de 10 respuestas).
 4. **Soluciones propuestas,** por prioridad.
 5. **Piloto de 30 días:** qué se hace y cómo se mide el resultado.
-6. **Precio.**
+6. **Precio.** En pausa desde 2026-09-28: de momento el informe sale sin precio y se habla en la llamada.
 7. **Agendar reunión:** Google Meet, Teams, llamada o WhatsApp, a elección del cliente.
 
 **La recompensa por responder es el propio informe:** un diagnóstico personalizado y una comparativa

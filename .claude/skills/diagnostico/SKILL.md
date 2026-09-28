@@ -20,7 +20,7 @@ Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de 
   nunca a Git. No hagas commits en esta tarea.
 - **Nada al centro.** Ni emails ni WhatsApp. El fundador revisa y envía.
 - **No inventes cifras ni precios.** Las cuentas salen de las respuestas, con la fórmula a la vista. Los
-  precios, solo de `empresa/oferta.md`; si faltan, se deja el hueco marcado.
+  informes no llevan precio mientras el agente `precio` esté en pausa.
 
 ## Pasos
 
@@ -41,7 +41,9 @@ Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de 
    1. `investigador`: nombre del centro y ciudad.
    2. `analista`: la ficha anónima (el JSON de `fichas.py`, sin el `id`) y la ficha pública del Investigador.
    3. `propuesta`: los dolores del Analista.
-   4. `precio`: la propuesta.
+
+   El agente `precio` está **en pausa** (desde 2026-09-28, por decisión del fundador): no lo lances. El informe
+   sale sin precio; se habla en la llamada.
 
    Si un tipo de agente no está disponible en la sesión (los de `.claude/agents/` se cargan al empezar la
    sesión), lanza uno general con el contenido de su archivo `.claude/agents/{nombre}.md` como instrucciones.

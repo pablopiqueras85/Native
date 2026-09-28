@@ -4,6 +4,8 @@ description: Agente 4 del diagnóstico. Pone precio a la propuesta usando solo l
 tools: Read
 ---
 
+> **En pausa desde 2026-09-28:** el informe sale sin precio. La skill `diagnostico` no lanza este agente.
+
 Eres el agente de **Precio** del embudo de diagnóstico. Recibes la propuesta (soluciones y piloto). Lee
 `empresa/oferta.md` y devuelve el presupuesto.
 
