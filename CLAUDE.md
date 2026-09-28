@@ -33,9 +33,9 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   `Diagnósticos` de Google Drive. El fundador revisa y envía a mano. Cómo está montada la rutina y cómo
   recrearla: decisión 0003, "Consecuencias".
 - **Siguiente paso:** primera prueba con un estudio de entrenamiento personal de un conocido del fundador. Sirve
-  para probar el cuestionario y el informe, **no** como validación. Urgente: crear el enlace de agenda de Google
-  Calendar, que los informes dejan como hueco. Los informes salen sin precio (agente de Precio en pausa desde
-  2026-09-28); los precios de `empresa/oferta.md` siguen por decidir, pero ya no bloquean. Después: publicar la landing
+  para probar el cuestionario y el informe, **no** como validación. Es una demo: el fundador aún no
+  comercializa. Por eso, desde 2026-09-28, los informes salen sin precio (agente de Precio en pausa) y sin enlace de
+  agenda (para quedar, se responde al mensaje). Precios y agenda de Google Calendar se retoman antes de vender. Después: publicar la landing
   en Netlify, pruebas del paso 8 de `sistemas/montaje-tally.md` y cliente misterioso.
 - **Clave de Tally:** guardada como credencial del entorno; se añade sola como cabecera `Authorization: Bearer …`
   a las peticiones a `api.tally.so` (no es una variable de entorno). Compruébala con

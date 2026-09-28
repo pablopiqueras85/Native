@@ -54,9 +54,9 @@ Cuando tengamos respuestas de al menos 10 centros como el tuyo, te enviaremos la
 {Qué se hace, con qué cifra se empieza y cómo se mide.}
 
 ## ¿Lo comentamos?
-{Si en la pregunta 21 dijo "Sí": propón la llamada de 20 minutos con el enlace de agenda [ENLACE DE AGENDA].
+{Si en la pregunta 21 dijo "Sí": propón una llamada de 20 minutos; para quedar, que responda a este mensaje.
 Si dijo "Prefiero solo el informe": ofrécela sin insistir. En los dos casos, di que en la llamada vemos también
-cuánto costaría.}
+cuánto costaría. Sin enlace de agenda: de momento no hay (fase de demo, 2026-09-28).}
 
 Pablo Piqueras
 ```
@@ -69,5 +69,5 @@ Pablo Piqueras
 4. **Antes de enviar, comprueba:**
    - [ ] Cada cifra cuadra con sus respuestas.
    - [ ] Ningún dato de la ficha pública es de otro centro.
-   - [ ] No queda `[ENLACE DE AGENDA]` ni ninguna cifra de precio.
+   - [ ] No queda ningún hueco entre corchetes ni ninguna cifra de precio.
    - [ ] El tono es el tuyo: lo firmas tú.
