@@ -55,7 +55,7 @@ Diseño completo del embudo: `sistemas/embudo-diagnostico.md`. Instrucciones de 
    - `Diagnóstico {id} · {centro} · BORRADOR`: el informe para el centro, que montas tú con la plantilla de
      `sistemas/diagnostico/agentes.md` a partir de lo que entregan los agentes.
    - `Diagnóstico {id} · {centro} · notas internas`: lo que el fundador necesita para revisarlo (fuentes
-     del Investigador, supuestos de las cuentas, huecos de precio, dudas y la lista de comprobación).
+     del Investigador, supuestos de las cuentas, dudas y la lista de comprobación).
 
 6. **Avisa al fundador** con una notificación (si está disponible) o en tu respuesta final: cuántos
    informes hay listos y sus enlaces de Drive. Recuérdale que los datos de contacto están en Tally o en
