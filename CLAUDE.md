@@ -16,9 +16,10 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Descartado:** el sector industrial (ver `decisiones/0002-descartar-sector-industrial.md`).
 - **Dirección:** un "agente comercial externo" (responder, cualificar y hacer seguimiento de clientes
   potenciales con agentes de IA). Ver `exploracion/mapa-trabajos-por-encargo.md`.
-- **Nicho en estudio:** salud y deporte. Mejor candidato: estudios boutique de fitness independientes,
-  con el foco en convertir y retener clientes (la recepción con IA ya está saturada). Ver
-  `exploracion/nicho-salud-deporte.md`.
+- **Alcance (decisión 0007):** un abanico de negocios con un patrón común (citas o clases, clientes recurrentes, dueño
+  dentro, WhatsApp). Tres sectores activos al principio (propuesta): estudios de fitness boutique, centros de estética y
+  peluquerías, y academias. Agentes por función, comunes a todos; lo propio de cada sector en `conocimiento/sectores/`.
+  Se mide la tasa de reutilización. Origen del nicho de fitness: `exploracion/nicho-salud-deporte.md`.
 - **Idea en curso:** `exploracion/ideas/0001-agente-comercial-estudios-boutique.md`, como puerta de entrada de
   `exploracion/ideas/0002-equipo-digital-solo-founders.md`.
 - **Posicionamiento (propuesta, decisión 0005):** agencia AI Native que amplía el equipo del dueño con un equipo
@@ -64,6 +65,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
   Los agentes del diagnóstico son agentes independientes en `.claude/agents/` (índice y plantilla en
   `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina. El equipo que trabaja para los clientes está
   en `sistemas/equipo-digital/` (fichas neutras en `agentes/`, plantillas y portero).
+- `conocimiento/sectores/` — una ficha por sector: vocabulario, dolores, plantillas, programas típicos y aprendizajes (decisión 0007).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.

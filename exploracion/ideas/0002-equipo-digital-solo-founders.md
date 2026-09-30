@@ -31,8 +31,9 @@ medición y la supervisión.
 
 ## Cliente ideal
 
-Pequeño negocio de servicios con clientes recurrentes y dueño que trabaja dentro (estudios de fitness,
-fisioterapia, nutrición, academias…). **Entrada:** estudios boutique de fitness (idea 0001), y después nichos vecinos.
+Negocio de servicios que vive de citas o clases, con clientes recurrentes, dueño que trabaja dentro y clientes que le
+escriben por WhatsApp (decisión 0007). Tres sectores activos al principio (propuesta): estudios de fitness boutique
+(idea 0001), centros de estética y peluquerías, y academias. Lo que cambia por sector vive en `conocimiento/sectores/`.
 
 ## Modelo de negocio
 

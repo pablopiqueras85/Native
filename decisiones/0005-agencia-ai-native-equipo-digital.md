@@ -26,7 +26,8 @@ diagnóstico → propuesta del catálogo → piloto medido → supervisión. Se 
   conexiones, la medición y la supervisión.
 - **Catálogo:** organizado por "responsables" (comercial, administración, comunicación…). Lo comercial se ofrece ya;
   administración y comunicación quedan *por validar* con datos del cuestionario.
-- **Entrada:** por nicho. Primero estudios boutique (idea 0001), luego nichos vecinos (idea 0002).
+- **Entrada:** ~~por nicho. Primero estudios boutique (idea 0001), luego nichos vecinos (idea 0002).~~ Sustituido el
+  2026-09-30 por la decisión 0007: un abanico de negocios con un patrón común, con 3 sectores activos al principio.
 - **La consultoría la hacen los agentes** (como el diagnóstico actual), para que escale.
 
 ## Alternativas consideradas
