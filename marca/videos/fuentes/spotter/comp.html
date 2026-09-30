@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<!-- onetake · © 2026 Patrick (github.com/feitangyuan) · PolyForm Noncommercial 1.0.0 · lineage otk-7f3e1c -->
+<!-- Spotter · vídeo revelación (uso no comercial: para enseñar a colegas) -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Spotter · revelación</title>
+<style>
+@font-face{font-family:'Archivo';src:url('Archivo.ttf') format('truetype');font-weight:100 900;font-stretch:62% 125%}
+:root{ --hueso:#F4F0E8; --noche:#0A1F44; --intenso:#1E4FD8; --medio:#3B7BEA; --cielo:#8DBBF5; --linea:#0B1530; }
+html,body{margin:0;width:1920px;height:1080px;overflow:hidden;background:var(--hueso)}
+svg{position:absolute;left:0;top:0;display:block}
+text{font-family:var(--disp),'Archivo',sans-serif}
+#hud{position:absolute;right:14px;bottom:10px;font:13px monospace;color:#c00;display:none}
+</style>
+</head>
+<body>
+<svg id="svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <defs>
+    <clipPath id="clipPeek" clipPathUnits="userSpaceOnUse"><rect id="clipRect" x="-4000" y="-4000" width="8000" height="4648"/></clipPath>
+    <clipPath id="clipGloves" clipPathUnits="userSpaceOnUse"><rect id="clipGRect" x="-4000" y="-4000" width="8000" height="4500"/></clipPath>
+    <clipPath id="clipBody"><ellipse cx="0" cy="0" rx="105" ry="135"/></clipPath>
+    <linearGradient id="sombraPersiana" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0A1F44" stop-opacity=".22"/><stop offset="1" stop-color="#0A1F44" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="gBody" cx="0.36" cy="0.27" r="0.85"><stop offset="0" stop-color="#7AAEFF"/><stop offset=".33" stop-color="#2F72EE"/><stop offset=".78" stop-color="#1D55CF"/><stop offset="1" stop-color="#143C98"/></radialGradient>
+    <linearGradient id="gBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#CFDBF0"/></linearGradient>
+    <linearGradient id="gGlove" x1="0" y1="0" x2="1" y2="1"><stop offset=".45" stop-color="#fff"/><stop offset="1" stop-color="#C9D3E4"/></linearGradient>
+    <pattern id="puntos" width="48" height="48" patternUnits="userSpaceOnUse"><circle cx="24" cy="24" r="1.7" fill="#0A1F44" opacity=".13"/></pattern>
+  </defs>
+  <rect width="1920" height="1080" fill="var(--hueso)"/>
+  <g id="lattice" opacity=".55"><rect x="-6000" y="-3000" width="12000" height="7000" fill="url(#puntos)"/></g>
+  <g id="world">
+    <!-- sala B (la máquina), 1920 px a la izquierda de la sala A -->
+    <g id="roomB" transform="translate(-1920,0)">
+      <ellipse cx="960" cy="938" rx="380" ry="16" fill="#0A1F44" opacity=".08"/>
+      <g id="maqAtras" stroke="#0B1530" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+        <rect x="640" y="905" width="640" height="30" rx="8" fill="#0A1F44"/>
+        <rect x="690" y="150" width="36" height="760" rx="8" fill="#0A1F44"/>
+        <rect x="1194" y="150" width="36" height="760" rx="8" fill="#0A1F44"/>
+        <rect x="660" y="140" width="600" height="40" rx="10" fill="#1E4FD8"/>
+        <line x1="662" y1="152" x2="1256" y2="152" stroke="#8DBBF5" stroke-width="5" opacity=".7"/>
+        <line id="cableBar" x1="960" y1="200" x2="960" y2="250" stroke-width="5"/>
+        <circle cx="960" cy="200" r="21" fill="#8DBBF5"/><circle cx="960" cy="200" r="6" fill="#0B1530" stroke="none"/>
+        <rect x="870" y="668" width="180" height="34" rx="14" fill="#3B7BEA"/>
+      </g>
+      <ellipse id="sombraPers" cx="560" cy="936" rx="120" ry="14" fill="#0A1F44" opacity=".14"/>
+    </g>
+    <!-- personaje: cuerpo, piernas y brazos -->
+    <g id="act2"></g>
+    <g id="wordE"></g>
+    <ellipse id="sombraChar" cx="0" cy="0" rx="120" ry="15" fill="#0A1F44" opacity="0"/>
+    <g id="charLayer" clip-path="url(#clipPeek)">
+      <g id="arms" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path id="armLo" stroke="#0B1530" stroke-width="25"/><path id="armLi" stroke="#2266E8" stroke-width="13"/><path id="armLh" stroke="#7AAEFF" stroke-width="4" opacity=".75"/>
+        <path id="armRo" stroke="#0B1530" stroke-width="25"/><path id="armRi" stroke="#2266E8" stroke-width="13"/><path id="armRh" stroke="#7AAEFF" stroke-width="4" opacity=".75"/>
+      </g>
+      <g id="char">
+        <g id="tails" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path id="tail2o" stroke="#0B1530" stroke-width="22"/><path id="tail2i" stroke="#DCE6F5" stroke-width="12"/>
+          <path id="tail1o" stroke="#0B1530" stroke-width="24"/><path id="tail1i" stroke="#fff" stroke-width="14"/><path id="tail1s" stroke="#2266E8" stroke-width="4"/>
+        </g>
+        <g id="legs" stroke-linecap="round" stroke-linejoin="round">
+          <path id="legLo" fill="none" stroke="#0B1530" stroke-width="27"/><path id="legLi" fill="none" stroke="#2266E8" stroke-width="15"/><path id="legLh" fill="none" stroke="#7AAEFF" stroke-width="4" opacity=".7"/>
+          <path id="legRo" fill="none" stroke="#0B1530" stroke-width="27"/><path id="legRi" fill="none" stroke="#2266E8" stroke-width="15"/><path id="legRh" fill="none" stroke="#7AAEFF" stroke-width="4" opacity=".7"/>
+          <g id="shoeL"><path d="M-30,-4 Q-34,-26 -4,-26 L14,-24 Q40,-20 46,0 L46,8 L-34,8 Z" fill="url(#gGlove)" stroke="#0B1530" stroke-width="6"/><rect x="-36" y="2" width="84" height="10" rx="5" fill="#8DBBF5" stroke="#0B1530" stroke-width="4"/><path d="M0,-22 L10,-10 M10,-23 L20,-11" stroke="#0B1530" stroke-width="3"/></g>
+          <g id="shoeR"><path d="M30,-4 Q34,-26 4,-26 L-14,-24 Q-40,-20 -46,0 L-46,8 L34,8 Z" fill="url(#gGlove)" stroke="#0B1530" stroke-width="6"/><rect x="-48" y="2" width="84" height="10" rx="5" fill="#8DBBF5" stroke="#0B1530" stroke-width="4"/><path d="M0,-22 L-10,-10 M-10,-23 L-20,-11" stroke="#0B1530" stroke-width="3"/></g>
+        </g>
+        <g id="body">
+          <ellipse cx="0" cy="0" rx="105" ry="135" fill="url(#gBody)"/>
+          <g clip-path="url(#clipBody)">
+            <ellipse cx="10" cy="150" rx="150" ry="62" fill="#0A1F44" opacity=".30"/>
+            <path d="M74,-104 Q132,-4 70,110" fill="none" stroke="#9CC4FF" stroke-width="9" opacity=".55"/>
+            <ellipse cx="-50" cy="-44" rx="15" ry="30" fill="#fff" opacity=".32" transform="rotate(22 -50 -44)"/>
+            <ellipse cx="-66" cy="-6" rx="6" ry="9" fill="#fff" opacity=".25"/>
+            <ellipse cx="-70" cy="24" rx="19" ry="11" fill="#FF8FB0" opacity=".28"/><ellipse cx="70" cy="24" rx="19" ry="11" fill="#FF8FB0" opacity=".28"/>
+            <path d="M-130,-96 Q0,-132 130,-96 L130,-58 Q0,-94 -130,-58 Z" fill="url(#gBand)" stroke="#0B1530" stroke-width="5"/>
+            <path d="M-130,-84 Q0,-120 130,-84 L130,-72 Q0,-108 -130,-72 Z" fill="#2266E8"/>
+          </g>
+          <ellipse cx="0" cy="0" rx="105" ry="135" fill="none" stroke="#0B1530" stroke-width="7"/>
+          <circle cx="86" cy="-80" r="12" fill="#fff" stroke="#0B1530" stroke-width="5"/>
+          <g id="eyes">
+            <g id="eyeL" transform="translate(-36,-30)"><ellipse rx="30" ry="36" fill="#fff" stroke="#0B1530" stroke-width="5"/><ellipse cx="0" cy="-20" rx="22" ry="10" fill="#DCE6F5" opacity=".7"/><circle id="pupL" r="13" fill="#0B1530"/><circle id="hiL" r="4.5" fill="#fff"/></g>
+            <g id="eyeR" transform="translate(36,-30)"><ellipse rx="30" ry="36" fill="#fff" stroke="#0B1530" stroke-width="5"/><ellipse cx="0" cy="-20" rx="22" ry="10" fill="#DCE6F5" opacity=".7"/><circle id="pupR" r="13" fill="#0B1530"/><circle id="hiR" r="4.5" fill="#fff"/></g>
+          </g>
+          <path id="winkR" d="M-24,4 Q0,-16 24,4" transform="translate(36,-30)" fill="none" stroke="#0B1530" stroke-width="7" stroke-linecap="round" opacity="0"/>
+          <g id="brows" fill="none" stroke="#0B1530" stroke-width="8" stroke-linecap="round">
+            <path id="browL" d="M-20,2 Q0,-8 20,0"/><path id="browR" d="M-20,0 Q0,-8 20,2"/>
+          </g>
+          <g id="mouth" transform="translate(0,40)">
+            <path d="M-56,0 Q0,16 56,0 Q44,54 0,56 Q-44,54 -56,0 Z" fill="#fff" stroke="#0B1530" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M-22,44 Q0,36 22,44 Q12,54 0,55 Q-12,54 -22,44 Z" fill="#E46B8A"/>
+            <path d="M-50,22 Q0,32 50,22 M-28,8 L-28,27 M-8,11 L-8,30 M12,11 L12,30 M31,8 L31,26" fill="none" stroke="#0B1530" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M-66,-6 Q-60,2 -54,-2 M66,-6 Q60,2 54,-2" fill="none" stroke="#0B1530" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g id="mouthSmirk" opacity="0" transform="translate(0,40)">
+            <path d="M-44,10 Q8,22 60,-10 Q52,36 10,44 Q-30,42 -44,10 Z" fill="#fff" stroke="#0B1530" stroke-width="5" stroke-linejoin="round"/>
+            <path d="M-38,24 Q12,32 52,10 M-16,18 L-16,34 M8,17 L8,35 M30,11 L30,29" fill="none" stroke="#0B1530" stroke-width="3.5" stroke-linecap="round"/>
+            <path d="M62,-18 Q72,-8 64,0" fill="none" stroke="#0B1530" stroke-width="4" stroke-linecap="round"/>
+          </g>
+          <g id="faceStrain" opacity="0" fill="none" stroke="#0B1530" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M-62,-50 L-20,-30 L-62,-10 M62,-50 L20,-30 L62,-10" stroke-width="9"/>
+            <path d="M-70,-84 L-16,-64 M70,-84 L16,-64" stroke-width="8"/>
+            <ellipse cx="-70" cy="22" rx="18" ry="11" fill="#FF8FB0" stroke="none" opacity=".55"/><ellipse cx="70" cy="22" rx="18" ry="11" fill="#FF8FB0" stroke="none" opacity=".55"/>
+            <rect x="-54" y="30" width="108" height="46" rx="14" fill="#fff" stroke-width="5"/>
+            <path d="M-50,53 L50,53 M-27,32 L-27,74 M0,32 L0,74 M27,32 L27,74" stroke-width="3.5"/>
+          </g>
+          <g id="sweat" opacity="0"><path d="M0,-18 Q14,4 0,12 Q-14,4 0,-18 Z" fill="#8DBBF5" stroke="#0B1530" stroke-width="4"/><circle cx="-3" cy="2" r="3" fill="#fff"/></g>
+          <g id="faceSurprise" opacity="0" stroke="#0B1530" stroke-linecap="round">
+            <ellipse cx="0" cy="62" rx="24" ry="30" fill="#0B1530" stroke-width="5"/>
+            <ellipse cx="0" cy="78" rx="14" ry="9" fill="#E46B8A" stroke="none"/>
+          </g>
+        </g>
+      </g>
+    </g>
+    <!-- parte delantera de la máquina: rodilleras y pila de pesas -->
+    <g id="roomBFront" transform="translate(-1920,0)" stroke="#0B1530" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <rect x="808" y="700" width="112" height="46" rx="22" fill="#1E4FD8"/>
+      <rect x="1000" y="700" width="112" height="46" rx="22" fill="#1E4FD8"/>
+      <line x1="838" y1="712" x2="890" y2="712" stroke="#8DBBF5" stroke-width="5" opacity=".8"/><line x1="1030" y1="712" x2="1082" y2="712" stroke="#8DBBF5" stroke-width="5" opacity=".8"/>
+      <line x1="786" y1="200" x2="786" y2="906" stroke="#8DBBF5" stroke-width="10"/>
+      <line x1="1134" y1="200" x2="1134" y2="906" stroke="#8DBBF5" stroke-width="10"/>
+      <line id="cabL" x1="860" y1="200" x2="860" y2="760" stroke-width="5"/>
+      <line id="cabR" x1="1060" y1="200" x2="1060" y2="760" stroke-width="5"/>
+      <circle cx="860" cy="200" r="18" fill="#8DBBF5"/><circle cx="1060" cy="200" r="18" fill="#8DBBF5"/>
+      <g id="stackFixed"></g>
+      <g id="stackMove"></g>
+    </g>
+    <!-- sala A: el texto -->
+    <g id="roomA">
+      <text id="conoce" x="960" y="212" text-anchor="middle" font-size="72" font-weight="800" fill="#1E4FD8" letter-spacing="4">CONOCE</text>
+      <g id="word"></g>
+    </g>
+    <!-- la barra de jalón (delante del personaje) -->
+    <g id="bar" stroke="#0B1530" stroke-width="6" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M-220,52 L-160,0 L160,0 L220,52" fill="none" stroke-width="28"/>
+      <path d="M-220,52 L-160,0 L160,0 L220,52" fill="none" stroke="#8DBBF5" stroke-width="16"/>
+      <path d="M-220,52 L-194,30" fill="none" stroke="#0A1F44" stroke-width="18"/><path d="M220,52 L194,30" fill="none" stroke="#0A1F44" stroke-width="18"/>
+      <rect x="-22" y="-16" width="44" height="30" rx="7" fill="#1E4FD8"/>
+    </g>
+    <!-- guantes (delante de todo lo del mundo) -->
+    <g id="gloves">
+      <g id="gloveL"><path d="M-22,-8 Q-26,-30 -6,-30 Q2,-40 14,-32 Q30,-32 28,-12 Q34,6 18,20 Q-4,30 -20,16 Q-32,6 -22,-8 Z" fill="url(#gGlove)" stroke="#0B1530" stroke-width="5.5" stroke-linejoin="round"/><path d="M-6,-30 Q-4,-16 -8,-8 M14,-32 Q14,-18 10,-8" fill="none" stroke="#0B1530" stroke-width="3" stroke-linecap="round"/></g>
+      <g id="gloveR"><path d="M22,-8 Q26,-30 6,-30 Q-2,-40 -14,-32 Q-30,-32 -28,-12 Q-34,6 -18,20 Q4,30 20,16 Q32,6 22,-8 Z" fill="url(#gGlove)" stroke="#0B1530" stroke-width="5.5" stroke-linejoin="round"/><path d="M6,-30 Q4,-16 8,-8 M-14,-32 Q-14,-18 -10,-8" fill="none" stroke="#0B1530" stroke-width="3" stroke-linecap="round"/></g>
+    </g>
+  </g>
+  <!-- la persiana: baja desde arriba con el texto final -->
+  <g id="blind">
+    <rect x="0" y="-2200" width="1920" height="2200" fill="var(--hueso)"/>
+    <rect x="0" y="0" width="1920" height="44" fill="url(#sombraPersiana)"/>
+    <g id="blindText" text-anchor="middle" fill="#1E4FD8" font-weight="800">
+      <text id="fin1" x="960" y="-640" font-size="104" letter-spacing="0">EL EQUIPO DE AGENTES VIRTUALES</text>
+      <text id="fin2" x="960" y="-496" font-size="104" letter-spacing="0">PARA TU NEGOCIO</text>
+    </g>
+    <g id="roller" stroke="#0B1530" stroke-width="6">
+      <rect x="-20" y="-16" width="1960" height="32" rx="16" fill="#0A1F44"/>
+      <line x1="0" y1="-7" x2="1920" y2="-7" stroke="#8DBBF5" stroke-width="5" opacity=".8"/>
+    </g>
+  </g>
+</svg>
+<div id="hud"></div>
+<script src="motion.js"></script>
+<script>
+// ══════════════════════════════════════════════════════════════════════════════════════════════
+// Spotter · todo es función pura de t (segundos). Contrato onetake: __seek, __ready, __meta.
+// Guion (del fundador): "Conoce Spotter" con el personaje asomando por detrás → la frase sale disparada a la
+// derecha y el personaje sale lanzado a una sala nueva con una máquina de jalón al pecho de frente → sube, hace
+// series → la última da paso a un "roll down" (persiana) con "El equipo de agentes virtuales para tu negocio".
+// ══════════════════════════════════════════════════════════════════════════════════════════════
+const FPS=30, DUR=25.0;
+// ── beats (s). Planos de largo muy distinto a propósito: asomar 1.9 s, látigo .55 s, reps .35–.45 s, final 2.2 s
+const CONOCE=0.15, WORD=0.42, J_UP=1.30, J_TOP=1.66, J_DOWN=2.26, J_GONE=2.62;
+const JX=1240;                                         // x por donde salta (detrás de la T y la E)
+const WHIP0=3.22, WHIP1=3.75, FLY0=3.24, LAND=4.15;
+const BLINK2=4.55, CLIMB0=4.75, SIT=5.30, REACH0=5.34, REACH1=5.58;
+const REPS=[[5.68,6.10,6.16,6.62],[6.68,6.90,6.94,7.18],[7.26,7.52,8.06,8.26]]; // [bajaIni, bajaFin, subeIni, subeFin]
+const LET_GO=8.16, BAR_GONE=8.46, ROLL0=8.40, ROLL1=9.28;
+// ── acto 2 (el negocio): torre de tareas → "lo hacemos nosotros" → cómo funciona → logo
+const A0=10.19, UP0=10.22, UP1=10.70;                         // salto de cámara (tapado por la persiana) y persiana que sube
+const TD=[10.95,11.20,11.40,11.56];                          // caen los bloques de tareas (ritmo que se acelera)
+const CAP1=10.80, CH0=12.20, CH1=12.72, WHOA=12.80, SMIRK=13.02, GRAB0=13.30, GRAB1=13.55, POP=13.95, WINK0=14.30, WINK1=14.62;
+const CAP2=14.02, TOSS0=14.85, TOSS_REL=15.05, LEAP0=15.52, S1=16.20;
+const SD=[15.45,15.62,15.79], CAP3=15.50, HOP2=[16.55,16.88], CHIPS=16.95, HOP3=[17.30,17.62];
+const JE0=18.45, JE1=19.35, WORDE=18.90, TAG=19.48;
+const CO={x:0,y:2200}, DO={x:1920,y:2200}, EO={x:1920,y:0};  // salas C, D y E en el mundo
+window.__meta={dur:DUR,fps:FPS,w:1920,h:1080,cuts:[WHIP0,LAND,SIT,ROLL0,ROLL1,A0,TOSS_REL,JE0]};
+
+const {clamp, lerp, seg, sstep, ssstep, spring, ease} = OM;
+const $=id=>document.getElementById(id);
+const S=(el,k,v)=>el.setAttribute(k,v);
+const f1=v=>v.toFixed(1), f3=v=>v.toFixed(3);
+
+// ── geometría (coordenadas de pantalla con la cámara quieta; la sala B vive en x-1920)
+const BX=-1920;                                    // desplazamiento de la sala B en el mundo
+const STAND_Y=625, LAND_X=560;                     // centro del cuerpo de pie en la sala B
+const SEAT={x:960,y:548};                          // centro del cuerpo sentado
+const BAR_TOP=252, BAR_BOT=400, GRIP=128;          // barra: arriba, abajo, media distancia entre manos
+// ── tipografía (elegible con ?font=… &w=ancho de la palabra en px)
+const Q=new URLSearchParams(location.search);
+const FONTS={Archivo:{file:'Archivo.ttf',w:800,ls:-6},LuckiestGuy:{file:'fuentes/LuckiestGuy.ttf',w:400,ls:4},Anton:{file:'fuentes/Anton.ttf',w:400,ls:6},
+  Fredoka:{file:'fuentes/Fredoka.ttf',w:700,ls:0},Bungee:{file:'fuentes/Bungee.ttf',w:400,ls:0},TitanOne:{file:'fuentes/TitanOne.ttf',w:400,ls:2},Rubik:{file:'fuentes/Rubik.ttf',w:900,ls:-2}};
+const FONT=Q.get('font')||'LuckiestGuy', FF=FONTS[FONT], WORD_W=+(Q.get('w')||1344);
+const WORD_BASE=+(Q.get('base')||730); let WORD_SIZE=270, CAP_TOP=WORD_BASE-0.686*270, PEEK_Y=418;           // borde superior de las mayúsculas                                   // centro del cuerpo cuando asoma
+const SHOULDER={x:92,y:26}, HIP={x:44,y:118};
+
+// ── la palabra, letra a letra
+const WORD_TXT='SPOTTER'; let letters=[];
+function buildWord(){
+  const g=$('word'); const probe=document.createElementNS('http://www.w3.org/2000/svg','text');
+  probe.setAttribute('font-size',100); probe.setAttribute('font-weight',FF.w); probe.setAttribute('letter-spacing',0); probe.textContent=WORD_TXT; g.appendChild(probe);
+  WORD_SIZE=100*WORD_W/probe.getComputedTextLength(); probe.setAttribute('font-size',WORD_SIZE);
+  // altura real de las mayúsculas en esta fuente
+  { const c=document.createElement('canvas').getContext('2d'); c.font=`${FF.w} 100px ${FONT}`; const m=c.measureText('SPOTTER'); CAP_TOP=WORD_BASE-m.actualBoundingBoxAscent*WORD_SIZE/100; }
+  PEEK_Y=CAP_TOP-47; $('conoce').setAttribute('y',f1(CAP_TOP-48)); $('conoce').setAttribute('font-size',f1(WORD_SIZE*0.27));
+  const total=probe.getComputedTextLength(); let x=960-total/2;
+  $('conoce').setAttribute('x',f1(x+8)); $('conoce').setAttribute('text-anchor','start');
+  const adv=[...WORD_TXT].map((c,i)=>probe.getSubStringLength(i,1)); g.removeChild(probe);
+  letters=[...WORD_TXT].map((c,i)=>{ const el=document.createElementNS('http://www.w3.org/2000/svg','text');
+    el.setAttribute('font-size',WORD_SIZE); el.setAttribute('font-weight',FF.w); el.setAttribute('fill','#1E4FD8'); el.textContent=c;
+    const cx=x+adv[i]/2; el.setAttribute('x',f1(x)); el.setAttribute('y',WORD_BASE); el.setAttribute('letter-spacing',0);
+    const lg=document.createElementNS(NS,'g'); g.appendChild(lg); lg.appendChild(el); extrude(el,Math.round(16*WORD_SIZE/270),1.35); x+=adv[i]; return {el:lg,cx}; });
+}
+// ── relieve: capas desplazadas abajo-derecha, de más oscura (fondo) a menos (junto a la cara)
+const NS='http://www.w3.org/2000/svg';
+function extrude(face,n,step){ const g=face.parentNode; const layers=[];
+  for(let i=n;i>=1;i--){ const c=face.cloneNode(true); c.removeAttribute('id'); const k=i/n;
+    const col=`rgb(${Math.round(lerp(22,10,k))},${Math.round(lerp(52,31,k))},${Math.round(lerp(160,68,k))})`;
+    c.setAttribute('fill',col); c.setAttribute('transform',`translate(${f1(i*step*0.55)},${f1(i*step)})`); g.insertBefore(c,face); layers.push(c); }
+  face.setAttribute('stroke','#6FA3F7'); face.setAttribute('stroke-width', Math.max(1.5,step*0.9)); face.setAttribute('paint-order','fill'); face.setAttribute('stroke-opacity','.0');
+  return layers; }
+// ── la pila de pesas: 3 placas fijas abajo y 3 + tapa que suben
+function buildStack(){
+  const P=(g,y,h,fill)=>{ const r=document.createElementNS('http://www.w3.org/2000/svg','rect'); Object.entries({x:810,y,width:300,height:h,rx:6,fill}).forEach(([k,v])=>r.setAttribute(k,v)); g.appendChild(r);
+    const l=document.createElementNS('http://www.w3.org/2000/svg','line'); Object.entries({x1:822,y1:y+7,x2:1098,y2:y+7,stroke:'#3B7BEA','stroke-width':4,opacity:.7}).forEach(([k,v])=>l.setAttribute(k,v)); g.appendChild(l); };
+  for(let i=0;i<3;i++) P($('stackFixed'),905-(i+1)*22,20,'#13306B');
+  for(let i=3;i<6;i++) P($('stackMove'),905-(i+1)*22,20,'#13306B');
+  const cap=document.createElementNS('http://www.w3.org/2000/svg','rect'); Object.entries({x:830,y:905-6*22-14,width:260,height:14,rx:6,fill:'#0A1F44'}).forEach(([k,v])=>cap.setAttribute(k,v)); $('stackMove').appendChild(cap);
+  const pin=document.createElementNS('http://www.w3.org/2000/svg','circle'); Object.entries({cx:960,cy:905-3*22-10,r:7,fill:'#8DBBF5'}).forEach(([k,v])=>pin.setAttribute(k,v)); $('stackMove').appendChild(pin);
+}
+const STACK_TOP=905-6*22-14;
+
+// ── la barra en el tiempo
+function barY(t){
+  let y=BAR_TOP;
+  for(const [d0,d1,u0,u1] of REPS){
+    if(t>=d0&&t<d1) return lerp(BAR_TOP,BAR_BOT,ease.cubicInOut(seg(t,d0,d1)));
+    if(t>=d1&&t<u0) return BAR_BOT - (u0-d1>0.2 ? (Math.sin(t*57)*2.5+Math.sin(t*31)*1.5)*sstep(d1,d1+0.1,t) : 0);
+    if(t>=u0&&t<u1) return lerp(BAR_BOT,BAR_TOP,ease.quadOut ? ease.cubicOut(seg(t,u0,u1)) : seg(t,u0,u1));
+  }
+  // la última subida no para: la barra se suelta y sale disparada hacia arriba
+  const L=REPS[2]; if(t>=L[3]) return lerp(BAR_TOP,-260,ease.expoIn(seg(t,L[3]-0.02,BAR_GONE)));
+  return y;
+}
+// esfuerzo 0..1 mientras baja la barra (para la cara)
+function effort(t){ let e=0; for(const [d0,d1,u0,u1] of REPS){ e=Math.max(e,sstep(d0,d0+0.12,t)*(1-sstep(u0,u0+0.18,t))); } return e; }
+
+// ── IK de dos segmentos: el codo sale hacia 'pref'
+function ik(Sh,H,L,pref){ let dx=H.x-Sh.x, dy=H.y-Sh.y, d=Math.hypot(dx,dy); const dm=Math.min(d,2*L-0.5); const ux=dx/(d||1), uy=dy/(d||1);
+  const mx=Sh.x+ux*dm/2, my=Sh.y+uy*dm/2, h=Math.sqrt(Math.max(0,L*L-(dm/2)*(dm/2))); let px=-uy, py=ux; if(px*pref.x+py*pref.y<0){px=-px;py=-py;}
+  return {x:mx+px*h,y:my+py*h}; }
+const limb=(a,e,b)=>`M${f1(a.x)},${f1(a.y)} Q${f1(e.x)},${f1(e.y)} ${f1(b.x)},${f1(b.y)}`;
+
+// ── pose del personaje en coordenadas de PANTALLA (camara quieta en la sala correspondiente)
+function pose(t){
+  const P={x:960,y:PEEK_Y,rot:0,sx:1,sy:1,look:{x:0,y:0},blink:0,strain:0,hands:null,handsWorldFixed:false,legs:'stand',room:'A',armL:95,legT:0};
+  if(t>=A0) return pose2(t);
+  if(t<FLY0){
+    // salta por encima de la palabra desde detrás, se queda un instante en el aire mirando a cámara y cae detrás
+    const HID=CAP_TOP+330, APEX=CAP_TOP-318; P.x=JX; P.legs='stand';
+    if(t<J_UP){ P.y=HID; }
+    else if(t<J_TOP){ const u=seg(t,J_UP,J_TOP); P.y=lerp(HID,APEX,ease.cubicOut(u)); P.sy=1+0.16*(1-u); P.sx=1-0.1*(1-u); P.rot=-0.10*(1-u);
+      P.legs='tuck'; P.legT=1-u; P.hands='up'; P.look={x:0,y:-0.8}; P.brow={l:0.9,r:0.9}; }
+    else if(t<J_DOWN){ const u=seg(t,J_TOP,J_DOWN); P.y=APEX-10*Math.sin(u*Math.PI); P.hands='wave'; P.look={x:0,y:lerp(0.1,0.9,sstep(0.72,0.86,u))}; P.face=(t>J_TOP+0.18&&t<J_TOP+0.46)?'wink':(u>0.72?'o':'grin'); P.brow=u>0.72?{l:0.9,r:0.9}:{l:0.4,r:0.4}; }
+    else { const u=seg(t,J_DOWN,J_GONE); P.y=lerp(APEX,HID,u*u*u); P.sy=1+0.14*u; P.sx=1-0.08*u; P.hands='up'; P.look={x:0,y:-0.9}; P.face='o'; P.brow={l:1,r:1}; }
+    const im=OM.impact(t,J_TOP,{decay:9,omega:22,sqx:0.06,sqy:0.08}); if(t>=J_TOP&&t<J_DOWN){ P.sx*=im.sx; P.sy*=im.sy; }
+    return P;
+  }
+  if(t<LAND){
+    // lanzado: sale disparado desde detrás de la palabra y cae en el centro de la sala nueva, con una vuelta
+    const u=seg(t,FLY0,LAND), k2=ease.cubicInOut(u), HID=CAP_TOP+330;
+    P.x=lerp(JX,LAND_X+BX,k2); P.y=lerp(HID,STAND_Y,u)-4*520*u*(1-u);
+    P.rot=-ease.cubicInOut(u)*Math.PI*2;
+    const sp=Math.sin(u*Math.PI); P.sx=1-0.10*sp; P.sy=1+0.14*sp;
+    P.hands='flail'; P.legs='tuck'; P.legT=sp; P.look={x:-0.6,y:-0.5}; P.room='A'; P.flail=u; P.face='o'; P.brow={l:1,r:1};
+    return P;
+  }
+  if(t<CLIMB0){
+    P.x=LAND_X; P.y=STAND_Y; const im=OM.impact(t,LAND,{decay:8,omega:24,sqx:0.18,sqy:0.22}); P.sx=im.sx; P.sy=im.sy;
+    P.hands='side'; P.legs='stand'; P.look={x:lerp(-0.2,0.95,sstep(LAND+0.18,LAND+0.32,t)),y:lerp(0,-0.35,sstep(LAND+0.18,LAND+0.32,t))};
+    P.blink=blinkAt(t,BLINK2); P.room='B';
+    if(t<LAND+0.30){ P.face='o'; P.brow={l:1,r:1}; } else { P.face='smirk'; P.brow={l:-0.35,r:0.8}; }
+    // se agacha antes de saltar
+    const crouch=sstep(CLIMB0-0.2,CLIMB0,t); P.sy*=1-0.12*crouch; P.sx*=1+0.08*crouch; P.y+=18*crouch;
+    return P;
+  }
+  if(t<SIT){
+    const u=seg(t,CLIMB0,SIT), k2=ease.cubicInOut(u);
+    P.x=lerp(LAND_X,SEAT.x,k2); P.y=lerp(STAND_Y,SEAT.y,k2)-Math.sin(k2*Math.PI)*170;
+    P.rot=Math.sin(u*Math.PI)*0.16; const sp=Math.sin(u*Math.PI); P.sx=1-0.06*sp; P.sy=1+0.1*sp;
+    P.hands='up'; P.legs='tuck'; P.legT=sp; P.look={x:0.5,y:-0.6}; P.room='B'; P.brow={l:0.7,r:0.7};
+    return P;
+  }
+  // sentado en la máquina
+  P.x=SEAT.x; P.y=SEAT.y; P.room='B'; P.legs='sit';
+  const im=OM.impact(t,SIT,{decay:9,omega:26,sqx:0.12,sqy:0.14}); P.sx=im.sx; P.sy=im.sy;
+  const e=effort(t); P.strain=e; P.sy*=1-0.05*e; P.sx*=1+0.03*e; P.y+=8*e;
+  const L3=REPS[2]; if(t>L3[1]&&t<L3[2]){ P.x+=Math.sin(t*63)*2.2; P.rot+=Math.sin(t*47)*0.012; }
+  const by=barY(t);
+  if(t<LET_GO){
+    const r=sstep(REACH0,REACH1,t);
+    P.hands=[{x:lerp(868-40,960-GRIP,r),y:lerp(640,by+2,r)},{x:lerp(1052+40,960+GRIP,r),y:lerp(640,by+2,r)}];
+    P.armL=lerp(110,178,r); P.handsWorldFixed=true;
+  } else {
+    // suelta: las manos se quedan arriba un instante y caen con muelle
+    const d=spring(t-LET_GO-0.12,0.5,14);
+    P.hands=[{x:lerp(960-GRIP,840,d),y:lerp(Math.max(by,BAR_TOP-40),300,d)},{x:lerp(960+GRIP,1080,d),y:lerp(Math.max(by,BAR_TOP-40),300,d)}]; P.armL=lerp(178,150,d);
+  }
+  P.look={x:0,y:lerp(-0.2,-1,sstep(LET_GO,LET_GO+0.12,t))};
+  if(t<REACH1) P.look={x:0,y:-0.8};
+  P.blink=blinkAt(t,6.95,0.12)*0;
+  return P;
+}
+function pose2(t){
+  const P={x:0,y:0,rot:0,sx:1,sy:1,look:{x:0,y:0},blink:0,strain:0,hands:'side',legs:'stand',room:'W',armL:95,legT:0,face:'grin',brow:null};
+  const C=(x,y)=>({x:CO.x+x,y:CO.y+y}), D=(x,y)=>({x:DO.x+x,y:DO.y+y});
+  const STC=C(740,625), ST1=D(640,930-120-306), ST2=D(980,930-240-306), ST3=D(1320,930-360-306), STE={x:EO.x+1180,y:CAP_E-306};
+  const at=(Q)=>{P.x=Q.x;P.y=Q.y;};
+  const hopTo=(t0,t1,A,B,H,spin=0)=>{ const u=seg(t,t0,t1), h=OM.hop(t,t0,t1,A,B,{height:H,curve:ease.cubicInOut}); P.x=h.x;P.y=h.y; const sp=Math.sin(u*Math.PI);
+    P.sx=1-0.08*sp; P.sy=1+0.13*sp; P.legs='tuck'; P.legT=sp; P.hands='up'; P.rot=spin*ease.cubicInOut(u); P.brow={l:0.8,r:0.8}; };
+  const land=(tl,k=1)=>{ const im=OM.impact(t,tl,{decay:8,omega:24,sqx:0.16*k,sqy:0.2*k}); P.sx*=im.sx; P.sy*=im.sy; };
+  const crouch=(t0,t1)=>{ const c=sstep(t0,t1,t); P.sy*=1-0.13*c; P.sx*=1+0.08*c; P.y+=20*c; };
+  if(t<CH0){ at(C(-400,625)); return P; }
+  if(t<CH1){ hopTo(CH0,CH1,C(-260,625),STC,240); P.look={x:0.7,y:-0.3}; return P; }
+  if(t<GRAB0){ at(STC); land(CH1);
+    if(t<SMIRK){ P.face='o'; P.brow={l:1,r:1}; P.look={x:0.75,y:-1}; }                         // mira la torre: "uf"
+    else { P.face='smirk'; P.brow={l:-0.35,r:0.9}; P.look={x:0.1,y:0.05}; }                    // mira a cámara: "tranquilo"
+    crouch(GRAB0-0.17,GRAB0); return P; }
+  if(t<TOSS0){ at(STC); const tb=towerBase(t);
+    P.hands=[{x:tb.x-120,y:tb.y+8},{x:tb.x+120,y:tb.y+8}]; P.armL=132;
+    if(t<POP){ const q=sstep(GRAB0,GRAB1,t); P.sy=1-0.17*q; P.sx=1+0.1*q; P.y+=24*q; P.strain=1; P.face='strain';
+      if(t>GRAB1){ P.x+=Math.sin(t*61)*2.6; P.rot=Math.sin(t*43)*0.016; } }
+    else { const q=OM.impact(t,POP,{decay:7,omega:20,sqx:-0.10,sqy:-0.14}); P.sx=q.sx; P.sy=q.sy;
+      P.face=(t>WINK0&&t<WINK1)?'wink':'grin'; P.brow=(t>WINK0&&t<WINK1)?{l:0.6,r:-0.4}:{l:0.5,r:0.5}; }
+    return P; }
+  if(t<LEAP0){ at(STC); const tb=towerBase(t);
+    if(t<TOSS_REL+0.04){ P.hands=[{x:tb.x-120,y:tb.y+8},{x:tb.x+120,y:tb.y+8}]; P.armL=132; P.rot=-0.10*sstep(TOSS0,TOSS0+0.12,t)+0.34*sstep(TOSS_REL-0.1,TOSS_REL,t); P.face='grin'; P.brow={l:0.8,r:0.8}; }
+    else { P.rot=0.34*(1-sstep(TOSS_REL,TOSS_REL+0.3,t)); P.hands=t<TOSS_REL+0.25?'up':'side'; P.face='smirk'; P.brow={l:-0.3,r:0.9}; P.look={x:1,y:-0.5}; }
+    crouch(LEAP0-0.14,LEAP0); return P; }
+  if(t<S1){ hopTo(LEAP0,S1,STC,ST1,380,-Math.PI*2); P.hands='flail'; P.face='grin'; P.look={x:0.8,y:0}; return P; }
+  if(t<HOP2[0]){ at(ST1); land(S1); P.look={x:0.8,y:-0.6}; P.brow={l:0.7,r:0.7}; crouch(HOP2[0]-0.12,HOP2[0]); return P; }
+  if(t<HOP2[1]){ hopTo(HOP2[0],HOP2[1],ST1,ST2,150); P.look={x:0.7,y:-0.2}; return P; }
+  if(t<HOP3[0]){ at(ST2); land(HOP2[1],0.8); const dn=sstep(CHIPS,CHIPS+0.1,t)*(1-sstep(17.18,17.26,t)); P.look={x:0.25*dn,y:dn}; P.face=dn>0.5?'o':'grin'; P.brow={l:0.8,r:0.8}; crouch(HOP3[0]-0.12,HOP3[0]); return P; }
+  if(t<HOP3[1]){ hopTo(HOP3[0],HOP3[1],ST2,ST3,150); P.look={x:0.6,y:-0.2}; return P; }
+  if(t<JE0){ at(ST3); land(HOP3[1]); P.hands='up'; P.face='grin'; P.brow={l:0.9,r:0.9}; P.look={x:0,y:0.1};
+    crouch(JE0-0.16,JE0); if(t>JE0-0.16){ P.look={x:0,y:-1}; P.hands='side'; } return P; }
+  if(t<JE1){ const u=seg(t,JE0,JE1); P.x=lerp(ST3.x,STE.x,ease.cubicInOut(u)); P.y=lerp(ST3.y,STE.y,u)-4*260*u*(1-u);
+    P.rot=-Math.PI*2*ease.cubicInOut(u); const sp=Math.sin(u*Math.PI); P.sx=1-0.1*sp; P.sy=1+0.16*sp; P.legs='tuck'; P.legT=sp; P.hands='up'; P.face='grin'; P.brow={l:1,r:1}; return P; }
+  at(STE); land(JE1,1.2);
+  P.hands=t<JE1+0.3?'up':'hips'; P.look={x:0,y:0};
+  if(t<19.7){ P.face='grin'; P.brow={l:0.8,r:0.8}; } else if(t<20.0){ P.face='smirk'; P.brow={l:-0.3,r:0.9}; }
+  else if(t<20.3){ P.face='wink'; P.brow={l:0.6,r:-0.4}; } else { P.face='smirk'; P.brow={l:-0.2,r:0.6}; }
+  return P;
+}
+// la torre de tareas: base (centro inferior) y giro, en el mundo
+function towerBase(t){
+  const C=(x,y)=>({x:CO.x+x,y:CO.y+y});
+  if(t<GRAB0) return {...C(1200,930),a:0};
+  if(t<GRAB1){ const h=OM.hop(t,GRAB0,GRAB1,C(1200,930),C(740,510),{height:120,curve:ease.cubicInOut}); return {x:h.x,y:h.y,a:-0.12*Math.sin(seg(t,GRAB0,GRAB1)*Math.PI)}; }
+  if(t<POP){ const b=C(740,510); return {x:b.x+Math.sin(t*61)*2.6,y:b.y+Math.sin(t*47)*2,a:Math.sin(t*39)*0.02}; }
+  if(t<TOSS0){ const k=spring(t-POP,0.45,16); const b=C(740,lerp(510,395,k)); return {x:b.x,y:b.y,a:0}; }
+  if(t<TOSS_REL){ const k=sstep(TOSS0,TOSS_REL,t); const b=C(740-30*k,395+20*k); return {x:b.x,y:b.y,a:-0.08*k}; }
+  const u=seg(t,TOSS_REL,TOSS_REL+0.75); const b=C(710+2600*u, 415-1500*u+300*u*u); return {x:b.x,y:b.y,a:-0.08+2.6*u};
+}
+function posW(t){ const Q=pose(t); return (Q.room==='B'&&t>=LAND)?{x:Q.x+BX,y:Q.y}:{x:Q.x,y:Q.y}; }
+function vel(t,lag,dt){ if(t-lag-dt<0) return {x:0,y:0}; const a=posW(t-lag), b=posW(t-lag-dt); const v={x:(a.x-b.x)/dt,y:(a.y-b.y)/dt}; return Math.hypot(v.x,v.y)>6000?{x:0,y:0}:v; }
+function blinkAt(t,t0,d=0.14){ const u=seg(t,t0,t0+d); return u>0&&u<1?Math.sin(u*Math.PI):0; }
+
+// ── cámara operada (skill onetake §5): claves con OM.camera, mano de operador fuera de las pausas, sacudida en cada aterrizaje
+const SX=SEAT.x+BX, LX=LAND_X+BX;
+const KEYS=[
+  {t:0.00, x:960, y:560, zoom:1.00},
+  {t:1.20, x:960, y:555, zoom:1.04, curve:ease.sineInOut},          // empuje lento mientras cae la palabra
+  {t:1.60, x:1060, y:440, zoom:1.08, curve:ease.expoInOut},         // se va a la cumbre del salto antes que él
+  {t:2.26, x:1060, y:440, zoom:1.08, curve:ease.sineInOut},         // pausa en el aire
+  {t:2.80, x:960, y:560, zoom:1.03, curve:ease.sineInOut},          // vuelve con él a la palabra
+  {t:3.02, x:960, y:560, zoom:1.03, curve:ease.sineInOut},          // pausa: la palabra sola
+  {t:3.20, x:1000, y:540, zoom:0.97, curve:ease.sineInOut},         // anticipación: se abre un poco
+  {t:3.95, x:LX+150, y:560, zoom:1.18, curve:ease.expoInOut},       // látigo: llega al punto de aterrizaje antes que él
+  {t:4.62, x:LX+150, y:560, zoom:1.18, curve:ease.sineInOut},       // pausa: mira la máquina
+  {t:5.25, x:SX, y:520, zoom:1.12, curve:ease.sineInOut},           // le sigue hasta el asiento
+  {t:6.60, x:SX, y:505, zoom:1.18, curve:ease.sineInOut},
+  {t:6.86, x:SX, y:500, zoom:1.85, curve:ease.expoInOut},           // primer plano de la cara en las series duras
+  {t:8.12, x:SX, y:490, zoom:1.95, curve:ease.sineInOut},
+  {t:8.46, x:SX, y:150, zoom:1.35, curve:ease.expoIn},              // sigue a la barra hacia arriba
+  {t:A0-0.01, x:SX, y:150, zoom:1.35},
+  {t:A0, x:CO.x+960, y:CO.y+560, zoom:1.00, curve:ease.linear},      // salto invisible, tapado por la persiana
+  {t:12.20, x:CO.x+960, y:CO.y+560, zoom:1.00},
+  {t:12.75, x:CO.x+900, y:CO.y+520, zoom:1.08, curve:ease.sineInOut}, // le sigue cuando entra
+  {t:13.30, x:CO.x+900, y:CO.y+520, zoom:1.08},
+  {t:13.62, x:CO.x+860, y:CO.y+470, zoom:1.16, curve:ease.expoInOut}, // se acerca al esfuerzo
+  {t:14.02, x:CO.x+960, y:CO.y+440, zoom:1.02, curve:ease.expoInOut}, // se abre al levantarla
+  {t:14.85, x:CO.x+960, y:CO.y+440, zoom:1.02},
+  {t:15.35, x:DO.x+960, y:DO.y+560, zoom:1.00, curve:ease.expoInOut}, // látigo detrás del lanzamiento
+  {t:16.20, x:DO.x+960, y:DO.y+560, zoom:1.00},
+  {t:17.62, x:DO.x+1040, y:DO.y+500, zoom:1.06, curve:ease.sineInOut},
+  {t:18.40, x:DO.x+1040, y:DO.y+500, zoom:1.06},
+  {t:19.05, x:EO.x+960, y:EO.y+525, zoom:1.00, curve:ease.expoInOut},  // sube con él y llega antes que él
+];
+const HITS=[[J_GONE,6,10],[LAND,16,8],[SIT,7,10],[LET_GO+0.06,9,9],...TD.map((x,i)=>[x,4+2*i,10]),[CH1,9,9],[POP,7,10],...SD.map(x=>[x,4,11]),[S1,7,9],[HOP2[1],5,10],[HOP3[1],6,10],[JE1,15,8]];
+const HOLDS=[[1.72,2.22],[2.85,3.02],[4.30,4.62],[ROLL1,12.15],[14.15,14.85],[17.75,18.3],[20.35,99]];
+const handEnv=t=>{ let e=sstep(0.1,0.5,t); for(const [a,b] of HOLDS) e*=1-sstep(a-0.15,a,t)*(1-sstep(b,b+0.2,t)); return e; };
+function camAt(t){
+  const c=OM.camera(t,KEYS), e=handEnv(t)*5;
+  let x=c.x+e*(Math.sin(1.7*t)+0.6*Math.sin(2.9*t+1))/c.zoom, y=c.y+e*(Math.sin(1.3*t+2)+0.5*Math.sin(3.3*t))/c.zoom, rot=c.rot;
+  for(const [th,amp,decay] of HITS){ const k=OM.shake(t,th,{amp,decay,seed:Math.round(th*100)}); x+=k.x/c.zoom; y+=k.y/c.zoom; rot+=k.rot; }
+  return {x,y,zoom:c.zoom,rot};
+}
+const mtx=M=>`matrix(${M.map(v=>v.toFixed(4)).join(',')})`;
+
+function seek(t){
+  const CAM=camAt(t);
+  S($('world'),'transform',mtx(OM.view(CAM)));
+  { const G=OM.view(CAM,{depth:1.2}); S($('lattice'),'transform',mtx(G)); }
+  const toWorld=p=>p;
+
+  // 1 · texto: "Conoce" sube, "Spotter" cae letra a letra
+  { const ant=-46*sstep(2.98,3.2,t)*(1-sstep(3.2,3.3,t)), shot=OM.ease.expoIn(seg(t,3.2,3.62))*900;
+    S($('roomA'),'transform',`translate(${f1(ant+shot)},0)`); S($('roomA'),'opacity',t<4.3?1:0);
+    const w=OM.wordRise(t,CONOCE,{dist:30}); S($('conoceG'),'opacity',f3(w.op)); S($('conoceG'),'transform',`translate(0,${f1(w.y)})`);
+    letters.forEach((L,i)=>{ const d=OM.letterDrop(t,WORD,i,{dist:70,stagger:0.06});
+      // al despegar y al caer detrás, las letras cercanas botan
+      const near=Math.exp(-Math.pow((L.cx-JX)/260,2));
+      const g1=OM.impact(t,J_UP+0.02,{decay:9,omega:24,sqx:0,sqy:0.05}), g2=OM.impact(t,J_GONE,{decay:8,omega:22,sqx:0,sqy:0.07}), g3=OM.impact(t,WHIP0+0.02,{decay:9,omega:24,sqx:0,sqy:0.05});
+      const dy=d.y+((1-g1.sy)+(1-g2.sy)+(1-g3.sy))*70*near;
+      S(L.el,'opacity',f3(d.op)); S(L.el,'transform',`translate(${f1(L.cx)},${f1(WORD_BASE+dy)}) scale(${f3(d.sx)},${f3(d.sy)}) translate(${f1(-L.cx)},${-WORD_BASE})`); }); }
+
+  // 2 · personaje
+  const P=pose(t);
+  const V=vel(t,0,0.04), VD=vel(t,0.05,0.06);
+  if(P.legs!=='sit'&&t>=FLY0+0.3) P.rot+=clamp(V.x*0.00011,-0.2,0.2);                 // se inclina hacia donde va
+  const still=HOLDS.some(([a,b])=>t>a&&t<b);                                      // en las pausas, quieto de verdad
+  if(!still&&P.legs==='stand'&&Math.hypot(V.x,V.y)<40){ const b=Math.sin(t*4.2); P.sy*=1+0.011*b; P.sx*=1-0.006*b; }   // respira
+  // en la sala B, la pose está en coordenadas de pantalla de la sala B; en A y durante el vuelo, en pantalla actual
+  let base = (P.room==='B' && t>=LAND) ? {x:P.x+BX, y:P.y} : toWorld({x:P.x,y:P.y});
+  S($('char'),'transform',`translate(${f1(base.x)},${f1(base.y)}) rotate(${(P.rot*57.2958).toFixed(2)}) scale(${f3(P.sx)},${f3(P.sy)})`);
+  const cr=Math.cos(P.rot), sr=Math.sin(P.rot);
+  const L2W=p=>({x:base.x+(p.x*P.sx)*cr-(p.y*P.sy)*sr, y:base.y+(p.x*P.sx)*sr+(p.y*P.sy)*cr});
+  const shL=L2W({x:-SHOULDER.x,y:SHOULDER.y}), shR=L2W({x:SHOULDER.x,y:SHOULDER.y});
+  // manos en el mundo
+  let hL,hR, prefL={x:-1,y:0.6}, prefR={x:1,y:0.6}, armLen=P.armL;
+  const roomToWorld=h=>(P.room==='B'&&t>=LAND)?{x:h.x+BX,y:h.y}:toWorld(h);
+  if(Array.isArray(P.hands)){ hL=roomToWorld(P.hands[0]); hR=roomToWorld(P.hands[1]); if(t<FLY0){prefL={x:-1,y:1};prefR={x:1,y:1};} }
+  else if(P.hands==='flail'){ const w=Math.sin(t*26)*20; hL=L2W({x:-190,y:-60+w}); hR=L2W({x:190,y:-80-w}); armLen=110; prefL={x:0,y:1}; prefR={x:0,y:1}; }
+  else if(P.hands==='wave'){ const w=Math.sin((t-J_TOP)*16)*26*sstep(J_TOP,J_TOP+0.1,t); hL=L2W({x:-175,y:40}); hR=L2W({x:160+w*0.3,y:-150+w}); armLen=110; prefL={x:-1,y:1}; prefR={x:1,y:1}; }
+  else if(P.hands==='hips'){ hL=L2W({x:-104,y:74}); hR=L2W({x:104,y:74}); armLen=78; prefL={x:-1,y:-0.3}; prefR={x:1,y:-0.3}; }
+  else if(P.hands==='up'){ hL=L2W({x:-150,y:-150}); hR=L2W({x:150,y:-150}); armLen=110; prefL={x:-1,y:1}; prefR={x:1,y:1}; }
+  else { const sw=Math.sin((t-LAND)*5)*6*Math.exp(-Math.max(0,t-LAND)*3)*(t>=LAND?1:0); hL=L2W({x:-128,y:158+sw}); hR=L2W({x:128,y:158-sw}); armLen=85; }
+  const eL=ik(shL,hL,armLen,prefL), eR=ik(shR,hR,armLen,prefR);
+  ['armLo','armLi','armLh'].forEach(id=>S($(id),'d',limb(shL,eL,hL))); ['armRo','armRi','armRh'].forEach(id=>S($(id),'d',limb(shR,eR,hR)));
+  S($('armLh'),'transform','translate(-3,-3)'); S($('armRh'),'transform','translate(-3,-3)');
+  S($('gloveL'),'transform',`translate(${f1(hL.x)},${f1(hL.y)}) rotate(${(Math.atan2(hL.y-eL.y,hL.x-eL.x)*57.3-90).toFixed(1)})`);
+  S($('gloveR'),'transform',`translate(${f1(hR.x)},${f1(hR.y)}) rotate(${(Math.atan2(hR.y-eR.y,hR.x-eR.x)*57.3-90).toFixed(1)})`);
+  // piernas (en coordenadas locales del cuerpo)
+  { let fL,fR,kL,kR;
+    const hipL={x:-HIP.x,y:HIP.y}, hipR={x:HIP.x,y:HIP.y};
+    if(P.legs==='stand'||P.legs==='hang'){ fL={x:-56,y:286}; fR={x:56,y:286}; }
+    else if(P.legs==='tuck'){ const k=P.legT; fL={x:lerp(-56,-92,k),y:lerp(286,210,k)}; fR={x:lerp(56,92,k),y:lerp(286,210,k)}; }
+    else { fL={x:-92,y:330}; fR={x:92,y:330}; }
+    kL=ik(hipL,fL,88,{x:-1,y:0}); kR=ik(hipR,fR,88,{x:1,y:0});
+    ['legLo','legLi','legLh'].forEach(id=>S($(id),'d',limb(hipL,kL,fL))); ['legRo','legRi','legRh'].forEach(id=>S($(id),'d',limb(hipR,kR,fR)));
+    S($('legLh'),'transform','translate(-3,0)'); S($('legRh'),'transform','translate(-3,0)');
+    S($('shoeL'),'transform',`translate(${f1(fL.x-6)},${f1(fL.y+14)})`); S($('shoeR'),'transform',`translate(${f1(fR.x+6)},${f1(fR.y+14)})`); }
+  // cara: estados (sonrisa, media sonrisa, guiño, esfuerzo, sorpresa), cejas, mirada y parpadeos
+  { const inA1=t<A0;
+    const F=P.face || (P.strain>0.45&&t<LET_GO&&inA1 ? 'strain' : (t>=LET_GO+0.02&&inA1 ? 'o' : 'grin'));
+    const BL=Math.max(P.blink, ...[0.95,3.05,6.3,9.6,12.98,16.45,18.1,21.5].map(b=>blinkAt(t,b)));
+    const sac=still?0:0.12*Math.sin(t*1.3)*Math.sin(t*3.7);                                       // microsacudidas de la mirada
+    const lx=(P.look.x+sac)*10, ly=P.look.y*12, bl=1-0.92*BL;
+    ['L','R'].forEach(k=>{ S($('pup'+k),'cx',f1(lx)); S($('pup'+k),'cy',f1(ly)); S($('hi'+k),'cx',f1(lx+4)); S($('hi'+k),'cy',f1(ly-5)); });
+    let es=1; if(F==='o'&&t>=LET_GO&&inA1){ const pop=OM.impact(t,LET_GO+0.02,{decay:8,omega:26,sqx:0.25,sqy:-0.25}); es=pop.sx; }
+    const eo=F==='o'?1.1:1;
+    S($('eyeL'),'transform',`translate(-36,${F==='o'?-33:-30}) scale(${f3(eo*es)},${f3(eo*bl)})`); S($('eyeR'),'transform',`translate(36,${F==='o'?-33:-30}) scale(${f3(eo*es)},${f3(eo*bl)})`);
+    S($('eyes'),'opacity',F==='strain'?0:1); S($('eyeR'),'opacity',F==='wink'?0:1); S($('winkR'),'opacity',F==='wink'?1:0);
+    S($('mouth'),'opacity',(F==='grin'||F==='wink')?1:0); S($('mouthSmirk'),'opacity',F==='smirk'?1:0);
+    S($('faceStrain'),'opacity',F==='strain'?1:0); S($('faceSurprise'),'opacity',F==='o'?1:0);
+    const br=P.brow||({grin:{l:0.25,r:0.25},o:{l:1,r:1},smirk:{l:-0.3,r:0.85},wink:{l:0.6,r:-0.4}})[F]||{l:0,r:0};
+    S($('brows'),'opacity',F==='strain'?0:1);
+    S($('browL'),'transform',`translate(-36,${f1(-76-br.l*11)}) rotate(${f1(br.l<0?-br.l*16:-br.l*4)})`);
+    S($('browR'),'transform',`translate(36,${f1(-76-br.r*11)}) rotate(${f1(br.r<0?br.r*16:br.r*4)})`);
+    // gota de sudor desde la segunda serie (y cuando sostiene la torre)
+    const swA=t>=REPS[1][0]&&t<LET_GO+0.3, swB=t>=GRAB1&&t<POP+0.4; const t0=swA?REPS[1][0]:GRAB1; const su=((t-t0)%0.9)/0.9;
+    S($('sweat'),'opacity',(swA||swB)?f3(1-sstep(0.7,1,su)):0); S($('sweat'),'transform',`translate(${f1(96-su*6)},${f1(-70+su*70)})`); }
+  // colas de la cinta: se arrastran detrás del movimiento, con retraso (acción secundaria)
+  { const spd=Math.hypot(VD.x,VD.y), fl=Math.min(1,spd/700);
+    const dx=-VD.x*0.45+70, dy=-VD.y*0.45+240; const c=Math.cos(-P.rot), s2=Math.sin(-P.rot);
+    const lx=(dx*c-dy*s2)/P.sx, ly=(dx*s2+dy*c)/P.sy, base=Math.atan2(ly,lx), A={x:86,y:-80};
+    [[1,72,-0.05],[2,56,0.42]].forEach(([i,L,off])=>{ const ang=base+off+Math.sin(t*19+i*1.7)*0.35*fl+(still?0:Math.sin(t*2.3+i)*0.06);
+      const E={x:A.x+Math.cos(ang)*L,y:A.y+Math.sin(ang)*L}, px=-Math.sin(ang), py=Math.cos(ang), w=Math.sin(t*19+i)*12*fl+4;
+      const M={x:A.x+Math.cos(ang)*L*0.5+px*w,y:A.y+Math.sin(ang)*L*0.5+py*w}; const d=limb(A,M,E);
+      ['o','i'].forEach(k=>S($(`tail${i}${k}`),'d',d)); if(i===1) S($('tail1s'),'d',d); }); }
+  // recorte: mientras asoma, lo que queda por debajo de la palabra no se ve
+  S($('charLayer'),'clip-path', t<FLY0+0.27 ? 'url(#clipPeek)' : 'none');
+  S($('clipRect'),'height', f1(4000+CAP_TOP+6));
+  S($('clipGRect'),'height', f1(4000+CAP_TOP+6)); S($('gloves'),'clip-path', t<FLY0+0.27 ? 'url(#clipGloves)' : 'none');
+  { const sc=$('sombraChar'); let fy=null;
+    if(t>=CH0&&t<LEAP0+0.2) fy=CO.y+930;
+    else if(t>=LEAP0+0.2&&t<JE0+0.25){ const lx=base.x-DO.x; fy=DO.y+930-(lx<815?120:lx<1145?240:360); }
+    else if(t>=JE1-0.15) fy=CAP_E+2;
+    const hgt=fy===null?0:Math.max(0,fy-306-base.y);
+    S(sc,'opacity',fy===null?0:f3(0.16*clamp(1-hgt/420,0.15,1))); S(sc,'cx',f1(base.x)); S(sc,'cy',f1((fy||0)+4)); S(sc,'rx',f1(118*clamp(1-hgt/700,0.4,1))); }
+  // sombra en el suelo de la sala B
+  { const sp=$('sombraPers'); const room=(t>=LAND-0.25); const hx=(P.room==='B'&&t>=LAND)?P.x:P.x-BX; const high=Math.max(0,STAND_Y-P.y);
+    S(sp,'cx',f1(t>=SIT?SEAT.x:hx)); S(sp,'opacity',f3(room&&t<SIT?0.14*clamp(1-high/300,0.2,1):0)); S(sp,'rx',f1(120*clamp(1-high/500,0.4,1))); }
+
+  // 3 · máquina: barra, cables, pesas
+  { const by=barY(t); const barVis=by>-250;
+    S($('bar'),'transform',`translate(${960+BX},${f1(by)})`); S($('bar'),'opacity',barVis?1:0);
+    const cab=$('cableBar'); S(cab,'y2',f1(Math.max(200,by-14))); S(cab,'opacity', t<LET_GO+0.05?1:0);
+    const lift = t<LET_GO ? (by-BAR_TOP)*0.42 : 0;
+    const drop = t>=LET_GO ? OM.impact(t,LET_GO+0.04,{decay:10,omega:30,sqx:0,sqy:1}).r*-6 : 0;
+    S($('stackMove'),'transform',`translate(0,${f1(-lift+drop)})`);
+    const top=STACK_TOP-lift+drop; S($('cabL'),'y2',f1(top)); S($('cabR'),'y2',f1(top)); }
+
+  // 4 · persiana: la barra que salió por arriba vuelve como rodillo y baja la pantalla nueva
+  { const u=seg(t,ROLL0,ROLL1); const k=ease.cubicInOut(u);
+    let R= t<ROLL0 ? -60 : lerp(-60,1130,k);
+    if(t>=UP0) R=lerp(1130,-60,ease.expoInOut(seg(t,UP0,UP1)));
+    S($('blind'),'transform',`translate(0,${f1(R)})`); S($('blind'),'opacity', (t<ROLL0||t>UP1+0.02)?0:1);
+    // el rodillo sigue y sale por abajo; el texto se queda
+    const settle=OM.impact(t,ROLL1,{decay:7,omega:18,sqx:0.02,sqy:0.02});
+    const hold=1;
+    S($('fin1G'),'transform',`translate(960,-640) scale(${f3(hold*settle.sx)}) translate(-960,640)`);
+    S($('fin2G'),'transform',`translate(960,-496) scale(${f3(hold*settle.sx)}) translate(-960,496)`); }
+  act2(t);
+  $('hud').textContent='t='+t.toFixed(3);
+  return Promise.resolve();
+}
+// ────────────────────────────────────────── acto 2 ──────────────────────────────────────────
+const SVGE=(tag,attrs,parent)=>{ const e=document.createElementNS(NS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); if(parent) parent.appendChild(e); return e; };
+function text3d(parent,str,x,y,size,{anchor='middle',depth=7,fill='#1E4FD8'}={}){ const g=SVGE('g',{},parent);
+  const e=SVGE('text',{x,y,'font-size':size,'font-weight':FF.w,'text-anchor':anchor,fill},g); e.textContent=str; extrude(e,depth,1.1); return g; }
+let BLOCKS=[], STEPS=[], CHIPEL=[], CAPS={}, LETTERS_E=[], TAGS=[], CAP_E=460, TOWER=null;
+const TAREAS=[['RESPONDER WHATSAPPS','25 KG'],['SEGUIMIENTOS','20 KG'],['RUTINAS','15 KG'],['RECORDATORIOS','10 KG']];
+const PASOS=[['1','CUESTIONARIO'],['2','INFORME'],['3','PILOTO 30 DÍAS']];
+const BW=470, BH=86;
+function buildAct2(){
+  const G=$('act2');
+  CAPS.c1=text3d(G,'LO QUE HOY HACES A MANO',CO.x+1420,CO.y+205,70);
+  CAPS.c2=text3d(G,'LO HACEMOS NOSOTROS',CO.x+1420,CO.y+205,70);
+  CAPS.c3=text3d(G,'CÓMO FUNCIONA',DO.x+660,DO.y+190,70);
+  SVGE('ellipse',{cx:CO.x+1200,cy:CO.y+936,rx:280,ry:16,fill:'#0A1F44',opacity:.1,id:'sombraTorre'},G);
+  TOWER=SVGE('g',{},G);
+  BLOCKS=TAREAS.map(([lab,kg],i)=>{ const g=SVGE('g',{stroke:'#0B1530','stroke-width':6,'stroke-linejoin':'round'},TOWER);
+    // bloque con volumen: cara superior, lateral y frontal; origen en el centro inferior del bloque
+    SVGE('path',{d:`M${-BW/2},${-BH} L${-BW/2+22},${-BH-18} L${BW/2+22},${-BH-18} L${BW/2},${-BH} Z`,fill:'#3B7BEA'},g);
+    SVGE('path',{d:`M${BW/2},${-BH} L${BW/2+22},${-BH-18} L${BW/2+22},-18 L${BW/2},0 Z`,fill:'#0A1F44'},g);
+    SVGE('rect',{x:-BW/2,y:-BH,width:BW,height:BH,rx:6,fill:'#13306B'},g);
+    SVGE('line',{x1:-BW/2+10,y1:-BH+9,x2:BW/2-10,y2:-BH+9,stroke:'#3B7BEA','stroke-width':4,opacity:.8},g);
+    const tx=SVGE('text',{x:-52,y:-BH/2+12,'font-size':30,'font-weight':FF.w,'text-anchor':'middle',fill:'#fff',stroke:'none'},g); tx.textContent=lab;
+    SVGE('rect',{x:BW/2-104,y:-BH/2-19,width:88,height:38,rx:19,fill:'#8DBBF5','stroke-width':4},g);
+    const k=SVGE('text',{x:BW/2-60,y:-BH/2+10,'font-size':24,'font-weight':FF.w,'text-anchor':'middle',fill:'#0A1F44',stroke:'none'},g); k.textContent=kg;
+    return g; });
+  STEPS=PASOS.map(([n,lab],i)=>{ const cx=DO.x+640+340*i, h=120*(i+1), W=330; const g=SVGE('g',{stroke:'#0B1530','stroke-width':6,'stroke-linejoin':'round'},G);
+    SVGE('ellipse',{cx:0,cy:6,rx:W/2+20,ry:12,fill:'#0A1F44',opacity:.1,stroke:'none'},g);
+    SVGE('path',{d:`M${-W/2},${-h} L${-W/2+20},${-h-16} L${W/2+20},${-h-16} L${W/2},${-h} Z`,fill:'#8DBBF5'},g);
+    SVGE('path',{d:`M${W/2},${-h} L${W/2+20},${-h-16} L${W/2+20},-16 L${W/2},0 Z`,fill:'#13306B'},g);
+    SVGE('rect',{x:-W/2,y:-h,width:W,height:h,rx:8,fill:'#1E4FD8'},g);
+    SVGE('circle',{cx:-W/2+36,cy:-h+42,r:22,fill:'#fff','stroke-width':5},g);
+    const nn=SVGE('text',{x:-W/2+36,y:-h+54,'font-size':32,'font-weight':FF.w,'text-anchor':'middle',fill:'#0A1F44',stroke:'none'},g); nn.textContent=n;
+    const tx=SVGE('text',{x:22,y:-h+54,'font-size':30,'font-weight':FF.w,'text-anchor':'middle',fill:'#fff',stroke:'none'},g); tx.textContent=lab;
+    return {g,cx,h}; });
+  CHIPEL=['CAPTAR','CUIDAR','RECUPERAR'].map((lab,i)=>{ const g=SVGE('g',{},STEPS[1].g);
+    const r=SVGE('rect',{x:-100,y:-16,width:200,height:34,rx:17,fill:'#fff','stroke-width':4},g);
+    const tx=SVGE('text',{x:0,y:9,'font-size':22,'font-weight':FF.w,'text-anchor':'middle',fill:'#1E4FD8',stroke:'none'},g); tx.textContent=lab;
+    return {g,r,y:-240+100+i*44}; });
+  // el logo final: SPOTTER otra vez, con su lema
+  const W=$('wordE'); const probe=SVGE('text',{'font-size':100,'font-weight':FF.w},W); probe.textContent=WORD_TXT;
+  const size=100*WORD_W/probe.getComputedTextLength(); probe.setAttribute('font-size',size);
+  const total=probe.getComputedTextLength(), adv=[...WORD_TXT].map((c,i)=>probe.getSubStringLength(i,1)); W.removeChild(probe);
+  const baseE=EO.y+700; CAP_E=baseE-(WORD_BASE-CAP_TOP)*size/WORD_SIZE; let x=EO.x+960-total/2;
+  LETTERS_E=[...WORD_TXT].map((c,i)=>{ const lg=SVGE('g',{},W); const el=SVGE('text',{x:f1(x),y:baseE,'font-size':size,'font-weight':FF.w,fill:'#1E4FD8'},lg); el.textContent=c;
+    extrude(el,Math.round(16*size/270),1.35); const cx=x+adv[i]/2; x+=adv[i]; return {el:lg,cx,base:baseE}; });
+  TAGS=[text3d(G,'TÚ ENTRENAS.',EO.x+960,EO.y+850,86,{depth:8}), text3d(G,'EL RESTO, LO HACEMOS NOSOTROS.',EO.x+960,EO.y+935,56,{depth:6})];
+}
+function act2(t){
+  const on=t>=A0; $('act2').style.display=on?'':'none'; $('wordE').style.display=on?'':'none'; if(!on) return;
+  // rótulos
+  { const a=OM.wordRise(t,CAP1,{dist:30}), o=OM.liftOut(t,CAP2-0.1,{dur:0.2,dist:60,blur:0}); S(CAPS.c1,'opacity',f3(t<CAP2-0.1?a.op:Math.max(0,1-seg(t,CAP2-0.1,CAP2+0.1))));
+    S(CAPS.c1,'transform',`translate(0,${f1(t<CAP2-0.1?a.y:o.dy)})`);
+    const b=OM.wordRise(t,CAP2,{dist:40,zeta:0.5}); S(CAPS.c2,'opacity',f3(t<CAP2?0:b.op)); S(CAPS.c2,'transform',`translate(${CO.x+1420},${f1(CO.y+205+b.y)}) scale(${f3(b.s)}) translate(${-(CO.x+1420)},${-(CO.y+205)})`);
+    const c=OM.wordRise(t,CAP3,{dist:30}); S(CAPS.c3,'opacity',f3(t<CAP3?0:c.op)); S(CAPS.c3,'transform',`translate(0,${f1(c.y)})`); }
+  // la torre: cada bloque cae y bota; luego se mueve entera
+  { const tb=towerBase(t); S(TOWER,'transform',`translate(${f1(tb.x)},${f1(tb.y)}) rotate(${f1(tb.a*57.3)})`); S(TOWER,'opacity',t<TOSS_REL+0.8?1:0);
+    const sep=t>TOSS_REL?seg(t,TOSS_REL,TOSS_REL+0.75):0;
+    BLOCKS.forEach((g,i)=>{ const td=TD[i], restY=-i*(BH+18)+0*0; const fall=seg(t,td-0.28,td), y=t<td-0.28?-1400:(t<td?lerp(-1400,restY,fall*fall):restY);
+      const im=OM.impact(t,td,{decay:9,omega:24,sqx:0.05,sqy:0.09}); const sx=t>=td?im.sx:1, sy=t>=td?im.sy:1+0.12*fall;
+      const ox=sep*(i-1.5)*160, oy=-sep*i*60, rot=sep*(i%2?-1:1)*40*i;
+      S(g,'transform',`translate(${f1(ox)},${f1(y+oy)}) rotate(${f1(rot)}) scale(${f3(sx)},${f3(sy)})`); S(g,'opacity',t<td-0.28?0:1); });
+    S($('sombraTorre'),'opacity',f3(t<GRAB0?0.12*sstep(TD[0]-0.1,TD[0],t):0.12*(1-sstep(GRAB0,GRAB0+0.2,t)))); }
+  // escalones: caen con rebote
+  STEPS.forEach(({g,cx,h},i)=>{ const td=SD[i], fall=seg(t,td-0.26,td), y=t<td-0.26?-1500:(t<td?lerp(-1500,0,fall*fall):0);
+    const im=OM.impact(t,td,{decay:9,omega:24,sqx:0.05,sqy:0.08}); const sy=t>=td?im.sy:1+0.1*fall, sx=t>=td?im.sx:1;
+    const step=[S1,HOP2[1],HOP3[1]][i], pr=OM.impact(t,step,{decay:10,omega:26,sqx:0.03,sqy:0.06}); const psy=t>=step?pr.sy:1;
+    S(g,'transform',`translate(${cx},${f1(DO.y+930+y)}) scale(${f3(sx)},${f3(sy*psy)})`); S(g,'opacity',t<td-0.26?0:1); });
+  CHIPEL.forEach((c,i)=>{ const p=OM.popIn(t,CHIPS+i*0.08,{rise:20,s0:0.6,ds:0.4}); const on2=t>=CHIPS+i*0.08;
+    S(c.g,'transform',`translate(10,${f1(c.y+p.dy)}) scale(${f3(on2?p.s:0.6)})`); S(c.g,'opacity',on2?f3(p.op):0);
+    const hi=i===1&&t>17.15; S(c.r,'fill',hi?'#8DBBF5':'#fff'); });
+  // logo final: las letras caen y botan cuando aterriza encima
+  LETTERS_E.forEach((L,i)=>{ const d=OM.letterDrop(t,WORDE,i,{dist:90,stagger:0.05}); const near=Math.exp(-Math.pow((L.cx-(EO.x+1180))/300,2));
+    const g=OM.impact(t,JE1,{decay:8,omega:22,sqx:0,sqy:0.09}); const dy=d.y+(1-g.sy)*80*near;
+    S(L.el,'opacity',f3(d.op)); S(L.el,'transform',`translate(${f1(L.cx)},${f1(L.base+dy)}) scale(${f3(d.sx)},${f3(d.sy)}) translate(${f1(-L.cx)},${-L.base})`); });
+  TAGS.forEach((g,i)=>{ const w=OM.wordRise(t,TAG+i*0.16,{dist:26}); S(g,'opacity',f3(t<TAG+i*0.16?0:w.op)); S(g,'transform',`translate(0,${f1(w.y)})`); });
+}
+window.__seek=async t=>{ await seek(t); return true; };
+const FACE=new FontFace(FONT,`url(${FF.file})`,{weight:String(FF.w)}); document.fonts.add(FACE);
+document.documentElement.style.setProperty('--disp',`'${FONT}'`);
+['conoce'].forEach(id=>$(id).setAttribute('font-weight',FF.w)); $('blindText').setAttribute('font-weight',FF.w);
+window.__ready=FACE.load().then(()=>document.fonts.load('800 100px Archivo')).then(()=>document.fonts.ready).then(()=>{ buildWord(); buildStack();
+  ['fin1','fin2'].forEach(id=>{ const e=$(id); const w=e.getComputedTextLength(); if(w>1640) e.setAttribute('font-size',f1(104*1640/w)); });
+  const fs=Math.min(+$('fin1').getAttribute('font-size'),+$('fin2').getAttribute('font-size')); $('fin1').setAttribute('font-size',f1(fs)); $('fin2').setAttribute('font-size',f1(fs));
+  // cada línea en su grupo para escalar con el relieve
+  ['fin1','fin2','conoce'].forEach(id=>{ const e=$(id); const g=document.createElementNS(NS,'g'); g.setAttribute('id',id+'G'); e.parentNode.insertBefore(g,e); g.appendChild(e); extrude(e,id==='conoce'?6:9,1.1); });
+  buildAct2();
+  return seek(0); });
+const q=new URLSearchParams(location.search);
+if(q.has('t')) __ready.then(()=>seek(parseFloat(q.get('t'))));
+if(q.has('hud')) $('hud').style.display='block';
+if(q.has('play')) __ready.then(()=>{const t0=performance.now();(function loop(){seek(((performance.now()-t0)/1000)%DUR);requestAnimationFrame(loop);})();});
+</script>
+</body>
+</html>

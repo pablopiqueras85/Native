@@ -61,6 +61,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/oferta.md` — el producto: empleados virtuales (paquetes cerrados de agentes con ficha de puesto, métrica y precio), catálogo de agentes y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
+- `marca/videos/` — vídeos de marca hechos con onetake (solo uso no comercial) y sus fuentes. Ver su `README.md`.
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
   Los agentes del diagnóstico son agentes independientes en `.claude/agents/` (índice y plantilla en
   `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina. El equipo que trabaja para los clientes está
