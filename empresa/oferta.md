@@ -18,23 +18,52 @@ canales que el estudio ya usa (sobre todo WhatsApp), y el fundador los supervisa
 - **Frente a Harbiz, Trainingym, Glofox y parecidos:** ellos venden una herramienta que el dueño tiene que
   usar; nosotros, la tarea hecha y medida. Podemos trabajar encima de la herramienta que ya tenga.
 
-## Cómo se vende: la carta existe, pero se sirven menús (2026-09-28)
+## Cómo se vende: a la carta, con sentido (2026-09-30)
 
-- **Por dentro, un catálogo de agentes** (abajo): piezas estándar que se montan igual en cada estudio.
-- **Al vender, 3 paquetes fijos**, uno por bloque. No es el cliente quien monta el menú: **el diagnóstico
-  elige el paquete** a partir de sus respuestas ("tu problema son las bajas: empieza por Cuidar").
-- **Para empezar, un solo paquete** en el piloto de 30 días, para tener un resultado limpio y medible.
-- **Extras sueltos, más adelante:** cuando haya 5–10 clientes y se sepa qué combinaciones se piden de verdad.
+Sustituye al modelo de "solo menús" del 2026-09-28. El cliente elige su combinación de agentes, pero dentro de
+unas reglas, porque **unos agentes alimentan a otros** y trabajan en cascada.
 
-Por qué no a la carta desde el principio (*hipótesis*): demasiadas opciones frenan la decisión de un dueño
-sin tiempo; cada combinación distinta es más trabajo de montaje y supervisión (prueba del doble); el precio se
-complica, y con muchos agentes a la vez no se sabe cuál ha funcionado.
+- **Base (obligatoria):** conexión con sus canales (WhatsApp, programa de reservas), ficha de clientes,
+  supervisión del fundador e informe mensual. Todos los agentes beben de estos datos.
+- **Agentes a la carta:** cada uno con su precio mensual (tabla de precios, abajo).
+- **Requisitos:** un agente no se vende sin el que lo alimenta (tabla de cascadas, abajo).
+- **Cadenas:** si el cliente elige varios agentes conectados, pagan menos juntos que sueltos, porque comparten
+  datos y montaje (*hipótesis*).
+- **El diagnóstico recomienda** una combinación de partida y el presupuesto sale solo de la tabla. El cliente puede
+  añadir o quitar agentes respetando los requisitos.
+- **Para empezar, una sola cadena** en el piloto de 30 días, para tener un resultado limpio y saber qué ha funcionado.
+- **A medida:** lo que no está en el catálogo se cobra aparte (montaje + mensual). Lo que piden 2–3 clientes del
+  mismo nicho pasa al catálogo.
 
-| Paquete | Para qué | Agentes |
+Riesgo que se asume (*hipótesis*): demasiadas opciones frenan la decisión de un dueño sin tiempo. Por eso el
+diagnóstico siempre llega con una recomendación, y los menús de abajo se mantienen como sugerencias.
+
+### Cascadas: quién alimenta a quién
+
+| Agente | Necesita (requisito) | Alimenta a |
 |---|---|---|
-| **Captar** | Que no se escape ningún interesado | 1 + 2, y 7 cuando se valide |
-| **Cuidar** | Que los socios no se vayan | 3 y 8, y 4, 9, 10 y 11 cuando se validen |
-| **Recuperar** | Que vuelvan los que se fueron | 6 |
+| 1. Respuesta a consultas | Base | 2 (interesados) |
+| 2. Seguimiento de indecisos | 1 | 3 (altas nuevas) |
+| 3. Primeros 90 días | Base | 8 (socios que pasan los 90 días), 10 |
+| 4. Rutinas y seguimiento | Base | 11 (datos de progreso) |
+| 5. Recordatorios y renovaciones | Base | 6 (bonos que no se renuevan) |
+| 6. Recuperación de antiguos socios | Base | 3 (los que vuelven empiezan de nuevo) |
+| 7. Recomendaciones | 10 (sabe quién está contento) | 2 (recomendados que piden información) |
+| 8. Socios en riesgo | Base con datos de asistencia | 6 (los que se van igualmente), aviso al dueño |
+| 9. Cambios y cancelaciones | Base con programa de reservas | — |
+| 10. Opinión y alerta temprana | Base | 7 (contentos), 8 y aviso al dueño (descontentos) |
+| 11. Resumen de progreso | 4, o datos que apunte el entrenador | 8 (motiva a quedarse, *hipótesis*) |
+
+La cascada completa: **interesado → cliente → cliente que se queda → cliente que recomienda → nuevo interesado**,
+y los que se van vuelven a entrar por la recuperación.
+
+### Menús sugeridos (para quien no quiera elegir)
+
+| Menú | Para qué | Agentes |
+|---|---|---|
+| **Captar** | Que no se escape ningún interesado | 1 + 2 (+ 10 y 7 cuando se validen) |
+| **Cuidar** | Que los socios no se vayan | 3 + 8 (+ 10, 4 y 11 cuando se validen) |
+| **Recuperar** | Que vuelvan los que se fueron | 6 (+ 5 cuando se valide) |
 
 ## Catálogo de agentes
 
@@ -69,24 +98,36 @@ casos que los agentes escalan.
 
 ## Estructura de precio (*hipótesis*)
 
-- **Cuota base mensual por paquete**, más un **variable por socio conseguido o recuperado** en los paquetes
-  que lo permiten (Captar y Recuperar).
+**Presupuesto = base + suma de agentes elegidos − descuento por cadena**, más un **variable por resultado** en los
+agentes que lo permiten (altas en 1–2 y 7; socios recuperados en 6).
+
 - Referencia: los chatbots para gimnasios cuestan 150–400 €/mes según un blog del sector
   ([Javadex](https://www.javadex.es/blog/ia-para-gimnasios-automatizar-gestion-precios-2026), *no verificado*).
   Nuestro precio se justifica por resultados, no por funciones.
-- **Piloto:** los 3 primeros clientes, a precio reducido durante 30 días a cambio de poder publicar el
-  caso con datos. Sirve para validar y para el portfolio del fundador.
+- **Piloto:** los 3 primeros clientes, una cadena a precio reducido durante 30 días a cambio de poder publicar el
+  caso con datos. La regla de medición se pacta antes de empezar.
+- **A medida:** cuota de montaje + mensual, fuera de esta tabla.
 
 ## Tabla de precios
 
-| Paquete | Cuota base (€/mes) | Variable | Piloto 30 días |
+| Concepto | Cuota (€/mes) | Variable | Notas |
 |---|---|---|---|
-| Captar | *por decidir* | *por decidir* por alta | *por decidir* |
-| Cuidar | *por decidir* | — | *por decidir* |
-| Recuperar | *por decidir* | *por decidir* por socio recuperado | *por decidir* |
+| Base | *por decidir* | — | Obligatoria |
+| 1 + 2 (van juntos) | *por decidir* | *por decidir* por alta | |
+| 3. Primeros 90 días | *por decidir* | — | |
+| 4. Rutinas | *por decidir* | — | Por validar |
+| 5. Recordatorios y renovaciones | *por decidir* | — | Por validar |
+| 6. Recuperación | *por decidir* | *por decidir* por socio recuperado | |
+| 7. Recomendaciones | *por decidir* | *por decidir* por alta | Por validar; requiere 10 |
+| 8. Socios en riesgo | *por decidir* | — | Por validar |
+| 9. Cambios y cancelaciones | *por decidir* | — | Por validar |
+| 10. Opinión | *por decidir* | — | Por validar |
+| 11. Resumen de progreso | *por decidir* | — | Por validar |
+| Descuento por cadena | *por decidir* (%) | — | Cuando 2 o más agentes elegidos se alimentan entre sí |
 
 ## Reglas para el agente de precios
 
 - Usa **solo** los precios de esta tabla. Si falta un precio, deja el hueco marcado y avisa al fundador.
-- No inventes descuentos ni condiciones.
+- Respeta los requisitos de la tabla de cascadas: si falta un agente necesario, añádelo y dilo.
+- No inventes descuentos ni condiciones: solo el descuento por cadena de la tabla.
 - A los primeros 3 clientes, ofrece el piloto.
