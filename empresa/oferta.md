@@ -98,20 +98,30 @@ casos que los agentes escalan.
 
 ## Estructura de precio (*hipótesis*)
 
-**Presupuesto = base + suma de agentes elegidos − descuento por cadena**, más un **variable por resultado** en los
-agentes que lo permiten (altas en 1–2 y 7; socios recuperados en 6).
+Modelo híbrido (2026-09-30), en tres partes:
+
+1. **Montaje (una vez):** proporcional a la cadena que se monta; lo a medida, aparte. Deja al cliente el sistema a su
+   nombre (sus cuentas de WhatsApp y de la ficha, decisión 0006). Filtra al cliente serio y da caja al principio.
+2. **Cuota mensual:** base + suma de agentes elegidos − descuento por cadena. Paga la operación y la supervisión.
+3. **Variable por resultado** en los agentes que lo permiten (altas en 1–2 y 7; socios recuperados en 6). Es lo que
+   nos diferencia de una agencia que solo cobra por montar.
+
+**El montaje se cobra por valor, no por horas.** Con cada implementación parecida las horas bajan (plantillas,
+conectores con cada programa de reservas, configuración generada desde el diagnóstico), pero el precio del montaje no
+baja con ellas: esa diferencia es el margen que premia estandarizar.
 
 - Referencia: los chatbots para gimnasios cuestan 150–400 €/mes según un blog del sector
   ([Javadex](https://www.javadex.es/blog/ia-para-gimnasios-automatizar-gestion-precios-2026), *no verificado*).
   Nuestro precio se justifica por resultados, no por funciones.
-- **Piloto:** los 3 primeros clientes, una cadena a precio reducido durante 30 días a cambio de poder publicar el
-  caso con datos. La regla de medición se pacta antes de empezar.
+- **Los 3 primeros clientes:** sin montaje y piloto de 30 días de una cadena pagando solo el variable, a cambio de poder
+  publicar el caso con datos. La regla de medición se pacta antes de empezar. **A partir del cuarto, montaje completo.**
 - **A medida:** cuota de montaje + mensual, fuera de esta tabla.
 
 ## Tabla de precios
 
 | Concepto | Cuota (€/mes) | Variable | Notas |
 |---|---|---|---|
+| Montaje (una vez) | *por decidir* (propuesta: 300–900 € según la cadena) | — | Gratis para los 3 primeros; lo a medida, aparte |
 | Base | *por decidir* | — | Obligatoria |
 | 1 + 2 (van juntos) | *por decidir* | *por decidir* por alta | |
 | 3. Primeros 90 días | *por decidir* | — | |

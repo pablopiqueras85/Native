@@ -32,11 +32,28 @@ primer cliente: decide si el negocio pasa la prueba del doble.
 | Cada agente | 49–79 €/mes |
 | Variable (Captar y Recuperar) | 30–50 € por socio conseguido o recuperado |
 | Descuento por cadena | 10–15 % |
-| Montaje | 150–300 € una vez (gratis para los 3 primeros) |
-| Piloto 30 días | Sin cuota base, solo el variable |
+| Montaje | 300–900 € una vez, según la cadena; lo a medida, aparte (gratis para los 3 primeros) |
+| Piloto 30 días (3 primeros) | Sin montaje ni cuota base, solo el variable |
 
 Ejemplo: primera cadena Cuidar (base + agentes 3 y 8) ≈ 195 €/mes. Referencia: los chatbots para gimnasios cuestan
 150–400 €/mes ([Javadex](https://www.javadex.es/blog/ia-para-gimnasios-automatizar-gestion-precios-2026), *no verificado*).
+
+## El montaje: curva de aprendizaje
+
+Modelo híbrido aceptado por el fundador el 2026-09-30: **montaje + cuota mensual + variable** (ver `empresa/oferta.md`).
+
+- Cada implementación parecida abarata la siguiente. Se reutilizan:
+  - las plantillas;
+  - el conector con cada programa de reservas (Mindbody, Harbiz, Excel…), que se construye una vez por programa;
+  - la configuración generada desde el diagnóstico (A5).
+- **Nunca llega a cero del todo.** Quedan los datos propios de cada estudio (horarios, precios, tono), el alta y la
+  verificación de su número en WhatsApp con Meta, y la revisión de las dos primeras semanas. Objetivo: menos de 1 hora
+  de montaje por cliente a partir del cliente 20 (*hipótesis*).
+- **El precio del montaje no baja con las horas:** se cobra por lo que vale para el estudio. La diferencia es margen.
+- **Métrica:** horas de montaje por cliente, apuntadas en cada implementación.
+
+Efecto en los números: con 3–4 montajes al mes a ~600 €, entran unos 1.800–2.400 €/mes extra mientras se crece hacia
+los 50 clientes. Son justo los meses en que las cuotas todavía son pocas.
 
 ## Escenarios con 50 clientes (al mes, sin IVA)
 
