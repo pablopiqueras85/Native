@@ -61,6 +61,12 @@ precio reducido para los 3 primeros. Precios por decidir (ver [`empresa/oferta.m
    [Harbiz](https://www.harbiz.io/en/blog/the-5-best-apps-for-personal-trainers)), y pagarían por quitarse ese trabajo.
    Aportada por el fundador el 2026-09-23.
 
+7. **El dueño paga por que se lo hagan aunque tenga Dots, Grok Bot o ChatGPT a mano** (*hipótesis*, 2026-09-30).
+   Es el riesgo principal desde que existen agentes generales. Criterio para descartarla: si en las 10 primeras
+   conversaciones la mayoría dice que se lo haría él, se descarta o se replantea (decisión 0005).
+
+**Encaje (2026-09-30):** esta idea es la puerta de entrada de la 0002 (equipo digital para solo founders).
+
 ## Evaluación
 
 *Pendiente de `/evaluar-idea`.*

@@ -19,7 +19,11 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Nicho en estudio:** salud y deporte. Mejor candidato: estudios boutique de fitness independientes,
   con el foco en convertir y retener clientes (la recepción con IA ya está saturada). Ver
   `exploracion/nicho-salud-deporte.md`.
-- **Idea en curso:** `exploracion/ideas/0001-agente-comercial-estudios-boutique.md`.
+- **Idea en curso:** `exploracion/ideas/0001-agente-comercial-estudios-boutique.md`, como puerta de entrada de
+  `exploracion/ideas/0002-equipo-digital-solo-founders.md`.
+- **Posicionamiento (propuesta, decisión 0005):** agencia AI Native que amplía el equipo del dueño con un equipo
+  digital (diagnóstico → catálogo → piloto medido), sobre modelos de terceros intercambiables. Se valida o descarta
+  en las 10 primeras conversaciones con dueños.
 - **Sistema en diseño:** el embudo de diagnóstico (`sistemas/embudo-diagnostico.md`), el primer equipo
   de agentes para uso propio: cuestionario → informe con soluciones (de momento sin precio) → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en

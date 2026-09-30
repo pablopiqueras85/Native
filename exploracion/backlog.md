@@ -8,3 +8,4 @@ Ordena por puntuación descendente; las descartadas van al final.
 | # | Idea | Estado | Puntuación | Siguiente paso |
 |---|---|---|---|---|
 | [0001](ideas/0001-agente-comercial-estudios-boutique.md) | Agente comercial para estudios boutique | nueva | — | Cliente misterioso y embudo de diagnóstico |
+| [0002](ideas/0002-equipo-digital-solo-founders.md) | Equipo digital para solo founders (agencia AI Native) | nueva | — | 10 conversaciones con dueños (decisión 0005) |
