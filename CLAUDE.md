@@ -24,7 +24,10 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Posicionamiento (propuesta, decisión 0005):** agencia AI Native que amplía el equipo del dueño con un equipo
   digital (diagnóstico → catálogo → piloto medido), sobre modelos de terceros intercambiables. Se valida o descarta
   en las 10 primeras conversaciones con dueños.
-- **Sistema en diseño:** el embudo de diagnóstico (`sistemas/embudo-diagnostico.md`), el primer equipo
+- **Sistema en diseño:** el equipo digital que trabajará para los clientes (`sistemas/equipo-digital/`): escalado de
+  excepciones, portero automático (`portero.py`, 20 pruebas), agente supervisor y biblioteca de mensajes. Agentes y
+  memoria portables (decisión 0006). Modelo económico en `empresa/modelo-economico.md`.
+- **Sistema en uso propio:** el embudo de diagnóstico (`sistemas/embudo-diagnostico.md`), el primer equipo
   de agentes para uso propio: cuestionario → informe con soluciones (de momento sin precio) → reunión.
 - **Hecho:** la landing con calculadora privada (`landing/`), vista previa en
   https://claude.ai/artifact/RSBDcBMg1jU1fvYWmJ8Ccp.
@@ -53,12 +56,14 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 
 - `fundador/perfil.md` — quién es el fundador. **Léelo antes de proponer o evaluar cualquier idea.**
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
+- `empresa/modelo-economico.md` — costes por cliente, precios propuestos, escenarios y palancas para escalar.
 - `empresa/oferta.md` — catálogo de agentes (qué tarea quita cada uno) y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
   Los agentes del diagnóstico son agentes independientes en `.claude/agents/` (índice y plantilla en
-  `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina.
+  `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina. El equipo que trabaja para los clientes está
+  en `sistemas/equipo-digital/` (fichas neutras en `agentes/`, plantillas y portero).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.

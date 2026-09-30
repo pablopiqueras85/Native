@@ -1,0 +1,87 @@
+{
+  "_nota": "Datos inventados para probar el portero. Nunca pongas aquí datos reales de socios.",
+  "cliente": {
+    "estudio": "Estudio Ejemplo",
+    "precios_autorizados": [89, 120]
+  },
+  "mensajes": [
+    {"id": "m01", "esperado": "OK", "agente": "2", "modo": "iniciado", "plantilla": "SEG-01", "primer_mensaje": true,
+     "permiso_whatsapp": true, "hora": "10:30",
+     "variables": {"nombre": "Ana", "clase": "pilates reformer", "dia": "jueves", "hora": "19:00"}},
+
+    {"id": "m02", "esperado": "OK", "agente": "2", "modo": "iniciado", "plantilla": "SEG-03",
+     "permiso_whatsapp": true, "hora": "12:00",
+     "variables": {"nombre": "Ana", "clase": "pilates reformer", "frase": "Laura, la entrenadora, me dijo que te defendiste muy bien."}},
+
+    {"id": "m03", "esperado": "BLOQUEADO", "agente": "6", "modo": "iniciado", "plantilla": "REC-01",
+     "permiso_whatsapp": false, "hora": "11:00",
+     "variables": {"nombre": "Luis"}},
+
+    {"id": "m04", "esperado": "BLOQUEADO", "agente": "2", "modo": "iniciado", "plantilla": "SEG-02",
+     "permiso_whatsapp": true, "hora": "22:30",
+     "variables": {"nombre": "Ana", "clase": "pilates reformer", "hora": "19:00"}},
+
+    {"id": "m05", "esperado": "BLOQUEADO", "agente": "2", "modo": "iniciado", "plantilla": "SEG-01",
+     "permiso_whatsapp": true, "hora": "10:00",
+     "variables": {"nombre": "Ana", "clase": "pilates reformer", "dia": "jueves"}},
+
+    {"id": "m06", "esperado": "BLOQUEADO", "agente": "6", "modo": "iniciado", "plantilla": "REC-02",
+     "permiso_whatsapp": true, "hora": "11:00",
+     "variables": {"nombre": "Luis", "opcion": "el primer mes a 60 €"}},
+
+    {"id": "m07", "esperado": "OK", "agente": "6", "modo": "iniciado", "plantilla": "REC-02", "aprobado_por_dueno": true,
+     "permiso_whatsapp": true, "hora": "11:00",
+     "variables": {"nombre": "Luis", "opcion": "el primer mes a 60 €"}},
+
+    {"id": "m08", "esperado": "OK", "agente": "1", "modo": "respuesta",
+     "ultimo_mensaje_socio": "¿Cuánto cuesta la cuota mensual?",
+     "texto": "La cuota mensual con clases ilimitadas es de 89 €. ¿Quieres que te reserve una clase de prueba?"},
+
+    {"id": "m09", "esperado": "BLOQUEADO", "agente": "1", "modo": "respuesta",
+     "ultimo_mensaje_socio": "¿Hay algo más barato?",
+     "texto": "Para ti podría dejarla en 60 €."},
+
+    {"id": "m10", "esperado": "ESCALAR", "agente": "3", "modo": "respuesta",
+     "ultimo_mensaje_socio": "No he ido porque me hice una lesión en la rodilla",
+     "variables": {"nombre": "Marta"},
+     "texto": "¡Vaya! Te recomiendo que hagas estos ejercicios en casa…"},
+
+    {"id": "m11", "esperado": "BAJA", "agente": "6", "modo": "respuesta",
+     "ultimo_mensaje_socio": "BAJA", "variables": {"nombre": "Luis"}, "texto": "Entendido."},
+
+    {"id": "m12", "esperado": "ESCALAR", "agente": "3", "modo": "respuesta",
+     "ultimo_mensaje_socio": "Quiero darme de baja del estudio el mes que viene",
+     "variables": {"nombre": "Marta"}, "texto": "Qué pena, ¿seguro?"},
+
+    {"id": "m13", "esperado": "BLOQUEADO", "agente": "2", "modo": "iniciado", "plantilla": "SEG-03",
+     "permiso_whatsapp": true, "hora": "12:00",
+     "variables": {"nombre": "Ana", "clase": "pilates reformer", "frase": "Si te apuntas esta semana, te hago un descuento."}},
+
+    {"id": "m14", "esperado": "BLOQUEADO", "agente": "1", "modo": "respuesta",
+     "ultimo_mensaje_socio": "¿En cuánto tiempo veré resultados?",
+     "texto": "Te garantizo que en un mes notas el cambio."},
+
+    {"id": "m15", "esperado": "ESCALAR", "agente": "2", "modo": "respuesta",
+     "ultimo_mensaje_socio": "Prefiero hablar con una persona, gracias",
+     "variables": {"nombre": "Ana"}, "texto": "Claro, dime."},
+
+    {"id": "m16", "esperado": "OK", "agente": "3", "modo": "iniciado", "plantilla": "P90-03",
+     "hora": "08:00", "variables": {"nombre": "Marta", "dias": "12"}},
+
+    {"id": "m17", "esperado": "BLOQUEADO", "agente": "6", "modo": "iniciado", "plantilla": "REC-03",
+     "no_contactar": true, "permiso_whatsapp": true, "hora": "11:00",
+     "variables": {"nombre": "Luis"}},
+
+    {"id": "m18", "esperado": "OK", "agente": "2", "modo": "respuesta",
+     "ultimo_mensaje_socio": "¿Tenéis clases por la tarde?",
+     "texto": "Sí, de lunes a viernes a las 18:00, 19:00 y 20:00. ¿Te reservo una?"},
+
+    {"id": "m19", "esperado": "ESCALAR", "agente": "3", "modo": "respuesta",
+     "ultimo_mensaje_socio": "Dame de baja, porfa, que me mudo",
+     "variables": {"nombre": "Marta"}, "texto": "Vale."},
+
+    {"id": "m20", "esperado": "ESCALAR", "agente": "3", "modo": "respuesta",
+     "ultimo_mensaje_socio": "Este mes no voy, estoy de baja médica",
+     "variables": {"nombre": "Marta"}, "texto": "¡Mejórate!"}
+  ]
+}
