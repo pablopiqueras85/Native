@@ -13,6 +13,9 @@ Quitamos al estudio las tareas manuales con sus clientes y, de paso, recuperamos
 le escapan. No es un programa que el dueño tenga que aprender: el trabajo lo hacen nuestros agentes, en los
 canales que el estudio ya usa (sobre todo WhatsApp), y el fundador los supervisa.
 
+**Desde 2026-09-30:** se vende como **empleados virtuales en paquetes cerrados** (ver "El producto", abajo) para
+cualquier negocio del patrón de la decisión 0007, no solo estudios.
+
 - **Las horas abren la conversación** ("te quitamos estas tareas") y **los euros cierran la venta**
   ("y recuperamos estos clientes"). *Hipótesis:* un dueño paga más fácil por socios que por horas.
 - **Frente a Harbiz, Trainingym, Glofox y parecidos:** ellos venden una herramienta que el dueño tiene que
@@ -57,13 +60,29 @@ diagnóstico siempre llega con una recomendación, y los menús de abajo se mant
 La cascada completa: **interesado → cliente → cliente que se queda → cliente que recomienda → nuevo interesado**,
 y los que se van vuelven a entrar por la recuperación.
 
-### Menús sugeridos (para quien no quiera elegir)
+### El producto: empleados virtuales (2026-09-30)
 
-| Menú | Para qué | Agentes |
-|---|---|---|
-| **Captar** | Que no se escape ningún interesado | 1 + 2 (+ 10 y 7 cuando se validen) |
-| **Cuidar** | Que los socios no se vayan | 3 + 8 (+ 10, 4 y 11 cuando se validen) |
-| **Recuperar** | Que vuelvan los que se fueron | 6 (+ 5 cuando se valide) |
+Lo que se vende son **empleados virtuales**: paquetes cerrados de agentes, cada uno con su **ficha de puesto** (qué
+tareas le quita al dueño), su **métrica** y su **precio**. Sustituyen a los menús Captar, Cuidar y Recuperar.
+
+- **Qué nos separa de la "IA genérica para todos":** no hacemos proyectos a medida con alcance abierto. El cliente
+  contrata un puesto cerrado.
+- **El mismo empleado sirve en todos los sectores del patrón** (decisión 0007). Lo que cambia es el uniforme: vocabulario y
+  plantillas de `conocimiento/sectores/`.
+- **Varios empleados trabajan en equipo:** la cascada de arriba es cómo se pasan el trabajo. La carta sigue existiendo
+  para quien quiera ajustar; lo normal es contratar uno o dos empleados.
+
+| Empleado virtual | Tareas que le quita al dueño | Agentes | Métrica | Estado |
+|---|---|---|---|---|
+| **Recepcionista comercial** | Contestar a cada interesado y perseguir a los indecisos hasta el alta o un "no" | 1 + 2 (+ 9 cuando se valide) | Altas de interesados que antes se perdían | Ofrecido |
+| **Responsable de clientes** | Estar pendiente de los nuevos y de quien deja de venir | 3 + 8 (+ 10, 11 y 4 cuando se validen) | Bajas evitadas | Ofrecido (3); 8 por validar |
+| **Recuperador** | Escribir a quien se fue | 6 (+ 5 cuando se valide) | Clientes recuperados | Ofrecido |
+| **Administrativo** | Recordatorios de pago, bonos que caducan, papeles para la gestoría | 5 + agentes nuevos por definir | Horas liberadas y cobros recuperados | **Por validar** |
+| **Responsable de comunicación** | Pedir reseñas, avisos generales, recomendaciones | 10 + 7 | Reseñas y altas por recomendación | **Por validar** |
+| **Encargado** (incluido en la base) | Revisar el trabajo de los demás y dar el informe mensual | Supervisor (`sistemas/equipo-digital/agentes/supervisor.md`) | Tasa de corrección | Siempre |
+
+Regla honesta de comunicación: son "empleados" como metáfora de venta para el dueño. Ante sus clientes, los agentes
+**siempre dicen que son una IA** (ley europea de IA, artículo 50) y nunca se hacen pasar por una persona.
 
 ## Catálogo de agentes
 

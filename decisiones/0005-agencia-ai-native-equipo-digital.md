@@ -44,7 +44,9 @@ diagnóstico → propuesta del catálogo → piloto medido → supervisión. Se 
   ChatGPT/Dots", se descarta o se replantea con otra decisión.
 - **Cuestionario:** añadir preguntas de horas por área (clientes, administración, comunicación) y de uso actual de
   herramientas de IA.
-- **Mensaje:** "amplía tu equipo" / "tú entrenas, el resto lo hacemos nosotros"; evitar "agentes" como gancho.
+- **Mensaje:** "amplía tu equipo" / "tú entrenas, el resto lo hacemos nosotros"; evitar "agentes" o "IA" como gancho.
+  **Actualizado 2026-09-30:** el producto son **empleados virtuales en paquetes cerrados**, con ficha de puesto, métrica y
+  precio (ver `empresa/oferta.md`). Es la metáfora de venta; ante los clientes finales, los agentes siempre se identifican como IA.
   El lema del vídeo de Spotter ("El equipo de agentes virtuales para tu negocio") conviene revisarlo.
 - **Riesgos asumidos:**
   - dependencia de plataformas y de las normas de WhatsApp para bots con IA (por verificar);
