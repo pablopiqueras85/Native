@@ -1,1 +1,5 @@
 __pycache__/
+
+# temporales de HyperFrames durante el render
+marca/videos/.*.hf-transaction-*/
+marca/videos/work-*/
