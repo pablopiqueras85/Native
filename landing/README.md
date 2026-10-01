@@ -61,4 +61,8 @@ redistribuirlas con la página.
   (base 99 €/mes con Executive Assistant y Chief of Staff Officer, empleados de 49 a 79 €/mes, montaje 300–900 €). Están
   marcados como orientativos. **Antes de publicarla, el fundador tiene que fijar los precios** (`empresa/oferta.md` aún
   dice "por decidir").
+- **Vídeo de cabecera:** `video/contrata-tu-equipo.webm` (Chrome, Firefox, Edge) y `.mp4` (Safari), copias de
+  `marca/videos/contrata-tu-equipo.mp4`, con el fotograma del organigrama como portada (`.jpg`). Se reproduce en bucle y
+  sin sonido, con botón de pausa; si el visitante prefiere menos movimiento, se queda quieto en la portada. Si cambias el
+  vídeo, vuelve a copiarlo aquí y a generar el `.webm`.
 - **Privacidad:** igual que `index.html`: todo se calcula en el navegador y no se envía nada.

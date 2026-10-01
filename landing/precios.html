@@ -58,6 +58,11 @@ button{font:inherit;color:inherit;cursor:pointer}
 .brand span{color:var(--accent)}
 .pill{font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
 
+/* 0 · vídeo de cabecera */
+.reel{position:relative;border-radius:18px;overflow:hidden;border:2px solid var(--ink);box-shadow:10px 10px 0 var(--ink);background:var(--board);aspect-ratio:16/9;max-width:100%}
+.reel video{display:block;width:100%;height:100%;object-fit:cover}
+.reel button{position:absolute;right:12px;bottom:12px;border:0;border-radius:999px;background:rgba(15,36,31,.78);color:#eef3f0;font-size:.9rem;font-weight:600;padding:8px 14px}
+
 /* 1 · tu hora */
 .hero{display:flex;flex-direction:column;gap:18px}
 .dial{background:var(--surface);border:2px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 var(--ink);padding:28px clamp(18px,4vw,40px);display:flex;flex-direction:column;gap:20px}
@@ -163,6 +168,18 @@ footer a{color:var(--accent)}
     <div class="brand">Native <span>Crew</span></div>
     <span class="pill">Tus números no salen de este navegador</span>
   </div>
+
+  <!-- 0 · Vídeo de cabecera -->
+  <section aria-label="Vídeo: contrata tu primer equipo digital">
+    <div class="reel">
+      <video id="reel" poster="video/contrata-tu-equipo.jpg" muted loop playsinline preload="metadata"
+        aria-label="Vídeo sin sonido: una oferta de empleo se convierte en tu primer equipo digital">
+        <source src="video/contrata-tu-equipo.webm" type="video/webm">
+        <source src="video/contrata-tu-equipo.mp4" type="video/mp4">
+      </video>
+      <button type="button" id="reel-btn" aria-pressed="false">Pausar</button>
+    </div>
+  </section>
 
   <!-- 1 · Tu hora -->
   <section class="hero" aria-labelledby="h-hora">
@@ -325,6 +342,14 @@ const $ = id => document.getElementById(id);
 const eur = n => new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0, useGrouping: "always" }).format(Math.round(n)) + " €";
 const num = (n, d = 0) => new Intl.NumberFormat("es-ES", { maximumFractionDigits: d, minimumFractionDigits: 0, useGrouping: "always" }).format(n);
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// --- 0 · vídeo de cabecera: en bucle y sin sonido; quieto si el visitante prefiere menos movimiento
+const reel = $("reel"), reelBtn = $("reel-btn");
+function reelState(playing) { reelBtn.textContent = playing ? "Pausar" : "Ver vídeo"; reelBtn.setAttribute("aria-pressed", String(!playing)); }
+reelBtn.addEventListener("click", () => { if (reel.paused) reel.play().catch(() => {}); else reel.pause(); });
+reel.addEventListener("play", () => reelState(true));
+reel.addEventListener("pause", () => reelState(false));
+if (reduce) reelState(false); else reel.play().catch(() => reelState(false));
 
 // --- 1 · tu hora
 const PRESETS = [20, 30, 40, 60, 90];
