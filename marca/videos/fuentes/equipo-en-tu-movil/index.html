@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <title>Tu equipo en tu móvil</title>
+    <!-- Native Crew · vídeo hecho con HyperFrames (Apache-2.0). Uso comercial permitido.
+         Efectos de sonido: Pixabay Content License (assets/audio/sfx/CREDITS.md). Música: compuesta con musica.py.
+         Fuentes: Barlow Condensed y Figtree (SIL OFL). Los datos del chat son un ejemplo ilustrativo. -->
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url("assets/fonts/BarlowCondensed-700.woff2") format("woff2"); }
+      @font-face { font-family: "Figtree"; font-weight: 300 900; src: url("assets/fonts/Figtree-variable.woff2") format("woff2"); }
+      :root {
+        --ground: #0f241f; --ground-2: #143029; --ink: #eef3f0; --muted: #a9bcb4;
+        --sun: #f4c64f; --blue: #2446c8; --mint: #5fd3a5;
+        --screen: #edf2ef; --bubble: #fbfcfb; --text: #0f241f; --text-muted: #5b6d66; --hair: #d5ded9;
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Figtree", sans-serif; color: var(--ink); }
+
+      /* fondo */
+      .bg { position: absolute; inset: 0; background: var(--ground); }
+      .glow { position: absolute; width: 1200px; height: 1200px; left: -100px; top: -60px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(244, 198, 79, 0.16) 0%, rgba(244, 198, 79, 0) 62%); }
+      .glow-2 { position: absolute; width: 1000px; height: 1000px; left: 1100px; top: 300px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(95, 211, 165, 0.10) 0%, rgba(95, 211, 165, 0) 60%); }
+      .ghost { position: absolute; left: 960px; top: 770px; font-family: "Barlow Condensed", sans-serif; font-size: 300px;
+        line-height: 1; color: var(--ink); opacity: 0.035; white-space: nowrap; letter-spacing: 0.02em; }
+      .hairline { position: absolute; left: 1010px; top: 300px; width: 2px; height: 480px; background: rgba(238, 243, 240, 0.12); }
+
+      /* escena 1 · hora */
+      #intro { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding-left: 180px; gap: 18px; }
+      #intro .clock { font-family: "Barlow Condensed", sans-serif; font-size: 260px; line-height: 0.85; color: var(--sun); font-variant-numeric: tabular-nums; }
+      #intro .line { font-size: 54px; font-weight: 600; max-width: 1300px; }
+      #intro .line em { font-style: normal; color: var(--mint); }
+
+      /* teléfono */
+      #phone-wrap { position: absolute; left: 330px; top: 50px; width: 480px; height: 980px; }
+      .phone { position: absolute; inset: 0; border-radius: 72px; background: #0b1512; padding: 14px;
+        box-shadow: 0 0 0 2px #2b3b36, 0 40px 90px rgba(4, 12, 10, 0.55); }
+      .screen { position: relative; width: 100%; height: 100%; border-radius: 58px; overflow: hidden; background: var(--screen); color: var(--text); }
+      .island { position: absolute; left: 50%; top: 14px; width: 124px; height: 36px; margin-left: -62px; border-radius: 20px; background: #0b1512; z-index: 5; }
+      .status { position: absolute; left: 0; right: 0; top: 0; height: 60px; padding: 20px 34px 0; display: flex; justify-content: space-between;
+        font-size: 19px; font-weight: 700; z-index: 4; color: var(--text); }
+      .status .times { position: relative; width: 70px; height: 24px; }
+      .status .times span { position: absolute; left: 0; top: 0; font-variant-numeric: tabular-nums; }
+      .status .icons { display: flex; gap: 6px; align-items: center; }
+      .status .icons i { display: block; width: 18px; height: 11px; border-radius: 3px; background: var(--text); }
+      .status .icons i.bat { width: 28px; border-radius: 4px; }
+      .head { position: absolute; left: 0; right: 0; top: 60px; height: 84px; padding: 0 22px; display: flex; align-items: center; gap: 14px;
+        background: rgba(251, 252, 251, 0.94); border-bottom: 1px solid var(--hair); z-index: 3; }
+      .head .back { width: 14px; height: 14px; border-left: 3px solid var(--blue); border-bottom: 3px solid var(--blue); transform: rotate(45deg); margin: 0 6px 0 4px; }
+      .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--sun); display: grid; place-items: center;
+        font-family: "Barlow Condensed", sans-serif; font-size: 22px; color: var(--ground); flex: none; }
+      .head .who b { display: block; font-size: 22px; line-height: 1.15; }
+      .head .who span { font-size: 16px; color: var(--text-muted); }
+      .head .who span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #1f9d6c; margin-right: 6px; vertical-align: 1px; }
+
+      .chat { position: absolute; left: 0; right: 0; top: 144px; bottom: 104px; overflow: hidden; }
+      #stack { position: absolute; left: 0; right: 0; top: 0; padding: 18px 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+      .msg { max-width: 86%; font-size: 23px; line-height: 1.32; padding: 12px 15px; border-radius: 20px; }
+      .msg.ea { align-self: flex-start; background: var(--bubble); border-bottom-left-radius: 6px; box-shadow: 0 1px 0 rgba(15, 36, 31, 0.06); }
+      .msg.me { align-self: flex-end; background: var(--blue); color: #f4f6fd; border-bottom-right-radius: 6px; }
+      .card h4 { font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid var(--hair); font-size: 21px; }
+      .row:first-of-type { border-top: 0; }
+      .row small { font-size: 15px; font-weight: 600; color: #1d7a56; background: #e1f4ec; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+      .row small.wait { color: #8a5a00; background: #fbf0d2; }
+      .choices { display: flex; gap: 8px; margin-top: 10px; }
+      .choice { flex: 1; text-align: center; font-size: 19px; font-weight: 700; padding: 10px 6px; border-radius: 14px; border: 2px solid var(--blue); color: var(--blue); background: var(--bubble); position: relative; }
+            .choice span { position: relative; }
+      .pill { align-self: center; font-size: 16px; font-weight: 600; color: #4b5d56; background: #dfe7e3; border-radius: 999px; padding: 6px 14px; }
+      .pill b { color: var(--text); }
+      .day { align-self: center; font-size: 16px; font-weight: 700; color: var(--text-muted); padding: 8px 0 2px; letter-spacing: 0.04em; }
+      .stats { display: flex; gap: 8px; margin: 6px 0 8px; }
+      .stat { flex: 1; background: var(--screen); border-radius: 12px; padding: 8px 6px; text-align: center; }
+      .stat b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 48px; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+      .stat span { font-size: 15px; color: var(--text-muted); }
+      .stat.zero b { color: #1d7a56; }
+      .typing { align-self: flex-start; background: var(--bubble); border-radius: 20px; border-bottom-left-radius: 6px; padding: 14px 16px; display: flex; gap: 6px; }
+      .typing i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #93a49d; }
+
+      .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; padding: 14px 16px 34px; display: flex; gap: 10px; align-items: center;
+        background: rgba(251, 252, 251, 0.96); border-top: 1px solid var(--hair); z-index: 3; }
+      .field { flex: 1; height: 50px; border-radius: 25px; border: 1.5px solid var(--hair); background: #ffffff; padding: 0 18px; display: flex; align-items: center; font-size: 21px; position: relative; overflow: hidden; }
+      .field .ph { color: #66756f; position: absolute; left: 18px; }
+      .field .typed { color: var(--text); white-space: nowrap; }
+      .field .caret { display: inline-block; width: 2px; height: 22px; background: var(--blue); margin-left: 2px; }
+      .send { width: 50px; height: 50px; border-radius: 50%; background: var(--blue); flex: none; display: grid; place-items: center; }
+      .send svg { width: 22px; height: 22px; }
+
+      .banner { position: absolute; left: 12px; right: 12px; top: 58px; z-index: 6; background: rgba(251, 252, 251, 0.97); border-radius: 22px; padding: 14px 16px;
+        display: flex; gap: 12px; align-items: center; box-shadow: 0 12px 30px rgba(15, 36, 31, 0.22); }
+      .banner .app { width: 44px; height: 44px; border-radius: 12px; background: var(--mint); flex: none; display: grid; place-items: center; }
+      .banner .app svg { width: 24px; height: 24px; }
+      .banner b { display: block; font-size: 18px; }
+      .banner span { font-size: 18px; color: var(--text); }
+      .banner small { position: absolute; right: 18px; top: 14px; font-size: 13px; color: var(--text-muted); }
+      .tap { position: absolute; width: 64px; height: 64px; border-radius: 50%; background: rgba(36, 70, 200, 0.22); border: 2px solid rgba(36, 70, 200, 0.5); z-index: 7; }
+
+      /* titulares */
+      .side { position: absolute; left: 1100px; top: 0; width: 760px; height: 1080px; }
+      .hl { position: absolute; left: 0; top: 360px; width: 760px; display: flex; flex-direction: column; gap: 22px; }
+      .hl .k { font-family: "Barlow Condensed", sans-serif; font-size: 30px; letter-spacing: 0.16em; color: var(--muted); }
+      .hl h2 { font-family: "Barlow Condensed", sans-serif; font-size: 100px; line-height: 0.95; font-weight: 700; color: var(--ink); text-wrap: balance; }
+      .msg.card { width: 86%; }
+      .hl h2 em { font-style: normal; color: var(--sun); }
+      .note { position: absolute; left: 1100px; top: 1010px; font-size: 18px; color: var(--muted); }
+
+      /* cierre */
+      #outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; text-align: center; }
+      #outro .brand { font-family: "Barlow Condensed", sans-serif; font-size: 190px; line-height: 0.9; }
+      #outro .brand em { font-style: normal; color: var(--sun); }
+      #outro .tag { font-size: 52px; font-weight: 600; }
+      #outro .cta { margin-top: 24px; background: var(--sun); color: var(--ground); font-weight: 800; font-size: 44px; padding: 24px 52px; border-radius: 16px; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="31" data-width="1920" data-height="1080">
+      <div class="bg"></div>
+      <div class="glow" id="glow"></div>
+      <div class="glow-2" id="glow2"></div>
+      <div class="ghost" id="ghost">TU EQUIPO</div>
+
+      <!-- 1 · la hora -->
+      <section id="intro" class="clip" data-start="0" data-duration="3.0" data-track-index="1">
+        <div class="clock" id="clock">08:12</div>
+        <div class="line" id="intro-line">Tu equipo lleva trabajando <em>desde las 07:00</em>.</div>
+      </section>
+
+      <!-- 2 · el móvil -->
+      <section id="scene-phone" class="clip" data-start="2.8" data-duration="22.1" data-track-index="2" data-layout-allow-overflow>
+        <div class="hairline"></div>
+        <div id="phone-wrap">
+          <div class="phone" id="phone">
+            <div class="screen" data-layout-allow-occlusion data-layout-allow-overlap>
+              <div class="island"></div>
+              <div class="status">
+                <div class="times"><span id="t-am">08:14</span><span id="t-pm">18:30</span></div>
+                <div class="icons"><i></i><i></i><i class="bat"></i></div>
+              </div>
+              <div class="head" data-layout-allow-overlap data-layout-allow-occlusion>
+                <div class="back"></div>
+                <div class="avatar" data-layout-allow-overlap>EA</div>
+                <div class="who" data-layout-allow-overlap><b data-layout-allow-overlap>Executive Assistant</b><span data-layout-allow-overlap>Tu equipo digital · en línea</span></div>
+              </div>
+              <div class="chat">
+                <div id="stack" data-layout-allow-overflow>
+                  <div class="msg ea" id="m1">Buenos días. Así ha ido la noche:</div>
+                  <div class="msg ea card" id="m2">
+                    <h4>Mientras dormías</h4>
+                    <div class="row" id="m2a">4 WhatsApp contestados <small>Recepcionista</small></div>
+                    <div class="row" id="m2b">2 reservas para el jueves <small>Recepcionista</small></div>
+                    <div class="row" id="m2c">1 duda de precios <small class="wait">te la preparo</small></div>
+                  </div>
+                  <div class="typing" id="ty1"><i></i><i></i><i></i></div>
+                  <div class="msg me" id="m3">¿Algo que necesite yo?</div>
+                  <div class="msg ea" id="m4">Solo una cosa: Marta lleva 3 semanas sin venir. ¿Le escribo de tu parte?
+                    <div class="choices">
+                      <div class="choice" id="c-yes"><span id="c-yes-t">Sí, escríbele</span></div>
+                      <div class="choice"><span>La llamo yo</span></div>
+                    </div>
+                  </div>
+                  <div class="pill" id="m5">Chief of Staff Officer → <b>Responsable de clientes</b></div>
+                  <div class="msg ea" id="m6">Hecho. Le ha escrito el Responsable de clientes. Te aviso si contesta.</div>
+                  <div class="day" id="m7">HOY · 18:30</div>
+                  <div class="msg ea card" id="m8">
+                    <h4>Cierre del día</h4>
+                    <div class="stats">
+                      <div class="stat"><b>14</b><span>conversaciones</span></div>
+                      <div class="stat"><b>3</b><span>reservas</span></div>
+                      <div class="stat zero"><b>0</b><span>sin responder</span></div>
+                    </div>
+                    Mañana a las 8, más.
+                  </div>
+                </div>
+              </div>
+              <div class="bar">
+                <div class="field"><span class="ph" id="ph">Escribe a tu equipo…</span><span class="typed" id="typed"></span><span class="caret" id="caret"></span></div>
+                <div class="send" id="send"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l15-7-5 15-3-6-7-2z" fill="#f4f6fd"/></svg></div>
+              </div>
+              <div class="banner" id="banner" data-layout-allow-overlap data-layout-allow-occlusion>
+                <div class="app"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#0f241f" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="#0f241f" stroke-width="2"/></svg></div>
+                <div><b>Correo</b><span>3 facturas apartadas para la gestoría</span></div>
+                <small>ahora</small>
+              </div>
+              <div class="tap" id="tap"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="side">
+          <div class="hl" id="h1"><div class="k">08:14 · RESUMEN</div><h2>Mientras dormías, <em>alguien contestó por ti.</em></h2></div>
+          <div class="hl" id="h2"><div class="k">08:15 · TU DECISIÓN</div><h2>Lo delicado <em>lo decides tú.</em></h2></div>
+          <div class="hl" id="h3"><div class="k">08:15 · REPARTO</div><h2>Hablas con uno. <em>Ellos se reparten el trabajo.</em></h2></div>
+          <div class="hl" id="h4"><div class="k">12:40 · CORREO</div><h2>Nada se queda <em>sin ordenar.</em></h2></div>
+          <div class="hl" id="h5"><div class="k">18:30 · CIERRE</div><h2>Y cada día, <em>el resumen en un mensaje.</em></h2></div>
+        </div>
+        <div class="note">Ejemplo ilustrativo</div>
+      </section>
+
+      <!-- 3 · cierre -->
+      <section id="outro" class="clip" data-start="24.9" data-duration="6.1" data-track-index="3">
+        <div class="brand" id="o1">Native <em>Crew</em></div>
+        <div class="tag" id="o2">Tu primer equipo digital. En tu móvil.</div>
+        <div class="cta" id="o3">Pide tu diagnóstico gratuito</div>
+      </section>
+
+      <!-- sonido: música + efectos (los tiempos salen de T, más abajo) -->
+      <audio id="bgm" src="assets/audio/musica.wav" data-start="0" data-duration="31" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="sx-intro" src="assets/audio/sfx/whoosh-short.mp3" data-start="2.85" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-m1" src="assets/audio/sfx/notification.mp3" data-start="4.4" data-duration="2.46" data-track-index="11" data-volume="0.55"></audio>
+      <audio id="sx-m2" src="assets/audio/sfx/pop.mp3" data-start="5.1" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sx-type" src="assets/audio/sfx/typing.mp3" data-start="7.7" data-duration="1.5" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-send" src="assets/audio/sfx/whoosh-short.mp3" data-start="9.25" data-duration="0.57" data-track-index="12" data-volume="0.55"></audio>
+      <audio id="sx-m4" src="assets/audio/sfx/notification.mp3" data-start="11.0" data-duration="2.46" data-track-index="11" data-volume="0.55"></audio>
+      <audio id="sx-tap" src="assets/audio/sfx/click-soft.mp3" data-start="13.0" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
+      <audio id="sx-m5" src="assets/audio/sfx/pop.mp3" data-start="13.7" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sx-m6" src="assets/audio/sfx/notification.mp3" data-start="14.6" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-banner" src="assets/audio/sfx/ping.mp3" data-start="16.8" data-duration="1.32" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-m8" src="assets/audio/sfx/notification.mp3" data-start="21.0" data-duration="2.46" data-track-index="11" data-volume="0.55"></audio>
+      <audio id="sx-out" src="assets/audio/sfx/chime.mp3" data-start="25.0" data-duration="2.5" data-track-index="11" data-volume="0.5"></audio>
+    </div>
+
+    <script>
+      // Momentos clave (segundos, tiempo global). Los sonidos de arriba están puestos en estos mismos tiempos.
+      const T = { phoneIn: 2.8, m1: 4.4, m2: 5.1, type: 7.7, send: 9.25, ty1: 9.8, m4: 11.0, tap: 13.0, m5: 13.7, m6: 14.6,
+                  banner: 16.8, bannerOut: 19.4, m7: 19.8, m8: 21.0, phoneOut: 24.1 };
+      const S = T.phoneIn; // la escena del móvil empieza aquí: sus clips se animan en tiempo global igualmente
+      const tl = gsap.timeline({ paused: true });
+
+      // fondo vivo: respiración y deriva lentas (repeticiones finitas)
+      tl.fromTo("#glow", { scale: 0.92 }, { scale: 1.06, duration: 7.75, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+      tl.fromTo("#glow2", { scale: 1.05 }, { scale: 0.94, duration: 7.75, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+      tl.fromTo("#ghost", { x: 0 }, { x: -220, duration: 31, ease: "none" }, 0);
+
+      // 1 · la hora
+      tl.fromTo("#clock", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.2);
+      tl.fromTo("#intro-line", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.7);
+      tl.to("#intro", { opacity: 0, x: -80, duration: 0.45, ease: "power2.in" }, 2.35);
+
+      // 2 · el móvil entra
+      tl.fromTo("#phone-wrap", { y: 700, rotation: -6 }, { y: 0, rotation: 0, duration: 0.9, ease: "power3.out" }, T.phoneIn);
+      tl.fromTo(".hairline", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, T.phoneIn + 0.4);
+      tl.fromTo(".note", { opacity: 0 }, { opacity: 1, duration: 0.5 }, T.phoneIn + 0.8);
+      tl.fromTo("#t-pm", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.to("#t-am", { opacity: 0, duration: 0.3 }, T.m7);
+      tl.to("#t-pm", { opacity: 1, duration: 0.3 }, T.m7);
+
+      // mensajes: todos ocupan su sitio desde el principio; el chat sube para enseñar el último
+      const ids = ["m1", "m2", "ty1", "m3", "m4", "m5", "m6", "m7", "m8"];
+      const viewH = document.querySelector(".chat").offsetHeight;
+      const stack = document.getElementById("stack");
+      const bottomOf = id => { const el = document.getElementById(id); return el.offsetTop + el.offsetHeight + 18; };
+      const scrollFor = id => Math.max(0, bottomOf(id) - viewH);
+      ids.forEach(id => tl.set("#" + id, { opacity: 0 }, 0));
+      gsap.set(stack, { y: 0 });
+
+      function bubble(id, at, fromX) {
+        tl.to(stack, { y: -scrollFor(id), duration: 0.45, ease: "power2.out" }, at - 0.05);
+        tl.fromTo("#" + id, { opacity: 0, y: 18, x: fromX, scale: 0.96 }, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, at);
+      }
+      function typingDots(id, at, until) {
+        tl.to(stack, { y: -scrollFor(id), duration: 0.4, ease: "power2.out" }, at - 0.05);
+        tl.fromTo("#" + id, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.25 }, at);
+        tl.fromTo("#" + id + " i", { y: 0 }, { y: -6, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.09 }, at + 0.1);
+        tl.to("#" + id, { opacity: 0, duration: 0.15 }, until);
+      }
+
+      // primer resumen (con puntos de "escribiendo" previos a cargo del propio m1: aparece directo)
+      bubble("m1", T.m1, -20);
+      bubble("m2", T.m2, -20);
+      ["#m2a", "#m2b", "#m2c"].forEach((s, i) => tl.fromTo(s, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, T.m2 + 0.35 + i * 0.3));
+
+      // el dueño escribe en la barra
+      const phrase = "¿Algo que necesite yo?";
+      const typed = document.getElementById("typed");
+      const proxy = { n: 0 };
+      tl.set("#ph", { opacity: 1 }, 0);
+      tl.set("#ph", { opacity: 0 }, T.type);
+      tl.fromTo(proxy, { n: 0 }, { n: phrase.length, duration: 1.35, ease: "none",
+        onUpdate: () => { typed.textContent = phrase.slice(0, Math.round(proxy.n)); } }, T.type);
+      tl.fromTo("#send", { scale: 1 }, { scale: 0.86, duration: 0.08, yoyo: true, repeat: 1 }, T.send - 0.08);
+      tl.to(proxy, { n: 0, duration: 0.01, onUpdate: () => { typed.textContent = phrase.slice(0, Math.round(proxy.n)); } }, T.send);
+      tl.set("#ph", { opacity: 1 }, T.send + 0.05);
+      tl.fromTo("#caret", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "steps(1)", yoyo: true, repeat: 23 }, 0);
+      bubble("m3", T.send + 0.02, 20);
+
+      typingDots("ty1", T.ty1, T.m4 - 0.05);
+      bubble("m4", T.m4, -20);
+      tl.fromTo("#m4 .choice", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.12 }, T.m4 + 0.4);
+
+      // el toque en "Sí, escríbele" (posición calculada una vez, al montar)
+      const yesEl = document.getElementById("c-yes");   // su offsetParent es #stack
+      const chatTop = document.querySelector(".chat").offsetTop;
+      const tapX = yesEl.offsetLeft + yesEl.offsetWidth / 2 - 32;
+      const tapY = chatTop + yesEl.offsetTop + yesEl.offsetHeight / 2 - 32 - scrollFor("m4");
+      tl.set("#tap", { x: tapX, y: tapY, opacity: 0, scale: 0.4 }, 0);
+      tl.to("#tap", { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, T.tap - 0.15);
+      tl.to("#tap", { opacity: 0, scale: 1.5, duration: 0.35, ease: "power2.out" }, T.tap + 0.1);
+      tl.to("#c-yes", { scale: 0.94, duration: 0.09, yoyo: true, repeat: 1 }, T.tap - 0.05);
+      tl.set("#c-yes", { scale: 1, backgroundColor: "#fbfcfb", color: "#2446c8" }, 0);
+      tl.to("#c-yes", { backgroundColor: "#2446c8", color: "#f4f6fd", duration: 0.2 }, T.tap);
+
+      bubble("m5", T.m5, 0);
+      bubble("m6", T.m6, -20);
+
+      // aviso de Correo
+      tl.fromTo("#banner", { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, T.banner);
+      tl.to("#banner", { y: -160, opacity: 0, duration: 0.4, ease: "power2.in" }, T.bannerOut);
+
+      bubble("m7", T.m7, 0);
+      bubble("m8", T.m8, -20);
+      tl.fromTo("#m8 .stat", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.15, ease: "power2.out" }, T.m8 + 0.35);
+
+      // titulares al lado del móvil
+      const heads = [["#h1", T.m1 - 0.4, T.type + 1.6], ["#h2", T.send + 0.4, T.tap + 0.5], ["#h3", T.m5 - 0.2, T.banner],
+                     ["#h4", T.banner + 0.2, T.m7 - 0.2], ["#h5", T.m7 + 0.2, T.phoneOut]];
+      heads.forEach(([sel, a, b]) => {
+        tl.fromTo(sel, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, a);
+        tl.to(sel, { opacity: 0, y: -40, duration: 0.35, ease: "power2.in" }, b - 0.35);
+      });
+      heads.forEach(([sel]) => tl.set(sel, { opacity: 0 }, 0));
+
+      // el móvil sale
+      tl.to("#phone-wrap", { y: 120, scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.in" }, T.phoneOut);
+      tl.to(".hairline, .note", { opacity: 0, duration: 0.4 }, T.phoneOut);
+
+      // 3 · cierre
+      tl.fromTo("#o1", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 25.0);
+      tl.fromTo("#o2", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 25.5);
+      tl.fromTo("#o3", { y: 30, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 26.0);
+
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
