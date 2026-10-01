@@ -1,14 +1,14 @@
-"""Música de fondo del vídeo «Tu equipo en tu móvil» (64 s), compuesta aquí: sin licencias de terceros.
+"""Música de fondo del vídeo «Tu equipo en tu móvil» (60 s), compuesta aquí: sin licencias de terceros.
 
 Pad cálido + arpegio suave + pulso discreto, en Fa mayor, a 92 BPM. Los cambios siguen los momentos del vídeo:
-arpegio con el organigrama, pulso durante el día en el móvil y resolución en el cierre (58,2 s).
+gancho solo con pad, arpegio desde «Necesitas un equipo», pulso con el equipo y el día, y resolución en el cierre (54,4 s).
 Uso: python3 musica.py  ->  assets/audio/musica.wav  (necesita numpy y soundfile)
 """
 import numpy as np
 import soundfile as sf
 
 SR = 48000
-DUR = 64.0
+DUR = 60.0
 BPM = 92
 BEAT = 60 / BPM
 N = int(SR * DUR)
@@ -45,7 +45,7 @@ def add(sig, start, pan=0.0, gain=1.0):
     L[i:j] += s * np.sqrt(0.5 * (1 - pan)); R[i:j] += s * np.sqrt(0.5 * (1 + pan))
 
 # pad
-end_music = 58.2
+end_music = 54.4
 pos = 0.0; k = 0
 while pos < end_music:
     chord = CHORDS[k % 4]; dur = min(2 * BAR, end_music - pos) + 0.6
@@ -59,7 +59,7 @@ while pos < end_music:
     pos += 2 * BAR; k += 1
 
 # arpegio (corcheas) desde que entra el móvil hasta que sale
-start_arp, end_arp = 5.2, 58.0
+start_arp, end_arp = 9.1, 54.2
 step = BEAT / 2; i = 0; tcur = start_arp
 while tcur < end_arp:
     chord = CHORDS[int((tcur) // (2 * BAR)) % 4]
@@ -71,8 +71,8 @@ while tcur < end_arp:
     tcur += step; i += 1
 
 # pulso: bombo suave en 1 y 3, durante el día en el móvil
-tcur = 20.2
-while tcur < 50.2:
+tcur = 11.2
+while tcur < 47.4:
     n = int(0.35 * SR); tt = np.arange(n) / SR
     f = 95 * np.exp(-tt * 18) + 45
     kick = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-tt * 9)
@@ -80,8 +80,8 @@ while tcur < 50.2:
     tcur += 2 * BEAT
 
 # shaker suave en contratiempos, desde que el dueño envía
-tcur = 26.4 + BEAT / 2
-while tcur < 50.2:
+tcur = 24.4 + BEAT / 2
+while tcur < 47.4:
     n = int(0.08 * SR)
     noise = rng.standard_normal(n)
     noise = noise - onepole(noise, 3500)  # paso alto sencillo
@@ -90,14 +90,14 @@ while tcur < 50.2:
     tcur += BEAT
 
 # cierre: acorde abierto de Fa con campana, que se apaga al final
-n = int((DUR - 58.2) * SR); tt = np.arange(n) / SR
+n = int((DUR - 54.4) * SR); tt = np.arange(n) / SR
 sig = np.zeros(n)
 for m in [41, 53, 60, 64, 67, 72]:
     sig += np.sin(2 * np.pi * hz(m) * tt + rng.uniform(0, 6.28))
 sig *= env(n, 0.6, 3.0) / 6
-add(sig, 58.2, gain=0.6)
+add(sig, 54.4, gain=0.6)
 bell = (np.sin(2 * np.pi * hz(84) * tt) + 0.4 * np.sin(2 * np.pi * hz(91) * tt)) * np.exp(-tt * 1.6)
-add(bell, 58.2, gain=0.08)
+add(bell, 54.4, gain=0.08)
 
 mix = np.stack([L, R], axis=1)
 mix = onepole(mix[:, 0], 9000)[:, None] * [1, 0] + onepole(mix[:, 1], 9000)[:, None] * [0, 1]

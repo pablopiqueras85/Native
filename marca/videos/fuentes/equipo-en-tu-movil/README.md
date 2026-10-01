@@ -1,20 +1,20 @@
 # Tu equipo en tu móvil (HyperFrames)
 
-Vídeo de 64 s con sonido que explica **qué resuelve Native Crew, cómo está organizado el equipo y cómo trabaja**:
+Vídeo de 60 s con sonido. **Vende resultados, no tareas**: lo que el dueño deja de perder y lo que gana, y un equipo
+(no un chatbot) que lo consigue.
 
-1. **El problema (0–5 s):** "Hoy lo haces todo tú": WhatsApp, teléfono, correo, facturas, clientes que se van, cobros,
-   avisos y reseñas… y tu trabajo de verdad.
-2. **La estructura (5–19 s):** el organigrama de la decisión 0010 se monta pieza a pieza, cada puesto con el problema que
-   resuelve: Tú → Executive Assistant → Chief of Staff Officer → Administración (Recepcionista, Correo, Papeles),
-   Comercial (Responsable de clientes, Recuperador, Comunicación, Cobros), A medida y el control de calidad (portero,
-   aprobación del dueño, supervisión mensual).
-3. **Un día (19–50 s):** el iPhone con el chat del Executive Assistant y, al lado, un mini organigrama que **se enciende
-   con quien trabaja en cada momento**: Recepcionista por la noche; el dueño decide y el Chief of Staff Officer lo pasa al
-   Responsable de clientes; Correo y Papeles; Cobros con su permiso; Comunicación y Recuperador; el cierre del día.
-4. **Cómo empezamos (51–58 s):** diagnóstico gratis → montaje a tu nombre → revisión cada mes.
-5. **Cierre (58–64 s):** Native Crew y "Pide tu diagnóstico gratuito".
+1. **Gancho (0–7 s):** "Tu negocio no para. Tú tampoco. Y aun así, se te escapan cosas": el cliente de las 23:14 que
+   reserva en otro sitio, la clienta que deja de venir, la factura sin cobrar.
+2. **El giro (7–11 s):** "No necesitas otra app. Necesitas un equipo."
+3. **El equipo por resultados (11–24 s):** organigrama de la decisión 0010 donde cada tarjeta dice lo que consigue
+   ("Ningún cliente sin respuesta", "Menos bajas", "Cobras a tiempo"…) y debajo el puesto.
+4. **Un día con marcador (24–48 s):** el iPhone con el Executive Assistant y un marcador que sube: reservas, clientes
+   que vuelven, euros cobrados y horas de vuelta.
+5. **Por qué funciona (48–54 s):** "No es un chatbot. Es tu equipo": a medida, supervisado, medido y tuyo.
+6. **Cierre (54–60 s):** "Más clientes. Más tiempo. Nada se te escapa", diagnóstico gratuito y "Buscamos 3 negocios
+   piloto" (los 3 primeros clientes de `empresa/oferta.md`).
 
-Los datos del chat son un **ejemplo ilustrativo** (lo dice el propio vídeo).
+Las cifras y nombres son un **ejemplo ilustrativo** (lo dice el propio vídeo). No se promete ninguna cifra real.
 
 ## Licencias (se puede usar comercialmente)
 

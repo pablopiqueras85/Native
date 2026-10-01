@@ -6,7 +6,7 @@
     <title>Tu equipo en tu móvil</title>
     <!-- Native Crew · vídeo hecho con HyperFrames (Apache-2.0). Uso comercial permitido.
          Efectos: Pixabay Content License (assets/audio/sfx/CREDITS.md). Música: musica.py. Fuentes: SIL OFL.
-         Estructura: decisión 0010. Los datos del chat son un ejemplo ilustrativo.
+         Estructura: decisión 0010. Cifras y nombres del chat: ejemplo ilustrativo (lo dice el vídeo).
          Los <audio> los escribe sonidos.py (no editarlos a mano). -->
     <script src="assets/vendor/gsap.min.js"></script>
     <style>
@@ -21,7 +21,6 @@
       html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Figtree", sans-serif; color: var(--ink); }
 
-      /* fondo común */
       .bg { position: absolute; inset: 0; background: var(--ground); }
       .glow { position: absolute; width: 1300px; height: 1300px; left: -200px; top: -250px; border-radius: 50%;
         background: radial-gradient(circle, rgba(244, 198, 79, 0.13) 0%, rgba(244, 198, 79, 0) 62%); }
@@ -31,41 +30,46 @@
         background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 80px 80px; }
       .kick { font-family: "Barlow Condensed", sans-serif; font-size: 30px; letter-spacing: 0.16em; color: var(--muted); }
 
-      /* 1 · el problema */
-      #s1 { position: absolute; inset: 0; padding: 150px 160px; }
-      #s1 h1 { font-family: "Barlow Condensed", sans-serif; font-size: 150px; line-height: 0.9; }
-      #s1 h1 em { font-style: normal; color: var(--sun); }
-      .chips { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 56px; width: 1500px; }
-      .chip { font-size: 40px; font-weight: 600; padding: 14px 30px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); }
-      .chip.own { border-color: var(--sun); color: var(--sun); }
-      #s1-turn { position: absolute; left: 160px; top: 760px; font-size: 64px; font-weight: 700; }
-      #s1-turn em { font-style: normal; color: var(--mint); }
+      /* 1 · gancho */
+      #s1 { position: absolute; inset: 0; padding: 120px 160px; }
+      .big { font-family: "Barlow Condensed", sans-serif; font-size: 140px; line-height: 0.92; }
+      .big em { font-style: normal; color: var(--sun); }
+      #g2 { display: block; }
+      #h-sub { font-size: 52px; font-weight: 600; margin-top: 40px; color: var(--muted); }
+      .losses { display: flex; flex-direction: column; gap: 18px; margin-top: 34px; width: 1400px; }
+      .loss { display: flex; gap: 28px; align-items: baseline; padding: 18px 26px; border-radius: 16px; background: var(--card); border: 2px solid var(--line); }
+      .loss b { font-family: "Barlow Condensed", sans-serif; font-size: 34px; color: var(--coral); white-space: nowrap; width: 200px; flex: none; }
+      .loss span { font-size: 36px; font-weight: 600; }
 
-      /* 2 · la estructura */
-      #s2 { position: absolute; inset: 0; }
-      #s2 .kick { position: absolute; left: 90px; top: 50px; }
+      /* 2 · el giro */
+      #s2 { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding-left: 160px; gap: 10px; }
+      #s2 .big { font-size: 190px; }
+      #r1 { color: var(--muted); }
+      #r1-x { position: absolute; left: -10px; top: 0; height: 8px; width: 1330px; background: var(--coral); transform-origin: left; }
+      .r1-wrap { position: relative; }
+
+      /* 3 · el equipo por resultados */
+      #s3 { position: absolute; inset: 0; }
+      #s3 .kick { position: absolute; left: 90px; top: 50px; }
       svg.wires { position: absolute; inset: 0; }
       svg.wires path { fill: none; stroke: #5f7a70; stroke-width: 3; }
       .node { position: absolute; background: var(--card); border: 3px solid var(--line); border-radius: 14px; padding: 12px 18px; }
-      .node h3 { font-family: "Barlow Condensed", sans-serif; font-size: 34px; line-height: 1; }
-      .node p { font-size: 20px; color: var(--muted); margin-top: 6px; line-height: 1.25; }
+      .node h3 { font-family: "Barlow Condensed", sans-serif; font-size: 36px; line-height: 1; }
+      .node p { font-size: 19px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 8px; }
       .node.top { text-align: center; }
-      .node.you { border-color: var(--sun); } .node.you h3 { color: var(--sun); }
-      .node.ea, .node.cos { border-color: var(--sky); } .node.ea h3, .node.cos h3 { color: var(--sky); }
-      .node.adm { border-color: var(--mint); }
-      .node.com { border-color: var(--coral); }
-      .node.med { border-style: dashed; border-color: #8aa29a; }
-      .node.ctl { border-color: #8aa29a; background: #12281f; }
-      .node.ctl li { list-style: none; font-size: 21px; color: var(--ink); margin-top: 10px; padding-left: 26px; position: relative; line-height: 1.25; }
-      .node.ctl li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 12px; height: 12px; border-radius: 3px; background: var(--mint); }
-      .glabel { position: absolute; font-family: "Barlow Condensed", sans-serif; font-size: 32px; letter-spacing: 0.12em; text-align: center; background: var(--ground); padding: 2px 16px; }
+      .node.you { border-color: var(--sun); } .node.you p { color: var(--sun); }
+      .node.ea, .node.cos { border-color: var(--sky); } .node.ea p, .node.cos p { color: var(--sky); }
+      .node.adm { border-color: var(--mint); } .node.adm p { color: var(--mint); }
+      .node.com { border-color: var(--coral); } .node.com p { color: var(--coral); }
+      .node.med { border-style: dashed; border-color: #8aa29a; } .node.med p { color: #c7d6cf; }
+      .glabel { position: absolute; font-family: "Barlow Condensed", sans-serif; font-size: 30px; letter-spacing: 0.12em; text-align: center; background: var(--ground); padding: 2px 16px; }
       .glabel small { display: block; font-family: "Figtree", sans-serif; font-size: 19px; letter-spacing: 0; color: var(--muted); }
       .g-adm { color: var(--mint); } .g-com { color: var(--coral); } .g-med { color: #c7d6cf; }
-      #s2-cap { position: absolute; left: 0; right: 0; top: 990px; text-align: center; font-size: 36px; font-weight: 600; }
-      #s2-cap em { font-style: normal; color: var(--sun); }
+      #s3-cap { position: absolute; left: 0; right: 0; top: 975px; text-align: center; font-size: 40px; font-weight: 700; }
+      #s3-cap em { font-style: normal; color: var(--sun); }
 
-      /* 3 · un día */
-      #s3 { position: absolute; inset: 0; }
+      /* 4 · un día */
+      #s4 { position: absolute; inset: 0; }
       #phone-wrap { position: absolute; left: 250px; top: 50px; width: 480px; height: 980px; }
       .phone { position: absolute; inset: 0; border-radius: 72px; background: #0b1512; padding: 14px; box-shadow: 0 0 0 2px #2b3b36, 0 40px 90px rgba(4, 12, 10, 0.55); }
       .screen { position: relative; width: 100%; height: 100%; border-radius: 58px; overflow: hidden; background: var(--screen); color: var(--text); }
@@ -87,6 +91,7 @@
       .msg.ea { align-self: flex-start; background: var(--bubble); border-bottom-left-radius: 6px; box-shadow: 0 1px 0 rgba(15, 36, 31, 0.06); }
       .msg.me { align-self: flex-end; background: var(--blue); color: #f4f6fd; border-bottom-right-radius: 6px; }
       .msg.card { width: 86%; }
+      .msg.win { border: 2px solid #9bdcc0; }
       .card h4 { font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
       .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid var(--hair); font-size: 19px; line-height: 1.25; }
       .row:first-of-type { border-top: 0; }
@@ -99,9 +104,8 @@
       .day { align-self: center; font-size: 16px; font-weight: 700; color: var(--text-muted); padding: 6px 0 2px; letter-spacing: 0.04em; }
       .stats { display: flex; gap: 8px; margin: 6px 0 8px; }
       .stat { flex: 1; background: var(--screen); border-radius: 12px; padding: 8px 6px; text-align: center; }
-      .stat b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 46px; line-height: 1; color: var(--text); }
-      .stat span { font-size: 15px; color: var(--text-muted); }
-      .stat.zero b { color: #17704f; }
+      .stat b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 42px; line-height: 1; color: var(--text); }
+      .stat span { font-size: 14px; color: var(--text-muted); }
       .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; padding: 14px 16px 34px; display: flex; gap: 10px; align-items: center; background: rgba(251, 252, 251, 0.96); border-top: 1px solid var(--hair); z-index: 3; }
       .field { flex: 1; height: 50px; border-radius: 25px; border: 1.5px solid var(--hair); background: #ffffff; padding: 0 18px; display: flex; align-items: center; font-size: 20px; position: relative; overflow: hidden; }
       .field .ph { color: #66756f; position: absolute; left: 18px; }
@@ -109,96 +113,91 @@
       .field .caret { display: inline-block; width: 2px; height: 22px; background: var(--blue); margin-left: 2px; }
       .send { width: 50px; height: 50px; border-radius: 50%; background: var(--blue); flex: none; display: grid; place-items: center; }
       .send svg { width: 22px; height: 22px; }
-      .banner { position: absolute; left: 12px; right: 12px; top: 58px; z-index: 6; background: rgba(251, 252, 251, 0.97); border-radius: 22px; padding: 14px 16px; display: flex; gap: 12px; align-items: center; box-shadow: 0 12px 30px rgba(15, 36, 31, 0.22); }
-      .banner .app { width: 44px; height: 44px; border-radius: 12px; background: var(--mint); flex: none; display: grid; place-items: center; }
-      .banner .app svg { width: 24px; height: 24px; }
-      .banner b { display: block; font-size: 18px; }
-      .banner span { font-size: 18px; }
-      .banner small { position: absolute; right: 18px; top: 14px; font-size: 13px; color: var(--text-muted); }
       .tap { position: absolute; left: 0; top: 0; width: 64px; height: 64px; border-radius: 50%; background: rgba(36, 70, 200, 0.22); border: 2px solid rgba(36, 70, 200, 0.5); z-index: 7; }
 
-      /* panel derecho: titular + mini organigrama vivo */
       .side { position: absolute; left: 1000px; top: 0; width: 860px; height: 1080px; }
       .hl { position: absolute; left: 0; top: 90px; width: 860px; display: flex; flex-direction: column; gap: 16px; }
-      .hl h2 { font-family: "Barlow Condensed", sans-serif; font-size: 76px; line-height: 0.95; text-wrap: balance; }
+      .hl .kick { color: var(--mint); }
+      .hl h2 { font-family: "Barlow Condensed", sans-serif; font-size: 80px; line-height: 0.95; text-wrap: balance; }
       .hl h2 em { font-style: normal; color: var(--sun); }
-      .mini { position: absolute; left: 0; top: 440px; width: 860px; height: 560px; }
-      .mini svg { position: absolute; inset: 0; }
-      .mini svg path { fill: none; stroke: #4c665d; stroke-width: 2.5; }
-      .mn { position: absolute; height: 58px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: var(--muted); overflow: hidden; }
-      .mn .lit { position: absolute; inset: 0; background: var(--sun); }
-      .mn span { position: relative; }
-      .mn.top { color: var(--sky); border-color: #3d5490; }
-      .mn.you { color: var(--sun); border-color: #7a6a30; }
-      .mlabel { position: absolute; font-family: "Barlow Condensed", sans-serif; font-size: 24px; letter-spacing: 0.12em; }
+      .board { position: absolute; left: 0; top: 520px; width: 860px; }
+      .board .kick { margin-bottom: 18px; }
+      .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .tile { background: var(--card); border: 2px solid var(--line); border-radius: 18px; padding: 20px 26px; }
+      .tile b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 96px; line-height: 0.95; font-variant-numeric: tabular-nums; color: var(--ink); }
+      .tile span { font-size: 24px; color: var(--muted); }
+      .tile.money b { color: var(--sun); }
       .note { position: absolute; left: 1000px; top: 1022px; font-size: 18px; color: var(--muted); }
 
-      /* 4 · cómo empezamos */
-      #s4 { position: absolute; inset: 0; padding: 120px 140px; }
-      #s4 h2 { font-family: "Barlow Condensed", sans-serif; font-size: 110px; line-height: 1; margin-top: 24px; }
-      .steps { position: absolute; left: 140px; top: 420px; width: 1640px; display: flex; gap: 40px; }
-      .step { flex: 1; background: var(--card); border: 3px solid var(--line); border-radius: 18px; padding: 30px 32px; }
-      .step .n { font-family: "Barlow Condensed", sans-serif; font-size: 34px; color: var(--sun); letter-spacing: 0.1em; }
-      .step h3 { font-family: "Barlow Condensed", sans-serif; font-size: 62px; line-height: 1; margin-top: 10px; }
-      .step p { font-size: 27px; color: var(--muted); margin-top: 16px; line-height: 1.3; }
-      .step.free { border-color: var(--sun); }
+      /* 5 · confianza */
+      #s5 { position: absolute; inset: 0; padding: 120px 140px; }
+      #s5 .big { font-size: 120px; margin-top: 20px; }
+      .pillars { position: absolute; left: 140px; top: 470px; width: 1640px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 26px; }
+      .pillar { background: var(--card); border: 3px solid var(--line); border-radius: 18px; padding: 28px 28px; }
+      .pillar h3 { font-family: "Barlow Condensed", sans-serif; font-size: 50px; line-height: 1; color: var(--ink); }
+      .pillar p { font-size: 25px; color: var(--muted); margin-top: 14px; line-height: 1.3; }
+      .pillar i { display: block; width: 44px; height: 6px; border-radius: 3px; background: var(--sun); margin-bottom: 22px; }
 
-      /* 5 · cierre */
-      #s5 { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center; }
-      #s5 .brand { font-family: "Barlow Condensed", sans-serif; font-size: 190px; line-height: 0.9; }
-      #s5 .brand em { font-style: normal; color: var(--sun); }
-      #s5 .tag { font-size: 50px; font-weight: 600; }
-      #s5 .cta { margin-top: 22px; background: var(--sun); color: var(--ground); font-weight: 800; font-size: 44px; padding: 24px 52px; border-radius: 16px; }
+      /* 6 · cierre */
+      #s6 { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; text-align: center; }
+      #s6 .brand { font-family: "Barlow Condensed", sans-serif; font-size: 190px; line-height: 0.9; }
+      #s6 .brand em { font-style: normal; color: var(--sun); }
+      #s6 .tag { font-size: 52px; font-weight: 700; }
+      #s6 .cta { margin-top: 20px; background: var(--sun); color: var(--ground); font-weight: 800; font-size: 44px; padding: 24px 52px; border-radius: 16px; }
+      #s6 .pilot { font-size: 30px; color: var(--mint); font-weight: 700; letter-spacing: 0.02em; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="64" data-width="1920" data-height="1080">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60" data-width="1920" data-height="1080">
       <div class="bg"></div>
       <div class="grid"></div>
       <div class="glow" id="glow"></div>
       <div class="glow-2" id="glow2"></div>
 
-      <!-- 1 · el problema -->
-      <section id="s1" class="clip" data-start="0" data-duration="5.2" data-track-index="1">
-        <h1 id="s1-h">Hoy lo haces <em>todo tú.</em></h1>
-        <div class="chips">
-          <div class="chip" id="k0">Contestar WhatsApp</div><div class="chip" id="k1">Coger el teléfono</div>
-          <div class="chip" id="k2">El correo</div><div class="chip" id="k3">Facturas y gestoría</div>
-          <div class="chip" id="k4">Clientes que se van</div><div class="chip" id="k5">Cobros pendientes</div>
-          <div class="chip" id="k6">Avisos y reseñas</div><div class="chip own" id="k7">Y tu trabajo de verdad</div>
+      <!-- 1 · gancho: lo que se te escapa -->
+      <section id="s1" class="clip" data-start="0" data-duration="7.2" data-track-index="1">
+        <div class="big" id="g1">Tu negocio no para. <em id="g2">Tú tampoco.</em></div>
+        <div id="h-sub">Y aun así, se te escapan cosas:</div>
+        <div class="losses">
+          <div class="loss" id="x1"><b>23:14</b><span>Un cliente escribe. Nadie contesta. Reserva en otro sitio.</span></div>
+          <div class="loss" id="x2"><b>3 semanas</b><span>Una clienta deja de venir. Nadie la llama.</span></div>
+          <div class="loss" id="x3"><b>40 días</b><span>Una factura sigue sin cobrar.</span></div>
         </div>
-        <div id="s1-turn">Native Crew te da <em>un equipo digital</em> para lo demás.</div>
       </section>
 
-      <!-- 2 · la estructura -->
-      <section id="s2" class="clip" data-start="5.2" data-duration="14.0" data-track-index="2" data-layout-allow-overlap>
-        <div class="kick" id="s2-k">CÓMO ESTÁ ORGANIZADO TU EQUIPO</div>
+      <!-- 2 · el giro -->
+      <section id="s2" class="clip" data-start="7.2" data-duration="4.0" data-track-index="2">
+        <div class="r1-wrap"><div class="big" id="r1">No necesitas otra app.</div><div id="r1-x"></div></div>
+        <div class="big" id="r2">Necesitas <em>un equipo.</em></div>
+      </section>
+
+      <!-- 3 · el equipo, por resultados -->
+      <section id="s3" class="clip" data-start="11.2" data-duration="13.2" data-track-index="3" data-layout-allow-overlap>
+        <div class="kick" id="s3-k">TU EQUIPO DIGITAL · LO QUE CONSIGUE CADA PUESTO</div>
         <svg class="wires" viewBox="0 0 1920 1080" width="1920" height="1080">
           <path id="w1" d="M960 196 V214" /><path id="w2" d="M960 302 V320" />
           <path id="w3" d="M960 408 V440 M330 440 H1590 M330 440 V458 M962 440 V458 M1590 440 V458" />
           <path id="w4" d="M330 528 V546" /><path id="w5" d="M962 528 V546" /><path id="w6" d="M1590 528 V546" />
         </svg>
-        <div class="node top you" id="n-you" style="left:700px;top:110px;width:520px"><h3>Tú</h3><p>Decides y apruebas lo delicado</p></div>
-        <div class="node top ea" id="n-ea" style="left:700px;top:214px;width:520px"><h3>Executive Assistant</h3><p>Tu único contacto: le escribes o le llamas</p></div>
-        <div class="node top cos" id="n-cos" style="left:700px;top:320px;width:520px"><h3>Chief of Staff Officer</h3><p>Recibe cada tarea y se la pasa a quien toca</p></div>
+        <div class="node top you" id="n-you" style="left:700px;top:110px;width:520px"><h3>Tú diriges</h3><p>El dueño</p></div>
+        <div class="node top ea" id="n-ea" style="left:700px;top:214px;width:520px"><h3>Te enteras de todo en un mensaje</h3><p>Executive Assistant</p></div>
+        <div class="node top cos" id="n-cos" style="left:700px;top:320px;width:520px"><h3>Cada tarea, a quien toca</h3><p>Chief of Staff Officer</p></div>
         <div class="glabel g-adm" id="g-adm" style="left:180px;top:458px;width:300px">ADMINISTRACIÓN<small>lo que entra</small></div>
         <div class="glabel g-com" id="g-com" style="left:812px;top:458px;width:300px">COMERCIAL<small>lo que sale</small></div>
         <div class="glabel g-med" id="g-med" style="left:1440px;top:458px;width:300px">A MEDIDA<small>lo que tu negocio pida</small></div>
-        <div class="node adm" id="n-rec" style="left:110px;top:546px;width:440px"><h3>Recepcionista</h3><p>WhatsApp y llamadas a cualquier hora. Reserva y cambia citas.</p></div>
-        <div class="node adm" id="n-cor" style="left:110px;top:676px;width:440px"><h3>Correo</h3><p>Ordena la bandeja y te deja las respuestas preparadas.</p></div>
-        <div class="node adm" id="n-pap" style="left:110px;top:806px;width:440px"><h3>Papeles</h3><p>Facturas de proveedores, listas para la gestoría.</p></div>
-        <div class="node com" id="n-cli" style="left:600px;top:546px;width:350px"><h3>Resp. de clientes</h3><p>Ve quién deja de venir y le escribe a tiempo.</p></div>
-        <div class="node com" id="n-rcp" style="left:972px;top:546px;width:350px"><h3>Recuperador</h3><p>Trae de vuelta a los clientes de antes.</p></div>
-        <div class="node com" id="n-cmu" style="left:600px;top:700px;width:350px"><h3>Comunicación</h3><p>Avisos a todos y reseñas en Google.</p></div>
-        <div class="node com" id="n-cob" style="left:972px;top:700px;width:350px"><h3>Cobros</h3><p>Recuerda los pagos pendientes, con tacto.</p></div>
-        <div class="node med" id="n-med" style="left:1400px;top:546px;width:380px"><h3>Tu agente propio</h3><p>Lo diseñamos tras hablar contigo: presupuestos, stock, turnos…</p></div>
-        <div class="node ctl" id="n-ctl" style="left:1400px;top:700px;width:380px"><h3>Control de calidad</h3>
-          <ul><li>El portero revisa cada mensaje antes de salir.</li><li>Lo delicado siempre pasa por ti.</li><li>Lo supervisamos y medimos cada mes.</li></ul></div>
-        <div id="s2-cap">Tú hablas con uno. <em>El Chief of Staff Officer reparte. Cada empleado hace su trabajo.</em></div>
+        <div class="node adm" id="n-rec" style="left:110px;top:546px;width:440px"><h3>Ningún cliente sin respuesta</h3><p>Recepcionista</p></div>
+        <div class="node adm" id="n-cor" style="left:110px;top:660px;width:440px"><h3>Tu bandeja, bajo control</h3><p>Correo</p></div>
+        <div class="node adm" id="n-pap" style="left:110px;top:774px;width:440px"><h3>La gestoría, siempre al día</h3><p>Papeles</p></div>
+        <div class="node com" id="n-cli" style="left:600px;top:546px;width:350px"><h3>Menos bajas</h3><p>Resp. de clientes</p></div>
+        <div class="node com" id="n-rcp" style="left:972px;top:546px;width:350px"><h3>Vuelven los de antes</h3><p>Recuperador</p></div>
+        <div class="node com" id="n-cmu" style="left:600px;top:680px;width:350px"><h3>Más reseñas y recomendaciones</h3><p>Comunicación</p></div>
+        <div class="node com" id="n-cob" style="left:972px;top:680px;width:350px"><h3>Cobras a tiempo</h3><p>Cobros</p></div>
+        <div class="node med" id="n-med" style="left:1400px;top:546px;width:380px"><h3>Lo que tu negocio necesite</h3><p>Diseñado contigo</p></div>
+        <div id="s3-cap">Trabajan día y noche. <em>Tú solo hablas con uno.</em></div>
       </section>
 
-      <!-- 3 · un día -->
-      <section id="s3" class="clip" data-start="19.2" data-duration="31.6" data-track-index="3" data-layout-allow-overlap>
+      <!-- 4 · un día, con marcador -->
+      <section id="s4" class="clip" data-start="24.4" data-duration="23.6" data-track-index="4" data-layout-allow-overlap>
         <div id="phone-wrap">
           <div class="phone" id="phone">
             <div class="screen" data-layout-allow-occlusion data-layout-allow-overlap>
@@ -210,39 +209,28 @@
               </div>
               <div class="chat">
                 <div id="stack" data-layout-allow-overflow>
-                  <div class="msg ea" id="m1">Buenos días. Esta noche:</div>
-                  <div class="msg ea card" id="m2"><h4>Mientras dormías</h4>
-                    <div class="row">4 WhatsApp contestados <small class="t-adm">Recepcionista</small></div>
-                    <div class="row">2 reservas para el jueves <small class="t-adm">Recepcionista</small></div>
-                    <div class="row">1 llamada perdida, devuelta <small class="t-adm">Recepcionista</small></div></div>
-                  <div class="msg me" id="m3">¿Algo que necesite yo?</div>
-                  <div class="msg ea" id="m4">Marta lleva 3 semanas sin venir. ¿Le escribo de tu parte?
+                  <div class="msg ea card" id="m1"><h4>Mientras dormías</h4>
+                    <div class="row">3 reservas nuevas <small class="t-adm">Recepcionista</small></div>
+                    <div class="row">5 mensajes contestados <small class="t-adm">Recepcionista</small></div></div>
+                  <div class="msg ea" id="m2">Marta lleva 3 semanas sin venir. ¿Le escribo de tu parte?
                     <div class="choices"><div class="choice" id="c1">Sí, escríbele</div><div class="choice">La llamo yo</div></div></div>
-                  <div class="pill" id="m5">Chief of Staff Officer → <b>Resp. de clientes</b></div>
-                  <div class="msg ea" id="m6">Hecho. Te aviso si contesta.</div>
-                  <div class="msg ea card" id="m7"><h4>Correo, ordenado</h4>
-                    <div class="row">2 presupuestos: respuestas listas <small class="t-adm">Correo</small></div>
-                    <div class="row">3 facturas para la gestoría <small class="t-adm">Papeles</small></div></div>
-                  <div class="msg ea" id="m8">2 clientes tienen un pago pendiente. ¿Les mando un recordatorio amable?
-                    <div class="choices"><div class="choice" id="c2">Sí, mándalo</div><div class="choice">Espera</div></div></div>
-                  <div class="pill" id="m9">Chief of Staff Officer → <b>Cobros</b></div>
-                  <div class="msg ea card" id="m10"><h4>Esta semana</h4>
-                    <div class="row">Aviso del festivo, a 118 clientes <small class="t-com">Comunicación</small></div>
-                    <div class="row">6 reseñas nuevas en Google <small class="t-com">Comunicación</small></div>
-                    <div class="row">4 antiguos clientes han vuelto <small class="t-com">Recuperador</small></div></div>
-                  <div class="day" id="m11">HOY · 19:00</div>
-                  <div class="msg ea card" id="m12"><h4>Cierre del día</h4>
-                    <div class="stats"><div class="stat"><b>23</b><span>conversaciones</span></div><div class="stat"><b>5</b><span>reservas</span></div><div class="stat zero"><b>0</b><span>sin responder</span></div></div>
-                    Todo ha pasado por el portero antes de salir.</div>
+                  <div class="pill" id="m3">Chief of Staff Officer → <b>Resp. de clientes</b></div>
+                  <div class="msg ea win" id="m4">Buenas noticias: Marta ha reservado para el jueves.</div>
+                  <div class="msg ea win" id="m5">Pago de 120 € recibido. No queda nada pendiente.</div>
+                  <div class="msg ea card" id="m6"><h4>Esta semana</h4>
+                    <div class="row">2 antiguos clientes han vuelto <small class="t-com">Recuperador</small></div>
+                    <div class="row">5 reseñas nuevas en Google <small class="t-com">Comunicación</small></div>
+                    <div class="row">Facturas, en la gestoría <small class="t-adm">Papeles</small></div></div>
+                  <div class="msg me" id="m7">¿Cómo ha ido hoy?</div>
+                  <div class="day" id="m8">HOY · 19:00</div>
+                  <div class="msg ea card" id="m9"><h4>Cierre del día</h4>
+                    <div class="stats"><div class="stat"><b>5</b><span>reservas</span></div><div class="stat"><b>3</b><span>vuelven</span></div><div class="stat"><b>120 €</b><span>cobrados</span></div></div>
+                    Y te he quitado unas 3 horas de móvil.</div>
                 </div>
               </div>
               <div class="bar">
                 <div class="field"><span class="ph" id="ph">Escribe a tu equipo…</span><span class="typed" id="typed"></span><span class="caret" id="caret"></span></div>
                 <div class="send" id="send"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l15-7-5 15-3-6-7-2z" fill="#f4f6fd" /></svg></div>
-              </div>
-              <div class="banner" id="banner" data-layout-allow-overlap data-layout-allow-occlusion>
-                <div class="app"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#0f241f" stroke-width="2" /><path d="M4 7l8 6 8-6" stroke="#0f241f" stroke-width="2" /></svg></div>
-                <div><b>Correo</b><span>Bandeja ordenada: 2 respuestas listas</span></div><small>ahora</small>
               </div>
               <div class="tap" id="tap"></div>
             </div>
@@ -250,225 +238,202 @@
         </div>
 
         <div class="side">
-          <div class="hl" id="h1"><div class="kick">07:58 · ADMINISTRACIÓN</div><h2>Mientras dormías, la Recepcionista <em>contestó y reservó.</em></h2></div>
-          <div class="hl" id="h2"><div class="kick">08:05 · TÚ DECIDES</div><h2>Tú das el sí. <em>El Chief of Staff Officer lo reparte.</em></h2></div>
-          <div class="hl" id="h3"><div class="kick">11:30 · ADMINISTRACIÓN</div><h2>El correo, ordenado. <em>Las facturas, a la gestoría.</em></h2></div>
-          <div class="hl" id="h4"><div class="kick">13:10 · COMERCIAL</div><h2>Cobras <em>sin perseguir a nadie.</em></h2></div>
-          <div class="hl" id="h5"><div class="kick">16:00 · COMERCIAL</div><h2>Avisos, reseñas y <em>clientes que vuelven.</em></h2></div>
-          <div class="hl" id="h6"><div class="kick">19:00 · CIERRE</div><h2>Cada noche, el resumen. <em>Nada sale sin revisar.</em></h2></div>
-
-          <div class="mini" id="mini">
-            <svg viewBox="0 0 860 560" width="860" height="560">
-              <path d="M430 58 V82 M430 140 V164 M430 222 V250 M190 250 H670 M190 250 V290 M670 250 V290" />
-            </svg>
-            <div class="mn you" id="x-you" style="left:310px;top:0;width:240px"><div class="lit" id="l-you"></div><span>Tú</span></div>
-            <div class="mn top" id="x-ea" style="left:250px;top:82px;width:360px"><div class="lit" id="l-ea"></div><span>Executive Assistant</span></div>
-            <div class="mn top" id="x-cos" style="left:250px;top:164px;width:360px"><div class="lit" id="l-cos"></div><span>Chief of Staff Officer</span></div>
-            <div class="mlabel g-adm" style="left:90px;top:300px;width:200px;text-align:center">ADMINISTRACIÓN</div>
-            <div class="mlabel g-com" style="left:520px;top:300px;width:300px;text-align:center">COMERCIAL</div>
-            <div class="mn" id="x-rec" style="left:40px;top:340px;width:300px"><div class="lit" id="l-rec"></div><span>Recepcionista</span></div>
-            <div class="mn" id="x-cor" style="left:40px;top:410px;width:300px"><div class="lit" id="l-cor"></div><span>Correo</span></div>
-            <div class="mn" id="x-pap" style="left:40px;top:480px;width:300px"><div class="lit" id="l-pap"></div><span>Papeles</span></div>
-            <div class="mn" id="x-cli" style="left:440px;top:340px;width:200px"><div class="lit" id="l-cli"></div><span>Clientes</span></div>
-            <div class="mn" id="x-rcp" style="left:660px;top:340px;width:200px"><div class="lit" id="l-rcp"></div><span>Recuperador</span></div>
-            <div class="mn" id="x-cmu" style="left:440px;top:410px;width:200px"><div class="lit" id="l-cmu"></div><span>Comunicación</span></div>
-            <div class="mn" id="x-cob" style="left:660px;top:410px;width:200px"><div class="lit" id="l-cob"></div><span>Cobros</span></div>
+          <div class="hl" id="h1"><div class="kick">07:58 · RECEPCIONISTA</div><h2>Mientras dormías, <em>entraron 3 reservas.</em></h2></div>
+          <div class="hl" id="h2"><div class="kick">08:05 · TÚ DECIDES EN UN TOQUE</div><h2>Tú das el sí. <em>Tu equipo hace el resto.</em></h2></div>
+          <div class="hl" id="h3"><div class="kick">12:20 · RESPONSABLE DE CLIENTES</div><h2>Una clienta que se iba, <em>de vuelta.</em></h2></div>
+          <div class="hl" id="h4"><div class="kick">13:10 · COBROS</div><h2>Cobras <em>sin perseguir a nadie.</em></h2></div>
+          <div class="hl" id="h5"><div class="kick">16:00 · RECUPERADOR · COMUNICACIÓN · PAPELES</div><h2>Vuelven clientes. <em>Llegan reseñas.</em></h2></div>
+          <div class="hl" id="h6"><div class="kick">19:00 · EXECUTIVE ASSISTANT</div><h2>Y tú, con tiempo <em>para tu trabajo.</em></h2></div>
+          <div class="board" id="board">
+            <div class="kick">MARCADOR DE HOY</div>
+            <div class="tiles">
+              <div class="tile"><b id="v-res">0</b><span>reservas</span></div>
+              <div class="tile"><b id="v-cli">0</b><span>clientes que vuelven</span></div>
+              <div class="tile money"><b id="v-eur">0 €</b><span>cobrados sin perseguir</span></div>
+              <div class="tile money"><b id="v-hrs">0 h</b><span>de vuelta para ti</span></div>
+            </div>
           </div>
         </div>
         <div class="note" id="note">Ejemplo ilustrativo</div>
       </section>
 
-      <!-- 4 · cómo empezamos -->
-      <section id="s4" class="clip" data-start="50.8" data-duration="7.4" data-track-index="4">
-        <div class="kick" id="s4-k">CÓMO EMPEZAMOS</div>
-        <h2 id="s4-h">Tres pasos y tu equipo trabaja.</h2>
-        <div class="steps">
-          <div class="step free" id="p1"><div class="n">01 · GRATIS</div><h3>Diagnóstico</h3><p>Un cuestionario corto y te decimos dónde se te van las horas.</p></div>
-          <div class="step" id="p2"><div class="n">02</div><h3>Montaje</h3><p>Conectamos tu WhatsApp, correo y agenda. Todo queda a tu nombre.</p></div>
-          <div class="step" id="p3"><div class="n">03 · CADA MES</div><h3>Revisión</h3><p>Supervisamos, ajustamos y te mandamos el informe de resultados.</p></div>
+      <!-- 5 · confianza -->
+      <section id="s5" class="clip" data-start="48.0" data-duration="6.4" data-track-index="5">
+        <div class="kick" id="s5-k">POR QUÉ FUNCIONA</div>
+        <div class="big" id="s5-h">No es un chatbot. <em>Es tu equipo.</em></div>
+        <div class="pillars">
+          <div class="pillar" id="p1"><i></i><h3>A medida</h3><p>Diseñado para tu negocio, con tu tono y tus precios.</p></div>
+          <div class="pillar" id="p2"><i></i><h3>Supervisado</h3><p>Personas detrás. Lo delicado siempre pasa por ti.</p></div>
+          <div class="pillar" id="p3"><i></i><h3>Medido</h3><p>Resultados cada mes. Si un puesto no rinde, se cambia.</p></div>
+          <div class="pillar" id="p4"><i></i><h3>Tuyo</h3><p>Tu WhatsApp y tus datos, siempre a tu nombre.</p></div>
         </div>
       </section>
 
-      <!-- 5 · cierre -->
-      <section id="s5" class="clip" data-start="58.2" data-duration="5.8" data-track-index="5">
+      <!-- 6 · cierre -->
+      <section id="s6" class="clip" data-start="54.4" data-duration="5.6" data-track-index="6">
         <div class="brand" id="o1">Native <em>Crew</em></div>
-        <div class="tag" id="o2">Tu primer equipo digital. Tú hablas con uno; trabajan todos.</div>
+        <div class="tag" id="o2">Más clientes. Más tiempo. Nada se te escapa.</div>
         <div class="cta" id="o3">Pide tu diagnóstico gratuito</div>
+        <div class="pilot" id="o4">Buscamos 3 negocios piloto para empezar</div>
       </section>
 
       <!-- AUDIO:INICIO (generado por sonidos.py) -->
-      <audio id="bgm" src="assets/audio/musica.wav" data-start="0" data-duration="64" data-track-index="10" data-volume="0.55"></audio>
-      <audio id="sx-00" src="assets/audio/sfx/pop.mp3" data-start="0.90" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
-      <audio id="sx-01" src="assets/audio/sfx/pop.mp3" data-start="1.20" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
-      <audio id="sx-02" src="assets/audio/sfx/pop.mp3" data-start="1.50" data-duration="0.72" data-track-index="13" data-volume="0.35"></audio>
-      <audio id="sx-03" src="assets/audio/sfx/pop.mp3" data-start="1.80" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
-      <audio id="sx-04" src="assets/audio/sfx/pop.mp3" data-start="2.10" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
-      <audio id="sx-05" src="assets/audio/sfx/pop.mp3" data-start="2.40" data-duration="0.72" data-track-index="13" data-volume="0.35"></audio>
-      <audio id="sx-06" src="assets/audio/sfx/pop.mp3" data-start="2.70" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
-      <audio id="sx-07" src="assets/audio/sfx/pop.mp3" data-start="3.00" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
-      <audio id="sx-08" src="assets/audio/sfx/whoosh-short.mp3" data-start="3.70" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
-      <audio id="sx-09" src="assets/audio/sfx/pop.mp3" data-start="5.50" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-10" src="assets/audio/sfx/pop.mp3" data-start="6.10" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
-      <audio id="sx-11" src="assets/audio/sfx/pop.mp3" data-start="6.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-12" src="assets/audio/sfx/pop.mp3" data-start="7.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-13" src="assets/audio/sfx/pop.mp3" data-start="9.70" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-14" src="assets/audio/sfx/pop.mp3" data-start="11.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-15" src="assets/audio/sfx/pop.mp3" data-start="13.10" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-16" src="assets/audio/sfx/chime.mp3" data-start="14.20" data-duration="2.5" data-track-index="11" data-volume="0.35"></audio>
-      <audio id="sx-17" src="assets/audio/sfx/whoosh-short.mp3" data-start="19.20" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-18" src="assets/audio/sfx/notification.mp3" data-start="20.20" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-19" src="assets/audio/sfx/pop.mp3" data-start="20.80" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
-      <audio id="sx-20" src="assets/audio/sfx/typing.mp3" data-start="25.00" data-duration="1.5" data-track-index="11" data-volume="0.45"></audio>
-      <audio id="sx-21" src="assets/audio/sfx/whoosh-short.mp3" data-start="26.40" data-duration="0.57" data-track-index="12" data-volume="0.5"></audio>
-      <audio id="sx-22" src="assets/audio/sfx/notification.mp3" data-start="27.00" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-23" src="assets/audio/sfx/click-soft.mp3" data-start="28.80" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
-      <audio id="sx-24" src="assets/audio/sfx/pop.mp3" data-start="29.40" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
-      <audio id="sx-25" src="assets/audio/sfx/notification.mp3" data-start="30.00" data-duration="2.46" data-track-index="11" data-volume="0.45"></audio>
-      <audio id="sx-26" src="assets/audio/sfx/ping.mp3" data-start="31.60" data-duration="1.32" data-track-index="12" data-volume="0.4"></audio>
-      <audio id="sx-27" src="assets/audio/sfx/notification.mp3" data-start="32.40" data-duration="2.46" data-track-index="13" data-volume="0.5"></audio>
-      <audio id="sx-28" src="assets/audio/sfx/notification.mp3" data-start="36.20" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-29" src="assets/audio/sfx/click-soft.mp3" data-start="38.00" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
-      <audio id="sx-30" src="assets/audio/sfx/pop.mp3" data-start="38.50" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
-      <audio id="sx-31" src="assets/audio/sfx/notification.mp3" data-start="40.80" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-32" src="assets/audio/sfx/notification.mp3" data-start="45.50" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-33" src="assets/audio/sfx/whoosh-short.mp3" data-start="50.20" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
-      <audio id="sx-34" src="assets/audio/sfx/pop.mp3" data-start="51.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-35" src="assets/audio/sfx/pop.mp3" data-start="52.50" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
-      <audio id="sx-36" src="assets/audio/sfx/pop.mp3" data-start="53.20" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
-      <audio id="sx-37" src="assets/audio/sfx/chime.mp3" data-start="58.40" data-duration="2.5" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="bgm" src="assets/audio/musica.wav" data-start="0" data-duration="60" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="sx-00" src="assets/audio/sfx/whoosh-short.mp3" data-start="0.20" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-01" src="assets/audio/sfx/pop.mp3" data-start="1.20" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-02" src="assets/audio/sfx/key-press.mp3" data-start="2.70" data-duration="0.4" data-track-index="11" data-volume="0.6"></audio>
+      <audio id="sx-03" src="assets/audio/sfx/key-press.mp3" data-start="3.80" data-duration="0.4" data-track-index="11" data-volume="0.6"></audio>
+      <audio id="sx-04" src="assets/audio/sfx/key-press.mp3" data-start="4.90" data-duration="0.4" data-track-index="11" data-volume="0.6"></audio>
+      <audio id="sx-05" src="assets/audio/sfx/whoosh-short.mp3" data-start="8.40" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-06" src="assets/audio/sfx/impact-bass-1.mp3" data-start="9.10" data-duration="2.12" data-track-index="11" data-volume="0.55"></audio>
+      <audio id="sx-07" src="assets/audio/sfx/pop.mp3" data-start="11.50" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-08" src="assets/audio/sfx/pop.mp3" data-start="12.00" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-09" src="assets/audio/sfx/pop.mp3" data-start="12.70" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-10" src="assets/audio/sfx/pop.mp3" data-start="13.60" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-11" src="assets/audio/sfx/pop.mp3" data-start="15.50" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-12" src="assets/audio/sfx/pop.mp3" data-start="17.60" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-13" src="assets/audio/sfx/chime.mp3" data-start="19.20" data-duration="2.5" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-14" src="assets/audio/sfx/whoosh-short.mp3" data-start="24.40" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-15" src="assets/audio/sfx/notification.mp3" data-start="25.30" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-16" src="assets/audio/sfx/notification.mp3" data-start="28.60" data-duration="2.46" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-17" src="assets/audio/sfx/click-soft.mp3" data-start="30.40" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
+      <audio id="sx-18" src="assets/audio/sfx/pop.mp3" data-start="31.00" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sx-19" src="assets/audio/sfx/sparkle.mp3" data-start="33.40" data-duration="1.8" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-20" src="assets/audio/sfx/sparkle.mp3" data-start="35.80" data-duration="1.8" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-21" src="assets/audio/sfx/notification.mp3" data-start="38.20" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-22" src="assets/audio/sfx/typing.mp3" data-start="40.60" data-duration="1.5" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-23" src="assets/audio/sfx/whoosh-short.mp3" data-start="41.80" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-24" src="assets/audio/sfx/notification.mp3" data-start="42.90" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-25" src="assets/audio/sfx/sparkle.mp3" data-start="43.40" data-duration="1.8" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-26" src="assets/audio/sfx/whoosh-short.mp3" data-start="47.40" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-27" src="assets/audio/sfx/pop.mp3" data-start="49.20" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-28" src="assets/audio/sfx/pop.mp3" data-start="49.70" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-29" src="assets/audio/sfx/pop.mp3" data-start="50.20" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-30" src="assets/audio/sfx/pop.mp3" data-start="50.70" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-31" src="assets/audio/sfx/impact-bass-1.mp3" data-start="54.60" data-duration="2.12" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-32" src="assets/audio/sfx/chime.mp3" data-start="55.70" data-duration="2.5" data-track-index="12" data-volume="0.45"></audio>
       <!-- AUDIO:FIN -->
     </div>
 
     <script>
-      // Momentos clave en segundos (tiempo global). sonidos.py lee esta misma tabla.
-      const T = {"s2": 5.2, "s3": 19.2, "m1": 20.2, "m2": 20.8, "type": 25.0, "send": 26.4, "m4": 27.0, "tap1": 28.8, "m5": 29.4, "m6": 30.0,
-                 "banner": 31.6, "m7": 32.4, "m8": 36.2, "tap2": 38.0, "m9": 38.5, "m10": 40.8, "m11": 45.0, "m12": 45.5,
-                 "s3out": 50.2, "s4": 50.8, "s5": 58.2};
+      // Momentos clave en segundos (tiempo global). sonidos.py usa esta misma tabla.
+      const T = {"s2": 7.2, "s3": 11.2, "s4": 24.4, "m1": 25.3, "m2": 28.6, "tap1": 30.4, "m3": 31.0, "m4": 33.4, "m5": 35.8,
+                 "m6": 38.2, "type": 40.6, "send": 41.8, "m8": 42.4, "m9": 42.9, "s4out": 47.4, "s5": 48.0, "s6": 54.4, "end": 60};
       const tl = gsap.timeline({ paused: true });
       const up = (sel, at, d = 0.5, dist = 40, ease = "power3.out") => tl.fromTo(sel, { opacity: 0, y: dist }, { opacity: 1, y: 0, duration: d, ease }, at);
 
-      // fondo vivo
-      tl.fromTo("#glow", { scale: 0.92 }, { scale: 1.06, duration: 8, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
-      tl.fromTo("#glow2", { scale: 1.05 }, { scale: 0.94, duration: 8, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
+      tl.fromTo("#glow", { scale: 0.92 }, { scale: 1.06, duration: 7.5, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
+      tl.fromTo("#glow2", { scale: 1.05 }, { scale: 0.94, duration: 7.5, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
 
-      // 1 · el problema
-      up("#s1-h", 0.2, 0.6, 60);
-      for (let i = 0; i < 8; i++) tl.fromTo("#k" + i, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 0.9 + i * 0.3);
-      up("#s1-turn", 3.7, 0.5, 30);
-      tl.to("#s1-h, .chips, #s1-turn", { opacity: 0, y: -40, duration: 0.4, ease: "power2.in" }, T.s2 - 0.45);
+      // 1 · gancho
+      tl.fromTo("#g1", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+      tl.fromTo("#g2", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 1.2);
+      up("#h-sub", 2.0, 0.45, 20);
+      ["#x1", "#x2", "#x3"].forEach((s, i) => tl.fromTo(s, { opacity: 0, x: -60 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, 2.7 + i * 1.1));
+      tl.to("#s1 > *", { opacity: 0, duration: 0.35, ease: "power2.in" }, T.s2 - 0.4);
 
-      // 2 · la estructura
-      const wires = ["w1", "w2", "w3", "w4", "w5", "w6"];
-      wires.forEach(id => { const p = document.getElementById(id); const L = p.getTotalLength(); p.style.strokeDasharray = L; tl.set(p, { strokeDashoffset: L }, 0); });
-      const draw = (id, at, d = 0.35) => tl.to("#" + id, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, at);
-      const b = T.s2;
-      up("#s2-k", b + 0.1, 0.4, 20);
-      up("#n-you", b + 0.3, 0.45, 30); draw("w1", b + 0.7, 0.2);
-      up("#n-ea", b + 0.9, 0.45, 30); draw("w2", b + 1.4, 0.2);
-      up("#n-cos", b + 1.6, 0.45, 30); draw("w3", b + 2.1, 0.6);
-      up("#g-adm", b + 2.6, 0.4, 20); draw("w4", b + 2.9, 0.2);
-      ["#n-rec", "#n-cor", "#n-pap"].forEach((s, i) => up(s, b + 3.0 + i * 0.45, 0.45, 30));
-      up("#g-com", b + 4.5, 0.4, 20); draw("w5", b + 4.8, 0.2);
-      ["#n-cli", "#n-rcp", "#n-cmu", "#n-cob"].forEach((s, i) => up(s, b + 4.9 + i * 0.4, 0.45, 30));
-      up("#g-med", b + 6.6, 0.4, 20); draw("w6", b + 6.9, 0.2);
-      up("#n-med", b + 7.0, 0.45, 30);
-      up("#n-ctl", b + 7.9, 0.5, 30);
-      up("#s2-cap", b + 9.0, 0.5, 20);
-      tl.to("#s2 > *", { opacity: 0, duration: 0.4, ease: "power2.in" }, T.s3 - 0.45);
+      // 2 · el giro
+      up("#r1", T.s2 + 0.1, 0.4, 30);
+      tl.fromTo("#r1-x", { scaleX: 0, y: 92 }, { scaleX: 1, y: 92, duration: 0.35, ease: "power2.inOut" }, T.s2 + 1.2);
+      tl.fromTo("#r2", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power4.out" }, T.s2 + 1.9);
+      tl.to("#s2 > *", { opacity: 0, duration: 0.35, ease: "power2.in" }, T.s3 - 0.4);
 
-      // 3 · un día: mensajes (todos ocupan su sitio; el chat sube para enseñar el último)
-      const ids = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12"];
+      // 3 · el equipo
+      ["w1", "w2", "w3", "w4", "w5", "w6"].forEach(id => { const p = document.getElementById(id); const L = p.getTotalLength(); p.style.strokeDasharray = L; tl.set(p, { strokeDashoffset: L }, 0); });
+      const draw = (id, at, d = 0.3) => tl.to("#" + id, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, at);
+      const b = T.s3;
+      up("#s3-k", b + 0.1, 0.4, 20);
+      up("#n-you", b + 0.3, 0.4, 30); draw("w1", b + 0.6, 0.2);
+      up("#n-ea", b + 0.8, 0.4, 30); draw("w2", b + 1.3, 0.2);
+      up("#n-cos", b + 1.5, 0.4, 30); draw("w3", b + 2.0, 0.5);
+      up("#g-adm", b + 2.4, 0.35, 20); draw("w4", b + 2.7, 0.2);
+      ["#n-rec", "#n-cor", "#n-pap"].forEach((s, i) => up(s, b + 2.8 + i * 0.45, 0.4, 30));
+      up("#g-com", b + 4.3, 0.35, 20); draw("w5", b + 4.6, 0.2);
+      ["#n-cli", "#n-rcp", "#n-cmu", "#n-cob"].forEach((s, i) => up(s, b + 4.7 + i * 0.4, 0.4, 30));
+      up("#g-med", b + 6.4, 0.35, 20); draw("w6", b + 6.7, 0.2);
+      up("#n-med", b + 6.8, 0.4, 30);
+      tl.fromTo("#s3-cap", { opacity: 0, scale: 0.94 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, b + 8.0);
+      tl.to("#s3 > *", { opacity: 0, duration: 0.4, ease: "power2.in" }, T.s4 - 0.45);
+
+      // 4 · un día
+      const ids = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9"];
       const viewH = document.querySelector(".chat").offsetHeight;
       const chatTop = document.querySelector(".chat").offsetTop;
       const bottomOf = id => { const el = document.getElementById(id); return el.offsetTop + el.offsetHeight + 18; };
       const scrollFor = id => Math.max(0, bottomOf(id) - viewH);
       ids.forEach(id => tl.set("#" + id, { opacity: 0 }, 0));
+      tl.set("#stack", { y: 0 }, 0);
       const bubble = (id, at, fromX = -20) => {
         tl.to("#stack", { y: -scrollFor(id), duration: 0.45, ease: "power2.out" }, at - 0.05);
         tl.fromTo("#" + id, { opacity: 0, y: 18, x: fromX, scale: 0.96 }, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, at);
       };
-      tl.set("#stack", { y: 0 }, 0);
-
-      tl.fromTo("#phone-wrap", { y: 760, rotation: -6 }, { y: 0, rotation: 0, duration: 0.9, ease: "power3.out" }, T.s3);
-      tl.fromTo("#mini, #note", { opacity: 0 }, { opacity: 1, duration: 0.6 }, T.s3 + 0.5);
+      tl.fromTo("#phone-wrap", { y: 760, rotation: -6 }, { y: 0, rotation: 0, duration: 0.9, ease: "power3.out" }, T.s4);
+      tl.fromTo("#board, #note", { opacity: 0 }, { opacity: 1, duration: 0.6 }, T.s4 + 0.5);
       tl.set("#t-pm", { opacity: 0 }, 0);
-      tl.to("#t-am", { opacity: 0, duration: 0.3 }, T.m11);
-      tl.to("#t-pm", { opacity: 1, duration: 0.3 }, T.m11);
+      tl.to("#t-am", { opacity: 0, duration: 0.3 }, T.m8);
+      tl.to("#t-pm", { opacity: 1, duration: 0.3 }, T.m8);
 
-      bubble("m1", T.m1); bubble("m2", T.m2);
-      // el dueño escribe
-      const phrase = "¿Algo que necesite yo?", typed = document.getElementById("typed"), proxy = { n: 0 };
+      bubble("m1", T.m1);
+      bubble("m2", T.m2);
+      const el1 = document.getElementById("c1");
+      const tx = el1.offsetLeft + el1.offsetWidth / 2 - 32, ty = chatTop + el1.offsetTop + el1.offsetHeight / 2 - 32 - scrollFor("m2");
+      tl.set("#tap", { x: tx, y: ty, opacity: 0, scale: 0.4 }, 0);
+      tl.to("#tap", { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, T.tap1 - 0.15);
+      tl.to("#tap", { opacity: 0, scale: 1.5, duration: 0.35, ease: "power2.out" }, T.tap1 + 0.1);
+      tl.set("#c1", { backgroundColor: "#fbfcfb", color: "#2446c8" }, 0);
+      tl.to("#c1", { backgroundColor: "#2446c8", color: "#f4f6fd", duration: 0.2 }, T.tap1);
+      bubble("m3", T.m3, 0);
+      bubble("m4", T.m4);
+      bubble("m5", T.m5);
+      bubble("m6", T.m6);
+      // el dueño pregunta
+      const phrase = "¿Cómo ha ido hoy?", typed = document.getElementById("typed"), proxy = { n: 0 };
       const paint = () => { typed.textContent = phrase.slice(0, Math.round(proxy.n)); };
       tl.set("#ph", { opacity: 1 }, 0); tl.set("#ph", { opacity: 0 }, T.type);
-      tl.fromTo(proxy, { n: 0 }, { n: phrase.length, duration: 1.2, ease: "none", onUpdate: paint }, T.type);
+      tl.fromTo(proxy, { n: 0 }, { n: phrase.length, duration: 1.0, ease: "none", onUpdate: paint }, T.type);
       tl.to(proxy, { n: 0, duration: 0.01, onUpdate: paint }, T.send);
       tl.set("#ph", { opacity: 1 }, T.send + 0.05);
       tl.to("#send", { scale: 0.86, duration: 0.08, yoyo: true, repeat: 1 }, T.send - 0.08);
-      tl.fromTo("#caret", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "steps(1)", yoyo: true, repeat: 79 }, 0);
-      bubble("m3", T.send + 0.05, 20);
-      bubble("m4", T.m4);
-      // toques en los botones (posición calculada al montar; #stack es su offsetParent)
-      const tapAt = (btnId, msgId, at) => {
-        const el = document.getElementById(btnId);
-        const x = el.offsetLeft + el.offsetWidth / 2 - 32, y = chatTop + el.offsetTop + el.offsetHeight / 2 - 32 - scrollFor(msgId);
-        tl.set("#tap", { x, y, opacity: 0, scale: 0.4 }, at - 0.3);
-        tl.to("#tap", { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, at - 0.15);
-        tl.to("#tap", { opacity: 0, scale: 1.5, duration: 0.35, ease: "power2.out" }, at + 0.1);
-        tl.set("#" + btnId, { backgroundColor: "#fbfcfb", color: "#2446c8" }, 0);
-        tl.to("#" + btnId, { backgroundColor: "#2446c8", color: "#f4f6fd", duration: 0.2 }, at);
-      };
-      tl.set("#tap", { opacity: 0 }, 0);
-      tapAt("c1", "m4", T.tap1);
-      bubble("m5", T.m5, 0); bubble("m6", T.m6);
-      tl.fromTo("#banner", { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, T.banner);
-      tl.to("#banner", { y: -160, opacity: 0, duration: 0.4, ease: "power2.in" }, T.banner + 2.6);
-      bubble("m7", T.m7);
-      bubble("m8", T.m8);
-      tapAt("c2", "m8", T.tap2);
-      bubble("m9", T.m9, 0);
-      bubble("m10", T.m10);
-      bubble("m11", T.m11, 0);
-      bubble("m12", T.m12);
-      tl.fromTo("#m12 .stat", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.15 }, T.m12 + 0.35);
+      tl.fromTo("#caret", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "steps(1)", yoyo: true, repeat: 74 }, 0);
+      bubble("m7", T.send + 0.05, 20);
+      bubble("m8", T.m8, 0);
+      bubble("m9", T.m9);
+      tl.fromTo("#m9 .stat", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.15 }, T.m9 + 0.35);
 
-      // titulares y nodos encendidos de cada momento
-      const lits = ["you", "ea", "cos", "rec", "cor", "pap", "cli", "rcp", "cmu", "cob"];
-      const rest = k => (k === "you" ? "#f4c64f" : (k === "ea" || k === "cos") ? "#9db0ff" : "#a9bcb4");
-      lits.forEach(k => { tl.set("#l-" + k, { opacity: 0 }, 0); tl.set("#x-" + k + " span", { color: rest(k) }, 0); });
-      const beats = [
-        ["#h1", T.m1 - 0.4, T.type - 0.2, ["ea", "rec"]],
-        ["#h2", T.type, T.banner - 0.2, ["you", "ea", "cos", "cli"]],
-        ["#h3", T.banner, T.m8 - 0.2, ["ea", "cos", "cor", "pap"]],
-        ["#h4", T.m8, T.m10 - 0.2, ["you", "ea", "cos", "cob"]],
-        ["#h5", T.m10, T.m11 - 0.2, ["ea", "cos", "cmu", "rcp"]],
-        ["#h6", T.m11, T.s3out, ["you", "ea"]],
-      ];
-      beats.forEach(([sel, a, z, on]) => {
-        tl.set(sel, { opacity: 0 }, 0);
-        tl.fromTo(sel, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, a);
-        tl.to(sel, { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, z - 0.3);
-        on.forEach((k, i) => {
-          const on_ = a + 0.1 + i * 0.12;
-          tl.set("#l-" + k, { opacity: 1 }, on_);
-          tl.set("#x-" + k + " span", { color: "#0f241f" }, on_);
-          tl.fromTo("#x-" + k, { scale: 1 }, { scale: 1.06, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, on_);
-          tl.set("#l-" + k, { opacity: 0 }, z - 0.3);
-          tl.set("#x-" + k + " span", { color: rest(k) }, z - 0.3);
-        });
+      // marcador: cada cifra sube cuando pasa lo que la explica
+      const fmts = { "v-res": v => String(Math.round(v)), "v-cli": v => String(Math.round(v)),
+                     "v-eur": v => Math.round(v) + " €", "v-hrs": v => Math.round(v) + " h" };
+      const steps = [["v-res", 0, 3, T.m1 + 0.3], ["v-res", 3, 4, T.m4 + 0.2], ["v-cli", 0, 1, T.m4 + 0.2],
+                     ["v-eur", 0, 120, T.m5 + 0.2], ["v-cli", 1, 3, T.m6 + 0.3], ["v-res", 4, 5, T.m9 + 0.3], ["v-hrs", 0, 3, T.m9 + 0.5]];
+      Object.keys(fmts).forEach(id => { const el = document.getElementById(id); const o = { v: 0 };
+        tl.fromTo(o, { v: 0 }, { v: 0, duration: 0.01, onUpdate: () => { el.textContent = fmts[id](0); } }, 0); });
+      steps.forEach(([id, from, to, at]) => {
+        const el = document.getElementById(id), o = { v: from };
+        tl.fromTo(o, { v: from }, { v: to, duration: 0.6, ease: "power2.out", onUpdate: () => { el.textContent = fmts[id](o.v); } }, at);
+        tl.to("#" + id, { scale: 1.12, duration: 0.15, yoyo: true, repeat: 1, ease: "power2.out" }, at);
       });
-      tl.to("#phone-wrap", { y: 140, scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.in" }, T.s3out);
-      tl.to("#mini, #note", { opacity: 0, duration: 0.4 }, T.s3out);
 
-      // 4 · cómo empezamos
-      up("#s4-k", T.s4 + 0.1, 0.4, 20);
-      up("#s4-h", T.s4 + 0.3, 0.5, 40);
-      ["#p1", "#p2", "#p3"].forEach((s, i) => up(s, T.s4 + 1.0 + i * 0.7, 0.5, 40));
-      tl.to("#s4 > *", { opacity: 0, duration: 0.4, ease: "power2.in" }, T.s5 - 0.45);
+      const beats = [["#h1", T.m1 - 0.4, T.m2 - 0.1], ["#h2", T.m2, T.m4 - 0.1], ["#h3", T.m4, T.m5 - 0.1],
+                     ["#h4", T.m5, T.m6 - 0.1], ["#h5", T.m6, T.m8 - 0.1], ["#h6", T.m8, T.s4out]];
+      beats.forEach(([sel, a, z]) => {
+        tl.set(sel, { opacity: 0 }, 0);
+        tl.fromTo(sel, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, a);
+        tl.to(sel, { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, z - 0.3);
+      });
+      tl.to("#phone-wrap", { y: 140, scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.in" }, T.s4out);
+      tl.to("#board, #note", { opacity: 0, duration: 0.4 }, T.s4out);
 
-      // 5 · cierre
-      up("#o1", T.s5 + 0.2, 0.6, 50);
-      up("#o2", T.s5 + 0.7, 0.5, 30);
-      tl.fromTo("#o3", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, T.s5 + 1.2);
+      // 5 · confianza
+      up("#s5-k", T.s5 + 0.1, 0.4, 20);
+      up("#s5-h", T.s5 + 0.3, 0.5, 40);
+      ["#p1", "#p2", "#p3", "#p4"].forEach((s, i) => up(s, T.s5 + 1.2 + i * 0.5, 0.5, 40));
+      tl.to("#s5 > *", { opacity: 0, duration: 0.35, ease: "power2.in" }, T.s6 - 0.4);
+
+      // 6 · cierre
+      tl.fromTo("#o1", { opacity: 0, scale: 1.15 }, { opacity: 1, scale: 1, duration: 0.6, ease: "power4.out" }, T.s6 + 0.2);
+      up("#o2", T.s6 + 0.8, 0.5, 30);
+      tl.fromTo("#o3", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, T.s6 + 1.3);
+      up("#o4", T.s6 + 1.9, 0.5, 20);
 
       window.__timelines["main"] = tl;
       tl.seek(0);
