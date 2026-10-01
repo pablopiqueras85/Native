@@ -49,3 +49,17 @@ python3 <onetake>/scripts/render.py presentacion.html --out presentacion.mp4 --s
 Añade `--final` para sacar la versión en 4K60. El Spotter se genera con `fuentes/spotter/comp.html`, que no lleva sonido.
 
 El explicativo (`fuentes/explicativo/`) usa voz sintética local (Kokoro, voz `em_alex`) generada con `vo_tools.py tts vo/lines.txt --read vo/read.txt --lang es`; `read.txt` es la pronunciación ("Néitiv Crú"). Después: `plan.py` (tiempos y subtítulos), `render.py --samples 2` y `explicativo_score.py`.
+
+## Herramientas candidatas para los próximos vídeos (búsqueda del 2026-10-01)
+
+Objetivo: vídeos más modernos y con menos aspecto de IA genérica. Por ejemplo, un iPhone donde el dueño le escribe a su agente y
+ve llegar las respuestas y los avisos.
+
+| Herramienta | Qué es | Licencia | Encaje |
+|---|---|---|---|
+| [HyperFrames](https://github.com/heygen-com/hyperframes) (HeyGen) | HTML + CSS + animaciones → MP4, con skill para Claude Code (`npx skills add heygen-com/hyperframes`) | Apache-2.0: uso comercial libre | **Recomendada.** Es la misma forma de trabajar que `fuentes/contrata-tu-equipo/` (HTML que se renderiza), pero con más piezas: subtítulos, voz, GSAP |
+| [Remotion](https://www.remotion.dev/docs/ai/skills) + skills oficiales (`npx skills add remotion-dev/skills`) | Vídeo con React | Gratis hasta 3 personas, también para uso comercial; a partir de 4, licencia de empresa ([FAQ](https://www.remotion.dev/docs/license/faq)) | Alternativa. Tiene un elemento de mensajes tipo iMessage ([On-Screen Messages](https://www.remotion.dev/elements/storytelling/on-screen-messages)) |
+| [claude-remotion-editor](https://github.com/ytrofr/claude-remotion-editor) | Marco de móvil con contenido que se desplaza, chat de ejemplo y mano que toca la pantalla | Revisar antes de usar | Referencia para la escena del iPhone |
+| [awesome-claude-video-skills](https://github.com/zhuyansen/awesome-claude-video-skills) | Lista de unos 180 repositorios de vídeo para agentes, con nota de seguridad | — | Para buscar más; **leer cada skill antes de instalarla** |
+
+Las skills de terceros son instrucciones y código que ejecuta el agente: se instala solo lo que se ha leído.
