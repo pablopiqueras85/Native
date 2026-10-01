@@ -76,6 +76,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
   `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina. El equipo que trabaja para los clientes está
   en `sistemas/equipo-digital/` (fichas neutras en `agentes/`, plantillas y portero).
 - `sistemas/consultoria-reunion.md` — consultoría con dos puertas (formulario por defecto, reunión si se da el caso) → agente Consultor (`.claude/agents/consultor.md`) → propuesta de la carta y a medida → integración + mantenimiento por agente.
+- `sistemas/equipo-interno.md` — los agentes que trabajan para el fundador: cofundador virtual (`.claude/agents/cofundador.md`), seguimiento comercial, investigador, consultor… y la estructura de la hoja de conocidos (vive en Sheets, no aquí).
 - `clientes/` — una carpeta por cliente (`C001/`…) con sus empleados, canales, ajustes y permisos. Plantilla en `_plantilla/`. Sin datos personales.
 - `conocimiento/sectores/` — una ficha por sector: vocabulario, dolores, plantillas, programas típicos y aprendizajes (decisión 0007).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
