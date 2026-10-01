@@ -1,0 +1,28 @@
+Native Crew es una agencia que pone a trabajar equipos de agentes de inteligencia artificial en negocios pequeños.
+Vendes tres servicios: consultoría, implementación y revisión.
+Cada cliente empieza igual: por el formulario o, si se da el caso, por una reunión.
+El agente Consultor lee lo que dijo el cliente y propone empleados de la carta, y alguno a medida si hace falta.
+Después decides cuatro cosas.
+Primero, la ruta: si su trabajo vive en WhatsApp, o en el correo y la oficina.
+Segundo, el motor: tus agentes de WhatsApp, el Dot del cliente, o el agente gratuito de Meta para empezar.
+Tercero, el precio: un montaje, una cuota mensual y un variable cuando el resultado se puede medir.
+Y cuarto, la supervisión: al principio revisas todo, después el treinta por ciento y al final, el diez.
+Todo mensaje pasa antes por el portero: avisa de que es una IA y respeta el horario y la baja.
+Un Dot es un agente de OpenAI que vive dentro de ChatGPT y tiene su propio ordenador en la nube.
+Se conecta a más de cuatro mil aplicaciones: el correo, el calendario, las facturas.
+Cuando nadie le habla, revisa en segundo plano, sin tocar nada, y te trae un borrador listo.
+Las reglas las pones tú: qué hace solo, qué necesita tu permiso y qué no puede hacer nunca.
+Y le das tareas fijas: cada mañana, reclamar facturas vencidas o seguir los presupuestos sin respuesta.
+Tu implementación cabe en una carpeta: el paquete de puesta en marcha.
+El cliente rellena un formulario y con sus respuestas preparas su ficha, sus normas y sus permisos.
+Él solo hace tres cosas: crea su Dot, conecta sus cuentas y pega el primer mensaje.
+Las primeras semanas aprueba cada borrador. Tú miras qué corrige y ajustas las normas.
+Esa es la revisión mensual, y es tu cuota.
+En España, Dots va con la licencia Business Premium, de cien a ciento veinticinco dólares al mes, que paga el cliente.
+Debajo de todo está lo que es tuyo: la carta de agentes, las plantillas, el portero y las fichas por sector.
+Cada agente a medida que piden dos o tres clientes pasa a la carta. Así cada montaje es más corto.
+En los negocios de WhatsApp, tus agentes atienden a sus clientes. Dots trabaja en la trastienda del dueño.
+Y tú tienes tu propio Dot, que busca clientes y prepara diagnósticos.
+El camino tiene tres fases: servicio, producto con servicio y autoservicio.
+Para empezar, tres pilotos: el estudio de un conocido, tu Dot con un negocio inventado y una auditoría de diez negocios de tu ciudad.
+Native Crew. Tu equipo, montado y supervisado por una persona.

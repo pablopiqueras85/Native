@@ -12,6 +12,7 @@ Vídeos hechos con la skill **onetake** entre el 2026-09-28 y el 2026-09-30.
 | `native-crew-presentacion.mp4` | Presenta Native Crew: empleados virtuales a la carta y sus combinaciones | 23,5 s | Sí |
 | `native-crew-pitch.mp4` | Pitch: problema → agentes a la carta → cascadas → modelo | 41 s | Sí |
 | `native-crew-equipo.mp4` | "Así trabaja tu equipo": el Encargado (amarillo) y los agentes azul, verde y rojo se pasan el trabajo | 32 s | Sí |
+| `native-crew-explicativo.mp4` | Vídeo explicativo con voz en off: cada cliente (puertas, decisiones, portero), cómo funciona Dots, la implementación con el paquete de puesta en marcha, lo que es tuyo, las fases y los pilotos | 3 min 6 s | Voz y sonido |
 | `spotter.mp4` | Primera versión de la marca ("Conoce Spotter"), con el personaje de la máquina de jalón | 25 s | No |
 
 Los cuatro vídeos están en 1080p a 30 fotogramas por segundo y pasan la comprobación de onetake (`verify_promo.py`). Los nombres que salen en
@@ -30,3 +31,5 @@ python3 <onetake>/scripts/render.py presentacion.html --out presentacion.mp4 --s
 ```
 
 Añade `--final` para sacar la versión en 4K60. El Spotter se genera con `fuentes/spotter/comp.html`, que no lleva sonido.
+
+El explicativo (`fuentes/explicativo/`) usa voz sintética local (Kokoro, voz `em_alex`) generada con `vo_tools.py tts vo/lines.txt --read vo/read.txt --lang es`; `read.txt` es la pronunciación ("Néitiv Crú"). Después: `plan.py` (tiempos y subtítulos), `render.py --samples 2` y `explicativo_score.py`.
