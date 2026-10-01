@@ -70,6 +70,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `conocimiento/sectores/` — una ficha por sector: vocabulario, dolores, plantillas, programas típicos y aprendizajes (decisión 0007).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
+- `exploracion/radar-mercado-2026-10.md` — hacia dónde va el mercado de IA y agentes para pymes, y huecos detectados (2026-10-01).
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.
 - `exploracion/backlog.md` — tabla resumen de todas las ideas. Mantenla sincronizada con `exploracion/ideas/`.
 - `exploracion/ideas/NNNN-slug.md` — una idea por archivo, creada a partir de `_plantilla.md`.
