@@ -21,6 +21,26 @@ cualquier negocio del patrón de la decisión 0007, no solo estudios.
 - **Frente a Harbiz, Trainingym, Glofox y parecidos:** ellos venden una herramienta que el dueño tiene que
   usar; nosotros, la tarea hecha y medida. Podemos trabajar encima de la herramienta que ya tenga.
 
+## Los tres servicios (2026-10-01)
+
+En palabras del fundador: **"el servicio que ofrezco es consultoría, implementación a la carta y revisión"**. No
+vendemos un programa (como Marblism): vendemos el trabajo de dejar empleados de IA funcionando en el negocio y de
+vigilar que sigan funcionando bien.
+
+| Servicio | Qué recibe el cliente | Cómo se cobra (*hipótesis*) | De dónde sale |
+|---|---|---|---|
+| **1. Consultoría** | Qué tareas le quitan horas o clientes, cuánto le cuestan y qué empleados las resolverían. Termina en un plan con prioridades | **Diagnóstico** con agentes: gratis, es el gancho. **Consultoría a fondo** (sesión con el fundador y revisión de sus procesos y herramientas): de pago y descontable si contrata la implementación | El embudo de diagnóstico (`sistemas/embudo-diagnostico.md`) |
+| **2. Implementación a la carta** | Los empleados elegidos, configurados con sus datos, conectados a sus canales (WhatsApp, email, teléfono, web…), con sus plantillas y probados | **Montaje** una vez, por empleado y canal, según su valor y no según las horas (300–900 € por cadena) | El catálogo, las cascadas y las fichas de `empleados-virtuales.md` |
+| **3. Revisión** | Supervisión de lo que hacen los agentes, ajustes, plantillas nuevas, informe mensual de resultados y el Encargado como contacto | **Cuota mensual** (base + empleados) y **variable** donde se pueda medir | `sistemas/equipo-digital/` (portero, supervisor, supervisión decreciente) |
+
+- **Las horas del fundador sí son parte del producto** en consultoría e implementación, y se cobran. Lo que no debe
+  crecer con cada cliente es la **revisión**: ahí está la supervisión automática.
+- **Cada servicio se puede contratar por separado,** pero el valor completo es la secuencia: consultoría →
+  implementación → revisión. Si alguien quiere solo la implementación, el montaje se cobra completo y se le ofrece la
+  revisión.
+- **Frente a Marblism:** ellos dan una herramienta que se configura sola en minutos; nosotros, un equipo adaptado al
+  negocio, con una persona detrás y resultados medidos.
+
 ## Cómo se vende: a la carta, con sentido (2026-09-30)
 
 Sustituye al modelo de "solo menús" del 2026-09-28. El cliente elige su combinación de agentes, pero dentro de
