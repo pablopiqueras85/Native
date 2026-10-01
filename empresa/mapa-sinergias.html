@@ -1,0 +1,426 @@
+<title>Sinergias de Native Crew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: un gran diagrama del sistema (entradas → motor → lo que recibe el cliente, con lo que se acumula arriba y los motores abajo),
+   y debajo las sinergias, la cronología y lo aparcado. Mundo visual "dusk" de Native Crew, oscuro a propósito. */
+:root{
+  --ground:#15131c; --deep:#0e0c14; --card:#1f1c29; --line:#34313f; --mute:#9a96a8; --ink:#efece6;
+  --tuyo:#f4c64f; --surgido:#8b7dff; --hilo:#3ddc97; --mercado:#4c9aff; --grey:#6d6880;
+  --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:20px;padding-block:36px 80px;display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:800;letter-spacing:-.03em}
+h2{font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.lede{color:var(--mute);max-width:66ch}
+section{display:flex;flex-direction:column;gap:22px}
+.head{display:flex;flex-direction:column;gap:8px}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:.88rem;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.d-tuyo{background:var(--tuyo)}.d-surgido{background:var(--surgido)}.d-hilo{background:var(--hilo)}.d-mercado{background:var(--mercado)}
+
+.hero{display:flex;flex-direction:column;gap:16px;padding-top:12px}
+.hero .thesis{font-size:clamp(1.1rem,2vw,1.35rem);max-width:46ch}
+.hero .thesis b{color:var(--tuyo);font-weight:600}
+
+/* Diagrama */
+.diagram{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--deep)}
+.diagram svg{display:block;width:100%;min-width:900px;height:auto}
+.hint{font-size:.82rem;color:var(--mute)}
+
+/* Sinergias */
+.syn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.s{background:var(--card);border-radius:14px;padding:18px 20px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.s .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.s .dots{display:flex;gap:6px;padding-top:6px}
+.s p{color:var(--mute);font-size:.94rem}
+.s .flow{font-family:var(--mono);font-size:.78rem;color:var(--ink);letter-spacing:.02em}
+
+/* Cronología */
+.time{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;border-top:1px solid var(--line)}
+.day{padding:16px 16px 0 0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.day .date{font-family:var(--mono);font-size:.8rem;color:var(--tuyo);font-variant-numeric:tabular-nums}
+.day ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;font-size:.88rem}
+.day li{display:flex;gap:8px;align-items:baseline}
+.day li .dot{transform:translateY(1px)}
+
+/* Fases */
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.ph{border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.ph.now{border-color:var(--tuyo)}
+.ph .k{font-family:var(--mono);font-size:.74rem;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.ph p{font-size:.92rem;color:var(--mute)}
+
+/* Nevera y siguiente */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.fridge{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fridge li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:baseline;font-size:.92rem;border-bottom:1px dashed var(--line);padding-bottom:10px}
+.fridge li span.why{grid-column:2;color:var(--mute);font-size:.86rem}
+.next{counter-reset:n;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.next li{counter-increment:n;background:var(--card);border-radius:12px;padding:14px 16px;display:grid;grid-template-columns:28px 1fr;gap:4px 10px}
+.next li::before{content:counter(n);font-family:var(--mono);color:var(--tuyo);grid-row:span 2}
+.next li span{color:var(--mute);font-size:.9rem}
+footer{font-size:.82rem;color:var(--mute);border-top:1px solid var(--line);padding-top:18px}
+
+@media (max-width:860px){
+  .syn,.two,.phases{grid-template-columns:1fr}
+  .time{grid-template-columns:1fr 1fr}
+}
+@media (max-width:520px){ .time{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:no-preference){
+  .flowline{stroke-dasharray:4 6;animation:run 1.6s linear infinite}
+  @keyframes run{to{stroke-dashoffset:-20}}
+}
+</style>
+
+<main class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Native Crew · mapa de sinergias · 2026-09-23 → 2026-10-01</p>
+    <h1>Una sola máquina</h1>
+    <p class="thesis">Consultoría, implementación y revisión. <b>Cada cliente deja algo que hace más barato al siguiente.</b></p>
+    <div class="legend" aria-label="Origen de cada pieza">
+      <span><i class="dot d-tuyo"></i>Idea tuya</span>
+      <span><i class="dot d-surgido"></i>Surgió en nuestras conversaciones</span>
+      <span><i class="dot d-hilo"></i>Del hilo de Dots</span>
+      <span><i class="dot d-mercado"></i>Del mercado (radar, Marblism, Meta, OpenAI)</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-sys">
+    <div class="head">
+      <p class="eyebrow">El sistema</p>
+      <h2 id="t-sys">Cómo encaja todo</h2>
+      <p class="lede">Los clientes entran por la izquierda, pasan por tus tres servicios y salen con empleados a la derecha. Arriba se acumula lo que reutilizas; abajo, los motores que puedes cambiar sin tocar nada más.</p>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 1200 740" role="img" aria-labelledby="dg-t dg-d">
+        <title id="dg-t">Sistema de Native Crew</title>
+        <desc id="dg-d">Entradas: conocidos, formulario, reunión, auditoría de agentes, demo y vídeos. Motor: consultoría, implementación y revisión. Salidas: Encargado, Recepcionista, Responsable de clientes, Recuperador, Administrativo y Preparado para agentes. Arriba, los activos que se acumulan. Abajo, el portero y supervisor y los motores intercambiables.</desc>
+        <defs>
+          <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#9a96a8"/></marker>
+          <marker id="ary" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#f4c64f"/></marker>
+        </defs>
+        <style>
+          .lbl{font:500 11px "Geist Mono",ui-monospace,monospace;letter-spacing:.12em;fill:#9a96a8;text-transform:uppercase}
+          .nt{font:500 14px "Geist",system-ui,sans-serif;fill:#efece6}
+          .ns{font:400 11.5px "Geist",system-ui,sans-serif;fill:#9a96a8}
+          .el{font:400 12px "Geist",system-ui,sans-serif;fill:#9a96a8}
+          .elY{font:500 12px "Geist",system-ui,sans-serif;fill:#f4c64f}
+          .edge{fill:none;stroke:#4a4658;stroke-width:1.4}
+        </style>
+
+        <!-- Banda superior: lo que se acumula -->
+        <text class="lbl" x="160" y="36">Lo que se acumula con cada cliente</text>
+        <g>
+          <rect x="160" y="50" width="160" height="62" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="176" cy="66" r="4" fill="#f4c64f"/>
+          <text class="nt" x="240" y="80" text-anchor="middle">Carta de agentes</text>
+          <text class="ns" x="240" y="98" text-anchor="middle">empleados y cascadas</text>
+
+          <rect x="340" y="50" width="160" height="62" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="356" cy="66" r="4" fill="#8b7dff"/>
+          <text class="nt" x="420" y="80" text-anchor="middle">Plantillas</text>
+          <text class="ns" x="420" y="98" text-anchor="middle">mensajes aprobados</text>
+
+          <rect x="520" y="50" width="160" height="62" rx="10" fill="#1f1c29" stroke="#3ddc97"/>
+          <circle cx="536" cy="66" r="4" fill="#3ddc97"/>
+          <text class="nt" x="600" y="80" text-anchor="middle">Paquete de</text>
+          <text class="nt" x="600" y="98" text-anchor="middle">puesta en marcha</text>
+
+          <rect x="700" y="50" width="160" height="62" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="716" cy="66" r="4" fill="#8b7dff"/>
+          <text class="nt" x="780" y="80" text-anchor="middle">Fichas por sector</text>
+          <text class="ns" x="780" y="98" text-anchor="middle">vocabulario y dolores</text>
+
+          <rect x="880" y="50" width="160" height="62" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="896" cy="66" r="4" fill="#f4c64f"/>
+          <text class="nt" x="960" y="80" text-anchor="middle">Casos y referidos</text>
+          <text class="ns" x="960" y="98" text-anchor="middle">datos para vender</text>
+        </g>
+
+        <!-- Vuelta: lo a medida sube a la carta, la carta baja el montaje -->
+        <path class="edge" d="M560 330 L560 116" stroke="#f4c64f" marker-end="url(#ary)" style="stroke:#f4c64f"/>
+        <text class="elY" x="550" y="214" text-anchor="end">lo hecho a medida</text>
+        <text class="elY" x="550" y="230" text-anchor="end">pasa a la carta</text>
+        <path class="edge" d="M640 116 L640 330" marker-end="url(#ary)" style="stroke:#f4c64f"/>
+        <text class="elY" x="650" y="214">montaje cada vez</text>
+        <text class="elY" x="650" y="230">más corto (meta: menos de 1 h)</text>
+
+        <!-- Entradas -->
+        <text class="lbl" x="40" y="176">Cómo llegan</text>
+        <g>
+          <rect x="40" y="190" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="56" cy="206" r="4" fill="#f4c64f"/>
+          <text class="nt" x="70" y="211">Conocidos y referidos</text>
+          <text class="ns" x="70" y="229">canal de la fase 1</text>
+
+          <rect x="40" y="255" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="56" cy="271" r="4" fill="#f4c64f"/>
+          <text class="nt" x="70" y="276">Formulario + diagnóstico</text>
+          <text class="ns" x="70" y="294">puerta por defecto, automática</text>
+
+          <rect x="40" y="320" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="56" cy="336" r="4" fill="#f4c64f"/>
+          <text class="nt" x="70" y="341">Reunión transcrita</text>
+          <text class="ns" x="70" y="359">la analiza el agente Consultor</text>
+
+          <rect x="40" y="385" width="250" height="50" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="56" cy="401" r="4" fill="#8b7dff"/><circle cx="66" cy="401" r="4" fill="#3ddc97"/>
+          <text class="nt" x="78" y="406">Auditoría de agente</text>
+          <text class="ns" x="78" y="424">"¿te encuentra y te reserva?"</text>
+
+          <rect x="40" y="450" width="250" height="50" rx="10" fill="#1f1c29" stroke="#3ddc97"/>
+          <circle cx="56" cy="466" r="4" fill="#3ddc97"/>
+          <text class="nt" x="70" y="471">Demo con negocio inventado</text>
+          <text class="ns" x="70" y="489">grabada, en su mismo sector</text>
+
+          <rect x="40" y="515" width="250" height="50" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="56" cy="531" r="4" fill="#8b7dff"/>
+          <text class="nt" x="70" y="536">Vídeos de Native Crew</text>
+          <text class="ns" x="70" y="554">solo para colegas (licencia)</text>
+        </g>
+        <g class="edges">
+          <path class="edge flowline" d="M290 215 C 360 215, 360 420, 420 420"/>
+          <path class="edge flowline" d="M290 280 C 360 280, 360 420, 420 420"/>
+          <path class="edge flowline" d="M290 345 C 360 345, 360 420, 420 420"/>
+          <path class="edge flowline" d="M290 410 C 360 410, 360 420, 420 420"/>
+          <path class="edge flowline" d="M290 475 C 360 475, 360 420, 420 420"/>
+          <path class="edge flowline" d="M290 540 C 360 540, 360 420, 420 420"/>
+        </g>
+
+        <!-- Motor -->
+        <rect x="420" y="330" width="360" height="180" rx="18" fill="#1a1726" stroke="#f4c64f" stroke-width="2"/>
+        <text class="lbl" x="600" y="358" text-anchor="middle" style="fill:#f4c64f">El motor · tus tres servicios</text>
+        <rect x="431" y="380" width="100" height="40" rx="20" fill="#15131c" stroke="#f4c64f"/>
+        <text class="nt" x="481" y="405" text-anchor="middle">Consultoría</text>
+        <text class="el" x="538" y="405" text-anchor="middle">›</text>
+        <rect x="545" y="380" width="120" height="40" rx="20" fill="#15131c" stroke="#f4c64f"/>
+        <text class="nt" x="605" y="405" text-anchor="middle">Implementación</text>
+        <text class="el" x="672" y="405" text-anchor="middle">›</text>
+        <rect x="679" y="380" width="90" height="40" rx="20" fill="#15131c" stroke="#f4c64f"/>
+        <text class="nt" x="724" y="405" text-anchor="middle">Revisión</text>
+        <path d="M724 422 C 724 468, 481 468, 481 424" fill="none" stroke="#f4c64f" stroke-width="1.4" stroke-dasharray="3 4" marker-end="url(#ary)"/>
+        <text class="elY" x="600" y="486" text-anchor="middle">lo que corrige el dueño mejora la siguiente vuelta</text>
+
+        <!-- Salidas -->
+        <text class="lbl" x="910" y="176">Qué recibe el cliente</text>
+        <g>
+          <rect x="910" y="190" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="926" cy="206" r="4" fill="#f4c64f"/>
+          <text class="nt" x="940" y="211">Encargado</text>
+          <text class="ns" x="940" y="229">habla con el dueño, supervisa</text>
+
+          <rect x="910" y="255" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="926" cy="271" r="4" fill="#f4c64f"/>
+          <text class="nt" x="940" y="276">Recepcionista comercial</text>
+          <text class="ns" x="940" y="294">contesta y persigue al indeciso</text>
+
+          <rect x="910" y="320" width="250" height="50" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="926" cy="336" r="4" fill="#8b7dff"/>
+          <text class="nt" x="940" y="341">Responsable de clientes</text>
+          <text class="ns" x="940" y="359">que no se vayan</text>
+
+          <rect x="910" y="385" width="250" height="50" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="926" cy="401" r="4" fill="#8b7dff"/>
+          <text class="nt" x="940" y="406">Recuperador</text>
+          <text class="ns" x="940" y="424">que vuelvan los que se fueron</text>
+
+          <rect x="910" y="450" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="926" cy="466" r="4" fill="#f4c64f"/><circle cx="936" cy="466" r="4" fill="#3ddc97"/>
+          <text class="nt" x="948" y="471">Administrativo</text>
+          <text class="ns" x="948" y="489">cobros y seguimiento de presupuestos</text>
+
+          <rect x="910" y="515" width="250" height="50" rx="10" fill="#1f1c29" stroke="#f4c64f"/>
+          <circle cx="926" cy="531" r="4" fill="#f4c64f"/><circle cx="936" cy="531" r="4" fill="#3ddc97"/><circle cx="946" cy="531" r="4" fill="#4c9aff"/>
+          <text class="nt" x="958" y="536">Preparado para agentes</text>
+          <text class="ns" x="958" y="554">que Dots, Muse y Google te reserven</text>
+        </g>
+        <g class="edges">
+          <path class="edge flowline" d="M780 420 C 840 420, 840 215, 910 215"/>
+          <path class="edge flowline" d="M780 420 C 840 420, 840 280, 910 280"/>
+          <path class="edge flowline" d="M780 420 C 840 420, 840 345, 910 345"/>
+          <path class="edge flowline" d="M780 420 C 840 420, 840 410, 910 410"/>
+          <path class="edge flowline" d="M780 420 C 840 420, 840 475, 910 475"/>
+          <path class="edge flowline" d="M780 420 C 840 420, 840 540, 910 540"/>
+        </g>
+        <!-- La auditoría vende el servicio "Preparado para agentes" -->
+        <path d="M165 565 C 165 610, 1035 610, 1035 567" fill="none" stroke="#3ddc97" stroke-width="1.2" stroke-dasharray="2 5" marker-end="url(#ar)"/>
+        <text class="ns" x="600" y="622" text-anchor="middle" style="fill:#3ddc97">la misma prueba es el gancho de venta y el servicio</text>
+
+        <!-- Control -->
+        <path class="edge" d="M600 510 L600 550" marker-end="url(#ar)"/>
+        <rect x="420" y="552" width="360" height="40" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+        <text class="nt" x="600" y="577" text-anchor="middle">Portero + supervisor · aviso de IA, baja, horario</text>
+
+        <!-- Motores -->
+        <text class="lbl" x="95" y="650">Motores intercambiables · decisión 0006</text>
+        <g>
+          <path class="edge" d="M600 592 C 600 630, 190 630, 190 662"/>
+          <path class="edge" d="M600 592 C 600 630, 395 630, 395 662"/>
+          <path class="edge" d="M600 592 L600 662"/>
+          <path class="edge" d="M600 592 C 600 630, 805 630, 805 662"/>
+          <path class="edge" d="M600 592 C 600 630, 1010 630, 1010 662"/>
+
+          <rect x="95" y="662" width="190" height="54" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="111" cy="678" r="4" fill="#8b7dff"/>
+          <text class="nt" x="190" y="684" text-anchor="middle">Agentes en WhatsApp</text>
+          <text class="ns" x="190" y="702" text-anchor="middle">cara al público</text>
+
+          <rect x="300" y="662" width="190" height="54" rx="10" fill="#1f1c29" stroke="#4c9aff"/>
+          <circle cx="316" cy="678" r="4" fill="#4c9aff"/>
+          <text class="nt" x="395" y="684" text-anchor="middle">Dots (OpenAI)</text>
+          <text class="ns" x="395" y="702" text-anchor="middle">trastienda del dueño</text>
+
+          <rect x="505" y="662" width="190" height="54" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="521" cy="678" r="4" fill="#8b7dff"/>
+          <text class="nt" x="600" y="684" text-anchor="middle">Claude</text>
+          <text class="ns" x="600" y="702" text-anchor="middle">diagnóstico y Consultor</text>
+
+          <rect x="710" y="662" width="190" height="54" rx="10" fill="#1f1c29" stroke="#4c9aff"/>
+          <circle cx="726" cy="678" r="4" fill="#4c9aff"/>
+          <text class="nt" x="805" y="684" text-anchor="middle">Agente gratis de Meta</text>
+          <text class="ns" x="805" y="702" text-anchor="middle">nivel de entrada</text>
+
+          <rect x="915" y="662" width="190" height="54" rx="10" fill="#1f1c29" stroke="#8b7dff"/>
+          <circle cx="931" cy="678" r="4" fill="#8b7dff"/>
+          <text class="nt" x="1010" y="684" text-anchor="middle">n8n y conexiones</text>
+          <text class="ns" x="1010" y="702" text-anchor="middle">reservas, facturas, CRM</text>
+        </g>
+      </svg>
+    </div>
+    <p class="hint">En móvil, desliza el diagrama hacia los lados.</p>
+  </section>
+
+  <section aria-labelledby="t-syn">
+    <div class="head">
+      <p class="eyebrow">Por qué se refuerzan</p>
+      <h2 id="t-syn">Las sinergias, una a una</h2>
+    </div>
+    <div class="syn">
+      <article class="s">
+        <div class="top"><h3>La auditoría abre la puerta y vende el servicio</h3><span class="dots"><i class="dot d-tuyo"></i><i class="dot d-surgido"></i><i class="dot d-hilo"></i></span></div>
+        <p class="flow">auditoría → conversación → "Preparado para agentes"</p>
+        <p>Un agente intenta encontrar el precio y reservar en la web del negocio. Donde se atasca es el gancho para hablar, y arreglarlo es el servicio. Tu tesis de que los agentes buscarán y reservarán por la gente, más el método 3 del hilo.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>Dos puertas, un mismo Consultor</h3><span class="dots"><i class="dot d-tuyo"></i></span></div>
+        <p class="flow">formulario o reunión → Consultor → propuesta de la carta</p>
+        <p>El formulario da las cifras y la reunión el contexto. Las dos acaban en la misma propuesta: integración más mantenimiento por agente.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>Lo hecho a medida se vuelve carta</h3><span class="dots"><i class="dot d-tuyo"></i></span></div>
+        <p class="flow">a medida → 2–3 clientes lo piden → carta → menos horas</p>
+        <p>"Cuantos más agentes de base, más se reduce el tiempo de implementación." Se mide con la tasa de reutilización.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>El montaje cabe en una carpeta</h3><span class="dots"><i class="dot d-hilo"></i><i class="dot d-surgido"></i></span></div>
+        <p class="flow">formulario → paquete en Drive → "pega esto primero"</p>
+        <p>El paquete de puesta en marcha del hilo convierte tu implementación en una carpeta que el cliente conecta en minutos. Es la fase 2 de la decisión 0008, ya inventada.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>La revisión es cuota y es aprendizaje</h3><span class="dots"><i class="dot d-surgido"></i><i class="dot d-hilo"></i></span></div>
+        <p class="flow">borradores → el dueño corrige → mejoran las plantillas de todos</p>
+        <p>La supervisión que baja con el tiempo y la idea del hilo de mirar qué cambia el dueño. Lo que aprendes con un cliente mejora a todos los del mismo sector.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>Ningún motor te ata</h3><span class="dots"><i class="dot d-tuyo"></i><i class="dot d-mercado"></i></span></div>
+        <p class="flow">Dots dentro · WhatsApp fuera · Meta como entrada</p>
+        <p>Dots trabaja para el dueño, tus agentes de WhatsApp atienden a sus clientes y el agente gratis de Meta sirve de primer escalón. Si uno cambia sus reglas, cambias el motor y conservas fichas, plantillas y portero.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>Cada cliente trae al siguiente</h3><span class="dots"><i class="dot d-tuyo"></i></span></div>
+        <p class="flow">resultado medido → caso → referido → conocido del conocido</p>
+        <p>Entrar pequeño, por conocidos, y cobrar tu precio. El informe mensual con datos es lo que convierte a un cliente en referencia.</p>
+      </article>
+      <article class="s">
+        <div class="top"><h3>Marblism enseña el escaparate</h3><span class="dots"><i class="dot d-mercado"></i><i class="dot d-tuyo"></i></span></div>
+        <p class="flow">nombre, cara y precio claro + una persona detrás</p>
+        <p>De Marblism copias la forma de presentar a los empleados. Tú añades lo que sus clientes echan en falta: alguien que responde, ajustes a su negocio y resultados medidos.</p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-time">
+    <div class="head">
+      <p class="eyebrow">De dónde viene cada pieza</p>
+      <h2 id="t-time">Nueve días de trabajo</h2>
+    </div>
+    <div class="time">
+      <div class="day"><span class="date">2026-09-23</span><ul>
+        <li><i class="dot d-tuyo"></i>Perfil y fuera el sector industrial</li>
+        <li><i class="dot d-surgido"></i>Embudo de diagnóstico y formulario en Tally</li>
+        <li><i class="dot d-surgido"></i>Landing con calculadora</li></ul></div>
+      <div class="day"><span class="date">2026-09-25 · 28</span><ul>
+        <li><i class="dot d-surgido"></i>Agentes del diagnóstico separados</li>
+        <li><i class="dot d-surgido"></i>Catálogo de agentes que quitan tareas</li>
+        <li><i class="dot d-surgido"></i>Envío automático del informe</li></ul></div>
+      <div class="day"><span class="date">2026-09-30</span><ul>
+        <li><i class="dot d-tuyo"></i>Agencia AI Native (0005)</li>
+        <li><i class="dot d-tuyo"></i>A la carta con cascadas</li>
+        <li><i class="dot d-surgido"></i>Portero, supervisor y plantillas</li>
+        <li><i class="dot d-tuyo"></i>Montaje + cuota + variable</li>
+        <li><i class="dot d-tuyo"></i>Abanico de negocios (0007)</li>
+        <li><i class="dot d-tuyo"></i>Empleados virtuales y WhatsApp</li></ul></div>
+      <div class="day"><span class="date">2026-10-01 · mañana</span><ul>
+        <li><i class="dot d-mercado"></i>Radar: Meta gratis, bono de IA de 2027</li>
+        <li><i class="dot d-tuyo"></i>Que los agentes te encuentren (0004)</li>
+        <li><i class="dot d-surgido"></i>Seguimiento de presupuestos (0005)</li>
+        <li><i class="dot d-tuyo"></i>Un Marblism en español, por fases (0008)</li></ul></div>
+      <div class="day"><span class="date">2026-10-01 · tarde</span><ul>
+        <li><i class="dot d-tuyo"></i>Consultoría, implementación, revisión</li>
+        <li><i class="dot d-tuyo"></i>Formulario o reunión → Consultor</li>
+        <li><i class="dot d-mercado"></i>Dots y Muse</li>
+        <li><i class="dot d-hilo"></i>Paquete de puesta en marcha y demo</li></ul></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-ph">
+    <div class="head">
+      <p class="eyebrow">Decisión 0008 · propuesta</p>
+      <h2 id="t-ph">Hacia dónde va la máquina</h2>
+    </div>
+    <div class="phases">
+      <div class="ph now"><span class="k">Fase 1 · ahora</span><h3>Servicio</h3><p>Montas tú, con conocidos y referidos. Hasta 10 clientes que pagan.</p></div>
+      <div class="ph"><span class="k">Fase 2</span><h3>Producto con servicio</h3><p>El paquete de puesta en marcha monta casi todo solo. Tú sigues revisando. Hasta 30 clientes.</p></div>
+      <div class="ph"><span class="k">Fase 3</span><h3>Autoservicio</h3><p>El cliente contrata y configura solo. La revisión con persona es el nivel superior.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-end">
+    <div class="two">
+      <div class="head" style="gap:14px">
+        <p class="eyebrow">En la nevera</p>
+        <h2 id="t-end">Buenas ideas que esperan</h2>
+        <ul class="fridge">
+          <li><i class="dot d-tuyo"></i>Tiendas online (idea 0003)<span class="why">Espera a 3 clientes de la primera línea.</span></li>
+          <li><i class="dot d-hilo"></i>Plugin de precios y reservas para Dots<span class="why">Es un producto, no un servicio. Más adelante.</span></li>
+          <li><i class="dot d-mercado"></i>Gestorías y franquicias como canal<span class="why">Muchos clientes de golpe, pero venta lenta.</span></li>
+          <li><i class="dot d-mercado"></i>Proveedor del bono de IA de 2027<span class="why">Prepararse durante 2027, cuando salga la convocatoria.</span></li>
+          <li><i class="dot d-tuyo"></i>Revisar miles de anuncios con agentes<span class="why">Otra familia de negocio. Solo con API oficial y permiso.</span></li>
+        </ul>
+      </div>
+      <div class="head" style="gap:14px">
+        <p class="eyebrow">Ahora</p>
+        <h2>Lo siguiente</h2>
+        <ol class="next">
+          <li><b>Tu Dot con un negocio inventado</b><span>Reclamar facturas, contestar consultas y seguir presupuestos. Grábalo: es tu demo.</span></li>
+          <li><b>Auditoría de agente a 10–15 negocios de tu ciudad</b><span>¿Encuentra el precio? ¿Puede reservar? Es tu gancho.</span></li>
+          <li><b>Lista de 20 conocidos con negocio</b><span>En tu hoja de fichas, nunca en el repositorio. Qué empleado le encaja a cada uno.</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <footer>Todo lo de este mapa está escrito en el repositorio: oferta, empleados virtuales, decisiones 0005–0008, ideas 0001–0006, radar de mercado y consultoría. Precios y cifras son hipótesis sin validar.</footer>
+</main>
