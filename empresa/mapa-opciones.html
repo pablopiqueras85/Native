@@ -1,0 +1,309 @@
+<title>Rutas de Native Crew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: un árbol de decisión (de un cliente que llega a la ruta y al motor), una tabla de estructuras, los pilotos
+   como secuencia con su puerta de decisión, y lo que queda abierto. Mundo "dusk" de Native Crew, oscuro a propósito. */
+:root{
+  --ground:#15131c; --deep:#0e0c14; --card:#1f1c29; --line:#34313f; --mute:#9a96a8; --ink:#efece6;
+  --you:#f4c64f; --wa:#4c9aff; --dots:#3ddc97; --meta:#ff8a5b; --violet:#8b7dff; --grey:#6d6880;
+  --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:20px;padding-block:36px 80px;display:flex;flex-direction:column;gap:60px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15}
+h1{font-size:clamp(2rem,5vw,3.3rem);font-weight:800;letter-spacing:-.03em}
+h2{font-size:clamp(1.4rem,2.4vw,1.9rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.lede{color:var(--mute);max-width:66ch}
+section{display:flex;flex-direction:column;gap:22px}
+.head{display:flex;flex-direction:column;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.chip.rec{border-color:var(--you);color:var(--you)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+
+.hero{display:flex;flex-direction:column;gap:14px;padding-top:12px}
+.hero .q{font-size:clamp(1.1rem,2vw,1.35rem);max-width:52ch}
+.hero .q b{color:var(--you);font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:.88rem;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+
+.diagram{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--deep)}
+.diagram svg{display:block;width:100%;min-width:880px;height:auto}
+.hint{font-size:.82rem;color:var(--mute)}
+
+/* Tabla de estructuras */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:14px}
+table{width:100%;border-collapse:collapse;font-size:.92rem;min-width:820px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--mute);letter-spacing:.06em;text-transform:uppercase;background:var(--deep)}
+tbody th{font-weight:600;width:190px}
+tbody th .sub{display:block;font-weight:400;color:var(--mute);font-size:.82rem;margin-top:4px}
+tr.rec{background:rgba(244,198,79,.05)}
+tr:last-child th,tr:last-child td{border-bottom:0}
+td .num{font-variant-numeric:tabular-nums}
+
+/* Pilotos */
+.pilots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) minmax(0,.9fr);gap:12px;align-items:stretch}
+.pilot{background:var(--card);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;border-top:3px solid var(--c);min-width:0}
+.pilot .k{font-family:var(--mono);font-size:.72rem;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.pilot p{font-size:.92rem;color:var(--mute)}
+.pilot ul{margin:0;padding-left:1.05em;font-size:.9rem;display:flex;flex-direction:column;gap:4px}
+.pilot .goal{margin-top:auto;padding-top:10px;border-top:1px dashed var(--line);font-size:.86rem}
+.gate{border:1px dashed var(--you);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.gate .k{font-family:var(--mono);font-size:.72rem;color:var(--you);letter-spacing:.08em;text-transform:uppercase}
+.gate .yes,.gate .no{font-size:.9rem;display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:baseline}
+.gate .yes b{color:var(--dots)}.gate .no b{color:var(--mute)}
+
+/* Fijo y abierto */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.fixed{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fixed li{background:var(--card);border-radius:10px;padding:12px 14px;font-size:.9rem;display:flex;flex-direction:column;gap:2px}
+.fixed li span{color:var(--mute);font-size:.82rem}
+.open{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.open li{display:grid;grid-template-columns:auto 1fr;gap:6px 10px;align-items:baseline;border-bottom:1px dashed var(--line);padding-bottom:10px;font-size:.92rem}
+.open li span.why{grid-column:2;color:var(--mute);font-size:.85rem}
+footer{font-size:.82rem;color:var(--mute);border-top:1px solid var(--line);padding-top:18px}
+
+@media (max-width:980px){ .pilots{grid-template-columns:1fr 1fr} }
+@media (max-width:760px){ .two{grid-template-columns:1fr} }
+@media (max-width:560px){ .pilots,.fixed{grid-template-columns:1fr} }
+</style>
+
+<main class="wrap">
+
+  <header class="hero">
+    <p class="eyebrow">Native Crew · opciones y rutas · 2026-10-01</p>
+    <h1>Dos motores, una agencia</h1>
+    <p class="q">¿Dots como estructura de la agencia? <b>Sí para la trastienda del dueño, no como única base.</b> Cada cliente va por la ruta que le encaja, y lo tuyo sigue siendo tuyo pase lo que pase.</p>
+    <div class="legend">
+      <span><i class="dot" style="background:var(--you)"></i>Tú y tus servicios</span>
+      <span><i class="dot" style="background:var(--wa)"></i>Ruta WhatsApp</span>
+      <span><i class="dot" style="background:var(--dots)"></i>Ruta Dots</span>
+      <span><i class="dot" style="background:var(--meta)"></i>Agente gratis de Meta</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="t-tree">
+    <div class="head">
+      <p class="eyebrow">El recorrido</p>
+      <h2 id="t-tree">De un cliente que llega al motor que lo atiende</h2>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 1200 640" role="img" aria-labelledby="tr-t tr-d">
+        <title id="tr-t">Árbol de rutas de Native Crew</title>
+        <desc id="tr-d">Un cliente llega, pasa por la consultoría y, según dónde viva su trabajo, va a la ruta WhatsApp, a la ruta Dots o, en el caso de tu propia empresa, a tu Dot interno. Las rutas WhatsApp y Dots acaban en la revisión mensual sobre activos neutrales.</desc>
+        <defs>
+          <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#6d6880"/></marker>
+        </defs>
+        <style>
+          .t{font:500 15px "Geist",system-ui,sans-serif;fill:#efece6}
+          .s{font:400 12px "Geist",system-ui,sans-serif;fill:#9a96a8}
+          .lb{font:500 11px "Geist Mono",ui-monospace,monospace;letter-spacing:.12em;fill:#9a96a8}
+          .e{fill:none;stroke:#4a4658;stroke-width:1.5}
+        </style>
+
+        <!-- Llega -->
+        <rect x="470" y="20" width="260" height="52" rx="26" fill="#1f1c29" stroke="#6d6880"/>
+        <text class="t" x="600" y="44" text-anchor="middle">Llega un cliente</text>
+        <text class="s" x="600" y="61" text-anchor="middle">conocido, referido, auditoría o demo</text>
+        <path class="e" d="M600 72 L600 100" marker-end="url(#a)"/>
+
+        <!-- Consultoría -->
+        <rect x="430" y="102" width="340" height="56" rx="12" fill="#1a1726" stroke="#f4c64f" stroke-width="1.6"/>
+        <text class="t" x="600" y="126" text-anchor="middle">Consultoría</text>
+        <text class="s" x="600" y="145" text-anchor="middle">formulario por defecto · reunión si se da · agente Consultor</text>
+        <path class="e" d="M600 158 L600 186" marker-end="url(#a)"/>
+
+        <!-- Pregunta -->
+        <path d="M600 188 L760 218 L600 248 L440 218 Z" fill="#15131c" stroke="#6d6880"/>
+        <text class="t" x="600" y="223" text-anchor="middle">¿Dónde vive su trabajo?</text>
+
+        <path class="e" d="M440 218 C 300 218, 200 230, 200 278" marker-end="url(#a)"/>
+        <path class="e" d="M600 248 L600 278" marker-end="url(#a)"/>
+        <path class="e" d="M760 218 C 900 218, 1000 230, 1000 278" marker-end="url(#a)"/>
+        <text class="s" x="330" y="240" text-anchor="middle">WhatsApp y local</text>
+        <text class="s" x="612" y="266">email, ChatGPT, oficina</text>
+        <text class="s" x="870" y="240" text-anchor="middle">es tu negocio</text>
+
+        <!-- Nivel 1: tipo de cliente -->
+        <rect x="60" y="280" width="280" height="60" rx="12" fill="#1f1c29" stroke="#4c9aff"/>
+        <text class="t" x="200" y="305" text-anchor="middle">Negocio local con WhatsApp</text>
+        <text class="s" x="200" y="324" text-anchor="middle">estudios, peluquerías, academias</text>
+
+        <rect x="460" y="280" width="280" height="60" rx="12" fill="#1f1c29" stroke="#3ddc97"/>
+        <text class="t" x="600" y="305" text-anchor="middle">Profesionales, oficios y pymes</text>
+        <text class="s" x="600" y="324" text-anchor="middle">ya usan ChatGPT, correo y facturas</text>
+
+        <rect x="860" y="280" width="280" height="60" rx="12" fill="#1f1c29" stroke="#f4c64f"/>
+        <text class="t" x="1000" y="305" text-anchor="middle">Native Crew por dentro</text>
+        <text class="s" x="1000" y="324" text-anchor="middle">tú, con trabajo a jornada completa</text>
+
+        <path class="e" d="M200 340 L200 370" marker-end="url(#a)"/>
+        <path class="e" d="M600 340 L600 370" marker-end="url(#a)"/>
+        <path class="e" d="M1000 340 L1000 370" marker-end="url(#a)"/>
+
+        <!-- Nivel 2: motor -->
+        <rect x="60" y="372" width="280" height="76" rx="12" fill="#14213a" stroke="#4c9aff"/>
+        <text class="lb" x="76" y="392">MOTOR</text>
+        <text class="t" x="76" y="414">Tus agentes de WhatsApp</text>
+        <text class="s" x="76" y="434">con el portero · el agente de Meta, de entrada</text>
+
+        <rect x="460" y="372" width="280" height="76" rx="12" fill="#12291f" stroke="#3ddc97"/>
+        <text class="lb" x="476" y="392">MOTOR</text>
+        <text class="t" x="476" y="414">El Dot del cliente, a su nombre</text>
+        <text class="s" x="476" y="434">montado con el paquete de puesta en marcha</text>
+
+        <rect x="860" y="372" width="280" height="76" rx="12" fill="#2a2414" stroke="#f4c64f"/>
+        <text class="lb" x="876" y="392">MOTOR</text>
+        <text class="t" x="876" y="414">Tu Dot interno</text>
+        <text class="s" x="876" y="434">busca clientes, prepara diagnósticos</text>
+
+        <path class="e" d="M200 448 L200 478" marker-end="url(#a)"/>
+        <path class="e" d="M600 448 L600 478" marker-end="url(#a)"/>
+        <path class="e" d="M1000 448 L1000 478" marker-end="url(#a)"/>
+
+        <!-- Nivel 3: cobro -->
+        <rect x="60" y="480" width="280" height="60" rx="12" fill="#1f1c29" stroke="#34313f"/>
+        <text class="lb" x="76" y="500">COBRAS</text>
+        <text class="t" x="76" y="522">Montaje + cuota + variable</text>
+
+        <rect x="460" y="480" width="280" height="60" rx="12" fill="#1f1c29" stroke="#34313f"/>
+        <text class="lb" x="476" y="500">COBRAS</text>
+        <text class="t" x="476" y="522">Paquete + revisión mensual</text>
+
+        <rect x="860" y="480" width="280" height="60" rx="12" fill="#1f1c29" stroke="#34313f"/>
+        <text class="lb" x="876" y="500">TE DA</text>
+        <text class="t" x="876" y="522">Tu demo y tu laboratorio</text>
+
+        <!-- Base común -->
+        <path class="e" d="M200 540 C 200 570, 300 585, 380 585"/>
+        <path class="e" d="M600 540 L600 576" marker-end="url(#a)"/>
+        <path class="e" d="M1000 540 C 1000 570, 900 585, 820 585" stroke-dasharray="3 5"/>
+        <rect x="380" y="578" width="440" height="50" rx="12" fill="#1a1726" stroke="#f4c64f" stroke-width="1.6"/>
+        <text class="t" x="600" y="601" text-anchor="middle">Revisión mensual sobre activos que son tuyos</text>
+        <text class="s" x="600" y="619" text-anchor="middle">fichas, normas, plantillas, portero · decisión 0006</text>
+      </svg>
+    </div>
+    <p class="hint">Licencia de Dots en España: Business Premium, 100–125 $/mes por usuario, que paga el cliente a su nombre. En móvil, desliza el diagrama.</p>
+  </section>
+
+  <section aria-labelledby="t-str">
+    <div class="head">
+      <p class="eyebrow">Las opciones</p>
+      <h2 id="t-str">Cuatro estructuras posibles</h2>
+    </div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Estructura</th><th>Qué cubre</th><th>Coste para el cliente</th><th>Tu montaje</th><th>Dependencia</th><th>Para quién</th></tr></thead>
+        <tbody>
+          <tr>
+            <th>Agentes propios<span class="sub">WhatsApp API + Claude o n8n</span></th>
+            <td>Hablar con sus clientes, con portero y plantillas</td>
+            <td>Tu cuota. Costes internos de 60–105 €/mes (hipótesis)</td>
+            <td>Horas al principio; baja con la carta</td>
+            <td>Baja: el motor se cambia</td>
+            <td>Negocios locales con WhatsApp</td>
+          </tr>
+          <tr>
+            <th>Solo Dots<span class="sub">el Dot del cliente</span></th>
+            <td>Correo, agenda, facturas, presupuestos. No habla con sus clientes por WhatsApp (por ahora)</td>
+            <td><span class="num">100–125 $/mes</span> de licencia + tu cuota</td>
+            <td>Una carpeta: el paquete de puesta en marcha</td>
+            <td>Alta: OpenAI decide precio y reglas</td>
+            <td>Profesionales, oficios y pymes</td>
+          </tr>
+          <tr class="rec">
+            <th>Híbrida <span class="chip rec">recomendada</span><span class="sub">cada cliente por su ruta</span></th>
+            <td>Lo de dentro con Dots y lo de fuera con tus agentes</td>
+            <td>Según la ruta</td>
+            <td>Paquete para Dots + carta para WhatsApp</td>
+            <td>Repartida: si uno falla, cambias de motor</td>
+            <td>Todos</td>
+          </tr>
+          <tr>
+            <th>Agente de Meta gestionado<span class="sub">nivel de entrada</span></th>
+            <td>Responder, recomendar y reservar dentro de WhatsApp</td>
+            <td>Gratis por ahora + tu cuota pequeña</td>
+            <td>Configurarlo y vigilarlo</td>
+            <td>Alta: Meta controla el agente</td>
+            <td>Quien quiere empezar barato</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-pil">
+    <div class="head">
+      <p class="eyebrow">Los pilotos</p>
+      <h2 id="t-pil">Tres pruebas antes de decidir</h2>
+      <p class="lede">Se pueden hacer a la vez. Ninguna es todavía una venta: sirven para aprender y para tener qué enseñar.</p>
+    </div>
+    <div class="pilots">
+      <article class="pilot" style="--c:var(--you)">
+        <span class="k">Piloto Native Crew</span>
+        <h3>El estudio de entrenamiento de un conocido</h3>
+        <p>Formulario → informe automático → reunión para afinar → el Consultor prepara la propuesta.</p>
+        <ul><li>Prueba el cuestionario y el informe</li><li>Es una demo, no una validación</li></ul>
+        <p class="goal">Sale bien si el informe acierta en sus dolores y quiere seguir hablando.</p>
+      </article>
+      <article class="pilot" style="--c:var(--dots)">
+        <span class="k">Piloto Dots · 30 días</span>
+        <h3>Tu Dot con un negocio inventado</h3>
+        <p>Una empresa de reformas de mentira: reclamar facturas, contestar consultas y seguir presupuestos. Lo grabas y es tu demo.</p>
+        <ul><li>Montaje con el paquete: menos de 2 h</li><li>Borradores que aprobarías sin tocar: 70 % o más</li><li>Funciona en español, configurado desde España</li></ul>
+        <p class="goal">Coste: un mes de Business Premium.</p>
+      </article>
+      <article class="pilot" style="--c:var(--wa)">
+        <span class="k">Piloto auditoría</span>
+        <h3>10–15 negocios de tu ciudad</h3>
+        <p>Un agente intenta encontrar el precio y reservar en su web, sin rellenar formularios. Apunta dónde se atasca.</p>
+        <ul><li>Es tu gancho para abrir conversaciones</li><li>Mide si el servicio "preparado para agentes" tiene sentido aquí</li></ul>
+        <p class="goal">Sale bien si la mayoría se atasca y a los dueños les importa.</p>
+      </article>
+      <aside class="gate" aria-label="Puerta de decisión">
+        <span class="k">Decisión 0009</span>
+        <h3>¿Dots como motor de la trastienda?</h3>
+        <p class="yes"><b>Sí</b>Si el piloto Dots cumple las tres metas: ruta Dots para profesionales y pymes.</p>
+        <p class="no"><b>No</b>Si no las cumple: sigues con tu sistema neutral. Has perdido un mes de licencia.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section>
+    <div class="two">
+      <div class="head" style="gap:14px">
+        <p class="eyebrow">Elijas lo que elijas</p>
+        <h2>Lo que no cambia</h2>
+        <ul class="fixed">
+          <li>Tus tres servicios<span>consultoría, implementación, revisión</span></li>
+          <li>Las fichas de puesto<span>en texto, sin proveedor</span></li>
+          <li>La biblioteca de mensajes<span>plantillas aprobadas</span></li>
+          <li>El portero<span>aviso de IA, baja, horario</span></li>
+          <li>El agente Consultor<span>formulario o reunión</span></li>
+          <li>Las cuentas del cliente<span>a su nombre, siempre</span></li>
+        </ul>
+      </div>
+      <div class="head" style="gap:14px">
+        <p class="eyebrow">Variables abiertas</p>
+        <h2>Lo que aún no sabemos</h2>
+        <ul class="open">
+          <li><i class="dot" style="background:var(--dots)"></i>Dots en Europa<span class="why">El plan Pro no está disponible aquí; solo Business Premium. Hay que confirmarlo con una cuenta.</span></li>
+          <li><i class="dot" style="background:var(--dots)"></i>Mensajes de texto desde Dots<span class="why">"Próximamente". Si llegan por WhatsApp, cambia la ruta local.</span></li>
+          <li><i class="dot" style="background:var(--dots)"></i>Precio de cada Dot adicional<span class="why">Sin publicar. Por eso, un solo Dot que haga de varios empleados.</span></li>
+          <li><i class="dot" style="background:var(--violet)"></i>Una pieza de Native Crew para Dots<span class="why">WhatsApp con cumplimiento legal para el Dot de un negocio español, como ha hecho Okara con el marketing. Producto de las fases 2 y 3.</span></li>
+          <li><i class="dot" style="background:var(--meta)"></i>El agente gratis de Meta<span class="why">Qué hace exactamente y si deja espacio para tu Recepcionista.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>Basado en las decisiones 0005–0008, la oferta, el radar de mercado y las conversaciones del 2026-10-01 sobre Marblism, Dots y Okara. Los precios y las metas de los pilotos son propuestas sin validar.</footer>
+</main>

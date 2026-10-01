@@ -63,6 +63,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/oferta.md` — el producto: empleados virtuales (paquetes cerrados de agentes con ficha de puesto, métrica y precio), catálogo de agentes y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
 - `empresa/mapa-negocio.html` — mapa visual del negocio (recorrido, equipo, lienzo, fases, números, riesgos). Publicado en https://claude.ai/artifact/BFpHJNHKsBLjEkbpA47XZV.
 - `empresa/mapa-sinergias.html` — mapa de cómo encajan las ideas (del fundador, surgidas, hilo de Dots y mercado) en un solo sistema. Publicado en https://claude.ai/artifact/6rEYpYA8mAdwtiLX8H7xAL.
+- `empresa/mapa-opciones.html` — rutas y opciones: ruta WhatsApp, ruta Dots y Dot interno; cuatro estructuras; los tres pilotos y la futura decisión 0009. Publicado en https://claude.ai/artifact/GAdjVRUQQvySYFcnsKgRUk.
 - `empresa/empleados-virtuales.md` — ficha detallada de cada empleado virtual: qué hace, variantes por sector, métrica, montaje y riesgos.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
