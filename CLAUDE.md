@@ -67,6 +67,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/mapa-negocio.html` — mapa visual del negocio (recorrido, equipo, lienzo, fases, números, riesgos). Publicado en https://claude.ai/artifact/BFpHJNHKsBLjEkbpA47XZV.
 - `empresa/mapa-sinergias.html` — mapa de cómo encajan las ideas (del fundador, surgidas, hilo de Dots y mercado) en un solo sistema. Publicado en https://claude.ai/artifact/6rEYpYA8mAdwtiLX8H7xAL.
 - `empresa/mapa-opciones.html` — rutas y opciones: ruta WhatsApp, ruta Dots y Dot interno; cuatro estructuras; los tres pilotos y la futura decisión 0009. Publicado en https://claude.ai/artifact/GAdjVRUQQvySYFcnsKgRUk.
+- `empresa/organigrama.html` — organigrama de los agentes (equipo interno, control de calidad, equipo de cada cliente) y su estado. Publicado en https://claude.ai/artifact/EEs6ML9hRYrgDy6w1gqo3B.
 - `empresa/empleados-virtuales.md` — ficha detallada de cada empleado virtual: qué hace, variantes por sector, métrica, montaje y riesgos.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).

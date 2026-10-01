@@ -1,0 +1,268 @@
+<title>Organigrama de Native Crew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: organigrama de arriba abajo. Fundador → cofundador → tres ramas (equipo interno, control de calidad,
+   equipo de cada cliente). El estado de cada agente va en el borde y en una etiqueta. Mundo "dusk" de Native Crew. */
+:root{
+  --ground:#15131c; --deep:#0e0c14; --card:#1f1c29; --line:#3a3647; --mute:#a19dae; --ink:#efece6;
+  --you:#f4c64f; --live:#3ddc97; --paper:#4c9aff; --todo:#6d6880; --pause:#ff8a5b; --eleven:#8b7dff;
+  --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--display);font-size:15px;line-height:1.5;margin:0}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:20px;padding-block:36px 72px;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{margin:0;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-.03em}
+h2{font-size:1.05rem;font-weight:700}
+h3{font-size:.98rem;font-weight:650}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.lede{color:var(--mute);max-width:70ch}
+header{display:flex;flex-direction:column;gap:12px}
+
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:.86rem;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+.sw{width:12px;height:12px;border-radius:3px;border:2px solid;flex:none}
+.sw.live{border-color:var(--live)} .sw.paper{border-color:var(--paper);border-style:dashed}
+.sw.todo{border-color:var(--todo);border-style:dotted} .sw.pause{border-color:var(--pause)}
+
+.totals{display:flex;flex-wrap:wrap;gap:10px}
+.total{font-family:var(--mono);font-size:.8rem;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--mute);font-variant-numeric:tabular-nums}
+.total b{color:var(--ink);font-weight:500}
+
+/* nodos */
+.node{background:var(--card);border:2px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.node.live{border-color:var(--live)}
+.node.paper{border-color:var(--paper);border-style:dashed}
+.node.todo{border-color:var(--todo);border-style:dotted;background:transparent}
+.node.pause{border-color:var(--pause)}
+.node .role{font-size:.86rem;color:var(--mute)}
+.node .file{font-family:var(--mono);font-size:.7rem;color:var(--mute);word-break:break-all}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tag{font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:999px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.tag.live{border-color:var(--live);color:var(--live)}
+.tag.paper{border-color:var(--paper);color:var(--paper)}
+.tag.pause{border-color:var(--pause);color:var(--pause)}
+.tag.eleven{border-color:var(--eleven);color:var(--eleven)}
+
+/* tronco */
+.trunk{display:flex;flex-direction:column;align-items:center}
+.trunk .node{width:min(100%,420px);text-align:center;align-items:center}
+.founder{border-color:var(--you)!important;background:color-mix(in srgb,var(--you) 10%,var(--card))}
+.founder h3{color:var(--you);font-size:1.1rem}
+.vline{width:2px;height:26px;background:var(--line)}
+
+/* ramas */
+.branches{display:grid;grid-template-columns:1.25fr .8fr 1.25fr;gap:22px;position:relative;padding-top:26px}
+.branches::before{content:"";position:absolute;top:0;left:16.5%;right:16.5%;height:2px;background:var(--line)}
+.branch{position:relative;display:flex;flex-direction:column;gap:12px;min-width:0}
+.branch::before{content:"";position:absolute;top:-26px;left:50%;width:2px;height:26px;background:var(--line)}
+.bhead{background:var(--deep);border:1px solid var(--line);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.bhead p{font-size:.84rem;color:var(--mute)}
+.stack{display:flex;flex-direction:column;gap:10px;padding-left:16px;border-left:2px solid var(--line);margin-left:12px}
+.sub{display:flex;flex-direction:column;gap:8px;padding-left:14px;border-left:2px dashed var(--line);margin-left:10px}
+.group-label{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);margin-top:6px}
+.lead{border-width:2px}
+.client-code{font-family:var(--mono);font-size:.72rem;color:var(--mute)}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.note{border-top:2px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.note p{color:var(--mute);font-size:.9rem}
+.note h3{color:var(--ink)}
+
+@media (max-width:900px){
+  .branches{grid-template-columns:1fr;padding-top:0;gap:28px}
+  .branches::before,.branch::before{display:none}
+}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Native Crew · 2026-10-01</span>
+    <h1>Organigrama de agentes</h1>
+    <p class="lede">Quién trabaja para quién. Tú decides y envías; el cofundador ordena; debajo, el equipo que trabaja
+      para la propia empresa, el control de calidad y el equipo que se instala en cada cliente. Hoy solo funciona de
+      verdad la rama interna: los empleados de clientes son fichas diseñadas, sin montar.</p>
+    <div class="legend">
+      <span><i class="sw live"></i>Funciona hoy (se puede lanzar)</span>
+      <span><i class="sw pause"></i>Creado, en pausa</span>
+      <span><i class="sw paper"></i>Ficha diseñada, sin montar</span>
+      <span><i class="sw todo"></i>Pendiente</span>
+    </div>
+    <div class="totals">
+      <span class="total"><b>8</b> agentes que se pueden lanzar</span>
+      <span class="total"><b>4</b> skills</span>
+      <span class="total"><b>8</b> fichas de empleados para clientes</span>
+      <span class="total"><b>0</b> clientes</span>
+    </div>
+  </header>
+
+  <section aria-label="Organigrama">
+    <div class="trunk">
+      <div class="node founder">
+        <span class="eyebrow">Dirección</span>
+        <h3>Fundador</h3>
+        <p class="role">Vende, habla con los dueños, decide y envía. Ningún agente envía nada en su nombre.</p>
+      </div>
+      <div class="vline"></div>
+      <div class="node live">
+        <span class="eyebrow">Jefe de gabinete</span>
+        <h3>Cofundador virtual</h3>
+        <p class="role">Resumen del lunes, qué toca ahora, reta ideas nuevas, reparte trabajo y lleva las métricas.</p>
+        <span class="file">.claude/agents/cofundador.md</span>
+        <div class="tags"><span class="tag live">creado</span><span class="tag">rutina del lunes: por confirmar</span></div>
+      </div>
+    </div>
+
+    <div class="branches">
+      <!-- Rama 1 -->
+      <div class="branch">
+        <div class="bhead">
+          <span class="eyebrow">Rama 1</span>
+          <h2>Equipo interno</h2>
+          <p>Trabaja para Native Crew. Es también la prueba en casa de lo que se venderá.</p>
+        </div>
+        <div class="stack">
+          <span class="group-label">Comercial</span>
+          <div class="node live">
+            <h3>Seguimiento comercial</h3>
+            <p class="role">A quién escribir hoy (máx. 5) y el mensaje listo para copiar.</p>
+            <span class="file">.claude/agents/seguimiento-comercial.md</span>
+          </div>
+          <div class="node live">
+            <h3>Consultor</h3>
+            <p class="role">Reunión o formulario → propuesta de la carta y a medida.</p>
+            <span class="file">.claude/agents/consultor.md</span>
+          </div>
+          <div class="node live">
+            <h3>Asistente de correo</h3>
+            <p class="role">Clasifica tu correo, resumen de la mañana y borradores. Prueba del Asistente del dueño.</p>
+            <span class="file">.claude/agents/asistente-correo.md</span>
+            <div class="tags"><span class="tag">falta conectar Gmail</span></div>
+          </div>
+
+          <span class="group-label">Embudo de diagnóstico</span>
+          <div class="node pause lead">
+            <h3>Skill «diagnostico»</h3>
+            <p class="role">Coordina a los cuatro agentes: respuesta de Tally → informe en Drive → email.</p>
+            <div class="tags"><span class="tag pause">rutina en pausa</span><span class="tag">Brevo pendiente</span></div>
+          </div>
+          <div class="sub">
+            <div class="node live"><h3>Investigador</h3><p class="role">Ficha pública del negocio, con fuentes.</p></div>
+            <div class="node live"><h3>Analista</h3><p class="role">Dolores ordenados por dinero y horas.</p></div>
+            <div class="node live"><h3>Propuesta</h3><p class="role">Agentes de la carta y piloto de 30 días.</p></div>
+            <div class="node pause"><h3>Precio</h3><p class="role">Pone precio con la tabla de la oferta.</p><div class="tags"><span class="tag pause">en pausa: aún no se vende</span></div></div>
+          </div>
+
+          <span class="group-label">Herramientas (skills)</span>
+          <div class="node live">
+            <h3>evaluar-idea · generar-ideas · idea-nueva</h3>
+            <p class="role">Puntuar con la rúbrica, generar tandas y registrar ideas.</p>
+          </div>
+
+          <span class="group-label">Pendientes</span>
+          <div class="node todo"><h3>Auditor de agentes</h3><p class="role">¿Encuentra un agente el precio y reserva en la web de un negocio?</p></div>
+          <div class="node todo"><h3>Radar</h3><p class="role">Novedades sin perder el foco. Hoy lo cubre el cofundador.</p></div>
+          <div class="node todo"><h3>Contenido</h3><p class="role">Borradores de textos y piezas.</p></div>
+        </div>
+      </div>
+
+      <!-- Rama 2 -->
+      <div class="branch">
+        <div class="bhead">
+          <span class="eyebrow">Rama 2</span>
+          <h2>Control de calidad</h2>
+          <p>Vigila al equipo de los clientes. Trabaja para ti, nunca habla con nadie de fuera.</p>
+        </div>
+        <div class="stack">
+          <div class="node paper">
+            <h3>Portero</h3>
+            <p class="role">Revisa cada mensaje antes de salir: pasa, se bloquea o se escala.</p>
+            <span class="file">sistemas/equipo-digital/portero.py</span>
+            <div class="tags"><span class="tag live">20 pruebas</span><span class="tag">es código, no agente</span></div>
+          </div>
+          <div class="node paper">
+            <h3>Supervisor</h3>
+            <p class="role">Revisa después lo que hicieron los agentes y te da solo lo que hay que mirar.</p>
+            <span class="file">sistemas/equipo-digital/agentes/supervisor.md</span>
+          </div>
+          <div class="node paper">
+            <h3>Biblioteca de mensajes</h3>
+            <p class="role">Mensajes aprobados; los agentes solo rellenan huecos.</p>
+            <span class="file">sistemas/equipo-digital/plantillas.md</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rama 3 -->
+      <div class="branch">
+        <div class="bhead">
+          <span class="eyebrow">Rama 3 · una por cliente</span>
+          <h2>Equipo de cada cliente</h2>
+          <p>Se instala en <span class="client-code">clientes/C00X/</span>. Las recetas son comunes; los ajustes, de cada negocio.</p>
+        </div>
+        <div class="stack">
+          <div class="node paper lead">
+            <span class="eyebrow">Incluido siempre</span>
+            <h3>Encargado</h3>
+            <p class="role">Junta el trabajo de todos, avisa al dueño por un solo canal y recibe sus órdenes.</p>
+          </div>
+          <div class="sub">
+            <span class="group-label">Cara al público</span>
+            <div class="node paper">
+              <h3>Recepcionista</h3>
+              <p class="role">Contesta WhatsApp y llamadas, cualifica y reserva. Cambios de cita.</p>
+              <div class="tags"><span class="tag eleven">ElevenLabs</span><span class="tag paper">ofrecido</span></div>
+            </div>
+            <span class="group-label">Trastienda (Claude)</span>
+            <div class="node paper">
+              <h3>Responsable de clientes</h3>
+              <p class="role">Detecta quién se está yendo y le escribe a tiempo.</p>
+              <div class="tags"><span class="tag paper">ofrecido</span></div>
+            </div>
+            <div class="node paper">
+              <h3>Recuperador</h3>
+              <p class="role">Escribe a antiguos clientes en el momento justo.</p>
+              <div class="tags"><span class="tag paper">ofrecido</span></div>
+            </div>
+            <div class="node paper">
+              <h3>Asistente del dueño</h3>
+              <p class="role">Correo del dueño: clasifica, resume, borradores y lo reparte a los demás.</p>
+              <span class="file">sistemas/equipo-digital/agentes/asistente-del-dueno.md</span>
+              <div class="tags"><span class="tag">borrador</span></div>
+            </div>
+            <div class="node paper">
+              <h3>Administrativo</h3>
+              <p class="role">Cobros pendientes y papeles para la gestoría.</p>
+              <div class="tags"><span class="tag">por validar</span><span class="tag">propuesta: partir en Cobros + Papeles</span></div>
+            </div>
+            <div class="node paper">
+              <h3>Responsable de comunicación</h3>
+              <p class="role">Avisos, después del servicio, fechas especiales, informe a familias.</p>
+              <div class="tags"><span class="tag">por validar</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="notes" aria-label="Cómo leerlo">
+    <div class="note">
+      <h3>Cómo se pasan el trabajo</h3>
+      <p>Los empleados de un cliente no hablan entre ellos: uno marca algo en la ficha del cliente y otro lo recoge. El Encargado lo junta todo para el dueño.</p>
+    </div>
+    <div class="note">
+      <h3>Dónde viven</h3>
+      <p>Las recetas, en este repositorio. La parte que habla con el público, en ElevenLabs. La trastienda, en Claude. Los datos de cada negocio, en su hoja, nunca en Git.</p>
+    </div>
+    <div class="note">
+      <h3>Lo que falta para que la rama 3 funcione</h3>
+      <p>Un primer cliente piloto. Hasta entonces, cada ficha se prueba primero en casa: el Asistente del dueño, con tu correo.</p>
+    </div>
+  </section>
+</div>
