@@ -73,6 +73,19 @@ hispana**. Se llega **por fases**, sin construir un programa de autoservicio ant
 - **Los empleados virtuales llevan nombre y personalidad** (una sola marca de personajes, por ejemplo los del vídeo
   de Native Crew), con un nombre propio, nunca el de Marblism. Se copia la idea, nunca la marca, los textos ni los
   nombres.
+- **Canal de la fase 1 (2026-10-01, palabras del fundador):** entrar pequeño, con negocios de conocidos y
+  referidos, cobrando el precio propio. Se vende como **media consultoría + implantación de agentes**:
+  1. diagnóstico;
+  2. montaje;
+  3. servicio mensual.
+
+  Para que la consultoría no se vuelva trabajo a medida sin fin, sale siempre del diagnóstico y del catálogo.
+  - **Precio:** a los conocidos no se les rebaja. Se usa la regla ya decidida: los 3 primeros sin montaje, a cambio
+    del caso con datos; desde el cuarto, precio completo.
+  - **Referidos:** el cliente que trae a otro que contrata recibe una recompensa (*propuesta:* un mes de cuota gratis).
+  - **Sesgo a vigilar:** un conocido dice "qué buena idea" por cortesía. Solo cuenta como validación si paga o
+    compromete algo (tiempo, datos, un piloto con fecha).
+  - Los nombres y contactos de esos conocidos van en la herramienta de fichas, **nunca en este repositorio**.
 - **Hispanohablante:** España primero. Latinoamérica, cuando haya producto de fase 2. Allí cambian la normativa, los
   precios y los canales: es una decisión aparte.
 - **De pequeños negocios a pymes:** el patrón de la decisión 0007 sigue siendo la puerta de entrada. Las pymes llegan
