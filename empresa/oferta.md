@@ -81,6 +81,8 @@ tareas le quita al dueño), su **métrica** y su **precio**. Sustituyen a los me
 | **Responsable de comunicación** | Pedir reseñas, avisos generales, recomendaciones | 10 + 7 | Reseñas y altas por recomendación | **Por validar** |
 | **Encargado** (incluido en la base) | Revisar el trabajo de los demás y dar el informe mensual | Supervisor (`sistemas/equipo-digital/agentes/supervisor.md`) | Tasa de corrección | Siempre |
 
+Detalle de cada empleado (qué hace, qué no, por sector, qué necesita, métrica, montaje y riesgos): [`empleados-virtuales.md`](empleados-virtuales.md).
+
 Regla honesta de comunicación: son "empleados" como metáfora de venta para el dueño. Ante sus clientes, los agentes
 **siempre dicen que son una IA** (ley europea de IA, artículo 50) y nunca se hacen pasar por una persona.
 
@@ -99,7 +101,7 @@ Cada agente se encarga de **una tarea manual** y tiene **una métrica** (princip
 | **7. Recomendaciones** | Pedir recomendaciones a los socios contentos | Pide la recomendación en el momento justo y acompaña al recomendado hasta el alta. Solo contacta al recomendado si él lo pide (LSSI) | Altas por recomendación | **Por validar** |
 | **8. Socios en riesgo** | Darse cuenta de quién ha dejado de venir | Vigila a todos los socios: si alguien lleva unas 2 semanas sin venir y sigue pagando, le escribe antes de que se dé de baja | Bajas evitadas entre socios que dejaron de venir | **Por validar** (necesita saber quién viene: programa de reservas o registro a mano) |
 | **9. Cambios y cancelaciones** | Reorganizar la agenda por WhatsApp | Propone huecos libres, confirma el cambio y ofrece las plazas liberadas a quien las quería | Cambios gestionados sin el dueño y plazas recolocadas | **Por validar** (útil sobre todo en estudios sin programa de reservas) |
-| **10. Opinión y alerta temprana** | Preguntar a los socios qué tal les va | Una pregunta corta al mes: avisa al dueño si alguien está descontento y, si está contento, le pide reseña o recomendación | Descontentos detectados a tiempo y reseñas conseguidas | **Por validar** |
+| **10. Opinión y alerta temprana** | Preguntar a los socios qué tal les va | Una pregunta corta al mes: avisa al dueño si alguien está descontento y, si está contento, le pide una recomendación. La reseña de Google se pide a todos, no solo a los contentos (política de Google; ver `empleados-virtuales.md`) | Descontentos detectados a tiempo y reseñas conseguidas | **Por validar** |
 | **11. Resumen de progreso** | Contar a cada socio cómo avanza | Un mensaje al mes con sus sesiones, marcas o evolución | Asistencia y bajas de quienes lo reciben (*hipótesis*: motiva a quedarse) | **Por validar** (necesita que el entrenador apunte los datos) |
 | **Informe mensual** (incluido siempre) | Saber qué ha pasado | Resumen de horas liberadas, altas, bajas evitadas e ingresos atribuidos | — | Siempre |
 

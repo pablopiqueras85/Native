@@ -59,6 +59,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
 - `empresa/modelo-economico.md` — costes por cliente, precios propuestos, escenarios y palancas para escalar.
 - `empresa/oferta.md` — el producto: empleados virtuales (paquetes cerrados de agentes con ficha de puesto, métrica y precio), catálogo de agentes y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
+- `empresa/empleados-virtuales.md` — ficha detallada de cada empleado virtual: qué hace, variantes por sector, métrica, montaje y riesgos.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
 - `marca/videos/` — vídeos de marca hechos con onetake (solo uso no comercial) y sus fuentes. Ver su `README.md`.
