@@ -5,186 +5,244 @@
     <meta name="viewport" content="width=1920, height=1080" />
     <title>Tu equipo en tu móvil</title>
     <!-- Native Crew · vídeo hecho con HyperFrames (Apache-2.0). Uso comercial permitido.
-         Efectos de sonido: Pixabay Content License (assets/audio/sfx/CREDITS.md). Música: compuesta con musica.py.
-         Fuentes: Barlow Condensed y Figtree (SIL OFL). Los datos del chat son un ejemplo ilustrativo. -->
+         Efectos: Pixabay Content License (assets/audio/sfx/CREDITS.md). Música: musica.py. Fuentes: SIL OFL.
+         Estructura: decisión 0010. Los datos del chat son un ejemplo ilustrativo.
+         Los <audio> los escribe sonidos.py (no editarlos a mano). -->
     <script src="assets/vendor/gsap.min.js"></script>
     <style>
       @font-face { font-family: "Barlow Condensed"; font-weight: 700; src: url("assets/fonts/BarlowCondensed-700.woff2") format("woff2"); }
       @font-face { font-family: "Figtree"; font-weight: 300 900; src: url("assets/fonts/Figtree-variable.woff2") format("woff2"); }
       :root {
-        --ground: #0f241f; --ground-2: #143029; --ink: #eef3f0; --muted: #a9bcb4;
-        --sun: #f4c64f; --blue: #2446c8; --mint: #5fd3a5;
-        --screen: #edf2ef; --bubble: #fbfcfb; --text: #0f241f; --text-muted: #5b6d66; --hair: #d5ded9;
+        --ground: #0f241f; --card: #16302a; --line: #2f4a42; --ink: #eef3f0; --muted: #a9bcb4;
+        --sun: #f4c64f; --blue: #2446c8; --sky: #9db0ff; --mint: #5fd3a5; --coral: #ff9d7a;
+        --screen: #edf2ef; --bubble: #fbfcfb; --text: #0f241f; --text-muted: #55675f; --hair: #d5ded9;
       }
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
       #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "Figtree", sans-serif; color: var(--ink); }
 
-      /* fondo */
+      /* fondo común */
       .bg { position: absolute; inset: 0; background: var(--ground); }
-      .glow { position: absolute; width: 1200px; height: 1200px; left: -100px; top: -60px; border-radius: 50%;
-        background: radial-gradient(circle, rgba(244, 198, 79, 0.16) 0%, rgba(244, 198, 79, 0) 62%); }
-      .glow-2 { position: absolute; width: 1000px; height: 1000px; left: 1100px; top: 300px; border-radius: 50%;
-        background: radial-gradient(circle, rgba(95, 211, 165, 0.10) 0%, rgba(95, 211, 165, 0) 60%); }
-      .ghost { position: absolute; left: 960px; top: 770px; font-family: "Barlow Condensed", sans-serif; font-size: 300px;
-        line-height: 1; color: var(--ink); opacity: 0.035; white-space: nowrap; letter-spacing: 0.02em; }
-      .hairline { position: absolute; left: 1010px; top: 300px; width: 2px; height: 480px; background: rgba(238, 243, 240, 0.12); }
+      .glow { position: absolute; width: 1300px; height: 1300px; left: -200px; top: -250px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(244, 198, 79, 0.13) 0%, rgba(244, 198, 79, 0) 62%); }
+      .glow-2 { position: absolute; width: 1100px; height: 1100px; left: 1050px; top: 250px; border-radius: 50%;
+        background: radial-gradient(circle, rgba(95, 211, 165, 0.09) 0%, rgba(95, 211, 165, 0) 60%); }
+      .grid { position: absolute; inset: 0; opacity: 0.22;
+        background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size: 80px 80px; }
+      .kick { font-family: "Barlow Condensed", sans-serif; font-size: 30px; letter-spacing: 0.16em; color: var(--muted); }
 
-      /* escena 1 · hora */
-      #intro { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; padding-left: 180px; gap: 18px; }
-      #intro .clock { font-family: "Barlow Condensed", sans-serif; font-size: 260px; line-height: 0.85; color: var(--sun); font-variant-numeric: tabular-nums; }
-      #intro .line { font-size: 54px; font-weight: 600; max-width: 1300px; }
-      #intro .line em { font-style: normal; color: var(--mint); }
+      /* 1 · el problema */
+      #s1 { position: absolute; inset: 0; padding: 150px 160px; }
+      #s1 h1 { font-family: "Barlow Condensed", sans-serif; font-size: 150px; line-height: 0.9; }
+      #s1 h1 em { font-style: normal; color: var(--sun); }
+      .chips { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 56px; width: 1500px; }
+      .chip { font-size: 40px; font-weight: 600; padding: 14px 30px; border-radius: 999px; border: 2px solid var(--line); background: var(--card); }
+      .chip.own { border-color: var(--sun); color: var(--sun); }
+      #s1-turn { position: absolute; left: 160px; top: 760px; font-size: 64px; font-weight: 700; }
+      #s1-turn em { font-style: normal; color: var(--mint); }
 
-      /* teléfono */
-      #phone-wrap { position: absolute; left: 330px; top: 50px; width: 480px; height: 980px; }
-      .phone { position: absolute; inset: 0; border-radius: 72px; background: #0b1512; padding: 14px;
-        box-shadow: 0 0 0 2px #2b3b36, 0 40px 90px rgba(4, 12, 10, 0.55); }
+      /* 2 · la estructura */
+      #s2 { position: absolute; inset: 0; }
+      #s2 .kick { position: absolute; left: 90px; top: 50px; }
+      svg.wires { position: absolute; inset: 0; }
+      svg.wires path { fill: none; stroke: #5f7a70; stroke-width: 3; }
+      .node { position: absolute; background: var(--card); border: 3px solid var(--line); border-radius: 14px; padding: 12px 18px; }
+      .node h3 { font-family: "Barlow Condensed", sans-serif; font-size: 34px; line-height: 1; }
+      .node p { font-size: 20px; color: var(--muted); margin-top: 6px; line-height: 1.25; }
+      .node.top { text-align: center; }
+      .node.you { border-color: var(--sun); } .node.you h3 { color: var(--sun); }
+      .node.ea, .node.cos { border-color: var(--sky); } .node.ea h3, .node.cos h3 { color: var(--sky); }
+      .node.adm { border-color: var(--mint); }
+      .node.com { border-color: var(--coral); }
+      .node.med { border-style: dashed; border-color: #8aa29a; }
+      .node.ctl { border-color: #8aa29a; background: #12281f; }
+      .node.ctl li { list-style: none; font-size: 21px; color: var(--ink); margin-top: 10px; padding-left: 26px; position: relative; line-height: 1.25; }
+      .node.ctl li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 12px; height: 12px; border-radius: 3px; background: var(--mint); }
+      .glabel { position: absolute; font-family: "Barlow Condensed", sans-serif; font-size: 32px; letter-spacing: 0.12em; text-align: center; background: var(--ground); padding: 2px 16px; }
+      .glabel small { display: block; font-family: "Figtree", sans-serif; font-size: 19px; letter-spacing: 0; color: var(--muted); }
+      .g-adm { color: var(--mint); } .g-com { color: var(--coral); } .g-med { color: #c7d6cf; }
+      #s2-cap { position: absolute; left: 0; right: 0; top: 990px; text-align: center; font-size: 36px; font-weight: 600; }
+      #s2-cap em { font-style: normal; color: var(--sun); }
+
+      /* 3 · un día */
+      #s3 { position: absolute; inset: 0; }
+      #phone-wrap { position: absolute; left: 250px; top: 50px; width: 480px; height: 980px; }
+      .phone { position: absolute; inset: 0; border-radius: 72px; background: #0b1512; padding: 14px; box-shadow: 0 0 0 2px #2b3b36, 0 40px 90px rgba(4, 12, 10, 0.55); }
       .screen { position: relative; width: 100%; height: 100%; border-radius: 58px; overflow: hidden; background: var(--screen); color: var(--text); }
       .island { position: absolute; left: 50%; top: 14px; width: 124px; height: 36px; margin-left: -62px; border-radius: 20px; background: #0b1512; z-index: 5; }
-      .status { position: absolute; left: 0; right: 0; top: 0; height: 60px; padding: 20px 34px 0; display: flex; justify-content: space-between;
-        font-size: 19px; font-weight: 700; z-index: 4; color: var(--text); }
+      .status { position: absolute; left: 0; right: 0; top: 0; height: 60px; padding: 20px 34px 0; display: flex; justify-content: space-between; font-size: 19px; font-weight: 700; z-index: 4; }
       .status .times { position: relative; width: 70px; height: 24px; }
       .status .times span { position: absolute; left: 0; top: 0; font-variant-numeric: tabular-nums; }
       .status .icons { display: flex; gap: 6px; align-items: center; }
       .status .icons i { display: block; width: 18px; height: 11px; border-radius: 3px; background: var(--text); }
       .status .icons i.bat { width: 28px; border-radius: 4px; }
-      .head { position: absolute; left: 0; right: 0; top: 60px; height: 84px; padding: 0 22px; display: flex; align-items: center; gap: 14px;
-        background: rgba(251, 252, 251, 0.94); border-bottom: 1px solid var(--hair); z-index: 3; }
+      .head { position: absolute; left: 0; right: 0; top: 60px; height: 84px; padding: 0 22px; display: flex; align-items: center; gap: 14px; background: rgba(251, 252, 251, 0.95); border-bottom: 1px solid var(--hair); z-index: 3; }
       .head .back { width: 14px; height: 14px; border-left: 3px solid var(--blue); border-bottom: 3px solid var(--blue); transform: rotate(45deg); margin: 0 6px 0 4px; }
-      .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--sun); display: grid; place-items: center;
-        font-family: "Barlow Condensed", sans-serif; font-size: 22px; color: var(--ground); flex: none; }
+      .avatar { width: 50px; height: 50px; border-radius: 50%; background: var(--sun); display: grid; place-items: center; font-family: "Barlow Condensed", sans-serif; font-size: 22px; color: var(--ground); flex: none; }
       .head .who b { display: block; font-size: 22px; line-height: 1.15; }
       .head .who span { font-size: 16px; color: var(--text-muted); }
-      .head .who span::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #1f9d6c; margin-right: 6px; vertical-align: 1px; }
-
       .chat { position: absolute; left: 0; right: 0; top: 144px; bottom: 104px; overflow: hidden; }
-      #stack { position: absolute; left: 0; right: 0; top: 0; padding: 18px 16px 18px; display: flex; flex-direction: column; gap: 10px; }
-      .msg { max-width: 86%; font-size: 23px; line-height: 1.32; padding: 12px 15px; border-radius: 20px; }
+      #stack { position: absolute; left: 0; right: 0; top: 0; padding: 18px 16px; display: flex; flex-direction: column; gap: 10px; }
+      .msg { max-width: 86%; font-size: 22px; line-height: 1.3; padding: 12px 15px; border-radius: 20px; }
       .msg.ea { align-self: flex-start; background: var(--bubble); border-bottom-left-radius: 6px; box-shadow: 0 1px 0 rgba(15, 36, 31, 0.06); }
       .msg.me { align-self: flex-end; background: var(--blue); color: #f4f6fd; border-bottom-right-radius: 6px; }
-      .card h4 { font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
-      .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; border-top: 1px solid var(--hair); font-size: 21px; }
+      .msg.card { width: 86%; }
+      .card h4 { font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid var(--hair); font-size: 19px; line-height: 1.25; }
       .row:first-of-type { border-top: 0; }
-      .row small { font-size: 15px; font-weight: 600; color: #1d7a56; background: #e1f4ec; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
-      .row small.wait { color: #8a5a00; background: #fbf0d2; }
+      .row small { font-size: 14px; font-weight: 700; border-radius: 999px; padding: 3px 9px; white-space: nowrap; }
+      .t-adm { color: #17704f; background: #dcf2e8; } .t-com { color: #9a3d1c; background: #fde5dc; }
       .choices { display: flex; gap: 8px; margin-top: 10px; }
-      .choice { flex: 1; text-align: center; font-size: 19px; font-weight: 700; padding: 10px 6px; border-radius: 14px; border: 2px solid var(--blue); color: var(--blue); background: var(--bubble); position: relative; }
-            .choice span { position: relative; }
+      .choice { flex: 1; text-align: center; font-size: 18px; font-weight: 700; padding: 9px 6px; border-radius: 14px; border: 2px solid var(--blue); color: var(--blue); background: var(--bubble); }
       .pill { align-self: center; font-size: 16px; font-weight: 600; color: #4b5d56; background: #dfe7e3; border-radius: 999px; padding: 6px 14px; }
       .pill b { color: var(--text); }
-      .day { align-self: center; font-size: 16px; font-weight: 700; color: var(--text-muted); padding: 8px 0 2px; letter-spacing: 0.04em; }
+      .day { align-self: center; font-size: 16px; font-weight: 700; color: var(--text-muted); padding: 6px 0 2px; letter-spacing: 0.04em; }
       .stats { display: flex; gap: 8px; margin: 6px 0 8px; }
       .stat { flex: 1; background: var(--screen); border-radius: 12px; padding: 8px 6px; text-align: center; }
-      .stat b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 48px; line-height: 1; color: var(--text); font-variant-numeric: tabular-nums; }
+      .stat b { display: block; font-family: "Barlow Condensed", sans-serif; font-size: 46px; line-height: 1; color: var(--text); }
       .stat span { font-size: 15px; color: var(--text-muted); }
-      .stat.zero b { color: #1d7a56; }
-      .typing { align-self: flex-start; background: var(--bubble); border-radius: 20px; border-bottom-left-radius: 6px; padding: 14px 16px; display: flex; gap: 6px; }
-      .typing i { display: block; width: 9px; height: 9px; border-radius: 50%; background: #93a49d; }
-
-      .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; padding: 14px 16px 34px; display: flex; gap: 10px; align-items: center;
-        background: rgba(251, 252, 251, 0.96); border-top: 1px solid var(--hair); z-index: 3; }
-      .field { flex: 1; height: 50px; border-radius: 25px; border: 1.5px solid var(--hair); background: #ffffff; padding: 0 18px; display: flex; align-items: center; font-size: 21px; position: relative; overflow: hidden; }
+      .stat.zero b { color: #17704f; }
+      .bar { position: absolute; left: 0; right: 0; bottom: 0; height: 104px; padding: 14px 16px 34px; display: flex; gap: 10px; align-items: center; background: rgba(251, 252, 251, 0.96); border-top: 1px solid var(--hair); z-index: 3; }
+      .field { flex: 1; height: 50px; border-radius: 25px; border: 1.5px solid var(--hair); background: #ffffff; padding: 0 18px; display: flex; align-items: center; font-size: 20px; position: relative; overflow: hidden; }
       .field .ph { color: #66756f; position: absolute; left: 18px; }
-      .field .typed { color: var(--text); white-space: nowrap; }
+      .field .typed { white-space: nowrap; }
       .field .caret { display: inline-block; width: 2px; height: 22px; background: var(--blue); margin-left: 2px; }
       .send { width: 50px; height: 50px; border-radius: 50%; background: var(--blue); flex: none; display: grid; place-items: center; }
       .send svg { width: 22px; height: 22px; }
-
-      .banner { position: absolute; left: 12px; right: 12px; top: 58px; z-index: 6; background: rgba(251, 252, 251, 0.97); border-radius: 22px; padding: 14px 16px;
-        display: flex; gap: 12px; align-items: center; box-shadow: 0 12px 30px rgba(15, 36, 31, 0.22); }
+      .banner { position: absolute; left: 12px; right: 12px; top: 58px; z-index: 6; background: rgba(251, 252, 251, 0.97); border-radius: 22px; padding: 14px 16px; display: flex; gap: 12px; align-items: center; box-shadow: 0 12px 30px rgba(15, 36, 31, 0.22); }
       .banner .app { width: 44px; height: 44px; border-radius: 12px; background: var(--mint); flex: none; display: grid; place-items: center; }
       .banner .app svg { width: 24px; height: 24px; }
       .banner b { display: block; font-size: 18px; }
-      .banner span { font-size: 18px; color: var(--text); }
+      .banner span { font-size: 18px; }
       .banner small { position: absolute; right: 18px; top: 14px; font-size: 13px; color: var(--text-muted); }
-      .tap { position: absolute; width: 64px; height: 64px; border-radius: 50%; background: rgba(36, 70, 200, 0.22); border: 2px solid rgba(36, 70, 200, 0.5); z-index: 7; }
+      .tap { position: absolute; left: 0; top: 0; width: 64px; height: 64px; border-radius: 50%; background: rgba(36, 70, 200, 0.22); border: 2px solid rgba(36, 70, 200, 0.5); z-index: 7; }
 
-      /* titulares */
-      .side { position: absolute; left: 1100px; top: 0; width: 760px; height: 1080px; }
-      .hl { position: absolute; left: 0; top: 360px; width: 760px; display: flex; flex-direction: column; gap: 22px; }
-      .hl .k { font-family: "Barlow Condensed", sans-serif; font-size: 30px; letter-spacing: 0.16em; color: var(--muted); }
-      .hl h2 { font-family: "Barlow Condensed", sans-serif; font-size: 100px; line-height: 0.95; font-weight: 700; color: var(--ink); text-wrap: balance; }
-      .msg.card { width: 86%; }
+      /* panel derecho: titular + mini organigrama vivo */
+      .side { position: absolute; left: 1000px; top: 0; width: 860px; height: 1080px; }
+      .hl { position: absolute; left: 0; top: 90px; width: 860px; display: flex; flex-direction: column; gap: 16px; }
+      .hl h2 { font-family: "Barlow Condensed", sans-serif; font-size: 76px; line-height: 0.95; text-wrap: balance; }
       .hl h2 em { font-style: normal; color: var(--sun); }
-      .note { position: absolute; left: 1100px; top: 1010px; font-size: 18px; color: var(--muted); }
+      .mini { position: absolute; left: 0; top: 440px; width: 860px; height: 560px; }
+      .mini svg { position: absolute; inset: 0; }
+      .mini svg path { fill: none; stroke: #4c665d; stroke-width: 2.5; }
+      .mn { position: absolute; height: 58px; border-radius: 12px; border: 2px solid var(--line); background: var(--card); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 700; color: var(--muted); overflow: hidden; }
+      .mn .lit { position: absolute; inset: 0; background: var(--sun); }
+      .mn span { position: relative; }
+      .mn.top { color: var(--sky); border-color: #3d5490; }
+      .mn.you { color: var(--sun); border-color: #7a6a30; }
+      .mlabel { position: absolute; font-family: "Barlow Condensed", sans-serif; font-size: 24px; letter-spacing: 0.12em; }
+      .note { position: absolute; left: 1000px; top: 1022px; font-size: 18px; color: var(--muted); }
 
-      /* cierre */
-      #outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; text-align: center; }
-      #outro .brand { font-family: "Barlow Condensed", sans-serif; font-size: 190px; line-height: 0.9; }
-      #outro .brand em { font-style: normal; color: var(--sun); }
-      #outro .tag { font-size: 52px; font-weight: 600; }
-      #outro .cta { margin-top: 24px; background: var(--sun); color: var(--ground); font-weight: 800; font-size: 44px; padding: 24px 52px; border-radius: 16px; }
+      /* 4 · cómo empezamos */
+      #s4 { position: absolute; inset: 0; padding: 120px 140px; }
+      #s4 h2 { font-family: "Barlow Condensed", sans-serif; font-size: 110px; line-height: 1; margin-top: 24px; }
+      .steps { position: absolute; left: 140px; top: 420px; width: 1640px; display: flex; gap: 40px; }
+      .step { flex: 1; background: var(--card); border: 3px solid var(--line); border-radius: 18px; padding: 30px 32px; }
+      .step .n { font-family: "Barlow Condensed", sans-serif; font-size: 34px; color: var(--sun); letter-spacing: 0.1em; }
+      .step h3 { font-family: "Barlow Condensed", sans-serif; font-size: 62px; line-height: 1; margin-top: 10px; }
+      .step p { font-size: 27px; color: var(--muted); margin-top: 16px; line-height: 1.3; }
+      .step.free { border-color: var(--sun); }
+
+      /* 5 · cierre */
+      #s5 { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; text-align: center; }
+      #s5 .brand { font-family: "Barlow Condensed", sans-serif; font-size: 190px; line-height: 0.9; }
+      #s5 .brand em { font-style: normal; color: var(--sun); }
+      #s5 .tag { font-size: 50px; font-weight: 600; }
+      #s5 .cta { margin-top: 22px; background: var(--sun); color: var(--ground); font-weight: 800; font-size: 44px; padding: 24px 52px; border-radius: 16px; }
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="31" data-width="1920" data-height="1080">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="64" data-width="1920" data-height="1080">
       <div class="bg"></div>
+      <div class="grid"></div>
       <div class="glow" id="glow"></div>
       <div class="glow-2" id="glow2"></div>
-      <div class="ghost" id="ghost">TU EQUIPO</div>
 
-      <!-- 1 · la hora -->
-      <section id="intro" class="clip" data-start="0" data-duration="3.0" data-track-index="1">
-        <div class="clock" id="clock">08:12</div>
-        <div class="line" id="intro-line">Tu equipo lleva trabajando <em>desde las 07:00</em>.</div>
+      <!-- 1 · el problema -->
+      <section id="s1" class="clip" data-start="0" data-duration="5.2" data-track-index="1">
+        <h1 id="s1-h">Hoy lo haces <em>todo tú.</em></h1>
+        <div class="chips">
+          <div class="chip" id="k0">Contestar WhatsApp</div><div class="chip" id="k1">Coger el teléfono</div>
+          <div class="chip" id="k2">El correo</div><div class="chip" id="k3">Facturas y gestoría</div>
+          <div class="chip" id="k4">Clientes que se van</div><div class="chip" id="k5">Cobros pendientes</div>
+          <div class="chip" id="k6">Avisos y reseñas</div><div class="chip own" id="k7">Y tu trabajo de verdad</div>
+        </div>
+        <div id="s1-turn">Native Crew te da <em>un equipo digital</em> para lo demás.</div>
       </section>
 
-      <!-- 2 · el móvil -->
-      <section id="scene-phone" class="clip" data-start="2.8" data-duration="22.1" data-track-index="2" data-layout-allow-overflow>
-        <div class="hairline"></div>
+      <!-- 2 · la estructura -->
+      <section id="s2" class="clip" data-start="5.2" data-duration="14.0" data-track-index="2" data-layout-allow-overlap>
+        <div class="kick" id="s2-k">CÓMO ESTÁ ORGANIZADO TU EQUIPO</div>
+        <svg class="wires" viewBox="0 0 1920 1080" width="1920" height="1080">
+          <path id="w1" d="M960 196 V214" /><path id="w2" d="M960 302 V320" />
+          <path id="w3" d="M960 408 V440 M330 440 H1590 M330 440 V458 M962 440 V458 M1590 440 V458" />
+          <path id="w4" d="M330 528 V546" /><path id="w5" d="M962 528 V546" /><path id="w6" d="M1590 528 V546" />
+        </svg>
+        <div class="node top you" id="n-you" style="left:700px;top:110px;width:520px"><h3>Tú</h3><p>Decides y apruebas lo delicado</p></div>
+        <div class="node top ea" id="n-ea" style="left:700px;top:214px;width:520px"><h3>Executive Assistant</h3><p>Tu único contacto: le escribes o le llamas</p></div>
+        <div class="node top cos" id="n-cos" style="left:700px;top:320px;width:520px"><h3>Chief of Staff Officer</h3><p>Recibe cada tarea y se la pasa a quien toca</p></div>
+        <div class="glabel g-adm" id="g-adm" style="left:180px;top:458px;width:300px">ADMINISTRACIÓN<small>lo que entra</small></div>
+        <div class="glabel g-com" id="g-com" style="left:812px;top:458px;width:300px">COMERCIAL<small>lo que sale</small></div>
+        <div class="glabel g-med" id="g-med" style="left:1440px;top:458px;width:300px">A MEDIDA<small>lo que tu negocio pida</small></div>
+        <div class="node adm" id="n-rec" style="left:110px;top:546px;width:440px"><h3>Recepcionista</h3><p>WhatsApp y llamadas a cualquier hora. Reserva y cambia citas.</p></div>
+        <div class="node adm" id="n-cor" style="left:110px;top:676px;width:440px"><h3>Correo</h3><p>Ordena la bandeja y te deja las respuestas preparadas.</p></div>
+        <div class="node adm" id="n-pap" style="left:110px;top:806px;width:440px"><h3>Papeles</h3><p>Facturas de proveedores, listas para la gestoría.</p></div>
+        <div class="node com" id="n-cli" style="left:600px;top:546px;width:350px"><h3>Resp. de clientes</h3><p>Ve quién deja de venir y le escribe a tiempo.</p></div>
+        <div class="node com" id="n-rcp" style="left:972px;top:546px;width:350px"><h3>Recuperador</h3><p>Trae de vuelta a los clientes de antes.</p></div>
+        <div class="node com" id="n-cmu" style="left:600px;top:700px;width:350px"><h3>Comunicación</h3><p>Avisos a todos y reseñas en Google.</p></div>
+        <div class="node com" id="n-cob" style="left:972px;top:700px;width:350px"><h3>Cobros</h3><p>Recuerda los pagos pendientes, con tacto.</p></div>
+        <div class="node med" id="n-med" style="left:1400px;top:546px;width:380px"><h3>Tu agente propio</h3><p>Lo diseñamos tras hablar contigo: presupuestos, stock, turnos…</p></div>
+        <div class="node ctl" id="n-ctl" style="left:1400px;top:700px;width:380px"><h3>Control de calidad</h3>
+          <ul><li>El portero revisa cada mensaje antes de salir.</li><li>Lo delicado siempre pasa por ti.</li><li>Lo supervisamos y medimos cada mes.</li></ul></div>
+        <div id="s2-cap">Tú hablas con uno. <em>El Chief of Staff Officer reparte. Cada empleado hace su trabajo.</em></div>
+      </section>
+
+      <!-- 3 · un día -->
+      <section id="s3" class="clip" data-start="19.2" data-duration="31.6" data-track-index="3" data-layout-allow-overlap>
         <div id="phone-wrap">
           <div class="phone" id="phone">
             <div class="screen" data-layout-allow-occlusion data-layout-allow-overlap>
               <div class="island"></div>
-              <div class="status">
-                <div class="times"><span id="t-am">08:14</span><span id="t-pm">18:30</span></div>
-                <div class="icons"><i></i><i></i><i class="bat"></i></div>
-              </div>
+              <div class="status"><div class="times"><span id="t-am">07:58</span><span id="t-pm">19:00</span></div><div class="icons"><i></i><i></i><i class="bat"></i></div></div>
               <div class="head" data-layout-allow-overlap data-layout-allow-occlusion>
-                <div class="back"></div>
-                <div class="avatar" data-layout-allow-overlap>EA</div>
+                <div class="back"></div><div class="avatar" data-layout-allow-overlap>EA</div>
                 <div class="who" data-layout-allow-overlap><b data-layout-allow-overlap>Executive Assistant</b><span data-layout-allow-overlap>Tu equipo digital · en línea</span></div>
               </div>
               <div class="chat">
                 <div id="stack" data-layout-allow-overflow>
-                  <div class="msg ea" id="m1">Buenos días. Así ha ido la noche:</div>
-                  <div class="msg ea card" id="m2">
-                    <h4>Mientras dormías</h4>
-                    <div class="row" id="m2a">4 WhatsApp contestados <small>Recepcionista</small></div>
-                    <div class="row" id="m2b">2 reservas para el jueves <small>Recepcionista</small></div>
-                    <div class="row" id="m2c">1 duda de precios <small class="wait">te la preparo</small></div>
-                  </div>
-                  <div class="typing" id="ty1"><i></i><i></i><i></i></div>
+                  <div class="msg ea" id="m1">Buenos días. Esta noche:</div>
+                  <div class="msg ea card" id="m2"><h4>Mientras dormías</h4>
+                    <div class="row">4 WhatsApp contestados <small class="t-adm">Recepcionista</small></div>
+                    <div class="row">2 reservas para el jueves <small class="t-adm">Recepcionista</small></div>
+                    <div class="row">1 llamada perdida, devuelta <small class="t-adm">Recepcionista</small></div></div>
                   <div class="msg me" id="m3">¿Algo que necesite yo?</div>
-                  <div class="msg ea" id="m4">Solo una cosa: Marta lleva 3 semanas sin venir. ¿Le escribo de tu parte?
-                    <div class="choices">
-                      <div class="choice" id="c-yes"><span id="c-yes-t">Sí, escríbele</span></div>
-                      <div class="choice"><span>La llamo yo</span></div>
-                    </div>
-                  </div>
-                  <div class="pill" id="m5">Chief of Staff Officer → <b>Responsable de clientes</b></div>
-                  <div class="msg ea" id="m6">Hecho. Le ha escrito el Responsable de clientes. Te aviso si contesta.</div>
-                  <div class="day" id="m7">HOY · 18:30</div>
-                  <div class="msg ea card" id="m8">
-                    <h4>Cierre del día</h4>
-                    <div class="stats">
-                      <div class="stat"><b>14</b><span>conversaciones</span></div>
-                      <div class="stat"><b>3</b><span>reservas</span></div>
-                      <div class="stat zero"><b>0</b><span>sin responder</span></div>
-                    </div>
-                    Mañana a las 8, más.
-                  </div>
+                  <div class="msg ea" id="m4">Marta lleva 3 semanas sin venir. ¿Le escribo de tu parte?
+                    <div class="choices"><div class="choice" id="c1">Sí, escríbele</div><div class="choice">La llamo yo</div></div></div>
+                  <div class="pill" id="m5">Chief of Staff Officer → <b>Resp. de clientes</b></div>
+                  <div class="msg ea" id="m6">Hecho. Te aviso si contesta.</div>
+                  <div class="msg ea card" id="m7"><h4>Correo, ordenado</h4>
+                    <div class="row">2 presupuestos: respuestas listas <small class="t-adm">Correo</small></div>
+                    <div class="row">3 facturas para la gestoría <small class="t-adm">Papeles</small></div></div>
+                  <div class="msg ea" id="m8">2 clientes tienen un pago pendiente. ¿Les mando un recordatorio amable?
+                    <div class="choices"><div class="choice" id="c2">Sí, mándalo</div><div class="choice">Espera</div></div></div>
+                  <div class="pill" id="m9">Chief of Staff Officer → <b>Cobros</b></div>
+                  <div class="msg ea card" id="m10"><h4>Esta semana</h4>
+                    <div class="row">Aviso del festivo, a 118 clientes <small class="t-com">Comunicación</small></div>
+                    <div class="row">6 reseñas nuevas en Google <small class="t-com">Comunicación</small></div>
+                    <div class="row">4 antiguos clientes han vuelto <small class="t-com">Recuperador</small></div></div>
+                  <div class="day" id="m11">HOY · 19:00</div>
+                  <div class="msg ea card" id="m12"><h4>Cierre del día</h4>
+                    <div class="stats"><div class="stat"><b>23</b><span>conversaciones</span></div><div class="stat"><b>5</b><span>reservas</span></div><div class="stat zero"><b>0</b><span>sin responder</span></div></div>
+                    Todo ha pasado por el portero antes de salir.</div>
                 </div>
               </div>
               <div class="bar">
                 <div class="field"><span class="ph" id="ph">Escribe a tu equipo…</span><span class="typed" id="typed"></span><span class="caret" id="caret"></span></div>
-                <div class="send" id="send"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l15-7-5 15-3-6-7-2z" fill="#f4f6fd"/></svg></div>
+                <div class="send" id="send"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l15-7-5 15-3-6-7-2z" fill="#f4f6fd" /></svg></div>
               </div>
               <div class="banner" id="banner" data-layout-allow-overlap data-layout-allow-occlusion>
-                <div class="app"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#0f241f" stroke-width="2"/><path d="M4 7l8 6 8-6" stroke="#0f241f" stroke-width="2"/></svg></div>
-                <div><b>Correo</b><span>3 facturas apartadas para la gestoría</span></div>
-                <small>ahora</small>
+                <div class="app"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="2" stroke="#0f241f" stroke-width="2" /><path d="M4 7l8 6 8-6" stroke="#0f241f" stroke-width="2" /></svg></div>
+                <div><b>Correo</b><span>Bandeja ordenada: 2 respuestas listas</span></div><small>ahora</small>
               </div>
               <div class="tap" id="tap"></div>
             </div>
@@ -192,146 +250,225 @@
         </div>
 
         <div class="side">
-          <div class="hl" id="h1"><div class="k">08:14 · RESUMEN</div><h2>Mientras dormías, <em>alguien contestó por ti.</em></h2></div>
-          <div class="hl" id="h2"><div class="k">08:15 · TU DECISIÓN</div><h2>Lo delicado <em>lo decides tú.</em></h2></div>
-          <div class="hl" id="h3"><div class="k">08:15 · REPARTO</div><h2>Hablas con uno. <em>Ellos se reparten el trabajo.</em></h2></div>
-          <div class="hl" id="h4"><div class="k">12:40 · CORREO</div><h2>Nada se queda <em>sin ordenar.</em></h2></div>
-          <div class="hl" id="h5"><div class="k">18:30 · CIERRE</div><h2>Y cada día, <em>el resumen en un mensaje.</em></h2></div>
+          <div class="hl" id="h1"><div class="kick">07:58 · ADMINISTRACIÓN</div><h2>Mientras dormías, la Recepcionista <em>contestó y reservó.</em></h2></div>
+          <div class="hl" id="h2"><div class="kick">08:05 · TÚ DECIDES</div><h2>Tú das el sí. <em>El Chief of Staff Officer lo reparte.</em></h2></div>
+          <div class="hl" id="h3"><div class="kick">11:30 · ADMINISTRACIÓN</div><h2>El correo, ordenado. <em>Las facturas, a la gestoría.</em></h2></div>
+          <div class="hl" id="h4"><div class="kick">13:10 · COMERCIAL</div><h2>Cobras <em>sin perseguir a nadie.</em></h2></div>
+          <div class="hl" id="h5"><div class="kick">16:00 · COMERCIAL</div><h2>Avisos, reseñas y <em>clientes que vuelven.</em></h2></div>
+          <div class="hl" id="h6"><div class="kick">19:00 · CIERRE</div><h2>Cada noche, el resumen. <em>Nada sale sin revisar.</em></h2></div>
+
+          <div class="mini" id="mini">
+            <svg viewBox="0 0 860 560" width="860" height="560">
+              <path d="M430 58 V82 M430 140 V164 M430 222 V250 M190 250 H670 M190 250 V290 M670 250 V290" />
+            </svg>
+            <div class="mn you" id="x-you" style="left:310px;top:0;width:240px"><div class="lit" id="l-you"></div><span>Tú</span></div>
+            <div class="mn top" id="x-ea" style="left:250px;top:82px;width:360px"><div class="lit" id="l-ea"></div><span>Executive Assistant</span></div>
+            <div class="mn top" id="x-cos" style="left:250px;top:164px;width:360px"><div class="lit" id="l-cos"></div><span>Chief of Staff Officer</span></div>
+            <div class="mlabel g-adm" style="left:90px;top:300px;width:200px;text-align:center">ADMINISTRACIÓN</div>
+            <div class="mlabel g-com" style="left:520px;top:300px;width:300px;text-align:center">COMERCIAL</div>
+            <div class="mn" id="x-rec" style="left:40px;top:340px;width:300px"><div class="lit" id="l-rec"></div><span>Recepcionista</span></div>
+            <div class="mn" id="x-cor" style="left:40px;top:410px;width:300px"><div class="lit" id="l-cor"></div><span>Correo</span></div>
+            <div class="mn" id="x-pap" style="left:40px;top:480px;width:300px"><div class="lit" id="l-pap"></div><span>Papeles</span></div>
+            <div class="mn" id="x-cli" style="left:440px;top:340px;width:200px"><div class="lit" id="l-cli"></div><span>Clientes</span></div>
+            <div class="mn" id="x-rcp" style="left:660px;top:340px;width:200px"><div class="lit" id="l-rcp"></div><span>Recuperador</span></div>
+            <div class="mn" id="x-cmu" style="left:440px;top:410px;width:200px"><div class="lit" id="l-cmu"></div><span>Comunicación</span></div>
+            <div class="mn" id="x-cob" style="left:660px;top:410px;width:200px"><div class="lit" id="l-cob"></div><span>Cobros</span></div>
+          </div>
         </div>
-        <div class="note">Ejemplo ilustrativo</div>
+        <div class="note" id="note">Ejemplo ilustrativo</div>
       </section>
 
-      <!-- 3 · cierre -->
-      <section id="outro" class="clip" data-start="24.9" data-duration="6.1" data-track-index="3">
+      <!-- 4 · cómo empezamos -->
+      <section id="s4" class="clip" data-start="50.8" data-duration="7.4" data-track-index="4">
+        <div class="kick" id="s4-k">CÓMO EMPEZAMOS</div>
+        <h2 id="s4-h">Tres pasos y tu equipo trabaja.</h2>
+        <div class="steps">
+          <div class="step free" id="p1"><div class="n">01 · GRATIS</div><h3>Diagnóstico</h3><p>Un cuestionario corto y te decimos dónde se te van las horas.</p></div>
+          <div class="step" id="p2"><div class="n">02</div><h3>Montaje</h3><p>Conectamos tu WhatsApp, correo y agenda. Todo queda a tu nombre.</p></div>
+          <div class="step" id="p3"><div class="n">03 · CADA MES</div><h3>Revisión</h3><p>Supervisamos, ajustamos y te mandamos el informe de resultados.</p></div>
+        </div>
+      </section>
+
+      <!-- 5 · cierre -->
+      <section id="s5" class="clip" data-start="58.2" data-duration="5.8" data-track-index="5">
         <div class="brand" id="o1">Native <em>Crew</em></div>
-        <div class="tag" id="o2">Tu primer equipo digital. En tu móvil.</div>
+        <div class="tag" id="o2">Tu primer equipo digital. Tú hablas con uno; trabajan todos.</div>
         <div class="cta" id="o3">Pide tu diagnóstico gratuito</div>
       </section>
 
-      <!-- sonido: música + efectos (los tiempos salen de T, más abajo) -->
-      <audio id="bgm" src="assets/audio/musica.wav" data-start="0" data-duration="31" data-track-index="10" data-volume="0.55"></audio>
-      <audio id="sx-intro" src="assets/audio/sfx/whoosh-short.mp3" data-start="2.85" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-m1" src="assets/audio/sfx/notification.mp3" data-start="4.4" data-duration="2.46" data-track-index="11" data-volume="0.55"></audio>
-      <audio id="sx-m2" src="assets/audio/sfx/pop.mp3" data-start="5.1" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
-      <audio id="sx-type" src="assets/audio/sfx/typing.mp3" data-start="7.7" data-duration="1.5" data-track-index="11" data-volume="0.45"></audio>
-      <audio id="sx-send" src="assets/audio/sfx/whoosh-short.mp3" data-start="9.25" data-duration="0.57" data-track-index="12" data-volume="0.55"></audio>
-      <audio id="sx-m4" src="assets/audio/sfx/notification.mp3" data-start="11.0" data-duration="2.46" data-track-index="11" data-volume="0.55"></audio>
-      <audio id="sx-tap" src="assets/audio/sfx/click-soft.mp3" data-start="13.0" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
-      <audio id="sx-m5" src="assets/audio/sfx/pop.mp3" data-start="13.7" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
-      <audio id="sx-m6" src="assets/audio/sfx/notification.mp3" data-start="14.6" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
-      <audio id="sx-banner" src="assets/audio/sfx/ping.mp3" data-start="16.8" data-duration="1.32" data-track-index="12" data-volume="0.4"></audio>
-      <audio id="sx-m8" src="assets/audio/sfx/notification.mp3" data-start="21.0" data-duration="2.46" data-track-index="11" data-volume="0.55"></audio>
-      <audio id="sx-out" src="assets/audio/sfx/chime.mp3" data-start="25.0" data-duration="2.5" data-track-index="11" data-volume="0.5"></audio>
+      <!-- AUDIO:INICIO (generado por sonidos.py) -->
+      <audio id="bgm" src="assets/audio/musica.wav" data-start="0" data-duration="64" data-track-index="10" data-volume="0.55"></audio>
+      <audio id="sx-00" src="assets/audio/sfx/pop.mp3" data-start="0.90" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sx-01" src="assets/audio/sfx/pop.mp3" data-start="1.20" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sx-02" src="assets/audio/sfx/pop.mp3" data-start="1.50" data-duration="0.72" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sx-03" src="assets/audio/sfx/pop.mp3" data-start="1.80" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sx-04" src="assets/audio/sfx/pop.mp3" data-start="2.10" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sx-05" src="assets/audio/sfx/pop.mp3" data-start="2.40" data-duration="0.72" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sx-06" src="assets/audio/sfx/pop.mp3" data-start="2.70" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sx-07" src="assets/audio/sfx/pop.mp3" data-start="3.00" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sx-08" src="assets/audio/sfx/whoosh-short.mp3" data-start="3.70" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-09" src="assets/audio/sfx/pop.mp3" data-start="5.50" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-10" src="assets/audio/sfx/pop.mp3" data-start="6.10" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-11" src="assets/audio/sfx/pop.mp3" data-start="6.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-12" src="assets/audio/sfx/pop.mp3" data-start="7.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-13" src="assets/audio/sfx/pop.mp3" data-start="9.70" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-14" src="assets/audio/sfx/pop.mp3" data-start="11.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-15" src="assets/audio/sfx/pop.mp3" data-start="13.10" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-16" src="assets/audio/sfx/chime.mp3" data-start="14.20" data-duration="2.5" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sx-17" src="assets/audio/sfx/whoosh-short.mp3" data-start="19.20" data-duration="0.57" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-18" src="assets/audio/sfx/notification.mp3" data-start="20.20" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-19" src="assets/audio/sfx/pop.mp3" data-start="20.80" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-20" src="assets/audio/sfx/typing.mp3" data-start="25.00" data-duration="1.5" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-21" src="assets/audio/sfx/whoosh-short.mp3" data-start="26.40" data-duration="0.57" data-track-index="12" data-volume="0.5"></audio>
+      <audio id="sx-22" src="assets/audio/sfx/notification.mp3" data-start="27.00" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-23" src="assets/audio/sfx/click-soft.mp3" data-start="28.80" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
+      <audio id="sx-24" src="assets/audio/sfx/pop.mp3" data-start="29.40" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sx-25" src="assets/audio/sfx/notification.mp3" data-start="30.00" data-duration="2.46" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-26" src="assets/audio/sfx/ping.mp3" data-start="31.60" data-duration="1.32" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-27" src="assets/audio/sfx/notification.mp3" data-start="32.40" data-duration="2.46" data-track-index="13" data-volume="0.5"></audio>
+      <audio id="sx-28" src="assets/audio/sfx/notification.mp3" data-start="36.20" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-29" src="assets/audio/sfx/click-soft.mp3" data-start="38.00" data-duration="0.37" data-track-index="12" data-volume="0.9"></audio>
+      <audio id="sx-30" src="assets/audio/sfx/pop.mp3" data-start="38.50" data-duration="0.72" data-track-index="12" data-volume="0.45"></audio>
+      <audio id="sx-31" src="assets/audio/sfx/notification.mp3" data-start="40.80" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-32" src="assets/audio/sfx/notification.mp3" data-start="45.50" data-duration="2.46" data-track-index="11" data-volume="0.5"></audio>
+      <audio id="sx-33" src="assets/audio/sfx/whoosh-short.mp3" data-start="50.20" data-duration="0.57" data-track-index="11" data-volume="0.45"></audio>
+      <audio id="sx-34" src="assets/audio/sfx/pop.mp3" data-start="51.80" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-35" src="assets/audio/sfx/pop.mp3" data-start="52.50" data-duration="0.72" data-track-index="12" data-volume="0.4"></audio>
+      <audio id="sx-36" src="assets/audio/sfx/pop.mp3" data-start="53.20" data-duration="0.72" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sx-37" src="assets/audio/sfx/chime.mp3" data-start="58.40" data-duration="2.5" data-track-index="11" data-volume="0.5"></audio>
+      <!-- AUDIO:FIN -->
     </div>
 
     <script>
-      // Momentos clave (segundos, tiempo global). Los sonidos de arriba están puestos en estos mismos tiempos.
-      const T = { phoneIn: 2.8, m1: 4.4, m2: 5.1, type: 7.7, send: 9.25, ty1: 9.8, m4: 11.0, tap: 13.0, m5: 13.7, m6: 14.6,
-                  banner: 16.8, bannerOut: 19.4, m7: 19.8, m8: 21.0, phoneOut: 24.1 };
-      const S = T.phoneIn; // la escena del móvil empieza aquí: sus clips se animan en tiempo global igualmente
+      // Momentos clave en segundos (tiempo global). sonidos.py lee esta misma tabla.
+      const T = {"s2": 5.2, "s3": 19.2, "m1": 20.2, "m2": 20.8, "type": 25.0, "send": 26.4, "m4": 27.0, "tap1": 28.8, "m5": 29.4, "m6": 30.0,
+                 "banner": 31.6, "m7": 32.4, "m8": 36.2, "tap2": 38.0, "m9": 38.5, "m10": 40.8, "m11": 45.0, "m12": 45.5,
+                 "s3out": 50.2, "s4": 50.8, "s5": 58.2};
       const tl = gsap.timeline({ paused: true });
+      const up = (sel, at, d = 0.5, dist = 40, ease = "power3.out") => tl.fromTo(sel, { opacity: 0, y: dist }, { opacity: 1, y: 0, duration: d, ease }, at);
 
-      // fondo vivo: respiración y deriva lentas (repeticiones finitas)
-      tl.fromTo("#glow", { scale: 0.92 }, { scale: 1.06, duration: 7.75, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
-      tl.fromTo("#glow2", { scale: 1.05 }, { scale: 0.94, duration: 7.75, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
-      tl.fromTo("#ghost", { x: 0 }, { x: -220, duration: 31, ease: "none" }, 0);
+      // fondo vivo
+      tl.fromTo("#glow", { scale: 0.92 }, { scale: 1.06, duration: 8, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
+      tl.fromTo("#glow2", { scale: 1.05 }, { scale: 0.94, duration: 8, ease: "sine.inOut", yoyo: true, repeat: 7 }, 0);
 
-      // 1 · la hora
-      tl.fromTo("#clock", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 0.2);
-      tl.fromTo("#intro-line", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 0.7);
-      tl.to("#intro", { opacity: 0, x: -80, duration: 0.45, ease: "power2.in" }, 2.35);
+      // 1 · el problema
+      up("#s1-h", 0.2, 0.6, 60);
+      for (let i = 0; i < 8; i++) tl.fromTo("#k" + i, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 0.9 + i * 0.3);
+      up("#s1-turn", 3.7, 0.5, 30);
+      tl.to("#s1-h, .chips, #s1-turn", { opacity: 0, y: -40, duration: 0.4, ease: "power2.in" }, T.s2 - 0.45);
 
-      // 2 · el móvil entra
-      tl.fromTo("#phone-wrap", { y: 700, rotation: -6 }, { y: 0, rotation: 0, duration: 0.9, ease: "power3.out" }, T.phoneIn);
-      tl.fromTo(".hairline", { scaleY: 0 }, { scaleY: 1, duration: 0.8, ease: "power2.out" }, T.phoneIn + 0.4);
-      tl.fromTo(".note", { opacity: 0 }, { opacity: 1, duration: 0.5 }, T.phoneIn + 0.8);
-      tl.fromTo("#t-pm", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
-      tl.to("#t-am", { opacity: 0, duration: 0.3 }, T.m7);
-      tl.to("#t-pm", { opacity: 1, duration: 0.3 }, T.m7);
+      // 2 · la estructura
+      const wires = ["w1", "w2", "w3", "w4", "w5", "w6"];
+      wires.forEach(id => { const p = document.getElementById(id); const L = p.getTotalLength(); p.style.strokeDasharray = L; tl.set(p, { strokeDashoffset: L }, 0); });
+      const draw = (id, at, d = 0.35) => tl.to("#" + id, { strokeDashoffset: 0, duration: d, ease: "power2.out" }, at);
+      const b = T.s2;
+      up("#s2-k", b + 0.1, 0.4, 20);
+      up("#n-you", b + 0.3, 0.45, 30); draw("w1", b + 0.7, 0.2);
+      up("#n-ea", b + 0.9, 0.45, 30); draw("w2", b + 1.4, 0.2);
+      up("#n-cos", b + 1.6, 0.45, 30); draw("w3", b + 2.1, 0.6);
+      up("#g-adm", b + 2.6, 0.4, 20); draw("w4", b + 2.9, 0.2);
+      ["#n-rec", "#n-cor", "#n-pap"].forEach((s, i) => up(s, b + 3.0 + i * 0.45, 0.45, 30));
+      up("#g-com", b + 4.5, 0.4, 20); draw("w5", b + 4.8, 0.2);
+      ["#n-cli", "#n-rcp", "#n-cmu", "#n-cob"].forEach((s, i) => up(s, b + 4.9 + i * 0.4, 0.45, 30));
+      up("#g-med", b + 6.6, 0.4, 20); draw("w6", b + 6.9, 0.2);
+      up("#n-med", b + 7.0, 0.45, 30);
+      up("#n-ctl", b + 7.9, 0.5, 30);
+      up("#s2-cap", b + 9.0, 0.5, 20);
+      tl.to("#s2 > *", { opacity: 0, duration: 0.4, ease: "power2.in" }, T.s3 - 0.45);
 
-      // mensajes: todos ocupan su sitio desde el principio; el chat sube para enseñar el último
-      const ids = ["m1", "m2", "ty1", "m3", "m4", "m5", "m6", "m7", "m8"];
+      // 3 · un día: mensajes (todos ocupan su sitio; el chat sube para enseñar el último)
+      const ids = ["m1", "m2", "m3", "m4", "m5", "m6", "m7", "m8", "m9", "m10", "m11", "m12"];
       const viewH = document.querySelector(".chat").offsetHeight;
-      const stack = document.getElementById("stack");
+      const chatTop = document.querySelector(".chat").offsetTop;
       const bottomOf = id => { const el = document.getElementById(id); return el.offsetTop + el.offsetHeight + 18; };
       const scrollFor = id => Math.max(0, bottomOf(id) - viewH);
       ids.forEach(id => tl.set("#" + id, { opacity: 0 }, 0));
-      gsap.set(stack, { y: 0 });
-
-      function bubble(id, at, fromX) {
-        tl.to(stack, { y: -scrollFor(id), duration: 0.45, ease: "power2.out" }, at - 0.05);
+      const bubble = (id, at, fromX = -20) => {
+        tl.to("#stack", { y: -scrollFor(id), duration: 0.45, ease: "power2.out" }, at - 0.05);
         tl.fromTo("#" + id, { opacity: 0, y: 18, x: fromX, scale: 0.96 }, { opacity: 1, y: 0, x: 0, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, at);
-      }
-      function typingDots(id, at, until) {
-        tl.to(stack, { y: -scrollFor(id), duration: 0.4, ease: "power2.out" }, at - 0.05);
-        tl.fromTo("#" + id, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.25 }, at);
-        tl.fromTo("#" + id + " i", { y: 0 }, { y: -6, duration: 0.18, ease: "sine.inOut", yoyo: true, repeat: 3, stagger: 0.09 }, at + 0.1);
-        tl.to("#" + id, { opacity: 0, duration: 0.15 }, until);
-      }
+      };
+      tl.set("#stack", { y: 0 }, 0);
 
-      // primer resumen (con puntos de "escribiendo" previos a cargo del propio m1: aparece directo)
-      bubble("m1", T.m1, -20);
-      bubble("m2", T.m2, -20);
-      ["#m2a", "#m2b", "#m2c"].forEach((s, i) => tl.fromTo(s, { opacity: 0, x: -14 }, { opacity: 1, x: 0, duration: 0.3, ease: "power2.out" }, T.m2 + 0.35 + i * 0.3));
+      tl.fromTo("#phone-wrap", { y: 760, rotation: -6 }, { y: 0, rotation: 0, duration: 0.9, ease: "power3.out" }, T.s3);
+      tl.fromTo("#mini, #note", { opacity: 0 }, { opacity: 1, duration: 0.6 }, T.s3 + 0.5);
+      tl.set("#t-pm", { opacity: 0 }, 0);
+      tl.to("#t-am", { opacity: 0, duration: 0.3 }, T.m11);
+      tl.to("#t-pm", { opacity: 1, duration: 0.3 }, T.m11);
 
-      // el dueño escribe en la barra
-      const phrase = "¿Algo que necesite yo?";
-      const typed = document.getElementById("typed");
-      const proxy = { n: 0 };
-      tl.set("#ph", { opacity: 1 }, 0);
-      tl.set("#ph", { opacity: 0 }, T.type);
-      tl.fromTo(proxy, { n: 0 }, { n: phrase.length, duration: 1.35, ease: "none",
-        onUpdate: () => { typed.textContent = phrase.slice(0, Math.round(proxy.n)); } }, T.type);
-      tl.fromTo("#send", { scale: 1 }, { scale: 0.86, duration: 0.08, yoyo: true, repeat: 1 }, T.send - 0.08);
-      tl.to(proxy, { n: 0, duration: 0.01, onUpdate: () => { typed.textContent = phrase.slice(0, Math.round(proxy.n)); } }, T.send);
+      bubble("m1", T.m1); bubble("m2", T.m2);
+      // el dueño escribe
+      const phrase = "¿Algo que necesite yo?", typed = document.getElementById("typed"), proxy = { n: 0 };
+      const paint = () => { typed.textContent = phrase.slice(0, Math.round(proxy.n)); };
+      tl.set("#ph", { opacity: 1 }, 0); tl.set("#ph", { opacity: 0 }, T.type);
+      tl.fromTo(proxy, { n: 0 }, { n: phrase.length, duration: 1.2, ease: "none", onUpdate: paint }, T.type);
+      tl.to(proxy, { n: 0, duration: 0.01, onUpdate: paint }, T.send);
       tl.set("#ph", { opacity: 1 }, T.send + 0.05);
-      tl.fromTo("#caret", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "steps(1)", yoyo: true, repeat: 23 }, 0);
-      bubble("m3", T.send + 0.02, 20);
-
-      typingDots("ty1", T.ty1, T.m4 - 0.05);
-      bubble("m4", T.m4, -20);
-      tl.fromTo("#m4 .choice", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.12 }, T.m4 + 0.4);
-
-      // el toque en "Sí, escríbele" (posición calculada una vez, al montar)
-      const yesEl = document.getElementById("c-yes");   // su offsetParent es #stack
-      const chatTop = document.querySelector(".chat").offsetTop;
-      const tapX = yesEl.offsetLeft + yesEl.offsetWidth / 2 - 32;
-      const tapY = chatTop + yesEl.offsetTop + yesEl.offsetHeight / 2 - 32 - scrollFor("m4");
-      tl.set("#tap", { x: tapX, y: tapY, opacity: 0, scale: 0.4 }, 0);
-      tl.to("#tap", { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, T.tap - 0.15);
-      tl.to("#tap", { opacity: 0, scale: 1.5, duration: 0.35, ease: "power2.out" }, T.tap + 0.1);
-      tl.to("#c-yes", { scale: 0.94, duration: 0.09, yoyo: true, repeat: 1 }, T.tap - 0.05);
-      tl.set("#c-yes", { scale: 1, backgroundColor: "#fbfcfb", color: "#2446c8" }, 0);
-      tl.to("#c-yes", { backgroundColor: "#2446c8", color: "#f4f6fd", duration: 0.2 }, T.tap);
-
-      bubble("m5", T.m5, 0);
-      bubble("m6", T.m6, -20);
-
-      // aviso de Correo
+      tl.to("#send", { scale: 0.86, duration: 0.08, yoyo: true, repeat: 1 }, T.send - 0.08);
+      tl.fromTo("#caret", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "steps(1)", yoyo: true, repeat: 79 }, 0);
+      bubble("m3", T.send + 0.05, 20);
+      bubble("m4", T.m4);
+      // toques en los botones (posición calculada al montar; #stack es su offsetParent)
+      const tapAt = (btnId, msgId, at) => {
+        const el = document.getElementById(btnId);
+        const x = el.offsetLeft + el.offsetWidth / 2 - 32, y = chatTop + el.offsetTop + el.offsetHeight / 2 - 32 - scrollFor(msgId);
+        tl.set("#tap", { x, y, opacity: 0, scale: 0.4 }, at - 0.3);
+        tl.to("#tap", { opacity: 1, scale: 1, duration: 0.2, ease: "power2.out" }, at - 0.15);
+        tl.to("#tap", { opacity: 0, scale: 1.5, duration: 0.35, ease: "power2.out" }, at + 0.1);
+        tl.set("#" + btnId, { backgroundColor: "#fbfcfb", color: "#2446c8" }, 0);
+        tl.to("#" + btnId, { backgroundColor: "#2446c8", color: "#f4f6fd", duration: 0.2 }, at);
+      };
+      tl.set("#tap", { opacity: 0 }, 0);
+      tapAt("c1", "m4", T.tap1);
+      bubble("m5", T.m5, 0); bubble("m6", T.m6);
       tl.fromTo("#banner", { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "back.out(1.4)" }, T.banner);
-      tl.to("#banner", { y: -160, opacity: 0, duration: 0.4, ease: "power2.in" }, T.bannerOut);
+      tl.to("#banner", { y: -160, opacity: 0, duration: 0.4, ease: "power2.in" }, T.banner + 2.6);
+      bubble("m7", T.m7);
+      bubble("m8", T.m8);
+      tapAt("c2", "m8", T.tap2);
+      bubble("m9", T.m9, 0);
+      bubble("m10", T.m10);
+      bubble("m11", T.m11, 0);
+      bubble("m12", T.m12);
+      tl.fromTo("#m12 .stat", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.15 }, T.m12 + 0.35);
 
-      bubble("m7", T.m7, 0);
-      bubble("m8", T.m8, -20);
-      tl.fromTo("#m8 .stat", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.15, ease: "power2.out" }, T.m8 + 0.35);
-
-      // titulares al lado del móvil
-      const heads = [["#h1", T.m1 - 0.4, T.type + 1.6], ["#h2", T.send + 0.4, T.tap + 0.5], ["#h3", T.m5 - 0.2, T.banner],
-                     ["#h4", T.banner + 0.2, T.m7 - 0.2], ["#h5", T.m7 + 0.2, T.phoneOut]];
-      heads.forEach(([sel, a, b]) => {
+      // titulares y nodos encendidos de cada momento
+      const lits = ["you", "ea", "cos", "rec", "cor", "pap", "cli", "rcp", "cmu", "cob"];
+      const rest = k => (k === "you" ? "#f4c64f" : (k === "ea" || k === "cos") ? "#9db0ff" : "#a9bcb4");
+      lits.forEach(k => { tl.set("#l-" + k, { opacity: 0 }, 0); tl.set("#x-" + k + " span", { color: rest(k) }, 0); });
+      const beats = [
+        ["#h1", T.m1 - 0.4, T.type - 0.2, ["ea", "rec"]],
+        ["#h2", T.type, T.banner - 0.2, ["you", "ea", "cos", "cli"]],
+        ["#h3", T.banner, T.m8 - 0.2, ["ea", "cos", "cor", "pap"]],
+        ["#h4", T.m8, T.m10 - 0.2, ["you", "ea", "cos", "cob"]],
+        ["#h5", T.m10, T.m11 - 0.2, ["ea", "cos", "cmu", "rcp"]],
+        ["#h6", T.m11, T.s3out, ["you", "ea"]],
+      ];
+      beats.forEach(([sel, a, z, on]) => {
+        tl.set(sel, { opacity: 0 }, 0);
         tl.fromTo(sel, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, a);
-        tl.to(sel, { opacity: 0, y: -40, duration: 0.35, ease: "power2.in" }, b - 0.35);
+        tl.to(sel, { opacity: 0, y: -30, duration: 0.3, ease: "power2.in" }, z - 0.3);
+        on.forEach((k, i) => {
+          const on_ = a + 0.1 + i * 0.12;
+          tl.set("#l-" + k, { opacity: 1 }, on_);
+          tl.set("#x-" + k + " span", { color: "#0f241f" }, on_);
+          tl.fromTo("#x-" + k, { scale: 1 }, { scale: 1.06, duration: 0.12, yoyo: true, repeat: 1, ease: "power2.out" }, on_);
+          tl.set("#l-" + k, { opacity: 0 }, z - 0.3);
+          tl.set("#x-" + k + " span", { color: rest(k) }, z - 0.3);
+        });
       });
-      heads.forEach(([sel]) => tl.set(sel, { opacity: 0 }, 0));
+      tl.to("#phone-wrap", { y: 140, scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.in" }, T.s3out);
+      tl.to("#mini, #note", { opacity: 0, duration: 0.4 }, T.s3out);
 
-      // el móvil sale
-      tl.to("#phone-wrap", { y: 120, scale: 0.9, opacity: 0, duration: 0.6, ease: "power2.in" }, T.phoneOut);
-      tl.to(".hairline, .note", { opacity: 0, duration: 0.4 }, T.phoneOut);
+      // 4 · cómo empezamos
+      up("#s4-k", T.s4 + 0.1, 0.4, 20);
+      up("#s4-h", T.s4 + 0.3, 0.5, 40);
+      ["#p1", "#p2", "#p3"].forEach((s, i) => up(s, T.s4 + 1.0 + i * 0.7, 0.5, 40));
+      tl.to("#s4 > *", { opacity: 0, duration: 0.4, ease: "power2.in" }, T.s5 - 0.45);
 
-      // 3 · cierre
-      tl.fromTo("#o1", { y: 50, opacity: 0 }, { y: 0, opacity: 1, duration: 0.6, ease: "power3.out" }, 25.0);
-      tl.fromTo("#o2", { y: 30, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "power2.out" }, 25.5);
-      tl.fromTo("#o3", { y: 30, opacity: 0, scale: 0.96 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, 26.0);
+      // 5 · cierre
+      up("#o1", T.s5 + 0.2, 0.6, 50);
+      up("#o2", T.s5 + 0.7, 0.5, 30);
+      tl.fromTo("#o3", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "back.out(1.6)" }, T.s5 + 1.2);
 
       window.__timelines["main"] = tl;
       tl.seek(0);
