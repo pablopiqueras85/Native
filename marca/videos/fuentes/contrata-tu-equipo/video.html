@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Contrata tu primer equipo digital</title>
+<!-- Vídeo para la landing de Native Crew. Código propio (sin onetake): se puede usar comercialmente.
+     Fuentes: Barlow Condensed y Figtree (licencia SIL OFL). Se renderiza con render.py: la página expone
+     window.seek(t) y pinta el fotograma del segundo t sin animaciones CSS, para que cada captura sea exacta. -->
+<style>
+@font-face{font-family:"Barlow Condensed";src:url("BarlowCondensed-700.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"Figtree";src:url("Figtree-variable.woff2") format("woff2");font-weight:300 900}
+:root{
+  --paper:#f2f5f2; --card:#ffffff; --ink:#0f241f; --muted:#55665f; --line:#d3dcd7;
+  --accent:#2446c8; --accent-soft:#e2e8fb; --warn:#9a5a00; --loss:#d9532c;
+  --board:#0f241f; --board-2:#16302a; --board-ink:#eef3f0; --board-muted:#9fb3ab; --board-line:#2f4a42;
+  --sky:#8fa6ff; --mint:#5fd3a5; --sun:#f4c64f;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"Figtree",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--paper)}
+body{font-family:var(--body);color:var(--ink);position:relative}
+.scene{position:absolute;inset:0;opacity:0}
+.a{will-change:transform,opacity}
+
+/* Escena 1-2: anuncio de empleo */
+#s1{background:var(--paper)}
+.grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.45}
+.ad{position:absolute;left:250px;top:120px;width:1420px;height:840px;background:var(--card);border:3px solid var(--ink);border-radius:6px;padding:72px 96px;box-shadow:16px 16px 0 var(--ink)}
+.ad-top{display:flex;justify-content:space-between;align-items:center;font-family:var(--display);font-size:34px;letter-spacing:.14em;color:var(--muted);border-bottom:3px solid var(--ink);padding-bottom:20px}
+.ad-top b{color:var(--ink)}
+.stamp{position:absolute;font-family:var(--display);text-transform:uppercase;letter-spacing:.08em;border:6px solid currentColor;border-radius:8px;padding:6px 22px;line-height:1}
+.se-busca{right:330px;top:400px;font-size:96px;color:var(--loss);transform-origin:center}
+.ad h1{font-family:var(--display);font-size:120px;line-height:.95;margin-top:44px;letter-spacing:-.01em;max-width:1000px}
+.caret{display:inline-block;width:8px;height:96px;background:var(--accent);vertical-align:-8px;margin-left:6px}
+.req{margin-top:40px;display:flex;flex-direction:column;gap:20px}
+.req li{list-style:none;font-size:42px;font-weight:500;display:flex;gap:22px;align-items:baseline}
+.req li i{font-style:normal;font-family:var(--display);color:var(--accent);font-size:44px;width:40px;flex:none}
+
+/* Escena 2: lo que cuesta */
+#s2{background:var(--paper)}
+.cost-h{position:absolute;left:250px;top:190px;font-family:var(--display);font-size:110px;line-height:1}
+.chips{position:absolute;left:250px;top:360px;display:flex;flex-wrap:wrap;gap:22px;width:1420px}
+.chip{font-size:46px;font-weight:600;padding:16px 34px;border:3px solid var(--ink);border-radius:999px;background:var(--card);position:relative}
+.chip .x{position:absolute;left:-6px;right:-6px;top:50%;height:6px;background:var(--loss);transform-origin:left;transform:scaleX(0)}
+.cost-q{position:absolute;left:250px;top:700px;font-size:64px;font-weight:700;max-width:1400px;line-height:1.15}
+.cost-q em{font-style:normal;color:var(--accent)}
+
+/* Escena 3: el giro */
+#s3{background:var(--accent);color:#fff}
+.big{position:absolute;left:180px;top:300px;font-family:var(--display);font-size:210px;line-height:.9;letter-spacing:-.01em}
+.big span{display:block}
+.big .l2{color:var(--sun)}
+.sub3{position:absolute;left:186px;top:800px;font-size:48px;font-weight:500;opacity:.92}
+
+/* Escena 4: organigrama */
+#s4{background:var(--board);color:var(--board-ink)}
+#s4 .grid{background-image:linear-gradient(var(--board-line) 1px,transparent 1px),linear-gradient(90deg,var(--board-line) 1px,transparent 1px);opacity:.35}
+.t4{position:absolute;left:90px;top:56px;font-family:var(--display);font-size:56px;letter-spacing:.04em;color:var(--board-muted)}
+.t4 b{color:var(--board-ink)}
+svg.wires{position:absolute;inset:0}
+svg.wires path{fill:none;stroke:var(--board-muted);stroke-width:3}
+.node{position:absolute;width:270px;transform:translate(-50%,0);background:var(--board-2);border:3px solid var(--board-line);border-radius:14px;padding:16px 18px 18px;text-align:center}
+.node h3{font-family:var(--display);font-size:38px;line-height:1;letter-spacing:.01em}
+.node p{font-size:22px;color:var(--board-muted);margin-top:8px;line-height:1.2}
+.node.you{width:360px;border-color:var(--sun);background:#2a2a1a}
+.node h3.sm{font-size:31px;padding-block:3px}
+.node.you h3{color:var(--sun)}
+.node.top{width:360px;border-color:var(--sky)}
+.node.top h3{color:var(--sky)}
+.node.admin{border-color:var(--mint)}
+.node.com{border-color:#ff9d7a}
+.hired{position:absolute;right:-18px;top:-20px;font-family:var(--display);font-size:22px;letter-spacing:.1em;color:var(--board);background:var(--mint);padding:5px 10px;border-radius:6px;transform-origin:center}
+.group{position:absolute;transform:translate(-50%,0);font-family:var(--display);font-size:34px;letter-spacing:.12em;text-transform:uppercase;padding:6px 18px;border-radius:999px;background:var(--board)}
+.group small{display:block;font-family:var(--body);font-size:20px;letter-spacing:0;text-transform:none;color:var(--board-muted);text-align:center}
+.g-admin{color:var(--mint)} .g-com{color:#ff9d7a}
+.cap4{position:absolute;left:0;right:0;top:960px;text-align:center;font-size:44px;font-weight:600}
+.cap4 em{font-style:normal;color:var(--sun)}
+
+/* Escena 5: reglas */
+#s5{background:var(--paper)}
+.rules{position:absolute;left:250px;top:250px;display:flex;flex-direction:column;gap:56px}
+.rule{display:flex;gap:40px;align-items:center}
+.tick{width:96px;height:96px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:56px;font-weight:800;flex:none}
+.rule h4{font-family:var(--display);font-size:92px;line-height:1}
+.rule p{font-size:36px;color:var(--muted);margin-top:6px}
+
+/* Escena 6: llamada a la acción */
+#s6{background:var(--board);color:var(--board-ink)}
+.brand{position:absolute;left:0;right:0;top:250px;text-align:center;font-family:var(--display);font-size:200px;letter-spacing:.02em;line-height:1}
+.brand b{color:var(--sun)}
+.tag6{position:absolute;left:0;right:0;top:500px;text-align:center;font-size:56px;font-weight:600}
+.cta{position:absolute;left:50%;top:650px;transform:translate(-50%,0);background:var(--sun);color:var(--board);font-weight:800;font-size:48px;padding:28px 60px;border-radius:14px}
+.foot6{position:absolute;left:0;right:0;top:860px;text-align:center;font-size:30px;color:var(--board-muted)}
+</style>
+</head>
+<body>
+
+<!-- 1 · El anuncio -->
+<section class="scene" id="s1">
+  <div class="grid"></div>
+  <div class="ad a" id="ad">
+    <div class="ad-top"><span><b>OFERTA DE EMPLEO</b> · Tu negocio</span><span>Incorporación inmediata</span></div>
+    <h1><span id="typed"></span><span class="caret" id="caret"></span></h1>
+    <ul class="req">
+      <li class="a" id="r1"><i>—</i>Que conteste el WhatsApp a las 23:00.</li>
+      <li class="a" id="r2"><i>—</i>Que haga seguimiento de cada presupuesto.</li>
+      <li class="a" id="r3"><i>—</i>Que se acuerde de los clientes que dejan de venir.</li>
+      <li class="a" id="r4"><i>—</i>Que lleve el correo al día.</li>
+      <li class="a" id="r5"><i>—</i>Los 7 días de la semana.</li>
+    </ul>
+  </div>
+  <div class="stamp se-busca a" id="sebusca">Se busca</div>
+</section>
+
+<!-- 2 · Lo que cuesta -->
+<section class="scene" id="s2">
+  <div class="grid"></div>
+  <div class="cost-h a" id="ch">Una persona más es:</div>
+  <div class="chips">
+    <div class="chip a" id="c1">Sueldo<span class="x" id="x1"></span></div>
+    <div class="chip a" id="c2">Seguridad Social<span class="x" id="x2"></span></div>
+    <div class="chip a" id="c3">Formación<span class="x" id="x3"></span></div>
+    <div class="chip a" id="c4">Vacaciones<span class="x" id="x4"></span></div>
+    <div class="chip a" id="c5">Turnos de noche<span class="x" id="x5"></span></div>
+  </div>
+  <div class="cost-q a" id="cq">¿Y si empezaras por <em>lo que se repite cada día</em>?</div>
+</section>
+
+<!-- 3 · El giro -->
+<section class="scene" id="s3">
+  <div class="big"><span class="a" id="b1">Contrata tu primer</span><span class="a l2" id="b2">equipo digital.</span></div>
+  <div class="sub3 a" id="b3">Empleados de IA con un puesto, unas tareas y una métrica.</div>
+</section>
+
+<!-- 4 · El organigrama -->
+<section class="scene" id="s4">
+  <div class="grid"></div>
+  <div class="t4 a" id="t4"><b>TU EQUIPO</b> · organigrama</div>
+  <svg class="wires" viewBox="0 0 1920 1080" width="1920" height="1080">
+    <path id="w1" d="M960 232 V272"/>
+    <path id="w2" d="M960 382 V422"/>
+    <path id="w3" d="M960 532 V566 M445 566 H1340 M445 566 V600 M1340 566 V600"/>
+    <path id="w4" d="M445 680 V712 M300 712 H590 M300 712 V740 M590 712 V740"/>
+    <path id="w5" d="M1340 680 V712 M1050 712 H1630 M1050 712 V740 M1340 712 V740 M1630 712 V740"/>
+  </svg>
+  <div class="node you a" id="n0" style="left:960px;top:120px"><h3>Tú</h3><p>Hablas solo con tu asistente</p></div>
+  <div class="node top a" id="n1" style="left:960px;top:272px"><h3>Executive Assistant</h3><p>Te avisa de lo importante</p><span class="hired a" id="h1">CONTRATADO</span></div>
+  <div class="node top a" id="n2" style="left:960px;top:422px"><h3>Chief of Staff Officer</h3><p>Reparte el trabajo</p><span class="hired a" id="h2">CONTRATADO</span></div>
+  <div class="group g-admin a" id="g1" style="left:445px;top:600px">Administración<small>lo que entra</small></div>
+  <div class="group g-com a" id="g2" style="left:1340px;top:600px">Comercial<small>lo que sale</small></div>
+  <div class="node admin a" id="n3" style="left:300px;top:740px"><h3>Recepcionista</h3><p>WhatsApp y llamadas</p><span class="hired a" id="h3">CONTRATADO</span></div>
+  <div class="node admin a" id="n4" style="left:590px;top:740px"><h3>Correo</h3><p>La bandeja, al día</p><span class="hired a" id="h4">CONTRATADO</span></div>
+  <div class="node com a" id="n5" style="left:1050px;top:740px"><h3 class="sm">Resp. de clientes</h3><p>Que nadie se vaya</p><span class="hired a" id="h5">CONTRATADO</span></div>
+  <div class="node com a" id="n6" style="left:1340px;top:740px"><h3>Recuperador</h3><p>Vuelven los de antes</p><span class="hired a" id="h6">CONTRATADO</span></div>
+  <div class="node com a" id="n7" style="left:1630px;top:740px"><h3>Comunicación</h3><p>Avisos y novedades</p><span class="hired a" id="h7">CONTRATADO</span></div>
+  <div class="cap4 a" id="cap4">Tú hablas con uno. <em>Ellos se reparten el trabajo.</em></div>
+</section>
+
+<!-- 5 · Las reglas -->
+<section class="scene" id="s5">
+  <div class="grid"></div>
+  <div class="rules">
+    <div class="rule a" id="u1"><div class="tick">✓</div><div><h4>Trabajan mientras tú atiendes</h4><p>Responden, preparan y hacen seguimiento.</p></div></div>
+    <div class="rule a" id="u2"><div class="tick">✓</div><div><h4>Tú decides qué hacen solos</h4><p>Lo delicado siempre pasa por ti.</p></div></div>
+    <div class="rule a" id="u3"><div class="tick">✓</div><div><h4>Se miden cada mes</h4><p>Si un puesto no rinde, se cambia.</p></div></div>
+  </div>
+</section>
+
+<!-- 6 · Llamada a la acción -->
+<section class="scene" id="s6">
+  <div class="brand a" id="k1">Native <b>Crew</b></div>
+  <div class="tag6 a" id="k2">Tu primer equipo digital, a medida de tu negocio.</div>
+  <div class="cta a" id="k3">Pide tu diagnóstico gratuito</div>
+  <div class="foot6 a" id="k4">Empezamos por lo que más tiempo te quita.</div>
+</section>
+
+<script>
+const DURATION = 36;
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);                       // salida suave
+const back = x => { x = clamp(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const prog = (t, t0, d) => clamp((t - t0) / d);
+
+// Escenas: [id, entra, sale]. Fundido cruzado de 0,35 s.
+const SCENES = [["s1", 0, 11.2], ["s2", 11.2, 16.4], ["s3", 16.4, 20], ["s4", 20, 29.6], ["s5", 29.6, 33], ["s6", 33, DURATION + 1]];
+const FADE = 0.35;
+
+function up(el, t, t0, d = 0.5, dist = 40) {           // aparece subiendo
+  const p = ease(prog(t, t0, d));
+  el.style.opacity = p;
+  el.style.transform = (el.dataset.base || "") + ` translateY(${(1 - p) * dist}px)`;
+}
+function pop(el, t, t0, d = 0.45, rot = 0) {            // sello: entra grande y se asienta
+  const p = prog(t, t0, d);
+  const s = 1.8 - 0.8 * back(p);
+  el.style.opacity = clamp(p * 3);
+  el.style.transform = (el.dataset.base || "") + ` scale(${s}) rotate(${rot}deg)`;
+}
+
+const HEADLINE = "¿Buscas contratar a alguien?";
+const wireLen = {};
+document.querySelectorAll("svg.wires path").forEach(p => {
+  const L = p.getTotalLength(); wireLen[p.id] = L;
+  p.style.strokeDasharray = L;
+});
+function wire(id, t, t0, d = 0.5) {
+  $(id).style.strokeDashoffset = wireLen[id] * (1 - ease(prog(t, t0, d)));
+}
+
+window.seek = function (t) {
+  for (const [id, a, b] of SCENES) {
+    const o = Math.min(prog(t, a - FADE / 2, FADE), 1 - prog(t, b - FADE / 2, FADE));
+    $(id).style.opacity = clamp(o);
+  }
+
+  // 1 · anuncio
+  up($("ad"), t, 0.1, 0.6, 60);
+  const n = Math.floor(clamp((t - 0.7) / 1.7) * HEADLINE.length);
+  $("typed").textContent = HEADLINE.slice(0, n);
+  $("caret").style.opacity = (t < 2.6 || Math.floor(t * 2) % 2 === 0) ? 1 : 0;
+  ["r1", "r2", "r3", "r4", "r5"].forEach((id, i) => up($(id), t, 3.0 + i * 1.05, 0.45, 24));
+  pop($("sebusca"), t, 8.6, 0.5, -8);
+
+  // 2 · lo que cuesta
+  up($("ch"), t, 11.4, 0.5);
+  ["c1", "c2", "c3", "c4", "c5"].forEach((id, i) => {
+    up($(id), t, 12.0 + i * 0.3, 0.4, 20);
+    $("x" + (i + 1)).style.transform = `scaleX(${ease(prog(t, 14.0 + i * 0.12, 0.35))})`;
+  });
+  up($("cq"), t, 14.6, 0.5);
+
+  // 3 · el giro
+  up($("b1"), t, 16.6, 0.55, 60);
+  up($("b2"), t, 17.0, 0.55, 60);
+  up($("b3"), t, 17.8, 0.5, 30);
+
+  // 4 · organigrama
+  up($("t4"), t, 20.1, 0.4, 20);
+  up($("n0"), t, 20.3, 0.45, 30);
+  wire("w1", t, 20.7, 0.3);
+  up($("n1"), t, 20.9, 0.45, 30); pop($("h1"), t, 21.3, 0.35, 6);
+  wire("w2", t, 21.5, 0.3);
+  up($("n2"), t, 21.7, 0.45, 30); pop($("h2"), t, 22.1, 0.35, -5);
+  wire("w3", t, 22.4, 0.6);
+  up($("g1"), t, 22.9, 0.4, 20); up($("g2"), t, 23.0, 0.4, 20);
+  wire("w4", t, 23.3, 0.4); wire("w5", t, 23.3, 0.5);
+  ["n3", "n4", "n5", "n6", "n7"].forEach((id, i) => {
+    up($(id), t, 23.6 + i * 0.32, 0.45, 30);
+    pop($("h" + (i + 3)), t, 23.95 + i * 0.32, 0.35, i % 2 ? -6 : 6);
+  });
+  up($("cap4"), t, 26.0, 0.5, 20);
+
+  // 5 · reglas
+  ["u1", "u2", "u3"].forEach((id, i) => up($(id), t, 29.8 + i * 0.75, 0.5, 30));
+
+  // 6 · llamada a la acción
+  up($("k1"), t, 33.2, 0.6, 50);
+  up($("k2"), t, 33.7, 0.5, 30);
+  up($("k3"), t, 34.2, 0.5, 30);
+  up($("k4"), t, 34.7, 0.5, 20);
+};
+
+document.querySelectorAll(".node,.group,.cta").forEach(el => el.dataset.base = "translate(-50%,0)");
+window.DURATION = DURATION;
+window.seek(0);
+</script>
+</body>
+</html>
