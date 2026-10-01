@@ -10,7 +10,7 @@
 - **Personaje:** {color y forma de la marca Native Crew, por decidir}
 - **Dónde trabaja:** trastienda (Claude), conectada al correo del dueño (Gmail u Outlook) con el permiso mínimo.
 - **Horario:** repaso del correo cada mañana a las 8:00 y otro a las 15:00; los avisos urgentes, al momento.
-- **Con quién habla:** con nadie de fuera. Sus avisos y resúmenes llegan al dueño **a través del asistente ejecutivo**;
+- **Con quién habla:** con nadie de fuera. Sus avisos y resúmenes llegan al dueño **a través del Executive Assistant**;
   el reparto a otros empleados, a través del Chief of Staff Officer.
 - **Métrica:** horas de correo ahorradas a la semana (estimadas por el dueño) y **correos importantes sin respuesta
   (meta: 0)**.
@@ -26,10 +26,10 @@ proveedor, y contesto tarde."
 | Tarea | Cuándo | Qué entrega |
 |---|---|---|
 | **Clasificar** cada correo nuevo: *Responder*, *Para saber*, *Facturas y papeles*, *Publicidad* | En cada repaso | Etiquetas en el correo |
-| **Resumen del día**: lo que pide respuesta, lo que vence y lo que puede esperar | Cada mañana | Resumen (máximo 10 líneas) para el asistente ejecutivo |
+| **Resumen del día**: lo que pide respuesta, lo que vence y lo que puede esperar | Cada mañana | Resumen (máximo 10 líneas) para el Executive Assistant |
 | **Borradores de respuesta** con el tono del dueño | En cada repaso, para los de *Responder* | Borrador guardado en el correo, **sin enviar** |
 | **Recordatorio de seguimiento**: correos enviados por el dueño sin respuesta en 3 días | Cada mañana | Línea en el resumen + borrador de recordatorio |
-| **Aviso urgente**: cliente enfadado, plazo de hoy, banco, Hacienda o Seguridad Social | Al momento | Aviso urgente al asistente ejecutivo |
+| **Aviso urgente**: cliente enfadado, plazo de hoy, banco, Hacienda o Seguridad Social | Al momento | Aviso urgente al Executive Assistant |
 | **Proponer bajas de listas** de publicidad que nunca abre | Una vez por semana | Lista para que el dueño marque cuáles |
 | **Repartir** a otros empleados lo que es suyo (ver "Pasa el trabajo a") | En cada repaso | Etiqueta + nota en la ficha |
 
@@ -54,7 +54,7 @@ proveedor, y contesto tarde."
 
 ## Avisos al dueño
 
-No los envía ella: los pasa al **asistente ejecutivo** (decisión 0010), que junta los de todos los empleados y los
+No los envía ella: los pasa al **Executive Assistant** (decisión 0010), que junta los de todos los empleados y los
 manda por el canal que eligió el dueño (WhatsApp, llamada, email o la app), con sus horas de silencio. Así el dueño
 recibe un solo mensaje y no uno por agente.
 

@@ -30,7 +30,7 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Arquitectura (decisión 0009, aceptada):** WhatsApp y llamadas delegados en ElevenLabs; los empleados virtuales los creamos
   nosotros al estilo Marblism (nombre, rol, tareas, horario, métrica) y trabajan en la trastienda con Claude (Claude Code ahora,
   Managed Agents después). Una carpeta por cliente en `clientes/C00X/` (código, sin datos personales).
-- **Estructura del equipo de cada cliente (propuesta, decisión 0010):** dueño → asistente ejecutivo (su único
+- **Estructura del equipo de cada cliente (propuesta, decisión 0010):** dueño → Executive Assistant (su único
   interlocutor) → Chief of Staff Officer (reparte) → ramas Administración (lo que entra), Comercial (lo que sale), A medida y
   Horizonte (GEO/SEO, web para agentes, compras por agentes; no se monta aún).
 - **Sistema en diseño:** el equipo digital que trabajará para los clientes (`sistemas/equipo-digital/`): escalado de

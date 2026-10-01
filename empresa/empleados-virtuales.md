@@ -8,7 +8,7 @@
   - [`../sistemas/equipo-digital/`](../sistemas/equipo-digital/): cómo trabajan por dentro (portero, supervisor y
     plantillas);
   - decisión 0007: los mismos empleados sirven en varios sectores;
-  - **decisión 0010 (propuesta): nueva estructura.** El Encargado se parte en asistente ejecutivo (habla con el
+  - **decisión 0010 (propuesta): nueva estructura.** El Encargado se parte en Executive Assistant (habla con el
     dueño) y Chief of Staff Officer (reparte), y los empleados se agrupan en Administración (lo que entra), Comercial (lo
     que sale), A medida y Horizonte. El Administrativo se parte en Papeles y Cobros. Esta página aún usa los nombres
     anteriores.

@@ -1,4 +1,4 @@
-# 0010 — Estructura del equipo de cada cliente: asistente ejecutivo, Chief of Staff Officer y ramas
+# 0010 — Estructura del equipo de cada cliente: Executive Assistant, Chief of Staff Officer y ramas
 
 - **Fecha:** 2026-10-01
 - **Estado:** propuesta (idea del fundador, ordenada y con matices). Se acepta o se ajusta tras probarla con el
@@ -18,7 +18,7 @@ El equipo de cada cliente se organiza así:
 ```
                          DUEÑO (el "CEO" del negocio)
                                    │  habla, llama, pide
-                         ASISTENTE EJECUTIVO
+                         EXECUTIVE ASSISTANT
                  (su único interlocutor; le avisa de lo importante)
                                    │
                           CHIEF OF STAFF OFFICER
@@ -36,11 +36,11 @@ El equipo de cada cliente se organiza así:
 
 ### Los cinco papeles
 
-1. **Asistente ejecutivo.** Trabaja codo con codo con el dueño. Es **el único** con el que habla: le escribe o le
-   llama, y el asistente le cuenta cómo va todo, le avisa de las reuniones próximas y de los cambios importantes, y
+1. **Executive Assistant.** Trabaja codo con codo con el dueño. Es **el único** con el que habla: le escribe o le
+   llama, y el Executive Assistant le cuenta cómo va todo, le avisa de las reuniones próximas y de los cambios importantes, y
    le pide permisos. Recoge los avisos de todos para que el dueño reciba un solo mensaje y no uno por agente.
-2. **Chief of Staff Officer.** No habla con el dueño ni con el público. Recibe cada petición (del asistente o de un
-   empleado), decide qué grupo la hace, vigila que se haga y devuelve el resultado al asistente. Es el patrón *chief of
+2. **Chief of Staff Officer.** No habla con el dueño ni con el público. Recibe cada petición (del Executive Assistant o de un
+   empleado), decide qué grupo la hace, vigila que se haga y devuelve el resultado al Executive Assistant. Es el patrón *chief of
    staff* del hilo de Dots.
 3. **Administración: reacciona a lo que llega de fuera.** Recepcionista (WhatsApp y llamadas de clientes, citas y
    cambios de cita), Correo (clasifica, resume, borradores y reparte) y Papeles (facturas de proveedores, gestoría).
@@ -68,13 +68,13 @@ Según la regla contra el ruido, ninguno se monta hasta tener las 10 conversacio
 - **El Administrativo se parte en dos.** "Papeles" es entrada (le llegan facturas): Administración. "Cobros" es
   salida (el negocio reclama pagos): Comercial. Coincide con la propuesta del hilo de Dots de separarlo.
 - **La Recepcionista también responde y reserva.** Sigue siendo de Administración porque nunca escribe primero.
-- **Dos papeles, un agente al principio.** Para un negocio pequeño con 2–3 empleados, asistente y Chief of Staff Officer
+- **Dos papeles, un agente al principio.** Para un negocio pequeño con 2–3 empleados, Executive Assistant y Chief of Staff Officer
   pueden ser el mismo agente con dos sombreros. Se separan cuando un cliente tenga 4 o más empleados o cuando el
-  asistente empiece a fallar en el reparto. En la ficha siempre son dos papeles.
-- **Encaja con la decisión 0009:** el asistente ejecutivo es lo que el dueño ve. Si le llama por teléfono, esa voz es
+  Executive Assistant empiece a fallar en el reparto. En la ficha siempre son dos papeles.
+- **Encaja con la decisión 0009:** el Executive Assistant es lo que el dueño ve. Si le llama por teléfono, esa voz es
   ElevenLabs; el Chief of Staff Officer y las ramas trabajan en la trastienda con Claude.
 - **Límite de WhatsApp:** Meta no permite asistentes de uso general en WhatsApp desde 2026-01-15 (ver
-  `empresa/empleados-virtuales.md`, Encargado). El asistente ejecutivo solo habla del trabajo del negocio; si el dueño
+  `empresa/empleados-virtuales.md`, Encargado). El Executive Assistant solo habla del trabajo del negocio; si el dueño
   le pide algo ajeno, lo declina.
 - **El control de calidad no es del cliente.** El portero, el supervisor y la biblioteca de mensajes son de Native
   Crew y vigilan a todas las ramas. El supervisor informa al fundador, no al dueño.
@@ -92,12 +92,12 @@ Según la regla contra el ruido, ninguno se monta hasta tener las 10 conversacio
 
 ## Consecuencias
 
-- El **Encargado** de `empresa/empleados-virtuales.md` pasa a ser **asistente ejecutivo + Chief of Staff Officer**. Hay que
+- El **Encargado** de `empresa/empleados-virtuales.md` pasa a ser **Executive Assistant + Chief of Staff Officer**. Hay que
   rehacer su ficha con la plantilla de empleado.
 - La ficha `sistemas/equipo-digital/agentes/asistente-del-dueno.md` pasa a ser la de **Correo** (rama
-  Administración). Los avisos al dueño pasan al asistente ejecutivo.
-- Asistente ejecutivo y Chief of Staff Officer van **incluidos siempre** en la cuota base; los precios por rama, en
+  Administración). Los avisos al dueño pasan al Executive Assistant.
+- Executive Assistant y Chief of Staff Officer van **incluidos siempre** en la cuota base; los precios por rama, en
   `empresa/oferta.md` cuando se retomen.
 - El organigrama (`empresa/organigrama.html`) refleja esta estructura.
-- **Se revisa** con el primer cliente piloto: ¿el dueño entiende la estructura? ¿Usa el canal con el asistente? ¿Hace
+- **Se revisa** con el primer cliente piloto: ¿el dueño entiende la estructura? ¿Usa el canal con el Executive Assistant? ¿Hace
   falta separar los dos sombreros?
