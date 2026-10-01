@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Equipo digital para solo founders</title>
+<!-- Versión para solo founders del vídeo de la landing. Código propio (sin onetake): se puede usar comercialmente.
+     Fuentes: Barlow Condensed y Figtree (licencia SIL OFL). Se renderiza con
+     `python3 render.py --html solo.html --out ../../solo-founders.mp4`. window.seek(t) pinta el segundo t. -->
+<style>
+@font-face{font-family:"Barlow Condensed";src:url("BarlowCondensed-700.woff2") format("woff2");font-weight:700}
+@font-face{font-family:"Figtree";src:url("Figtree-variable.woff2") format("woff2");font-weight:300 900}
+:root{
+  --paper:#f2f5f2; --card:#ffffff; --ink:#0f241f; --muted:#55665f; --line:#d3dcd7;
+  --accent:#2446c8; --loss:#d9532c;
+  --board:#0f241f; --board-2:#16302a; --board-ink:#eef3f0; --board-muted:#9fb3ab; --board-line:#2f4a42;
+  --sky:#8fa6ff; --mint:#5fd3a5; --sun:#f4c64f; --coral:#ff9d7a;
+  --display:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"Figtree",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--paper)}
+body{font-family:var(--body);color:var(--ink);position:relative}
+.scene{position:absolute;inset:0;opacity:0}
+.grid{position:absolute;inset:0;background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:64px 64px;opacity:.45}
+.dark .grid{background-image:linear-gradient(var(--board-line) 1px,transparent 1px),linear-gradient(90deg,var(--board-line) 1px,transparent 1px);opacity:.35}
+.dark{background:var(--board);color:var(--board-ink)}
+
+/* 1 · la tarjeta de visita */
+.bcard{position:absolute;left:150px;top:250px;width:800px;height:460px;background:var(--card);border:3px solid var(--ink);border-radius:10px;box-shadow:16px 16px 0 var(--ink);padding:56px 64px;display:flex;flex-direction:column}
+.bcard .who{font-family:var(--display);font-size:150px;line-height:.9}
+.bcard .role{font-size:54px;font-weight:700;color:var(--accent);margin-top:18px;height:70px;white-space:nowrap}
+.bcard .meta{margin-top:auto;font-size:28px;color:var(--muted);border-top:2px solid var(--line);padding-top:18px}
+.count{position:absolute;left:150px;top:780px;font-family:var(--display);font-size:96px;line-height:1}
+.count b{color:var(--loss)}
+.hats-h{position:absolute;left:1090px;top:150px;font-family:var(--display);font-size:46px;letter-spacing:.12em;color:var(--muted)}
+.hats{position:absolute;left:1090px;top:225px;display:flex;flex-direction:column;gap:12px}
+.hat{font-size:46px;font-weight:600;display:flex;align-items:baseline;gap:18px}
+.hat i{font-style:normal;font-family:var(--display);font-size:34px;color:var(--muted);width:44px}
+.hat.own{color:var(--accent);font-weight:800}
+
+/* 2 · tu día */
+.day-h{position:absolute;left:150px;top:110px;font-family:var(--display);font-size:64px;letter-spacing:.04em;color:var(--board-muted)}
+.day-h b{color:var(--board-ink)}
+.rail{position:absolute;left:340px;top:240px;width:4px;height:600px;background:var(--board-line)}
+.rail-fill{position:absolute;left:340px;top:240px;width:4px;height:600px;background:var(--sun);transform-origin:top}
+.slot{position:absolute;left:150px;display:flex;align-items:center;gap:60px}
+.slot .h{font-family:var(--display);font-size:56px;width:150px;text-align:right;color:var(--board-muted)}
+.slot .dot{width:24px;height:24px;border-radius:50%;background:var(--board);border:4px solid var(--coral);margin-left:-37px}
+.slot .txt{font-size:46px;font-weight:600}
+.slot.work .dot{border-color:var(--mint);background:var(--mint)}
+.slot.work .txt{color:var(--mint)}
+.slot .tag{font-family:var(--display);font-size:26px;letter-spacing:.1em;color:var(--board);background:var(--mint);padding:4px 10px;border-radius:6px;margin-left:16px;vertical-align:middle}
+.day-q{position:absolute;left:150px;top:900px;font-size:58px;font-weight:700}
+.day-q em{font-style:normal;color:var(--sun)}
+
+/* 3 · el giro */
+#s3{background:var(--accent);color:#fff}
+.big{position:absolute;left:180px;top:280px;font-family:var(--display);font-size:200px;line-height:.92}
+.big span{display:block}
+.big .l2{color:var(--sun)}
+.sub3{position:absolute;left:186px;top:800px;font-size:50px;font-weight:500}
+
+/* 4 · reparte los sombreros */
+.t4{position:absolute;left:150px;top:70px;font-family:var(--display);font-size:64px;letter-spacing:.04em;color:var(--board-muted)}
+.t4 b{color:var(--board-ink)}
+.cols{position:absolute;left:150px;top:170px;width:1620px;display:flex;justify-content:space-between;font-family:var(--display);font-size:30px;letter-spacing:.14em;color:var(--board-muted)}
+.row{position:absolute;left:150px;width:1620px;height:100px}
+.task{position:absolute;left:0;top:10px;width:760px;height:80px;border:3px solid var(--board-line);border-radius:999px;display:flex;align-items:center;padding:0 34px;font-size:36px;font-weight:600;color:var(--board-ink);background:var(--board-2)}
+.task s{position:absolute;left:24px;right:24px;top:50%;height:4px;background:var(--coral);transform-origin:left}
+svg.arrows{position:absolute;inset:0}
+svg.arrows path{fill:none;stroke:var(--sun);stroke-width:4}
+.emp{position:absolute;left:920px;top:0;width:700px;height:100px;border:3px solid var(--mint);border-radius:14px;background:var(--board-2);display:flex;flex-direction:column;justify-content:center;padding:0 28px}
+.emp h3{font-family:var(--display);font-size:44px;line-height:1}
+.emp p{font-size:24px;color:var(--board-muted);margin-top:4px}
+.emp.top{border-color:var(--sky)} .emp.top h3{color:var(--sky)}
+.emp.com{border-color:var(--coral)}
+.hired{position:absolute;right:-16px;top:-16px;font-family:var(--display);font-size:22px;letter-spacing:.1em;color:var(--board);background:var(--mint);padding:5px 10px;border-radius:6px}
+.cap4{position:absolute;left:0;right:0;top:985px;text-align:center;font-size:36px;font-weight:600;color:var(--board-muted)}
+.cap4 em{font-style:normal;color:var(--sky)}
+
+/* 5 · la tarjeta, otra vez */
+.again-h{position:absolute;left:0;right:0;top:150px;text-align:center;font-family:var(--display);font-size:96px;line-height:1}
+.again-h em{font-style:normal;color:var(--accent)}
+.bcard.c{left:560px;top:330px}
+.bcard.c .role{color:var(--ink)}
+
+/* 6 · llamada a la acción */
+.brand{position:absolute;left:0;right:0;top:250px;text-align:center;font-family:var(--display);font-size:200px;line-height:1}
+.brand b{color:var(--sun)}
+.tag6{position:absolute;left:0;right:0;top:500px;text-align:center;font-size:54px;font-weight:600}
+.cta{position:absolute;left:50%;top:650px;background:var(--sun);color:var(--board);font-weight:800;font-size:48px;padding:28px 60px;border-radius:14px}
+.foot6{position:absolute;left:0;right:0;top:860px;text-align:center;font-size:30px;color:var(--board-muted)}
+</style>
+</head>
+<body>
+
+<!-- 1 · Todos tus puestos -->
+<section class="scene" id="s1">
+  <div class="grid"></div>
+  <div class="bcard" id="card1">
+    <div class="who">Tú</div>
+    <div class="role" id="role1"></div>
+    <div class="meta">Tu negocio · tu móvil · abierto 24 h</div>
+  </div>
+  <div class="count" id="count">1 persona · <b id="n">0</b> puestos</div>
+  <div class="hats-h" id="hh">HOY ERES</div>
+  <div class="hats" id="hats"></div>
+</section>
+
+<!-- 2 · Tu día -->
+<section class="scene dark" id="s2">
+  <div class="grid"></div>
+  <div class="day-h" id="dh"><b>TU DÍA</b> · un martes cualquiera</div>
+  <div class="rail"></div><div class="rail-fill" id="rf"></div>
+  <div class="slot" id="d0" style="top:225px"><span class="h">07:30</span><span class="dot"></span><span class="txt">Abres y contestas el WhatsApp</span></div>
+  <div class="slot work" id="d1" style="top:325px"><span class="h">10:00</span><span class="dot"></span><span class="txt">Atiendes<span class="tag">TU TRABAJO</span></span></div>
+  <div class="slot" id="d2" style="top:425px"><span class="h">14:00</span><span class="dot"></span><span class="txt">Comes respondiendo mensajes</span></div>
+  <div class="slot work" id="d3" style="top:525px"><span class="h">17:00</span><span class="dot"></span><span class="txt">Atiendes<span class="tag">TU TRABAJO</span></span></div>
+  <div class="slot" id="d4" style="top:625px"><span class="h">21:30</span><span class="dot"></span><span class="txt">Facturas y correos</span></div>
+  <div class="slot" id="d5" style="top:725px"><span class="h">23:45</span><span class="dot"></span><span class="txt">«¿Le contesté a aquel cliente?»</span></div>
+  <div class="day-q" id="dq">¿Cuánto de tu día es <em>tu trabajo de verdad</em>?</div>
+</section>
+
+<!-- 3 · El giro -->
+<section class="scene" id="s3">
+  <div class="big"><span id="b1">Quédate con tu puesto.</span><span class="l2" id="b2">Delega el resto.</span></div>
+  <div class="sub3" id="b3">Un equipo digital para los que lo hacen todo.</div>
+</section>
+
+<!-- 4 · Reparte los sombreros -->
+<section class="scene dark" id="s4">
+  <div class="grid"></div>
+  <div class="t4" id="t4"><b>REPARTE TUS SOMBREROS</b></div>
+  <div class="cols" id="cols"><span>LO QUE HACES HOY</span><span style="width:700px">QUIÉN LO HACE AHORA</span></div>
+  <svg class="arrows" viewBox="0 0 1920 1080" width="1920" height="1080" id="arrows"></svg>
+  <div id="rows"></div>
+  <div class="cap4" id="cap4">Y un <em>Chief of Staff Officer</em> que reparte el trabajo entre ellos.</div>
+</section>
+
+<!-- 5 · Un solo puesto -->
+<section class="scene" id="s5">
+  <div class="grid"></div>
+  <div class="again-h" id="ah">Tu tarjeta, por fin, con <em>un solo puesto</em>.</div>
+  <div class="bcard c" id="card2">
+    <div class="who">Tú</div>
+    <div class="role">Tu oficio.</div>
+    <div class="meta">Lo demás lo lleva tu equipo digital</div>
+  </div>
+</section>
+
+<!-- 6 · Llamada a la acción -->
+<section class="scene dark" id="s6">
+  <div class="brand" id="k1">Native <b>Crew</b></div>
+  <div class="tag6" id="k2">Tu primer equipo digital, para los que lo hacen todo.</div>
+  <div class="cta" id="k3">Pide tu diagnóstico gratuito</div>
+  <div class="foot6" id="k4">Empezamos por lo que más tiempo te quita.</div>
+</section>
+
+<script>
+const DURATION = 37;
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const ease = x => 1 - Math.pow(1 - clamp(x), 3);
+const back = x => { x = clamp(x); const c = 1.7; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const prog = (t, t0, d) => clamp((t - t0) / d);
+
+const SCENES = [["s1", 0, 9.6], ["s2", 9.6, 16.4], ["s3", 16.4, 20], ["s4", 20, 30.4], ["s5", 30.4, 33.8], ["s6", 33.8, DURATION + 1]];
+const FADE = 0.35;
+
+function up(el, t, t0, d = 0.5, dist = 40) {
+  const p = ease(prog(t, t0, d));
+  el.style.opacity = p;
+  el.style.transform = (el.dataset.base || "") + ` translateY(${(1 - p) * dist}px)`;
+}
+function pop(el, t, t0, d = 0.4, rot = 0) {
+  const p = prog(t, t0, d);
+  el.style.opacity = clamp(p * 3);
+  el.style.transform = (el.dataset.base || "") + ` scale(${1.8 - 0.8 * back(p)}) rotate(${rot}deg)`;
+}
+
+// 1 · los puestos que lleva encima
+const HATS = ["Fundador", "Recepcionista", "Comercial", "Atención al cliente", "Administrativo", "Cobros",
+              "Redes sociales", "Correo", "Y además, tu oficio"];
+HATS.forEach((h, i) => {
+  const li = document.createElement("div");
+  li.className = "hat" + (i === HATS.length - 1 ? " own" : "");
+  li.id = "hat" + i;
+  li.innerHTML = `<i>${String(i + 1).padStart(2, "0")}</i>${h}`;
+  $("hats").appendChild(li);
+});
+const hatAt = i => 1.0 + i * 0.62;
+
+// 4 · tareas → empleados
+const ROWS = [
+  ["Contestar WhatsApp a deshoras", "Recepcionista", "Responde y reserva por ti", "admin"],
+  ["Vaciar la bandeja de correo", "Correo", "Clasifica, resume y prepara respuestas", "admin"],
+  ["Acordarte de quién dejó de venir", "Responsable de clientes", "Les escribe antes de que se vayan", "com"],
+  ["Escribir a los clientes de antes", "Recuperador", "Los trae de vuelta", "com"],
+  ["Avisar de cambios y novedades", "Comunicación", "Avisos a todos, a su hora", "com"],
+  ["Saber cómo va todo", "Executive Assistant", "Te lo cuenta en un solo mensaje", "top"],
+];
+const ROW_TOP = 230, ROW_STEP = 122;
+const rowAt = i => 20.5 + i * 0.85;
+ROWS.forEach(([task, role, line, kind], i) => {
+  const r = document.createElement("div");
+  r.className = "row"; r.style.top = (ROW_TOP + i * ROW_STEP) + "px";
+  r.innerHTML = `<div class="task" id="tk${i}">${task}<s id="st${i}"></s></div>
+    <div class="emp ${kind === "admin" ? "" : kind}" id="em${i}"><h3>${role}</h3><p>${line}</p><span class="hired" id="hd${i}">CONTRATADO</span></div>`;
+  $("rows").appendChild(r);
+  const y = ROW_TOP + i * ROW_STEP + 50;
+  const p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+  p.setAttribute("d", `M${150 + 775} ${y} H${150 + 905} M${150 + 885} ${y - 14} L${150 + 905} ${y} L${150 + 885} ${y + 14}`);
+  p.id = "ar" + i;
+  $("arrows").appendChild(p);
+  p.style.strokeDasharray = p.getTotalLength();
+});
+
+window.seek = function (t) {
+  for (const [id, a, b] of SCENES) {
+    $(id).style.opacity = clamp(Math.min(prog(t, a - FADE / 2, FADE), 1 - prog(t, b - FADE / 2, FADE)));
+  }
+
+  // 1
+  up($("card1"), t, 0.1, 0.6, 60);
+  up($("hh"), t, 0.6, 0.4, 20);
+  let shown = 0;
+  HATS.forEach((h, i) => { up($("hat" + i), t, hatAt(i), 0.35, 20); if (t >= hatAt(i)) shown = i + 1; });
+  $("role1").textContent = shown === 0 ? "" : shown < HATS.length ? HATS[shown - 1] : "Todo lo anterior";
+  $("n").textContent = shown;
+  up($("count"), t, 1.0, 0.4, 20);
+
+  // 2
+  up($("dh"), t, 9.8, 0.4, 20);
+  $("rf").style.transform = `scaleY(${ease(prog(t, 10.1, 4.0))})`;
+  for (let i = 0; i < 6; i++) up($("d" + i), t, 10.2 + i * 0.62, 0.4, 20);
+  up($("dq"), t, 14.4, 0.5, 20);
+
+  // 3
+  up($("b1"), t, 16.6, 0.55, 60);
+  up($("b2"), t, 17.1, 0.55, 60);
+  up($("b3"), t, 17.9, 0.5, 30);
+
+  // 4
+  up($("t4"), t, 20.1, 0.4, 20);
+  up($("cols"), t, 20.2, 0.4, 10);
+  ROWS.forEach((_, i) => {
+    const a = rowAt(i);
+    up($("tk" + i), t, a, 0.4, 20);
+    $("ar" + i).style.strokeDashoffset = $("ar" + i).getTotalLength() * (1 - ease(prog(t, a + 0.3, 0.3)));
+    up($("em" + i), t, a + 0.45, 0.4, 20);
+    pop($("hd" + i), t, a + 0.75, 0.35, i % 2 ? -6 : 6);
+    $("st" + i).style.transform = `scaleX(${ease(prog(t, a + 0.75, 0.3))})`;
+    $("tk" + i).style.color = t > a + 0.75 ? "var(--board-muted)" : "";
+  });
+  up($("cap4"), t, 26.3, 0.5, 20);
+
+  // 5
+  up($("ah"), t, 30.6, 0.5, 30);
+  up($("card2"), t, 31.0, 0.6, 50);
+
+  // 6
+  up($("k1"), t, 34.0, 0.6, 50);
+  up($("k2"), t, 34.5, 0.5, 30);
+  up($("k3"), t, 35.0, 0.5, 30);
+  up($("k4"), t, 35.5, 0.5, 20);
+};
+
+$("k3").dataset.base = "translate(-50%,0)";
+window.DURATION = DURATION;
+window.seek(0);
+</script>
+</body>
+</html>

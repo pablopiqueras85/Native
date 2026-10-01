@@ -5,6 +5,7 @@ Código propio de Native Crew (no usa onetake): el vídeo se puede usar comercia
 Uso:
     python3 render.py                      # vídeo completo -> contrata-tu-equipo.mp4
     python3 render.py --stills 2 9 24 34   # solo capturas PNG de esos segundos, para revisar
+    python3 render.py --html solo.html --out ../../solo-founders.mp4   # versión para solo founders
 """
 import argparse
 import subprocess
@@ -26,6 +27,7 @@ def ffmpeg_bin():
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--html", default="video.html")
     ap.add_argument("--out", default=str(AQUI.parent.parent / "contrata-tu-equipo.mp4"))
     ap.add_argument("--stills", nargs="*", type=float)
     args = ap.parse_args()
@@ -33,14 +35,14 @@ def main():
     with sync_playwright() as p:
         browser = p.chromium.launch()
         page = browser.new_page(viewport={"width": 1920, "height": 1080})
-        page.goto((AQUI / "video.html").as_uri())
+        page.goto((AQUI / args.html).as_uri())
         page.evaluate("document.fonts.ready")
         duracion = page.evaluate("window.DURATION")
 
         if args.stills:
             for s in args.stills:
                 page.evaluate(f"window.seek({s})")
-                page.screenshot(path=str(AQUI / f"still-{s:g}.png"))
+                page.screenshot(path=str(AQUI / f"still-{Path(args.html).stem}-{s:g}.png"))
             browser.close()
             return
 
