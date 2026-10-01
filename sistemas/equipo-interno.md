@@ -13,7 +13,7 @@ y decidir. Lo demás lo preparan los agentes; **ninguno envía nada en su nombre
 |---|---|---|---|---|
 | **Cofundador virtual** | `.claude/agents/cofundador.md` | Ordenar la semana, recordar, retar ideas nuevas y repartir trabajo | Cada lunes y cuando se le llame | Creado (2026-10-01) |
 | **Seguimiento comercial** | `.claude/agents/seguimiento-comercial.md` | Acordarse de a quién escribir y redactar el mensaje | Cada mañana | Creado (2026-10-01) |
-| **Asistente de correo** | `.claude/agents/asistente-correo.md` | Clasificar el correo, resumen de la mañana y borradores (nunca envía). Prueba en casa del empleado "Asistente del dueño" | Cada mañana | Creado; prueba pendiente de conectar Gmail |
+| **Asistente de correo** | `.claude/agents/asistente-correo.md` | Clasificar el correo, resumen de la mañana y borradores (nunca envía). Prueba en casa del empleado "Correo" (rama Administración) | Cada mañana | Creado; prueba pendiente de conectar Gmail |
 | **Investigador** | `.claude/agents/investigador.md` | Preparar cada conversación con un dueño | Antes de cada reunión | En uso (diagnóstico) |
 | **Consultor** | `.claude/agents/consultor.md` | Convertir una reunión o un formulario en una propuesta | Después de cada reunión | Creado |
 | **Diagnóstico** (Analista, Propuesta, Precio) | `.claude/agents/` | Informe para quien rellena el formulario | Al llegar una respuesta | Rutina en pausa |

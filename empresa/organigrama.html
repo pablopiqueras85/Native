@@ -96,7 +96,7 @@ header{display:flex;flex-direction:column;gap:12px}
     <div class="totals">
       <span class="total"><b>8</b> agentes que se pueden lanzar</span>
       <span class="total"><b>4</b> skills</span>
-      <span class="total"><b>8</b> fichas de empleados para clientes</span>
+      <span class="total"><b>9</b> puestos diseñados para clientes</span>
       <span class="total"><b>0</b> clientes</span>
     </div>
   </header>
@@ -140,7 +140,7 @@ header{display:flex;flex-direction:column;gap:12px}
           </div>
           <div class="node live">
             <h3>Asistente de correo</h3>
-            <p class="role">Clasifica tu correo, resumen de la mañana y borradores. Prueba del Asistente del dueño.</p>
+            <p class="role">Clasifica tu correo, resumen de la mañana y borradores. Prueba del empleado Correo.</p>
             <span class="file">.claude/agents/asistente-correo.md</span>
             <div class="tags"><span class="tag">falta conectar Gmail</span></div>
           </div>
@@ -201,24 +201,42 @@ header{display:flex;flex-direction:column;gap:12px}
       <!-- Rama 3 -->
       <div class="branch">
         <div class="bhead">
-          <span class="eyebrow">Rama 3 · una por cliente</span>
+          <span class="eyebrow">Rama 3 · una por cliente · decisión 0010</span>
           <h2>Equipo de cada cliente</h2>
-          <p>Se instala en <span class="client-code">clientes/C00X/</span>. Las recetas son comunes; los ajustes, de cada negocio.</p>
+          <p>Se instala en <span class="client-code">clientes/C00X/</span>. El dueño habla con uno solo; el resto trabaja por debajo.</p>
         </div>
         <div class="stack">
           <div class="node paper lead">
-            <span class="eyebrow">Incluido siempre</span>
-            <h3>Encargado</h3>
-            <p class="role">Junta el trabajo de todos, avisa al dueño por un solo canal y recibe sus órdenes.</p>
+            <span class="eyebrow">Incluido siempre · cara al dueño</span>
+            <h3>Asistente ejecutivo</h3>
+            <p class="role">El único con el que habla el dueño (le escribe o le llama). Le cuenta cómo va todo, reuniones próximas y cambios importantes.</p>
+            <div class="tags"><span class="tag eleven">voz: ElevenLabs</span><span class="tag">solo temas del negocio</span></div>
+          </div>
+          <div class="node paper lead">
+            <span class="eyebrow">Incluido siempre · trastienda</span>
+            <h3>Jefe de gabinete</h3>
+            <p class="role">Recibe cada petición y la reparte al grupo que toca. Al principio, mismo agente que el asistente con dos sombreros.</p>
           </div>
           <div class="sub">
-            <span class="group-label">Cara al público</span>
+            <span class="group-label">Administración · lo que entra</span>
             <div class="node paper">
               <h3>Recepcionista</h3>
-              <p class="role">Contesta WhatsApp y llamadas, cualifica y reserva. Cambios de cita.</p>
+              <p class="role">WhatsApp y llamadas de clientes: responde, cualifica, reserva y cambia citas.</p>
               <div class="tags"><span class="tag eleven">ElevenLabs</span><span class="tag paper">ofrecido</span></div>
             </div>
-            <span class="group-label">Trastienda (Claude)</span>
+            <div class="node paper">
+              <h3>Correo</h3>
+              <p class="role">Clasifica, resume, borradores y reparte lo que llega por email.</p>
+              <span class="file">sistemas/equipo-digital/agentes/correo.md</span>
+              <div class="tags"><span class="tag">borrador</span></div>
+            </div>
+            <div class="node paper">
+              <h3>Papeles</h3>
+              <p class="role">Facturas de proveedores y papeles para la gestoría.</p>
+              <div class="tags"><span class="tag">por validar · sale del Administrativo</span></div>
+            </div>
+
+            <span class="group-label">Comercial · lo que sale</span>
             <div class="node paper">
               <h3>Responsable de clientes</h3>
               <p class="role">Detecta quién se está yendo y le escribe a tiempo.</p>
@@ -230,21 +248,26 @@ header{display:flex;flex-direction:column;gap:12px}
               <div class="tags"><span class="tag paper">ofrecido</span></div>
             </div>
             <div class="node paper">
-              <h3>Asistente del dueño</h3>
-              <p class="role">Correo del dueño: clasifica, resume, borradores y lo reparte a los demás.</p>
-              <span class="file">sistemas/equipo-digital/agentes/asistente-del-dueno.md</span>
-              <div class="tags"><span class="tag">borrador</span></div>
-            </div>
-            <div class="node paper">
-              <h3>Administrativo</h3>
-              <p class="role">Cobros pendientes y papeles para la gestoría.</p>
-              <div class="tags"><span class="tag">por validar</span><span class="tag">propuesta: partir en Cobros + Papeles</span></div>
-            </div>
-            <div class="node paper">
-              <h3>Responsable de comunicación</h3>
+              <h3>Comunicación</h3>
               <p class="role">Avisos, después del servicio, fechas especiales, informe a familias.</p>
               <div class="tags"><span class="tag">por validar</span></div>
             </div>
+            <div class="node paper">
+              <h3>Cobros</h3>
+              <p class="role">Reclama pagos pendientes con tacto.</p>
+              <div class="tags"><span class="tag">por validar · sale del Administrativo</span></div>
+            </div>
+
+            <span class="group-label">A medida · por encargo</span>
+            <div class="node todo">
+              <h3>Agentes a medida</h3>
+              <p class="role">Salen de reunión → analista → consultor y se montan a petición del cliente.</p>
+            </div>
+
+            <span class="group-label">Horizonte · no se monta aún</span>
+            <div class="node todo"><h3>Visibilidad (GEO/SEO)</h3><p class="role">Que Google y las IA encuentren y recomienden el negocio. Al estilo de Penny.</p></div>
+            <div class="node todo"><h3>Web legible por agentes</h3><p class="role">Precios y reservas claros para que una IA los entienda.</p></div>
+            <div class="node todo"><h3>Compras por agentes</h3><p class="role">Cuando las IA compren o reserven por la gente. Más a futuro.</p></div>
           </div>
         </div>
       </div>
@@ -254,7 +277,7 @@ header{display:flex;flex-direction:column;gap:12px}
   <section class="notes" aria-label="Cómo leerlo">
     <div class="note">
       <h3>Cómo se pasan el trabajo</h3>
-      <p>Los empleados de un cliente no hablan entre ellos: uno marca algo en la ficha del cliente y otro lo recoge. El Encargado lo junta todo para el dueño.</p>
+      <p>Los empleados de un cliente no hablan entre ellos: uno marca algo en la ficha del cliente y el jefe de gabinete se lo pasa a quien toca. El asistente ejecutivo se lo cuenta al dueño.</p>
     </div>
     <div class="note">
       <h3>Dónde viven</h3>
@@ -262,7 +285,7 @@ header{display:flex;flex-direction:column;gap:12px}
     </div>
     <div class="note">
       <h3>Lo que falta para que la rama 3 funcione</h3>
-      <p>Un primer cliente piloto. Hasta entonces, cada ficha se prueba primero en casa: el Asistente del dueño, con tu correo.</p>
+      <p>Un primer cliente piloto. Hasta entonces, cada ficha se prueba primero en casa: la de Correo, con tu correo.</p>
     </div>
   </section>
 </div>
