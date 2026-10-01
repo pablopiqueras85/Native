@@ -1,4 +1,4 @@
-# Consultoría por reunión: de la conversación al presupuesto
+# Consultoría: del formulario o la reunión al presupuesto
 
 - **Fecha:** 2026-10-01
 - **Estado:** diseño. Aún no se ha usado con ningún cliente.
@@ -12,6 +12,22 @@
 > Reunión con el cliente → la reunión se transcribe → un agente experto analiza la conversación → escoge agentes de la
 > carta y sugiere uno creado a medida → el cliente paga la integración más el mantenimiento mensual de cada agente.
 > Cuantos más agentes hay creados de base, más se reduce el tiempo de implementación.
+
+## Dos puertas de entrada (2026-10-01)
+
+**El formulario es la puerta por defecto. La reunión, cuando se da el caso.** Las dos acaban en el mismo sitio: una
+propuesta de la carta (y a medida si hace falta), con integración + mantenimiento por agente.
+
+| Puerta | Cuándo | Qué analiza | Quién lo analiza | Qué sale |
+|---|---|---|---|---|
+| **Formulario** (Tally) | Siempre: lo rellena el cliente cuando quiere, sin quedar | Las respuestas del cuestionario y la información pública del negocio | El embudo de diagnóstico, de forma automática (`embudo-diagnostico.md`) | Informe con soluciones para el cliente |
+| **Reunión** | Si el cliente prefiere hablar, si es un conocido o referido, o si el informe deja dudas | La transcripción (con permiso) o las notas del fundador, **y el formulario si lo hay** | El agente Consultor | Propuesta y presupuesto en borrador para el fundador |
+
+- **Lo normal:** formulario → informe → reunión de 20–30 min para afinar → el Consultor prepara la propuesta.
+- **Si alguien llega directo a la reunión** (conocidos y referidos), se le puede pasar el formulario después para
+  completar datos, o seguir solo con la transcripción.
+- **Con las dos fuentes el análisis es mejor.** El formulario da cifras ordenadas y la reunión da el contexto y lo
+  que no cabe en un cuestionario.
 
 ## El flujo
 
