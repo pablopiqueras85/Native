@@ -14,6 +14,7 @@ Vídeos hechos con la skill **onetake** entre el 2026-09-28 y el 2026-09-30.
 | `native-crew-equipo.mp4` | "Así trabaja tu equipo": el Encargado (amarillo) y los agentes azul, verde y rojo se pasan el trabajo | 32 s | Sí |
 | `native-crew-explicativo.mp4` | Vídeo explicativo con voz en off: cada cliente (puertas, decisiones, portero), cómo funciona Dots, la implementación con el paquete de puesta en marcha, lo que es tuyo, las fases y los pilotos | 3 min 6 s | Voz y sonido |
 | `contrata-tu-equipo.mp4` | **Vídeo para la landing** ("¿Buscas contratar a alguien?"): oferta de empleo → lo que cuesta una persona más → "Contrata tu primer equipo digital" → organigrama de la decisión 0010 → reglas → diagnóstico gratuito. Sin sonido, para reproducirse en silencio y en bucle | 36 s | No |
+| `solo-founders.mp4` | **Versión para solo founders** («Reparte tus sombreros»): la tarjeta de visita con 9 puestos → tu día → «Quédate con tu puesto. Delega el resto» → cada tarea pasa a un empleado digital → tu tarjeta con un solo puesto → diagnóstico. Código propio, uso comercial permitido. Se genera con `render.py --html solo.html --out ../../solo-founders.mp4` | 37 s | No |
 | `spotter.mp4` | Primera versión de la marca ("Conoce Spotter"), con el personaje de la máquina de jalón | 25 s | No |
 
 Los cuatro vídeos están en 1080p a 30 fotogramas por segundo y pasan la comprobación de onetake (`verify_promo.py`). Los nombres que salen en

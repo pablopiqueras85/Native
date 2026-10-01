@@ -72,9 +72,9 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/mapa-opciones.html` — rutas y opciones: ruta WhatsApp, ruta Dots y Dot interno; cuatro estructuras; los tres pilotos y la futura decisión 0009. Publicado en https://claude.ai/artifact/GAdjVRUQQvySYFcnsKgRUk.
 - `empresa/organigrama.html` — organigrama de los agentes (equipo interno, control de calidad, equipo de cada cliente) y su estado. Publicado en https://claude.ai/artifact/EEs6ML9hRYrgDy6w1gqo3B.
 - `empresa/empleados-virtuales.md` — ficha detallada de cada empleado virtual: qué hace, variantes por sector, métrica, montaje y riesgos.
-- `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
+- `landing/` — la landing con la calculadora privada y `precios.html` («¿Cuánto vale tu hora?»: tareas → cifra → equipo que podrías contratar, con precios orientativos; vista previa en https://claude.ai/artifact/5htCjshTXiyoGNGbnmAMUL). Ver `landing/README.md`.
 - `legal/` — textos legales (borrador de política de privacidad).
-- `marca/videos/` — vídeos de marca hechos con onetake (solo uso no comercial) y sus fuentes. Ver su `README.md`.
+- `marca/videos/` — vídeos de marca y sus fuentes. Los de onetake, solo uso no comercial; `contrata-tu-equipo.mp4` y `solo-founders.mp4` son código propio y sirven para vender. Ver su `README.md`.
 - `sistemas/` — equipos de agentes que usa la propia empresa, con su diseño y sus piezas (cuestionarios, plantillas).
   Los agentes del diagnóstico son agentes independientes en `.claude/agents/` (índice y plantilla en
   `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina. El equipo que trabaja para los clientes está

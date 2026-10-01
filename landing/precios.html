@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuánto vale tu hora</title>
+<meta name="description" content="Pon precio a tu hora, marca las tareas repetitivas que te quitan tiempo y mira qué equipo digital podrías contratar con lo que te cuestan.">
+<style>
+@font-face{font-family:"Barlow Condensed";font-style:normal;font-weight:700;font-display:swap;src:url("fuentes/BarlowCondensed-700.woff2") format("woff2")}
+@font-face{font-family:"Figtree";font-style:normal;font-weight:300 900;font-display:swap;src:url("fuentes/Figtree-variable.woff2") format("woff2")}
+
+/* Layout: una sola columna que se lee como un cálculo: tu hora → tus tareas → la cifra → lo que podrías contratar
+   → precios. La cifra vive en un "tablero" oscuro, como en la landing principal. */
+:root{
+  color-scheme:light;
+  --ground:#f2f5f2; --surface:#ffffff; --ink:#0f241f; --muted:#55665f; --line:#d3dcd7;
+  --accent:#2446c8; --accent-ink:#ffffff; --accent-soft:#e2e8fb; --warn:#9a5a00; --good:#13795b;
+  --board:#0f241f; --board-ink:#eef3f0; --board-muted:#9fb3ab; --board-line:#2a4039; --board-loss:#ff8a66;
+  --board-good:#5fd3a5; --board-sun:#f4c64f; --board-card:#16302a;
+  --display:"Barlow Condensed","Arial Narrow","Roboto Condensed",sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --radius:10px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0c1513; --surface:#131f1b; --ink:#e3ebe7; --muted:#93a69e; --line:#26352f;
+    --accent:#8fa6ff; --accent-ink:#0c1513; --accent-soft:#1b2544; --warn:#f0b451; --good:#5fd3a5;
+    --board:#1a2b26; --board-ink:#eef3f0; --board-muted:#9fb3ab; --board-line:#30463f; --board-loss:#ff916f;
+    --board-good:#5fd3a5; --board-sun:#f4c64f; --board-card:#21362f;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0c1513; --surface:#131f1b; --ink:#e3ebe7; --muted:#93a69e; --line:#26352f;
+  --accent:#8fa6ff; --accent-ink:#0c1513; --accent-soft:#1b2544; --warn:#f0b451; --good:#5fd3a5;
+  --board:#1a2b26; --board-ink:#eef3f0; --board-muted:#9fb3ab; --board-line:#30463f; --board-loss:#ff916f;
+  --board-good:#5fd3a5; --board-sun:#f4c64f; --board-card:#21362f;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:28px 72px;display:flex;flex-direction:column;gap:64px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1;margin:0;text-wrap:balance;letter-spacing:.005em}
+h1{font-size:clamp(3rem,10vw,6.4rem)}
+h2{font-size:clamp(2.1rem,5vw,3.2rem)}
+h3{font-size:1.6rem}
+p{margin:0}
+.eyebrow{font-family:var(--display);font-size:1.05rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--muted);max-width:60ch;font-size:1.1rem}
+section{display:flex;flex-direction:column;gap:22px}
+.step{display:flex;align-items:baseline;gap:14px}
+.step b{font-family:var(--display);font-size:1.2rem;color:var(--accent);border:2px solid var(--accent);border-radius:999px;width:2.1rem;height:2.1rem;display:inline-grid;place-items:center;flex:none;line-height:1}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.brandbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-family:var(--display);font-size:1.6rem;letter-spacing:.02em}
+.brand span{color:var(--accent)}
+.pill{font-size:.85rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;color:var(--muted)}
+
+/* 1 · tu hora */
+.hero{display:flex;flex-direction:column;gap:18px}
+.dial{background:var(--surface);border:2px solid var(--ink);border-radius:18px;box-shadow:10px 10px 0 var(--ink);padding:28px clamp(18px,4vw,40px);display:flex;flex-direction:column;gap:20px}
+.dial-row{display:flex;align-items:center;justify-content:center;gap:clamp(12px,4vw,36px)}
+.knob{width:clamp(56px,12vw,76px);height:clamp(56px,12vw,76px);border-radius:50%;border:2px solid var(--ink);background:var(--ground);font-size:2rem;font-weight:700;line-height:1;display:grid;place-items:center;flex:none}
+.knob:active{transform:translateY(2px)}
+.readout{text-align:center;min-width:0}
+.readout output{display:block;font-family:var(--display);font-size:clamp(5rem,20vw,9.5rem);line-height:.9;color:var(--accent);font-variant-numeric:tabular-nums}
+.readout small{font-size:1rem;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--accent);height:28px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{border:1.5px solid var(--line);background:var(--ground);border-radius:999px;padding:6px 14px;font-size:.95rem;font-variant-numeric:tabular-nums}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+details.help{border-top:1px solid var(--line);padding-top:14px}
+details.help summary{cursor:pointer;color:var(--accent);font-weight:600}
+.helper{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:14px;align-items:end}
+label.f{display:flex;flex-direction:column;gap:6px;font-size:.92rem;color:var(--muted)}
+input[type=number]{font:inherit;font-size:1.1rem;color:var(--ink);background:var(--ground);border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;width:100%;font-variant-numeric:tabular-nums}
+.btn-sec{border:1.5px solid var(--accent);color:var(--accent);background:transparent;border-radius:8px;padding:10px 14px;font-weight:600}
+
+/* 2 · tareas */
+.modes{display:inline-flex;border:1.5px solid var(--line);border-radius:999px;padding:4px;gap:4px;align-self:flex-start;background:var(--surface)}
+.modes button{border:0;background:transparent;border-radius:999px;padding:8px 16px;font-weight:600;color:var(--muted)}
+.modes button[aria-pressed="true"]{background:var(--ink);color:var(--ground)}
+.tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.task{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius);padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.task.on{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.task-top{display:flex;gap:12px;align-items:flex-start}
+.task-top input[type=checkbox]{width:22px;height:22px;accent-color:var(--accent);margin-top:2px;flex:none}
+.task-top label{font-weight:650;line-height:1.3;cursor:pointer}
+.task-who{font-size:.85rem;color:var(--muted)}
+.hours{display:flex;align-items:center;gap:8px}
+.hours button{width:36px;height:36px;border-radius:8px;border:1.5px solid var(--line);background:var(--ground);font-size:1.2rem;font-weight:700}
+.hours output{min-width:4.5em;text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+.hours span{font-size:.85rem;color:var(--muted)}
+.task:not(.on) .hours{opacity:.45}
+.total-box{background:var(--surface);border:1.5px solid var(--line);border-radius:var(--radius);padding:18px;display:flex;flex-direction:column;gap:12px;max-width:520px}
+.sum{color:var(--muted);font-variant-numeric:tabular-nums}
+.sum b{color:var(--ink)}
+
+.go{align-self:flex-start;background:var(--accent);color:var(--accent-ink);border:0;border-radius:12px;padding:18px 28px;font-size:1.25rem;font-weight:800;box-shadow:6px 6px 0 var(--ink)}
+.go:active{transform:translate(3px,3px);box-shadow:3px 3px 0 var(--ink)}
+
+/* 3 · resultado */
+.board{background:var(--board);color:var(--board-ink);border-radius:18px;padding:clamp(22px,4vw,44px);display:flex;flex-direction:column;gap:28px}
+.board .eyebrow{color:var(--board-muted)}
+.board .waiting{color:var(--board-muted);font-size:1.15rem}
+.figure{font-family:var(--display);font-size:clamp(4rem,15vw,8.5rem);line-height:.9;color:var(--board-loss);font-variant-numeric:tabular-nums}
+.figure-sub{font-size:1.15rem;color:var(--board-muted)}
+.figure-sub b{color:var(--board-ink)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.fact{border-top:2px solid var(--board-line);padding-top:10px}
+.fact strong{display:block;font-family:var(--display);font-size:2.2rem;line-height:1;font-variant-numeric:tabular-nums}
+.fact span{font-size:.9rem;color:var(--board-muted)}
+.board h3{font-size:2rem}
+.team{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.emp{background:var(--board-card);border:2px solid var(--board-line);border-radius:12px;padding:14px 16px;position:relative;display:flex;flex-direction:column;gap:4px;min-width:0}
+.emp.base{border-color:#8fa6ff}
+.emp.hired{border-color:var(--board-good)}
+.emp h4{margin:0;font-family:var(--display);font-size:1.5rem;line-height:1}
+.emp p{font-size:.88rem;color:var(--board-muted);line-height:1.35}
+.emp .price{font-variant-numeric:tabular-nums;font-weight:700;margin-top:auto;padding-top:6px}
+.stamp{position:absolute;top:-11px;right:10px;font-family:var(--display);font-size:.85rem;letter-spacing:.1em;background:var(--board-good);color:var(--board);padding:3px 8px;border-radius:5px;transform:rotate(4deg)}
+.emp.base .stamp{background:#8fa6ff}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar{display:grid;grid-template-columns:minmax(120px,190px) 1fr auto;gap:12px;align-items:center}
+.bar span{font-size:.95rem;color:var(--board-muted)}
+.bar i{display:block;height:22px;border-radius:5px;min-width:4px;transition:width .6s ease}
+.bar b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.bar.you i{background:var(--board-loss)}
+.bar.team i{background:var(--board-good)}
+.verdict{font-size:clamp(1.25rem,3vw,1.6rem);font-weight:700;max-width:46ch;line-height:1.3}
+.verdict em{font-style:normal;color:var(--board-sun)}
+.skip{font-size:.95rem;color:var(--board-muted)}
+.cta{display:inline-block;align-self:flex-start;background:var(--board-sun);color:#0f241f;font-weight:800;font-size:1.15rem;padding:16px 26px;border-radius:12px;text-decoration:none}
+.small{font-size:.85rem;color:var(--board-muted)}
+
+/* 4 · precios */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.plan{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.plan.main{border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink)}
+.plan .amount{font-family:var(--display);font-size:3rem;line-height:1;font-variant-numeric:tabular-nums}
+.plan .amount small{font-family:var(--body);font-size:1rem;color:var(--muted);font-weight:500}
+.plan ul{margin:0;padding-left:1.1em;color:var(--muted);font-size:.95rem;display:flex;flex-direction:column;gap:4px}
+.table-wrap{overflow-x:auto;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:.95rem}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--display);font-size:1.05rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+td.num{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+tr:last-child td{border-bottom:0}
+.tag{font-size:.78rem;border-radius:999px;padding:2px 9px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tag.ok{border-color:var(--good);color:var(--good)}
+.note{font-size:.9rem;color:var(--muted);max-width:75ch}
+footer{font-size:.85rem;color:var(--muted);display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:18px}
+footer a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <div class="brand">Native <span>Crew</span></div>
+    <span class="pill">Tus números no salen de este navegador</span>
+  </div>
+
+  <!-- 1 · Tu hora -->
+  <section class="hero" aria-labelledby="h-hora">
+    <span class="eyebrow">Paso 1 de 3</span>
+    <h1 id="h-hora">¿Cuánto vale tu hora?</h1>
+    <p class="lede">Lo que facturas cuando haces tu trabajo de verdad. Con ese precio, vamos a ver cuánto te cuestan las tareas que se repiten cada semana.</p>
+
+    <div class="dial">
+      <div class="dial-row">
+        <button class="knob" type="button" id="menos" aria-label="Bajar 5 euros">−</button>
+        <div class="readout">
+          <output id="rate-out" for="rate">40 €</output>
+          <small>por hora de tu trabajo</small>
+        </div>
+        <button class="knob" type="button" id="mas" aria-label="Subir 5 euros">+</button>
+      </div>
+      <input type="range" id="rate" min="10" max="200" step="5" value="40" aria-label="Precio de tu hora en euros">
+      <div class="chips" id="rate-chips" aria-label="Valores habituales"></div>
+      <details class="help">
+        <summary>¿No sabes cuánto vale tu hora? Calcúlalo</summary>
+        <div class="helper">
+          <label class="f" for="fact">Facturación al mes (€)<input type="number" id="fact" min="0" step="100" value="6000" inputmode="numeric"></label>
+          <label class="f" for="hsem">Horas que trabajas a la semana<input type="number" id="hsem" min="1" step="1" value="45" inputmode="numeric"></label>
+          <button class="btn-sec" type="button" id="usar">Usar este valor: <span id="calc-rate">31 €/h</span></button>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- 2 · Tareas -->
+  <section aria-labelledby="h-tareas">
+    <span class="eyebrow">Paso 2 de 3</span>
+    <h2 id="h-tareas">¿A qué se te van las horas?</h2>
+    <p class="lede">Marca lo que haces tú y ajusta las horas a la semana. Las que vienen puestas son un punto de partida, no un dato: cámbialas por las tuyas.</p>
+    <div class="modes" role="group" aria-label="Cómo quieres contarlo">
+      <button type="button" id="m-tareas" aria-pressed="true">Tarea por tarea</button>
+      <button type="button" id="m-total" aria-pressed="false">Solo el total</button>
+    </div>
+    <div class="tasks" id="tasks"></div>
+    <div class="total-box" id="total-box" hidden>
+      <label class="f" for="htotal">Horas a la semana de trabajo repetitivo (mensajes, correos, avisos, papeles…)
+        <input type="number" id="htotal" min="0" max="80" step="0.5" value="10" inputmode="decimal"></label>
+      <p class="note">Con el total te proponemos el equipo con el que suelen empezar estos negocios; en el diagnóstico lo afinamos.</p>
+    </div>
+    <p class="sum" id="sum"></p>
+    <button class="go" type="button" id="go">Calcula lo que te cuesta →</button>
+  </section>
+
+  <!-- 3 · Resultado -->
+  <section aria-labelledby="h-res" aria-live="polite">
+    <span class="eyebrow">Paso 3 de 3</span>
+    <h2 id="h-res">Lo que te cuesta hacerlo tú</h2>
+    <div class="board" id="board">
+      <p class="waiting" id="waiting">Pon el precio de tu hora, marca tus tareas y pulsa <b>Calcula lo que te cuesta</b>. Aquí aparecerá la cifra y el equipo que podrías contratar con ella.</p>
+      <div id="result" hidden>
+        <div style="display:flex;flex-direction:column;gap:28px">
+          <div>
+            <span class="eyebrow">Tu tiempo en tareas repetitivas</span>
+            <div class="figure" id="fig">0 €</div>
+            <p class="figure-sub">al mes. <b id="fig-year"></b> al año.</p>
+          </div>
+          <div class="facts">
+            <div class="fact"><strong id="f-hm"></strong><span>horas al mes</span></div>
+            <div class="fact"><strong id="f-jor"></strong><span>jornadas de 8 horas</span></div>
+            <div class="fact"><strong id="f-rec"></strong><span>horas que podrías recuperar al mes</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <h3 id="team-h">Por esa cifra podrías contratar</h3>
+            <div class="team" id="team"></div>
+            <p class="skip" id="skip" hidden></p>
+          </div>
+          <div class="bars" aria-label="Comparación al mes">
+            <div class="bar you"><span>Lo que te devuelve</span><i id="bar-you"></i><b id="b-you"></b></div>
+            <div class="bar team"><span>Lo que cuesta tu equipo</span><i id="bar-team"></i><b id="b-team"></b></div>
+          </div>
+          <p class="verdict" id="verdict"></p>
+          <a class="cta" id="cta" href="https://tally.so/r/RGpogp" target="_blank" rel="noopener">Pide tu diagnóstico gratuito</a>
+          <p class="small">Estimación orientativa. Suponemos que el equipo te quita el <span id="pct"></span> de esas horas (lo delicado sigue pasando por ti) y un mes de 4,33 semanas. El diagnóstico lo calcula con tus datos reales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Precios -->
+  <section aria-labelledby="h-precios">
+    <span class="eyebrow">Precios de lanzamiento · orientativos</span>
+    <h2 id="h-precios">Así se paga tu equipo digital</h2>
+    <p class="lede">Dos partes: un montaje para dejarlo funcionando a tu nombre y una cuota al mes por los empleados que tengas.</p>
+    <div class="plans">
+      <div class="plan">
+        <span class="eyebrow">Empieza aquí</span>
+        <h3>Diagnóstico</h3>
+        <div class="amount">0 €</div>
+        <ul><li>Un cuestionario de unos minutos</li><li>Informe con dónde se te van las horas</li><li>Qué empleados te encajan y cuáles no</li></ul>
+      </div>
+      <div class="plan main">
+        <span class="eyebrow">Cada mes</span>
+        <h3>Cuota</h3>
+        <div class="amount"><span id="p-base">99 €</span> <small>+ empleados</small></div>
+        <ul><li>Executive Assistant: hablas solo con él</li><li>Chief of Staff Officer: reparte el trabajo</li><li>Supervisión, ajustes e informe mensual</li><li>Cada empleado, de <span id="p-rango">49 a 79 €</span></li></ul>
+      </div>
+      <div class="plan">
+        <span class="eyebrow">Una vez</span>
+        <h3>Montaje</h3>
+        <div class="amount" id="p-montaje">300–900 €</div>
+        <ul><li>Conectado a tu WhatsApp, correo y agenda</li><li>Todo a tu nombre: si te vas, te lo llevas</li><li><b>Gratis para los 3 primeros negocios piloto</b></li></ul>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Empleado</th><th>Qué te quita</th><th>Rama</th><th>€/mes</th></tr></thead>
+        <tbody id="price-rows"></tbody>
+      </table>
+    </div>
+    <p class="note">Precios en euros, sin IVA. Son precios de lanzamiento y pueden cambiar: el diagnóstico te dice el precio exacto de tu equipo antes de que decidas nada. Los agentes a medida se presupuestan aparte.</p>
+  </section>
+
+  <footer>
+    <span>Native Crew · empleados de IA para negocios que lo hacen todo.</span>
+    <span>Esta página no usa cookies ni analítica y no envía tus números a ningún sitio. <a id="priv" href="https://tally.so/r/J97z1K" target="_blank" rel="noopener">Política de privacidad</a></span>
+  </footer>
+</div>
+
+<script>
+// Todo lo que cambia con frecuencia está aquí. Precios: propuesta de empresa/modelo-economico.md (por decidir).
+const CONFIG = {
+  cuestionarioUrl: "https://tally.so/r/RGpogp",
+  privacidadUrl: "https://tally.so/r/J97z1K",
+  semanasMes: 4.33,
+  recupera: 0.7,            // parte de las horas que se estima que quita el equipo
+  base: 99,                 // Executive Assistant + Chief of Staff Officer + supervisión e informe
+  montaje: "300–900 €",
+  empleados: {
+    recepcionista: { nombre: "Recepcionista", precio: 79, rama: "Administración", linea: "Contesta WhatsApp y llamadas, reserva y persigue a los indecisos", validado: true },
+    correo:        { nombre: "Correo", precio: 49, rama: "Administración", linea: "Clasifica, resume y te deja las respuestas preparadas", validado: true },
+    papeles:       { nombre: "Papeles", precio: 49, rama: "Administración", linea: "Facturas de proveedores y lo que pide la gestoría", validado: false },
+    clientes:      { nombre: "Responsable de clientes", precio: 69, rama: "Comercial", linea: "Escribe a quien deja de venir antes de que se vaya", validado: true },
+    recuperador:   { nombre: "Recuperador", precio: 59, rama: "Comercial", linea: "Trae de vuelta a los clientes de antes", validado: true },
+    comunicacion:  { nombre: "Comunicación", precio: 49, rama: "Comercial", linea: "Avisos, cambios de horario y novedades a todos", validado: false },
+    cobros:        { nombre: "Cobros", precio: 59, rama: "Comercial", linea: "Reclama los pagos pendientes con tacto", validado: false },
+  },
+  // Equipo con el que suelen empezar (modo "solo el total").
+  equipoInicial: ["recepcionista", "correo", "clientes"],
+};
+
+const TAREAS = [
+  { id: "wa",    txt: "Contestar WhatsApp y llamadas de clientes", h: 5,   emp: "recepcionista", on: true },
+  { id: "pres",  txt: "Perseguir presupuestos y a los que «se lo piensan»", h: 2, emp: "recepcionista", on: true },
+  { id: "citas", txt: "Cambios y anulaciones de citas", h: 1.5,           emp: "recepcionista", on: false },
+  { id: "mail",  txt: "Leer, ordenar y contestar el correo", h: 3,        emp: "correo",        on: true },
+  { id: "pap",   txt: "Facturas y papeles para la gestoría", h: 1.5,      emp: "papeles",       on: false },
+  { id: "cob",   txt: "Reclamar pagos pendientes", h: 1,                  emp: "cobros",        on: false },
+  { id: "baja",  txt: "Acordarte de quién ha dejado de venir", h: 1.5,    emp: "clientes",      on: true },
+  { id: "antes", txt: "Escribir a antiguos clientes", h: 1,               emp: "recuperador",   on: false },
+  { id: "aviso", txt: "Avisos, horarios y novedades", h: 1,               emp: "comunicacion",  on: false },
+  { id: "dia",   txt: "Ponerte al día de cómo va todo", h: 1.5,           emp: "base",          on: false },
+];
+
+const $ = id => document.getElementById(id);
+const eur = n => new Intl.NumberFormat("es-ES", { maximumFractionDigits: 0, useGrouping: "always" }).format(Math.round(n)) + " €";
+const num = (n, d = 0) => new Intl.NumberFormat("es-ES", { maximumFractionDigits: d, minimumFractionDigits: 0, useGrouping: "always" }).format(n);
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// --- 1 · tu hora
+const PRESETS = [20, 30, 40, 60, 90];
+let rate = 40;
+PRESETS.forEach(v => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.textContent = v + " €/h"; b.dataset.v = v;
+  b.addEventListener("click", () => setRate(v));
+  $("rate-chips").appendChild(b);
+});
+function setRate(v) {
+  rate = Math.min(200, Math.max(10, Math.round(v)));
+  $("rate").value = rate;
+  $("rate-out").textContent = rate + " €";
+  document.querySelectorAll("#rate-chips .chip").forEach(c => c.setAttribute("aria-pressed", String(+c.dataset.v === rate)));
+  refresh();
+}
+$("rate").addEventListener("input", e => setRate(+e.target.value));
+$("menos").addEventListener("click", () => setRate(rate - 5));
+$("mas").addEventListener("click", () => setRate(rate + 5));
+function helperRate() {
+  const f = +$("fact").value, h = +$("hsem").value;
+  return f > 0 && h > 0 ? f / (h * CONFIG.semanasMes) : 0;
+}
+function showHelper() { $("calc-rate").textContent = num(helperRate()) + " €/h"; }
+["fact", "hsem"].forEach(id => $(id).addEventListener("input", showHelper));
+$("usar").addEventListener("click", () => { const r = helperRate(); if (r) setRate(r); });
+
+// --- 2 · tareas
+let mode = "tareas";
+TAREAS.forEach(t => {
+  const who = t.emp === "base" ? "Lo cubre tu Executive Assistant" : "Lo cubre: " + CONFIG.empleados[t.emp].nombre;
+  const el = document.createElement("div");
+  el.className = "task" + (t.on ? " on" : "");
+  el.id = "task-" + t.id;
+  el.innerHTML = `<div class="task-top"><input type="checkbox" id="c-${t.id}" ${t.on ? "checked" : ""}>
+      <div><label for="c-${t.id}">${t.txt}</label><div class="task-who">${who}</div></div></div>
+    <div class="hours"><button type="button" aria-label="Menos horas">−</button><output id="o-${t.id}"></output><button type="button" aria-label="Más horas">+</button><span>a la semana</span></div>`;
+  $("tasks").appendChild(el);
+  const [minus, plus] = el.querySelectorAll(".hours button");
+  const paint = () => { $("o-" + t.id).textContent = num(t.h, 1) + " h"; el.classList.toggle("on", t.on); refresh(); };
+  minus.addEventListener("click", () => { t.h = Math.max(0, t.h - 0.5); t.on = t.h > 0 && t.on; $("c-" + t.id).checked = t.on; paint(); });
+  plus.addEventListener("click", () => { t.h = Math.min(40, t.h + 0.5); t.on = true; $("c-" + t.id).checked = true; paint(); });
+  $("c-" + t.id).addEventListener("change", e => { t.on = e.target.checked; paint(); });
+  paint();
+});
+function setMode(m) {
+  mode = m;
+  $("m-tareas").setAttribute("aria-pressed", String(m === "tareas"));
+  $("m-total").setAttribute("aria-pressed", String(m === "total"));
+  $("tasks").hidden = m !== "tareas";
+  $("total-box").hidden = m !== "total";
+  refresh();
+}
+$("m-tareas").addEventListener("click", () => setMode("tareas"));
+$("m-total").addEventListener("click", () => setMode("total"));
+$("htotal").addEventListener("input", refresh);
+
+function weeklyHours() {
+  if (mode === "total") return Math.max(0, +$("htotal").value || 0);
+  return TAREAS.filter(t => t.on).reduce((s, t) => s + t.h, 0);
+}
+function refresh() {
+  const h = weeklyHours();
+  $("sum").innerHTML = `Ahora mismo: <b>${num(h, 1)} h a la semana</b> × <b>${rate} €</b> la hora.`;
+  if (!$("result").hidden) compute(false);
+}
+
+// --- 3 · cálculo y equipo
+function plan() {
+  const sm = CONFIG.semanasMes, rec = CONFIG.recupera;
+  const valor = h => h * sm * rate * rec;              // lo que vale al mes lo que te quitaría
+  if (mode === "total") {
+    // Sin desglose: equipo inicial, repartiendo las horas a partes iguales para estimar.
+    const ids = CONFIG.equipoInicial;
+    const h = weeklyHours() / ids.length;
+    return { hired: ids.map(id => ({ id, horas: h, valor: valor(h) })), skipped: [], baseHoras: 0 };
+  }
+  const porEmp = {};
+  let baseHoras = 0;
+  TAREAS.filter(t => t.on && t.h > 0).forEach(t => {
+    if (t.emp === "base") baseHoras += t.h; else porEmp[t.emp] = (porEmp[t.emp] || 0) + t.h;
+  });
+  const hired = [], skipped = [];
+  Object.entries(porEmp).forEach(([id, h]) => {
+    const item = { id, horas: h, valor: valor(h) };
+    (item.valor >= CONFIG.empleados[id].precio ? hired : skipped).push(item);
+  });
+  hired.sort((a, b) => b.valor - a.valor);
+  return { hired, skipped, baseHoras };
+}
+
+function countUp(el, to, fmt) {
+  if (reduce) { el.textContent = fmt(to); return; }
+  const t0 = performance.now(), d = 900;
+  const step = now => {
+    const p = Math.min(1, (now - t0) / d), e = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(to * e);
+    if (p < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+function empCard(cls, title, line, price, stamp) {
+  const d = document.createElement("div");
+  d.className = "emp " + cls;
+  d.innerHTML = `<span class="stamp">${stamp}</span><h4>${title}</h4><p>${line}</p><div class="price">${price}</div>`;
+  return d;
+}
+
+function compute(animate = true) {
+  const sm = CONFIG.semanasMes;
+  const hSem = weeklyHours();
+  const hMes = hSem * sm;
+  const coste = hMes * rate;
+  const { hired, skipped, baseHoras } = plan();
+  const cuota = hired.length ? CONFIG.base + hired.reduce((s, x) => s + CONFIG.empleados[x.id].precio, 0) : 0;
+  const hRec = (hired.reduce((s, x) => s + x.horas, 0) + (hired.length ? baseHoras : 0)) * sm * CONFIG.recupera;
+
+  $("waiting").hidden = true; $("result").hidden = false;
+  if (animate) countUp($("fig"), coste, eur); else $("fig").textContent = eur(coste);
+  $("fig-year").textContent = eur(coste * 12);
+  $("f-hm").textContent = num(hMes);
+  $("f-jor").textContent = num(hMes / 8, 1);
+  $("f-rec").textContent = num(hRec);
+  $("pct").textContent = Math.round(CONFIG.recupera * 100) + " %";
+
+  const team = $("team"); team.innerHTML = "";
+  if (hired.length) {
+    $("team-h").textContent = "Por esa cifra podrías contratar";
+    team.appendChild(empCard("base", "Executive Assistant", "Tu único interlocutor: te cuenta cómo va todo", "Incluido en la base", "CONTRATADO"));
+    team.appendChild(empCard("base", "Chief of Staff Officer", "Reparte el trabajo entre tu equipo", "Incluido en la base", "CONTRATADO"));
+    hired.forEach(x => {
+      const e = CONFIG.empleados[x.id];
+      team.appendChild(empCard("hired", e.nombre, `${e.linea}. Te quita unas ${num(x.horas * sm * CONFIG.recupera)} h al mes.`, e.precio + " €/mes", "CONTRATADO"));
+    });
+  } else {
+    $("team-h").textContent = "Con estos números, todavía no";
+  }
+  if (skipped.length) {
+    $("skip").hidden = false;
+    $("skip").textContent = "Aún no te compensa: " + skipped.map(x => CONFIG.empleados[x.id].nombre + " (te quitaría " + eur(x.valor) + " al mes y cuesta " + CONFIG.empleados[x.id].precio + " €)").join("; ") + ". Lo seguirías haciendo tú, o lo vemos en el diagnóstico.";
+  } else $("skip").hidden = true;
+
+  const devuelve = hRec * rate;
+  const max = Math.max(devuelve, cuota, 1);
+  $("bar-you").style.width = (devuelve / max * 100) + "%";
+  $("bar-team").style.width = (cuota / max * 100) + "%";
+  $("b-you").textContent = eur(devuelve) + "/mes";
+  $("b-team").textContent = cuota ? eur(cuota) + "/mes" : "—";
+
+  const v = $("verdict");
+  if (!hSem) v.textContent = "Marca alguna tarea o pon tus horas para ver la cifra.";
+  else if (!hired.length) v.innerHTML = "Hoy tu tiempo en estas tareas vale menos que un empleado digital. <em>No te lo vamos a vender</em>: si cambian tus números, vuelve a calcularlo.";
+  else if (devuelve > cuota) v.innerHTML = `Tu equipo digital costaría <em>${eur(cuota)}</em> al mes y te devolvería unas <em>${num(hRec)} horas</em>, que a tu precio valen <em>${eur(devuelve)}</em>. Esas horas, para tu trabajo de verdad.`;
+  else v.innerHTML = `Tu equipo costaría ${eur(cuota)} al mes y te devolvería unas <em>${num(hRec)} horas</em>. Con tus números está justo: empieza por <em>${CONFIG.empleados[hired[0].id].nombre}</em>, que es el que más te quita.`;
+
+  if (animate) $("board").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+}
+$("go").addEventListener("click", () => compute(true));
+
+// --- 4 · tabla de precios
+$("p-base").textContent = CONFIG.base + " €";
+$("p-montaje").textContent = CONFIG.montaje;
+const precios = Object.values(CONFIG.empleados).map(e => e.precio);
+$("p-rango").textContent = `de ${Math.min(...precios)} a ${Math.max(...precios)} €`;
+const rows = [["Executive Assistant + Chief of Staff Officer", "Hablas con uno; el otro reparte. Supervisión e informe mensual", "Siempre", CONFIG.base + " €", true]]
+  .concat(Object.values(CONFIG.empleados).map(e => [e.nombre, e.linea, e.rama, e.precio + " €", e.validado]));
+$("price-rows").innerHTML = rows.map(([n, l, r, p, ok]) =>
+  `<tr><td><b>${n}</b>${ok ? "" : ' <span class="tag">próximamente</span>'}</td><td>${l}</td><td>${r}</td><td class="num">${p}</td></tr>`).join("");
+$("cta").href = CONFIG.cuestionarioUrl;
+$("priv").href = CONFIG.privacidadUrl;
+
+showHelper();
+setRate(40);
+</script>
+</body>
+</html>

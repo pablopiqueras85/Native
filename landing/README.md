@@ -47,3 +47,18 @@ Los valores que aparecen al abrir la página son de ejemplo y están marcados co
 
 Barlow Condensed y Figtree, ambas con licencia SIL Open Font License 1.1, que permite incrustarlas y
 redistribuirlas con la página.
+
+## Página de precios: «¿Cuánto vale tu hora?» (`precios.html`)
+
+- **Vista previa privada:** https://claude.ai/artifact/5htCjshTXiyoGNGbnmAMUL
+- **Qué hace:** el visitante pone el precio de su hora (rueda con − / +, deslizador, valores rápidos o calculado con su
+  facturación), marca sus tareas repetitivas con las horas a la semana (o pone solo el total) y pulsa un botón. Ve lo que le
+  cuestan al mes y al año, el equipo digital que podría contratar con esa cifra (solo los empleados que **se pagan solos**
+  con sus números; los que no, se dicen) y la comparación entre lo que le devuelve y lo que cuesta.
+- **Honestidad:** las horas por tarea que vienen puestas son un punto de partida, no datos. Se supone que el equipo quita el
+  70 % de esas horas, no todas. Si no le compensa, la página lo dice.
+- **Precios:** salen del bloque `CONFIG` del `<script>` y son la **propuesta** de `empresa/modelo-economico.md`
+  (base 99 €/mes con Executive Assistant y Chief of Staff Officer, empleados de 49 a 79 €/mes, montaje 300–900 €). Están
+  marcados como orientativos. **Antes de publicarla, el fundador tiene que fijar los precios** (`empresa/oferta.md` aún
+  dice "por decidir").
+- **Privacidad:** igual que `index.html`: todo se calcula en el navegador y no se envía nada.
