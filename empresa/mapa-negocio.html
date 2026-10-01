@@ -1,0 +1,362 @@
+<title>Mapa de Native Crew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una sola columna de lectura con bloques anchos (equipo, lienzo, fases) que se apilan en móvil.
+   Mismo mundo visual que los vídeos de Native Crew ("dusk"): diseño oscuro a propósito, un solo tema. */
+:root{
+  --ground:#15131c; --deep:#0e0c14; --card:#1f1c29; --line:#34313f; --mute:#9a96a8; --ink:#efece6;
+  --violet:#8b7dff; --yellow:#f4c64f; --blue:#4c9aff; --green:#3ddc97; --red:#ff5f6d; --grey:#6d6880;
+  --display:"Geist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"Geist Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px;padding-block:40px 80px;display:flex;flex-direction:column;gap:72px}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15}
+h2{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.lede{color:var(--mute);max-width:62ch}
+section{display:flex;flex-direction:column;gap:24px}
+.head{display:flex;flex-direction:column;gap:8px}
+.num{font-variant-numeric:tabular-nums}
+.chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--mute);white-space:nowrap}
+.chip.on{border-color:var(--yellow);color:var(--yellow)}
+.chip.hyp{border-style:dashed}
+
+/* Portada */
+.hero{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:center;padding-top:24px}
+.brand{font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;letter-spacing:-.035em;line-height:1}
+.brand .dot{color:var(--yellow)}
+.thesis{font-size:clamp(1.15rem,2vw,1.4rem);font-weight:500;max-width:30ch;margin-top:18px}
+.thesis em{font-style:normal;color:var(--yellow)}
+.hero .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.crew{width:100%;max-width:420px;justify-self:center}
+
+/* Recorrido del cliente final */
+.loop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.step{padding:20px;display:flex;flex-direction:column;gap:8px;border-right:1px solid var(--line);position:relative}
+.step:last-child{border-right:0}
+.step .k{font-family:var(--mono);font-size:.72rem;color:var(--mute);letter-spacing:.08em;text-transform:uppercase}
+.step .v{font-size:1.15rem;font-weight:600}
+.step .who{font-size:.9rem;color:var(--mute)}
+.step .bar{height:4px;border-radius:2px;margin-bottom:6px}
+.back{font-family:var(--mono);font-size:.8rem;color:var(--mute);text-align:right}
+
+/* Equipo */
+.team{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.mate{background:var(--card);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:10px;border-top:4px solid var(--c)}
+.mate svg{width:56px;height:56px}
+.mate .role{font-size:1.05rem;font-weight:700}
+.mate .does{color:var(--mute);font-size:.92rem}
+.mate dl{margin:6px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:.85rem}
+.mate dt{font-family:var(--mono);color:var(--mute);font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;padding-top:2px}
+.mate dd{margin:0}
+.later{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.later .lbl{font-size:.9rem;color:var(--mute);margin-right:4px}
+
+/* Lienzo del modelo de negocio */
+.canvas{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-areas:
+  "socios activ valor relac segm"
+  "socios recur valor canal segm"
+  "costes costes costes ingre ingre";gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.cell{background:var(--deep);padding:18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cell h3{font-family:var(--mono);font-size:.74rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.cell ul{margin:0;padding-left:1.05em;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.cell li::marker{color:var(--grey)}
+.cell.valor{background:#1a1726}
+.cell.valor h3{color:var(--yellow)}
+.cell .big{font-size:1.05rem;font-weight:600;line-height:1.35}
+.a-socios{grid-area:socios}.a-activ{grid-area:activ}.a-recur{grid-area:recur}.a-valor{grid-area:valor}
+.a-relac{grid-area:relac}.a-canal{grid-area:canal}.a-segm{grid-area:segm}.a-costes{grid-area:costes}.a-ingre{grid-area:ingre}
+
+/* Fases */
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.phase{border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.phase.now{border-color:var(--yellow);background:linear-gradient(180deg,rgba(244,198,79,.06),transparent 60%)}
+.phase .k{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.phase .gate{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--mute)}
+.phase .gate b{color:var(--ink);font-weight:600}
+
+/* Números */
+.econ{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:24px;align-items:start}
+.box{background:var(--card);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:700;border-bottom:0}
+tr.total td.n{color:var(--yellow)}
+.bars{display:flex;flex-direction:column;gap:10px}
+.barrow{display:grid;grid-template-columns:120px 1fr 64px;gap:10px;align-items:center;font-size:.88rem}
+.track{height:10px;background:var(--deep);border-radius:5px;overflow:hidden}
+.fill{height:100%;border-radius:5px}
+.note{font-size:.82rem;color:var(--mute)}
+
+/* Riesgos */
+.risks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.risk{border-left:3px solid var(--sev);background:var(--card);border-radius:0 12px 12px 0;padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.risk .t{font-weight:600}
+.risk .r{font-size:.9rem;color:var(--mute)}
+
+/* Siguiente */
+.next{counter-reset:n;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;list-style:none;margin:0;padding:0}
+.next li{counter-increment:n;border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.next li::before{content:counter(n);font-family:var(--mono);color:var(--yellow);font-size:.85rem}
+footer{font-size:.82rem;color:var(--mute);border-top:1px solid var(--line);padding-top:20px;display:flex;flex-wrap:wrap;gap:6px 18px}
+
+a{color:var(--violet)}
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr}
+  .team{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .canvas{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:
+    "valor valor" "segm canal" "relac activ" "recur socios" "ingre ingre" "costes costes"}
+  .econ{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .loop{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:0}
+  .step:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .team,.phases,.risks,.next{grid-template-columns:1fr}
+  .canvas{grid-template-columns:1fr;grid-template-areas:"valor" "segm" "canal" "relac" "activ" "recur" "socios" "ingre" "costes"}
+  .barrow{grid-template-columns:96px 1fr 56px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .crew .blob{animation:bob 3.2s ease-in-out infinite}
+  .crew .blob:nth-child(2){animation-delay:.4s}.crew .blob:nth-child(3){animation-delay:.8s}.crew .blob:nth-child(4){animation-delay:1.2s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+}
+</style>
+
+<main class="wrap">
+
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Mapa del negocio · 2026-10-01</p>
+      <h1 class="brand">Native Crew<span class="dot">.</span></h1>
+      <p class="thesis">Empleados de IA con nombre para negocios sin tiempo. <em>Montados y supervisados por una persona.</em></p>
+      <div class="meta">
+        <span class="chip on">Fase 1 · servicio</span>
+        <span class="chip">España primero</span>
+        <span class="chip hyp">Sin clientes todavía</span>
+      </div>
+    </div>
+    <svg class="crew" viewBox="0 0 420 240" role="img" aria-label="El equipo: el Encargado amarillo y los agentes azul, verde y rojo">
+      <ellipse cx="210" cy="222" rx="190" ry="10" fill="#0e0c14"/>
+      <g class="blob"><circle cx="210" cy="118" r="62" fill="#f4c64f"/><circle cx="190" cy="108" r="9" fill="#15131c"/><circle cx="230" cy="108" r="9" fill="#15131c"/><circle cx="193" cy="105" r="3" fill="#efece6"/><circle cx="233" cy="105" r="3" fill="#efece6"/><path d="M188 136 Q210 154 232 136" stroke="#15131c" stroke-width="6" fill="none" stroke-linecap="round"/></g>
+      <g class="blob"><circle cx="72" cy="168" r="40" fill="#4c9aff"/><circle cx="60" cy="162" r="6" fill="#15131c"/><circle cx="84" cy="162" r="6" fill="#15131c"/><path d="M60 180 Q72 190 84 180" stroke="#15131c" stroke-width="4.5" fill="none" stroke-linecap="round"/></g>
+      <g class="blob"><circle cx="330" cy="166" r="42" fill="#3ddc97"/><circle cx="317" cy="160" r="6" fill="#15131c"/><circle cx="343" cy="160" r="6" fill="#15131c"/><path d="M318 179 Q330 188 342 179" stroke="#15131c" stroke-width="4.5" fill="none" stroke-linecap="round"/></g>
+      <g class="blob"><circle cx="128" cy="196" r="22" fill="#ff5f6d"/><circle cx="121" cy="193" r="4" fill="#15131c"/><circle cx="135" cy="193" r="4" fill="#15131c"/><path d="M121 203 Q128 208 135 203" stroke="#15131c" stroke-width="3" fill="none" stroke-linecap="round"/></g>
+    </svg>
+  </header>
+
+  <section aria-labelledby="t-loop">
+    <div class="head">
+      <p class="eyebrow">Lo que vendemos</p>
+      <h2 id="t-loop">El recorrido del cliente del negocio, cubierto de punta a punta</h2>
+      <p class="lede">Cada empleado se encarga de un tramo. Se pasan el trabajo a través de la ficha de clientes, no hablando entre ellos.</p>
+    </div>
+    <div class="loop">
+      <div class="step"><span class="bar" style="background:var(--violet)"></span><span class="k">1 · Que te encuentren</span><span class="v">Escaparate para IA</span><span class="who">Google, ChatGPT y los agentes te recomiendan y pueden reservar contigo</span></div>
+      <div class="step"><span class="bar" style="background:var(--blue)"></span><span class="k">2 · Que te contesten</span><span class="v">Recepcionista</span><span class="who">Respuesta en minutos y seguimiento del indeciso hasta el sí o el no</span></div>
+      <div class="step"><span class="bar" style="background:var(--green)"></span><span class="k">3 · Que se queden</span><span class="v">Responsable de clientes</span><span class="who">Primeros 90 días y aviso antes de que alguien se dé de baja</span></div>
+      <div class="step"><span class="bar" style="background:var(--red)"></span><span class="k">4 · Que vuelvan</span><span class="v">Recuperador</span><span class="who">Escribe a quien se fue y lo devuelve al paso 3</span></div>
+    </div>
+    <p class="back">Los clientes contentos recomiendan → vuelven al paso 1</p>
+  </section>
+
+  <section aria-labelledby="t-team">
+    <div class="head">
+      <p class="eyebrow">El equipo de lanzamiento</p>
+      <h2 id="t-team">Tres empleados y un Encargado</h2>
+      <p class="lede">Puestos cerrados, cada uno con su métrica. Los nombres y la personalidad de cada uno están por decidir.</p>
+    </div>
+    <div class="team">
+      <article class="mate" style="--c:var(--yellow)">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="30" r="24" fill="#f4c64f"/><circle cx="20" cy="26" r="4" fill="#15131c"/><circle cx="36" cy="26" r="4" fill="#15131c"/><path d="M19 37 Q28 44 37 37" stroke="#15131c" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <span class="role">Encargado</span>
+        <p class="does">Supervisa a los demás y es el único que habla con el dueño, por WhatsApp.</p>
+        <dl><dt>Mide</dt><dd>Tasa de corrección</dd><dt>Precio</dt><dd>Incluido en la base</dd></dl>
+      </article>
+      <article class="mate" style="--c:var(--blue)">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="30" r="24" fill="#4c9aff"/><circle cx="20" cy="26" r="4" fill="#15131c"/><circle cx="36" cy="26" r="4" fill="#15131c"/><path d="M19 37 Q28 44 37 37" stroke="#15131c" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <span class="role">Recepcionista comercial</span>
+        <p class="does">Contesta, reserva la prueba y persigue al indeciso.</p>
+        <dl><dt>Mide</dt><dd>Altas que antes se perdían</dd><dt>Precio</dt><dd>Cuota + variable por alta</dd></dl>
+      </article>
+      <article class="mate" style="--c:var(--green)">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="30" r="24" fill="#3ddc97"/><circle cx="20" cy="26" r="4" fill="#15131c"/><circle cx="36" cy="26" r="4" fill="#15131c"/><path d="M19 37 Q28 44 37 37" stroke="#15131c" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <span class="role">Responsable de clientes</span>
+        <p class="does">Acompaña a los nuevos y avisa cuando alguien deja de venir.</p>
+        <dl><dt>Mide</dt><dd>Bajas evitadas</dd><dt>Precio</dt><dd>Cuota fija</dd></dl>
+      </article>
+      <article class="mate" style="--c:var(--red)">
+        <svg viewBox="0 0 56 56" aria-hidden="true"><circle cx="28" cy="30" r="24" fill="#ff5f6d"/><circle cx="20" cy="26" r="4" fill="#15131c"/><circle cx="36" cy="26" r="4" fill="#15131c"/><path d="M19 37 Q28 44 37 37" stroke="#15131c" stroke-width="3" fill="none" stroke-linecap="round"/></svg>
+        <span class="role">Recuperador</span>
+        <p class="does">Escribe a los antiguos clientes y les ofrece volver.</p>
+        <dl><dt>Mide</dt><dd>Clientes recuperados</dd><dt>Precio</dt><dd>Cuota + variable por cliente</dd></dl>
+      </article>
+    </div>
+    <div class="later">
+      <span class="lbl">Por validar:</span>
+      <span class="chip hyp">Administrativo</span>
+      <span class="chip hyp">Responsable de comunicación</span>
+      <span class="chip hyp">Escaparate para IA</span>
+      <span class="chip hyp">Telefonista</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-canvas">
+    <div class="head">
+      <p class="eyebrow">Lienzo del modelo de negocio</p>
+      <h2 id="t-canvas">Cómo encaja todo</h2>
+    </div>
+    <div class="canvas">
+      <div class="cell a-socios"><h3>Socios clave</h3><ul>
+        <li>Proveedores de modelos de IA, intercambiables (decisión 0006)</li>
+        <li>API oficial de WhatsApp Business (Meta)</li>
+        <li>Programas de reservas de cada sector</li>
+        <li>Clientes que recomiendan</li>
+        <li>Más adelante: gestorías y el bono de IA de 2027</li></ul></div>
+      <div class="cell a-activ"><h3>Actividades clave</h3><ul>
+        <li>Diagnóstico con agentes</li>
+        <li>Montaje del equipo en cada negocio</li>
+        <li>Supervisión que baja con el tiempo</li>
+        <li>Convertir lo que se repite en producto</li></ul></div>
+      <div class="cell a-recur"><h3>Recursos clave</h3><ul>
+        <li>Catálogo de empleados y fichas de puesto</li>
+        <li>Biblioteca de mensajes aprobados</li>
+        <li>Portero y supervisor automáticos</li>
+        <li>Fichas por sector</li>
+        <li>El fundador: venta B2B y seguimiento</li></ul></div>
+      <div class="cell valor a-valor"><h3>Propuesta de valor</h3>
+        <p class="big">Amplía tu equipo sin contratar.</p>
+        <ul>
+          <li>Tareas que el dueño hace a deshoras, hechas</li>
+          <li>Clientes que se perdían, recuperados y medidos</li>
+          <li>Una persona detrás que responde (lo que no tiene Marblism)</li>
+          <li>Sin programa que aprender: todo pasa en WhatsApp</li></ul></div>
+      <div class="cell a-relac"><h3>Relación con el cliente</h3><ul>
+        <li>El Encargado le habla por WhatsApp</li>
+        <li>Informe mensual con resultados</li>
+        <li>El fundador, cerca al principio</li></ul></div>
+      <div class="cell a-canal"><h3>Canales</h3><ul>
+        <li>Conocidos y referidos (fase 1)</li>
+        <li>Diagnóstico gratuito</li>
+        <li>Auditoría "¿Te recomienda la IA?" como gancho</li>
+        <li>Landing con calculadora</li></ul></div>
+      <div class="cell a-segm"><h3>Segmentos de clientes</h3><ul>
+        <li>Negocios con citas o clases, clientes que repiten, el dueño dentro y WhatsApp</li>
+        <li>Fitness boutique, estética y peluquería, academias</li>
+        <li>Después: pymes y Latinoamérica</li></ul></div>
+      <div class="cell a-costes"><h3>Estructura de costes · por cliente al mes</h3><ul>
+        <li>Modelo de IA: <span class="num">20–30 €</span></li>
+        <li>WhatsApp (Meta): <span class="num">10–15 €</span></li>
+        <li>Proveedor de WhatsApp y alojamiento: <span class="num">30–60 €</span></li>
+        <li>Supervisión del fundador: <span class="num">40–80 €</span>, con el objetivo de bajar a <span class="num">10–15 €</span></li></ul></div>
+      <div class="cell a-ingre"><h3>Fuentes de ingresos</h3><ul>
+        <li>Montaje: <span class="num">300–900 €</span> una vez (gratis para los 3 primeros)</li>
+        <li>Cuota: base <span class="num">99 €</span> + <span class="num">49–79 €</span> por empleado</li>
+        <li>Variable: <span class="num">30–50 €</span> por cliente conseguido o recuperado</li></ul></div>
+    </div>
+    <p class="note">Precios y costes son propuestas sin validar (`empresa/modelo-economico.md`).</p>
+  </section>
+
+  <section aria-labelledby="t-phases">
+    <div class="head">
+      <p class="eyebrow">Decisión 0008 · propuesta</p>
+      <h2 id="t-phases">De agencia a plataforma, por fases</h2>
+      <p class="lede">El destino es un "Marblism" en español. Se llega sin construir un programa antes de saber qué se repite.</p>
+    </div>
+    <div class="phases">
+      <article class="phase now">
+        <div class="k"><h3>1 · Servicio</h3><span class="chip on">Ahora</span></div>
+        <p>Diagnóstico, montaje y servicio mensual a negocios de conocidos y referidos. Media consultoría con implantación.</p>
+        <p class="gate">Paso a la fase 2: <b>10 clientes que pagan</b> y <b>≥ 70 %</b> de lo montado se repite</p>
+      </article>
+      <article class="phase">
+        <div class="k"><h3>2 · Producto con servicio</h3><span class="chip">Después</span></div>
+        <p>Lo que se repite se monta solo en minutos. La supervisión sigue siendo nuestra.</p>
+        <p class="gate">Paso a la fase 3: <b>30 clientes</b> y <b>menos de 1 h</b> de montaje</p>
+      </article>
+      <article class="phase">
+        <div class="k"><h3>3 · Autoservicio</h3><span class="chip">Si funciona</span></div>
+        <p>El cliente contrata y configura solo. El servicio con persona se vende como nivel superior.</p>
+        <p class="gate">Revisión: con 10 clientes o el <b>2027-04-01</b></p>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-econ">
+    <div class="head">
+      <p class="eyebrow">Números · hipótesis</p>
+      <h2 id="t-econ">Con 50 clientes</h2>
+      <p class="lede">Al mes, sin IVA. Nada está validado: el escenario medio depende de recuperar un cliente al mes por negocio.</p>
+    </div>
+    <div class="econ">
+      <div class="box">
+        <h3>Beneficio antes de impuestos</h3>
+        <div class="bars" role="img" aria-label="Beneficio mensual: conservador 2.500 euros, medio 7.250 euros, optimista 9.300 euros">
+          <div class="barrow"><span>Conservador</span><span class="track"><span class="fill" style="width:26.9%;background:var(--grey);display:block"></span></span><span class="num" style="text-align:right">2.500 €</span></div>
+          <div class="barrow"><span>Medio</span><span class="track"><span class="fill" style="width:78%;background:var(--yellow);display:block"></span></span><span class="num" style="text-align:right">7.250 €</span></div>
+          <div class="barrow"><span>Optimista</span><span class="track"><span class="fill" style="width:100%;background:var(--violet);display:block"></span></span><span class="num" style="text-align:right">9.300 €</span></div>
+        </div>
+        <p class="note">Barras a la misma escala (máximo 9.300 €). Neto tras IRPF: unos 2.000, 5.200 y 6.500 € (a confirmar con gestoría).</p>
+      </div>
+      <div class="box">
+        <h3>Escenarios</h3>
+        <div class="scroll">
+          <table>
+            <thead><tr><th></th><th class="n">Conservador</th><th class="n">Medio</th><th class="n">Optimista</th></tr></thead>
+            <tbody>
+              <tr><td>Ingreso por cliente</td><td class="n">150 €</td><td class="n">235 €</td><td class="n">300 €</td></tr>
+              <tr><td>Coste por cliente</td><td class="n">80 €</td><td class="n">70 €</td><td class="n">90 €</td></tr>
+              <tr><td>Margen × 50</td><td class="n">3.500 €</td><td class="n">8.250 €</td><td class="n">10.500 €</td></tr>
+              <tr><td>Gastos fijos</td><td class="n">−1.000 €</td><td class="n">−1.000 €</td><td class="n">−1.200 €</td></tr>
+              <tr class="total"><td>Beneficio</td><td class="n">2.500 €</td><td class="n">7.250 €</td><td class="n">9.300 €</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Con 2–4 clientes nuevos al mes, llegar a 50 lleva 1–2 años. Los montajes (~600 € cada uno) dan caja mientras tanto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-risks">
+    <div class="head">
+      <p class="eyebrow">Lo que puede tumbarlo</p>
+      <h2 id="t-risks">Riesgos y respuesta</h2>
+    </div>
+    <div class="risks">
+      <div class="risk" style="--sev:var(--red)"><span class="t">Meta regala su agente de WhatsApp (2026-06)</span><span class="r">Entrar por lo que no hace: seguimiento, recuperar y medir. La Recepcionista sola pierde valor.</span></div>
+      <div class="risk" style="--sev:var(--red)"><span class="t">"Empleados de IA" a 24 $/mes (Marblism, Sintra)</span><span class="r">Vender un equipo gestionado, supervisado y medido, con una persona detrás.</span></div>
+      <div class="risk" style="--sev:var(--yellow)"><span class="t">Los conocidos dicen que sí por cortesía</span><span class="r">Solo cuenta si pagan o se comprometen: tiempo, datos o un piloto con fecha.</span></div>
+      <div class="risk" style="--sev:var(--yellow)"><span class="t">La supervisión no escala</span><span class="r">Portero, supervisor y plantillas desde el primer cliente. Objetivo: 15–20 min al mes por cliente.</span></div>
+      <div class="risk" style="--sev:var(--yellow)"><span class="t">Normas: ley europea de IA, LSSI, permiso para WhatsApp</span><span class="r">El aviso de IA en el primer mensaje y la opción de baja están dentro del portero. Falta revisarlo con un abogado.</span></div>
+      <div class="risk" style="--sev:var(--grey)"><span class="t">Tiempo del fundador (trabajo a jornada completa)</span><span class="r">Una línea a la vez. Las tiendas online y el resto de ideas esperan a tener 3 clientes.</span></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-next">
+    <div class="head">
+      <p class="eyebrow">Ahora</p>
+      <h2 id="t-next">Siguientes pasos</h2>
+    </div>
+    <ol class="next">
+      <li><h3>Lista de 20 conocidos con negocio</h3><p class="lede">En la hoja de fichas, nunca en el repositorio. Para cada uno: tipo de negocio y qué empleado le encaja.</p></li>
+      <li><h3>Nombre y personalidad a los empleados</h3><p class="lede">Partiendo de los personajes del vídeo de Native Crew.</p></li>
+      <li><h3>Probar Marblism un mes</h3><p class="lede">Ver qué hace bien, dónde falla en español y qué le falta a un negocio de aquí.</p></li>
+    </ol>
+  </section>
+
+  <footer>
+    <span>Fuentes en el repositorio: `empresa/oferta.md`, `empresa/empleados-virtuales.md`, `empresa/modelo-economico.md`</span>
+    <span>Decisiones 0005–0008</span>
+    <span>`exploracion/radar-mercado-2026-10.md`</span>
+  </footer>
+</main>

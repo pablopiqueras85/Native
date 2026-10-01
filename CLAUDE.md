@@ -61,6 +61,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `empresa/principios.md` — cómo opera una empresa AI Native. Úsalo como criterio en tus propuestas.
 - `empresa/modelo-economico.md` — costes por cliente, precios propuestos, escenarios y palancas para escalar.
 - `empresa/oferta.md` — el producto: empleados virtuales (paquetes cerrados de agentes con ficha de puesto, métrica y precio), catálogo de agentes y precios. El agente de precios (en pausa) solo usa lo que hay aquí.
+- `empresa/mapa-negocio.html` — mapa visual del negocio (recorrido, equipo, lienzo, fases, números, riesgos). Publicado en https://claude.ai/artifact/BFpHJNHKsBLjEkbpA47XZV.
 - `empresa/empleados-virtuales.md` — ficha detallada de cada empleado virtual: qué hace, variantes por sector, métrica, montaje y riesgos.
 - `landing/` — la landing con la calculadora privada. Ver `landing/README.md` para configurarla.
 - `legal/` — textos legales (borrador de política de privacidad).
