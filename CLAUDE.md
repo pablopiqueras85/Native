@@ -27,6 +27,9 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
   en las 10 primeras conversaciones con dueños.
 - **Dirección a largo plazo (propuesta, decisión 0008):** un "Marblism" en español: empleados de IA con nombre para negocios
   hispanohablantes, por fases (servicio → producto con servicio → autoservicio). La agencia (0005) es la fase 1.
+- **Arquitectura (decisión 0009, aceptada):** WhatsApp y llamadas delegados en ElevenLabs; los empleados virtuales los creamos
+  nosotros al estilo Marblism (nombre, rol, tareas, horario, métrica) y trabajan en la trastienda con Claude (Claude Code ahora,
+  Managed Agents después). Una carpeta por cliente en `clientes/C00X/` (código, sin datos personales).
 - **Sistema en diseño:** el equipo digital que trabajará para los clientes (`sistemas/equipo-digital/`): escalado de
   excepciones, portero automático (`portero.py`, 20 pruebas), agente supervisor y biblioteca de mensajes. Agentes y
   memoria portables (decisión 0006). Modelo económico en `empresa/modelo-economico.md`.
@@ -73,6 +76,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
   `sistemas/diagnostico/agentes.md`); la skill `diagnostico` los coordina. El equipo que trabaja para los clientes está
   en `sistemas/equipo-digital/` (fichas neutras en `agentes/`, plantillas y portero).
 - `sistemas/consultoria-reunion.md` — consultoría con dos puertas (formulario por defecto, reunión si se da el caso) → agente Consultor (`.claude/agents/consultor.md`) → propuesta de la carta y a medida → integración + mantenimiento por agente.
+- `clientes/` — una carpeta por cliente (`C001/`…) con sus empleados, canales, ajustes y permisos. Plantilla en `_plantilla/`. Sin datos personales.
 - `conocimiento/sectores/` — una ficha por sector: vocabulario, dolores, plantillas, programas típicos y aprendizajes (decisión 0007).
 - `exploracion/criterios.md` — la rúbrica para puntuar ideas. No la cambies sin registrar una decisión.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
