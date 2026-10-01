@@ -25,6 +25,8 @@ Escribe todo en **español**: documentos, mensajes de commit y respuestas.
 - **Posicionamiento (propuesta, decisión 0005):** agencia AI Native que amplía el equipo del dueño con un equipo
   digital (diagnóstico → catálogo → piloto medido), sobre modelos de terceros intercambiables. Se valida o descarta
   en las 10 primeras conversaciones con dueños.
+- **Dirección a largo plazo (propuesta, decisión 0008):** un "Marblism" en español: empleados de IA con nombre para negocios
+  hispanohablantes, por fases (servicio → producto con servicio → autoservicio). La agencia (0005) es la fase 1.
 - **Sistema en diseño:** el equipo digital que trabajará para los clientes (`sistemas/equipo-digital/`): escalado de
   excepciones, portero automático (`portero.py`, 20 pruebas), agente supervisor y biblioteca de mensajes. Agentes y
   memoria portables (decisión 0006). Modelo económico en `empresa/modelo-economico.md`.
