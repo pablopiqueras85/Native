@@ -11,7 +11,7 @@
 - **Dónde trabaja:** trastienda (Claude), conectada al correo del dueño (Gmail u Outlook) con el permiso mínimo.
 - **Horario:** repaso del correo cada mañana a las 8:00 y otro a las 15:00; los avisos urgentes, al momento.
 - **Con quién habla:** con nadie de fuera. Sus avisos y resúmenes llegan al dueño **a través del asistente ejecutivo**;
-  el reparto a otros empleados, a través del jefe de gabinete.
+  el reparto a otros empleados, a través del Chief of Staff Officer.
 - **Métrica:** horas de correo ahorradas a la semana (estimadas por el dueño) y **correos importantes sin respuesta
   (meta: 0)**.
 - **Estado:** borrador (2026-10-01). Prueba en el correo del fundador pendiente de conectar Gmail.
@@ -68,7 +68,7 @@ recibe un solo mensaje y no uno por agente.
 
 ## Pasa el trabajo a
 
-Marca la etiqueta; el **jefe de gabinete** la lee y se lo pasa a quien toca.
+Marca la etiqueta; el **Chief of Staff Officer** la lee y se lo pasa a quien toca.
 
 | Si el correo es… | Etiqueta | Lo recoge |
 |---|---|---|

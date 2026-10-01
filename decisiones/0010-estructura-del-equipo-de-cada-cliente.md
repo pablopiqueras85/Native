@@ -1,4 +1,4 @@
-# 0010 — Estructura del equipo de cada cliente: asistente, jefe de gabinete y tres ramas
+# 0010 — Estructura del equipo de cada cliente: asistente ejecutivo, Chief of Staff Officer y ramas
 
 - **Fecha:** 2026-10-01
 - **Estado:** propuesta (idea del fundador, ordenada y con matices). Se acepta o se ajusta tras probarla con el
@@ -21,7 +21,7 @@ El equipo de cada cliente se organiza así:
                          ASISTENTE EJECUTIVO
                  (su único interlocutor; le avisa de lo importante)
                                    │
-                          JEFE DE GABINETE
+                          CHIEF OF STAFF OFFICER
            (recibe cada petición y la reparte al grupo que toca)
         ┌──────────────────┬───────────────────┬──────────────────┐
   ADMINISTRACIÓN        COMERCIAL            A MEDIDA         HORIZONTE
@@ -39,7 +39,7 @@ El equipo de cada cliente se organiza así:
 1. **Asistente ejecutivo.** Trabaja codo con codo con el dueño. Es **el único** con el que habla: le escribe o le
    llama, y el asistente le cuenta cómo va todo, le avisa de las reuniones próximas y de los cambios importantes, y
    le pide permisos. Recoge los avisos de todos para que el dueño reciba un solo mensaje y no uno por agente.
-2. **Jefe de gabinete.** No habla con el dueño ni con el público. Recibe cada petición (del asistente o de un
+2. **Chief of Staff Officer.** No habla con el dueño ni con el público. Recibe cada petición (del asistente o de un
    empleado), decide qué grupo la hace, vigila que se haga y devuelve el resultado al asistente. Es el patrón *chief of
    staff* del hilo de Dots.
 3. **Administración: reacciona a lo que llega de fuera.** Recepcionista (WhatsApp y llamadas de clientes, citas y
@@ -47,7 +47,7 @@ El equipo de cada cliente se organiza así:
 4. **Comercial: inicia hacia fuera.** Las decisiones del negocio hacia sus clientes. Responsable de clientes,
    Recuperador, Comunicación y Cobros.
 5. **A medida.** Los que salen del flujo reunión → analista → consultor y se montan a petición del cliente. Cada uno
-   usa la misma plantilla de ficha y cuelga del jefe de gabinete como los demás.
+   usa la misma plantilla de ficha y cuelga del Chief of Staff Officer como los demás.
 
 **La regla para saber en qué rama va un agente:** si espera a que algo llegue, es de Administración; si decide
 escribir a alguien, es Comercial.
@@ -68,11 +68,11 @@ Según la regla contra el ruido, ninguno se monta hasta tener las 10 conversacio
 - **El Administrativo se parte en dos.** "Papeles" es entrada (le llegan facturas): Administración. "Cobros" es
   salida (el negocio reclama pagos): Comercial. Coincide con la propuesta del hilo de Dots de separarlo.
 - **La Recepcionista también responde y reserva.** Sigue siendo de Administración porque nunca escribe primero.
-- **Dos papeles, un agente al principio.** Para un negocio pequeño con 2–3 empleados, asistente y jefe de gabinete
+- **Dos papeles, un agente al principio.** Para un negocio pequeño con 2–3 empleados, asistente y Chief of Staff Officer
   pueden ser el mismo agente con dos sombreros. Se separan cuando un cliente tenga 4 o más empleados o cuando el
   asistente empiece a fallar en el reparto. En la ficha siempre son dos papeles.
 - **Encaja con la decisión 0009:** el asistente ejecutivo es lo que el dueño ve. Si le llama por teléfono, esa voz es
-  ElevenLabs; el jefe de gabinete y las ramas trabajan en la trastienda con Claude.
+  ElevenLabs; el Chief of Staff Officer y las ramas trabajan en la trastienda con Claude.
 - **Límite de WhatsApp:** Meta no permite asistentes de uso general en WhatsApp desde 2026-01-15 (ver
   `empresa/empleados-virtuales.md`, Encargado). El asistente ejecutivo solo habla del trabajo del negocio; si el dueño
   le pide algo ajeno, lo declina.
@@ -92,11 +92,11 @@ Según la regla contra el ruido, ninguno se monta hasta tener las 10 conversacio
 
 ## Consecuencias
 
-- El **Encargado** de `empresa/empleados-virtuales.md` pasa a ser **asistente ejecutivo + jefe de gabinete**. Hay que
+- El **Encargado** de `empresa/empleados-virtuales.md` pasa a ser **asistente ejecutivo + Chief of Staff Officer**. Hay que
   rehacer su ficha con la plantilla de empleado.
 - La ficha `sistemas/equipo-digital/agentes/asistente-del-dueno.md` pasa a ser la de **Correo** (rama
   Administración). Los avisos al dueño pasan al asistente ejecutivo.
-- Asistente ejecutivo y jefe de gabinete van **incluidos siempre** en la cuota base; los precios por rama, en
+- Asistente ejecutivo y Chief of Staff Officer van **incluidos siempre** en la cuota base; los precios por rama, en
   `empresa/oferta.md` cuando se retomen.
 - El organigrama (`empresa/organigrama.html`) refleja esta estructura.
 - **Se revisa** con el primer cliente piloto: ¿el dueño entiende la estructura? ¿Usa el canal con el asistente? ¿Hace
