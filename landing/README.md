@@ -66,3 +66,11 @@ redistribuirlas con la página.
   sin sonido, con botón de pausa; si el visitante prefiere menos movimiento, se queda quieto en la portada. Si cambias el
   vídeo, vuelve a copiarlo aquí y a generar el `.webm`.
 - **Privacidad:** igual que `index.html`: todo se calcula en el navegador y no se envía nada.
+
+## Siguientes pasos de diseño (2026-10-01, a petición del fundador)
+
+1. **Buscar skills de diseño** más alineadas con la estética que tiene en mente el fundador, para rehacer la interfaz de la
+   landing y los vídeos.
+2. **Carrusel de vídeos** en la cabecera: unos 3 vídeos (por ejemplo, "Contrata tu primer equipo digital", "Solo founders"
+   y uno nuevo), con flechas y puntos para pasar de uno a otro.
+3. **Después:** entrar en detalle en los precios (siguen siendo orientativos; ver `empresa/oferta.md`).
