@@ -113,6 +113,13 @@ la documentación: todo lo de abajo es* hipótesis *hasta probarlo.*
   ni llama por su cuenta en el lanzamiento ([eesel](https://eesel.ai/blog/openai-dots), [Vellum](https://www.vellum.ai/blog/official-openai-dots-breakdown)).
 - **Precio:** incluido en ChatGPT Pro (100, 200 o 500 $/mes) y Business Premium; los SMS, beta limitada en EE. UU.
   ([eesel](https://eesel.ai/blog/openai-dots)). Caro para un negocio pequeño, por ahora.
+- **Subagentes:** un Dot puede repartir una tarea entre agentes en segundo plano y coordinarlos mientras trabajan
+  ([heise](https://www.heise.de/en/news/OpenAI-Launches-Dots-Permanently-Active-AI-Agents-with-Their-Own-Cloud-Computer-11470571.html),
+  [VentureBeat](https://venturebeat.com/technology/openai-launches-dots-always-on-ai-agent-coworkers-and-chatgpt-space-where-they-can-collaborate-with-human-teams)).
+  Son ayudantes temporales para una tarea, no puestos fijos con nombre, canal y permisos. Cada cuenta trae **un** Dot;
+  varios Dots por cuenta, "más adelante" ([The Agentic Stack](https://theagenticstack.substack.com/p/meet-dots-what-can-you-actually-delegate)).
+  Nuestra estructura (Executive Assistant → Chief of Staff Officer → puestos, decisión 0010) es el mismo patrón: **la
+  estructura no es la ventaja; lo es lo que la rodea** (cara al público, datos del negocio, sector, supervisión, resultados).
 - Los "equipos de agentes" de Dots están anunciados, todavía no disponibles ([TechMyMoney](https://techmymoney.com/2026/09/29/openai-dots-personal-agents/)).
 
 **Qué queda expuesto y qué no**
