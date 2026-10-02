@@ -87,3 +87,49 @@
 | D · El agente gratuito de Meta, gestionado (nivel de entrada) | Pendiente de registrar | — |
 | E · Franquicias del patrón 0007 (un acuerdo, muchos locales) | Pendiente de registrar | — |
 | Canal para todos: proveedor del bono de IA de 2027 | Pendiente | — |
+
+## Riesgo: Dots y las agencias que lo usarán (2026-10-02)
+
+*Conversación con el fundador tras ver una demo de Dots (OpenAI) a la que se puede llamar. No hemos podido ver la demo ni
+la documentación: todo lo de abajo es* hipótesis *hasta probarlo.*
+
+**Lo que creemos que pasará**
+
+- Dots se conectará al correo, al calendario y a más herramientas. Para uso personal del dueño (resumen, correo,
+  agenda, "¿qué tengo hoy?") será fácil y barato. **Esa parte se convierte en commodity.**
+- Muchas personas montarán agencias que venden "equipos de agentes" hechos con Dots. La competencia no será OpenAI, sino
+  muchas agencias pequeñas con el mismo motor: guerra de precios en el montaje.
+
+**Qué queda expuesto y qué no**
+
+| Puesto | Riesgo | Por qué |
+|---|---|---|
+| Executive Assistant (como chat), Correo, agenda | **Alto** | Es justo lo que Dots hace bien para una persona conectada a su correo y calendario |
+| Papeles | Medio | Clasificar facturas es fácil; dejarlas como las quiere cada gestoría, menos |
+| Recepcionista (WhatsApp y llamadas del negocio) | Bajo-medio | Es de cara al público: número del negocio, normas de Meta, agenda del programa de reservas |
+| Responsable de clientes, Recuperador, Cobros, Comunicación | Bajo | Necesitan los datos del negocio (ficha de clientes, reservas, pagos), saber del sector, campañas con permiso y alguien que responda del resultado |
+| Supervisión, portero, informe mensual, cobro por resultados | Bajo | Es servicio y responsabilidad, no una función de la herramienta |
+
+**Cómo nos diferenciamos**
+
+1. **Especialización por sector** (decisión 0007): guiones probados para fitness, estética y academias.
+2. **Cobrar por resultados**, no solo por montar (variable por altas y clientes recuperados).
+3. **La cara al público** resuelta (WhatsApp y llamadas con ElevenLabs, decisión 0009).
+4. **Responder del resultado**: supervisión, portero e informe mensual.
+5. **Distribución propia**: conocidos y referidos, en español y en persona.
+6. **Velocidad**: los primeros casos con números son la mejor defensa.
+
+**Qué cambiaría en la oferta (propuesta, sin decidir)**
+
+- Lo personal (Executive Assistant, Correo, agenda) pasa a ser **la puerta de entrada incluida**, no lo que se vende. Si
+  el cliente ya usa Dots, se conecta a Dots en vez de montarlo nosotros (el motor es intercambiable, decisión 0009).
+- Lo que se vende y se cobra es **la capa que hace crecer el negocio**: Recepcionista y la rama Comercial, con variable
+  por resultados.
+
+**Cómo comprobarlo**
+
+- **Prueba de una semana**: el fundador usa Dots como si fuera dueño de un negocio y apunta qué hace bien y qué no puede
+  hacer (contestar en el WhatsApp del negocio, devolver una llamada perdida, campañas a clientes…).
+- **Pregunta en las 10 conversaciones**: "Si existiera un asistente así por unos 20 € al mes, ¿lo configurarías tú?".
+- **Regla contra el ruido**: nada de esto cambia el plan hasta tener esas 10 conversaciones. Si se confirma, se registra
+  como decisión (cambio de oferta).
