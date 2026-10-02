@@ -100,6 +100,17 @@ la documentación: todo lo de abajo es* hipótesis *hasta probarlo.*
 - Muchas personas montarán agencias que venden "equipos de agentes" hechos con Dots. La competencia no será OpenAI, sino
   muchas agencias pequeñas con el mismo motor: guerra de precios en el montaje.
 
+**Lo que sabemos de Dots (búsqueda del 2026-10-02, sin probarlo)**
+
+- Lanzado el 2026-09-29: agente que sigue trabajando entre conversaciones. Se le escribe o se le llama desde ChatGPT
+  (web, escritorio, móvil), Slack y Teams; los SMS, "próximamente" ([Winbuzzer](https://winbuzzer.com/2026/09/29/openai-rolls-out-dots-assistants-for-ongoing-work-across-apps-a003-xcxwbn/),
+  [Xenospectrum](https://xenospectrum.com/en/openai-dots-always-on-agents/)).
+- **No tiene integración con WhatsApp.** Y en segundo plano, las apps conectadas son **solo de lectura**: no envía
+  mensajes por su cuenta ([pSafe](https://www.psafe.com/en/blog/openai-dots-app-permissions/)).
+- WhatsApp personal no tiene API oficial: conectarlo con herramientas no oficiales incumple las condiciones y arriesga
+  el bloqueo del número. ChatGPT ya salió de WhatsApp ([OpenAI](https://openai.com/index/chatgpt-whatsapp-transition/)).
+- Los "equipos de agentes" de Dots están anunciados, todavía no disponibles ([TechMyMoney](https://techmymoney.com/2026/09/29/openai-dots-personal-agents/)).
+
 **Qué queda expuesto y qué no**
 
 | Puesto | Riesgo | Por qué |
