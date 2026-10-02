@@ -17,7 +17,7 @@
 | Concepto | Cálculo | €/mes |
 |---|---|---|
 | Modelo de IA | ~600 respuestas o seguimientos, céntimos cada una | 20–30 (*hipótesis*) |
-| WhatsApp (Meta) | Respuestas a quien escribe: gratis. Utilidad 0,0166 €/mensaje, marketing 0,0585 €/mensaje en España desde 2026-10-01 ([Meta](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing), [Agencia Reinicia](https://www.agenciareinicia.com/en/blog/whatsapp-business-api-price-changes-in-october-2026-what-this-means-for-your-bill/)) | 10–15 |
+| WhatsApp (Meta) | Desde 2026-10-01 las respuestas ya no son gratis sin límite: **1.000 mensajes de servicio gratis al mes por número**; a partir del 1.001, 0,0166 €/mensaje en España. Las plantillas de utilidad (recordatorios, cobros) se cobran desde el primer mensaje (0,0166 €) y las de marketing a 0,0585 € ([Meta](https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing), [Simla](https://www.simla.com/blog/nueva-tarificacion-whatsapp-business-api), [Infobae](https://www.infobae.com/tecno/2026/09/06/whatsapp-business-cobrara-por-responder-mensajes-en-2026-a-quienes-afecta-y-a-quienes-no/)). Estudio pequeño: casi todo dentro de los 1.000 gratis; las campañas y recordatorios sí cuentan. La cuenta es del cliente, así que Meta le factura a él | 10–25 |
 | Proveedor de WhatsApp + alojamiento | Cuota del proveedor y servidor | 30–60 (*por verificar*) |
 | Supervisión del fundador | 1–2 h/mes al principio; objetivo 15–20 min con `sistemas/equipo-digital/` | 40–80 → 10–15 |
 
