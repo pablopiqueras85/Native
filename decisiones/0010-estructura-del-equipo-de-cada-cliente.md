@@ -73,9 +73,9 @@ Según la regla contra el ruido, ninguno se monta hasta tener las 10 conversacio
   Executive Assistant empiece a fallar en el reparto. En la ficha siempre son dos papeles.
 - **Encaja con la decisión 0009:** el Executive Assistant es lo que el dueño ve. Si le llama por teléfono, esa voz es
   ElevenLabs; el Chief of Staff Officer y las ramas trabajan en la trastienda con Claude.
-- **Límite de WhatsApp:** Meta no permite asistentes de uso general en WhatsApp desde 2026-01-15 (ver
-  `empresa/empleados-virtuales.md`, Encargado). El Executive Assistant solo habla del trabajo del negocio; si el dueño
-  le pide algo ajeno, lo declina.
+- **Límite de WhatsApp:** Meta prohíbe los asistentes de uso general en WhatsApp desde 2026-01-15; en Europa los vuelve
+  a permitir 12 meses desde 2026-03, pagando por mensaje (corregido el 2026-10-02; ver `exploracion/radar-mercado-2026-10.md`).
+  El Executive Assistant solo habla del trabajo del negocio; si el dueño le pide algo ajeno, lo declina.
 - **El control de calidad no es del cliente.** El portero, el supervisor y la biblioteca de mensajes son de Native
   Crew y vigilan a todas las ramas. El supervisor informa al fundador, no al dueño.
 - **Los empleados no hablan entre ellos:** el traspaso sigue haciéndose a través de la ficha de clientes; el jefe de

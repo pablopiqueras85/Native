@@ -370,7 +370,7 @@ no tiene que aprender ningún panel, habla con su equipo por WhatsApp como con u
 
 - Los cambios que el dueño pide por WhatsApp sobre **precios, ofertas o plantillas** no se aplican solos. Al principio
   los confirma el fundador. Una orden mal entendida puede mandar un precio falso a 100 clientes.
-- No es un asistente general (Meta los prohíbe en WhatsApp desde 2026-01-15): solo habla del trabajo del equipo.
+- No es un asistente general: solo habla del trabajo del equipo. Meta prohíbe los asistentes generales en WhatsApp desde 2026-01-15, aunque en Europa los vuelve a permitir 12 meses desde 2026-03 pagando por mensaje ([TechCrunch](https://techcrunch.com/2026/03/05/meta-will-allow-rival-ai-chatbots-on-whatsapp-in-europe-but-for-a-fee/)). Quedarnos en temas del negocio evita ese coste y ese riesgo.
 
 ---
 

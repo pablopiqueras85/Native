@@ -133,3 +133,32 @@ la documentación: todo lo de abajo es* hipótesis *hasta probarlo.*
 - **Pregunta en las 10 conversaciones**: "Si existiera un asistente así por unos 20 € al mes, ¿lo configurarías tú?".
 - **Regla contra el ruido**: nada de esto cambia el plan hasta tener esas 10 conversaciones. Si se confirma, se registra
   como decisión (cambio de oferta).
+
+## WhatsApp: la app del móvil frente a la API (2026-10-02)
+
+*Observación del fundador:* la mayoría de pequeños negocios atiende desde la **app WhatsApp Business** en el móvil de la
+empresa, no desde la API. Eso cambia cómo entramos:
+
+- **La app es gratis, pero no se puede automatizar** desde fuera. Para que un agente conteste solo hace falta la **API**
+  (Cloud API), con sus tarifas desde 2026-10-01 (ver `empresa/modelo-economico.md`).
+- **Coexistencia** (app y API en el mismo número, Meta, mayo de 2025): según varias fuentes **no está disponible para
+  números de la UE, también los españoles** ([sandra.ch](https://sandra.ch/en/blog/whatsapp-coexistence-the-business-app-and-the-api-on-the-same-number),
+  [whautomate](https://whautomate.com/whatsapp-coexistence)). *Por verificar con un proveedor oficial.* Si se confirma,
+  pasar el número a la API significa **dejar de usar la app** en ese número y atender desde la bandeja del proveedor.
+- Eso es mucha fricción para un dueño que vive en su WhatsApp.
+
+**Cuatro formas de entrar (propuesta, de menos a más fricción)**
+
+| Modo | Cómo funciona | Coste de Meta | Para quién |
+|---|---|---|---|
+| **A · Asistido** | Los agentes trabajan en la trastienda y le dejan al dueño los mensajes preparados (enlace que abre WhatsApp con el texto escrito). El dueño solo pulsa enviar desde su app | 0 € | Puerta de entrada; casi todos los negocios |
+| **B · Agente de Meta en la app** | Configuramos el agente gratuito de Meta (Business Agent) en su app y lo supervisamos (paquete D del radar) | 0 € de momento | Quien quiere respuestas automáticas sin cambiar nada |
+| **C · Segundo número en la API** | Un número nuevo solo para reservas o la Recepcionista, y el de siempre sigue en la app | Tarifas de la API | Quien recibe muchos mensajes |
+| **D · Número principal en la API** | Todo el WhatsApp pasa a la API; se atiende desde la bandeja del proveedor | Tarifas de la API | Negocios con volumen y ganas, tras probar A o B |
+
+**Consecuencias**
+
+- La rama **Comercial** (clientes que se van, recuperar, cobros, avisos) **funciona en modo A sin tocar su WhatsApp**:
+  el valor está en saber a quién escribir, cuándo y qué decir; enviar es un toque. Es la mejor entrada.
+- La **Recepcionista 24 h** necesita B, C o D. Se vende después, cuando el dueño ya confía.
+- Hay que **revisar la decisión 0009** (que daba por hecho la API) cuando se verifique lo de la coexistencia.

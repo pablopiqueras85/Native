@@ -76,7 +76,7 @@ Las comprueba el portero. **Pendiente de revisar con un abogado antes del primer
 - **Opción de baja en los mensajes comerciales** (recuperación de antiguos socios, recomendaciones), por la LSSI.
 - **Solo se escribe primero a quien dio permiso** para recibir WhatsApp del estudio (opt-in, norma de Meta). Si no lo dio, no se le escribe.
 - **Solo la API oficial de WhatsApp Business** y plantillas aprobadas también por Meta. Meta permite la IA para
-  atención, ventas y citas de un negocio, pero prohíbe los asistentes de uso general desde 2026-01-15.
+  atención, ventas y citas de un negocio, y desde 2026-01-15 prohíbe los asistentes de uso general; en Europa, Meta los vuelve a permitir durante 12 meses desde 2026-03, pagando una tarifa por mensaje ([TechCrunch](https://techcrunch.com/2026/03/05/meta-will-allow-rival-ai-chatbots-on-whatsapp-in-europe-but-for-a-fee/)). Los nuestros son de negocio: no les afecta.
 - **Horario:** los mensajes que inicia el estudio salen solo entre las 9:00 y las 21:00.
 - **Nada de datos de salud ni de consejos de salud:** se escala.
 
