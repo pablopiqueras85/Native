@@ -3,6 +3,7 @@
 - **Fecha:** 2026-10-01
 - **Pregunta:** Con la presentación de los *dots* de OpenAI (DevDay, 2026-09-29), ¿cómo se abre el mercado de
   plugins para ChatGPT y Codex, y en qué nichos tiene más futuro crear uno?
+- **Relacionado:** [la guerra de los agentes: qué mercados se abren](mercados-guerra-agentes.md).
 - **Método y límites:** la red de este entorno bloquea la lectura directa de casi todas las webs. Los datos salen
   de los resúmenes del buscador y del catálogo público [`openai/plugins`](https://github.com/openai/plugins)
   (último cambio: 2026-09-28). Antes de basar una decisión en una cifra, hay que comprobarla en su fuente.

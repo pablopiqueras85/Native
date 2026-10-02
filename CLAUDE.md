@@ -46,6 +46,7 @@ Actualiza esta sección cuando cambie la fase o el siguiente paso.
 - `exploracion/mapa-trabajos-por-encargo.md` — qué trabajos por encargo pueden entregar agentes y por qué elegimos la familia comercial.
 - `exploracion/nicho-salud-deporte.md` — análisis del nicho de salud y deporte y experimento propuesto.
 - `exploracion/plugins-dots-openai.md` — el mercado de plugins para los dots de OpenAI (ChatGPT y Codex): nichos y qué supone para la idea 0001.
+- `exploracion/mercados-guerra-agentes.md` — la guerra de los agentes siempre encendidos (OpenAI, Meta, Google…): qué mercados abre y cuáles encajan con el fundador.
 - `exploracion/backlog.md` — tabla resumen de todas las ideas. Mantenla sincronizada con `exploracion/ideas/`.
 - `exploracion/ideas/NNNN-slug.md` — una idea por archivo, creada a partir de `_plantilla.md`.
 - `decisiones/NNNN-slug.md` — una decisión por archivo, creada a partir de `_plantilla.md`.
