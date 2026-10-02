@@ -109,6 +109,10 @@ la documentación: todo lo de abajo es* hipótesis *hasta probarlo.*
   mensajes por su cuenta ([pSafe](https://www.psafe.com/en/blog/openai-dots-app-permissions/)).
 - WhatsApp personal no tiene API oficial: conectarlo con herramientas no oficiales incumple las condiciones y arriesga
   el bloqueo del número. ChatGPT ya salió de WhatsApp ([OpenAI](https://openai.com/index/chatgpt-whatsapp-transition/)).
+- **Llamadas:** el dueño puede llamar a su Dot desde la app, pero **no coge llamadas de clientes** a un número del negocio
+  ni llama por su cuenta en el lanzamiento ([eesel](https://eesel.ai/blog/openai-dots), [Vellum](https://www.vellum.ai/blog/official-openai-dots-breakdown)).
+- **Precio:** incluido en ChatGPT Pro (100, 200 o 500 $/mes) y Business Premium; los SMS, beta limitada en EE. UU.
+  ([eesel](https://eesel.ai/blog/openai-dots)). Caro para un negocio pequeño, por ahora.
 - Los "equipos de agentes" de Dots están anunciados, todavía no disponibles ([TechMyMoney](https://techmymoney.com/2026/09/29/openai-dots-personal-agents/)).
 
 **Qué queda expuesto y qué no**
